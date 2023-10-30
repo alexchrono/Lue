@@ -1,4 +1,7 @@
+node_modules
+dev.db
 .env
+instance/dev.db
 __pycache__/
 *.py[cod]
 .venv
