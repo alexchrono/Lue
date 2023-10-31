@@ -31,3 +31,19 @@ class User(db.Model, UserMixin):
             'username': self.username,
             'email': self.email
         }
+
+
+
+Table users {
+  id integer [primary key]
+  username varchar
+  email varchar
+  hashed_password varchar
+  selected_avatar integer
+  level integer
+  health decimal (10,2)
+  gold decimal(10,2)
+  exp decimal(10,2)
+  created_at timestamp
+  updated_at timestamp
+}
