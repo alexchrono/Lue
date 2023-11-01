@@ -15,9 +15,9 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(40), nullable=False, unique=True)
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
-    selected_avatar= db.Column(db.String(200),nullable=False)
-    level = db.Column(db.Integer,default=1)
-    health = db.Column(db.Numeric(10,2),default=Decimal('0.00',nullable=False))
+    selected_avatar= db.Column(db.String(200),default='https://i.imgur.com/V26j32L.png',nullable=False)
+    level = db.Column(db.Integer,default=1,nullable=False)
+    health = db.Column(db.Numeric(10,2),default=Decimal('0.00'),nullable=False)
     gold = db.Column(db.Numeric(10, 2), default=Decimal('0.00'), nullable=False)
     exp = db.Column(db.Numeric(10, 2), default=Decimal('0.00'), nullable=False)
 

@@ -1,6 +1,6 @@
 update requirements.txt
 =============================
-pipenv lock -r > requirements.txt
+pipenv lock -r > requirements.txt  ====> doesnt work.
 
 require icecream
 =============================
