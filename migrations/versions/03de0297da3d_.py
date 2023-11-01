@@ -1,20 +1,19 @@
 """empty message
 
-Revision ID: 0df3fef05630
+Revision ID: 03de0297da3d
 Revises:
-Create Date: 2023-11-01 16:39:48.314843
+Create Date: 2023-11-01 16:58:00.210383
 
 """
 from alembic import op
 import sqlalchemy as sa
-
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = '0df3fef05630'
+revision = '03de0297da3d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,7 +26,7 @@ def upgrade():
     sa.Column('username', sa.String(length=40), nullable=False),
     sa.Column('email', sa.String(length=255), nullable=False),
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
-    sa.Column('selected_avatar', sa.String(length=200), nullable=False),
+    sa.Column('selected_avatar', sa.String(length=200), nullable=True),
     sa.Column('level', sa.Integer(), nullable=False),
     sa.Column('health', sa.Numeric(precision=10, scale=2), nullable=False),
     sa.Column('gold', sa.Numeric(precision=10, scale=2), nullable=False),
@@ -76,5 +75,3 @@ def downgrade():
     op.drop_table('dailies')
     op.drop_table('users')
     # ### end Alembic commands ###
-
-    
