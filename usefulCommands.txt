@@ -1,0 +1,7 @@
+update requirements.txt
+=============================
+pipenv lock -r > requirements.txt
+
+require icecream
+=============================
+from icecream import ic
