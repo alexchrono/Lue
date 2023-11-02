@@ -63,7 +63,9 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
+    ic(form.data)
     if form.validate_on_submit():
+        ic('atleast inside validate')
         url='https://i.imgur.com/V26j32L.png'
         if form.data['selected_avatar']:
             image=form.data['selected_avatar']

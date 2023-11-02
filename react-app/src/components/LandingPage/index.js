@@ -9,21 +9,29 @@ import './LandingPage.css';
 export default function LandingPage() {
     const user = useSelector((state) => state.session.user)
     const history = useHistory()
-    const [userName,setUserName]=useState('')
-    const [email,setEmail]=useState('')
-    const [password,setPassword]=useState('')
-    const [confirmPassword,setConfirmPassword]=useState('')
-    const [didPicChange,setDidPicChange]=useState('')
-    const [newAvatar,setNewAvatar] = useState("")
-    const dispatch= useDispatch()
+    const [userName, setUserName] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+    const [didPicChange, setDidPicChange] = useState('')
+    const [newAvatar, setNewAvatar] = useState("")
+    const dispatch = useDispatch()
 
-    const handleAvatarChange= (e)=> {
+    const handleAvatarChange = (e) => {
         setNewAvatar(e.target.files[0])
     }
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const success= await dispatch(signUp(userName,email,password,newAvatar))
+        const formData = new FormData()
+        formData.append('username', userName);
+        formData.append('email', email);
+        formData.append('password', password);
+        if (newAvatar) {
+            formData.append('selected_avatar', newAvatar);
+        }
+
+        const success = await dispatch(signUp(formData))
 
 
 
