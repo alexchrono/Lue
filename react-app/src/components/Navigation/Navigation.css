@@ -5,3 +5,22 @@
 .hidden {
   display: none;
 }
+
+.navbar-container {
+  height: 10%;
+  min-height: 10%;
+  width: 100%;
+  display: flex;
+}
+
+.logo, .dropdown {
+  flex: 1;
+}
+
+.dropdown {
+  text-align: right;
+}
+
+.fancy-text {
+  flex:8;
+}

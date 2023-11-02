@@ -1,0 +1,28 @@
+.stats-container {
+    display: flex;
+}
+
+.avatar, .stats, .inspirational-quote {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.avatar{
+    flex-basis: 20%;
+}
+
+.avatar img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.stats {
+    flex-basis: 20%;
+    display: flex;
+    flex-direction: column;
+}
+
+.inspirational-quote {
+    flex-basis: 60%;
+}
