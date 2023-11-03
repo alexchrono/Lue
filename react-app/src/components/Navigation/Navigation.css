@@ -10,6 +10,7 @@
   flex-basis: 80%;
   border: 5px solid black;
   display: flex;
+  justify-content: left;
 
 }
 .navbar-container {
@@ -33,5 +34,5 @@
 }
 
 .currentHealth {
-  background-color: green;
+  flex-grow: 0;
 }
