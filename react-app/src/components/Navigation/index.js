@@ -1,39 +1,45 @@
 import React from 'react';
-import { NavLink,useHistory } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
-	
+	console.log(sessionUser)
+	const healthPercentage = (sessionUser?.health / sessionUser?.currentHealth) * 100;
+	const healthColor = healthPercentage > 65 ? 'green' : healthPercentage >= 40 ? 'yellow' : 'red';
 
 	return (
 		<div className='navbar-container'>
 
-		<div className='logo'>
+			<div className='logo'>
 				<NavLink exact to="/">Lue</NavLink>
-				</div>
-				{!sessionUser && (
-					<div className='fancy-text'>
+			</div>
+			{!sessionUser && (
+				<div className='fancy-text'>
 					Level Up Everything
 				</div>
-				)}
-				{sessionUser && (
-					<div className='healthbar'>
-					HealthBar goes here
+			)}
+			{sessionUser && (
+				<div className='healthbar'>
+					<div className='currentHealth' style={{
+						width: `${healthPercentage}%`,
+						backgroundColor: healthColor
+					}}></div>
+
 				</div>
-				)}
+			)}
 
 			<div className='dropdown'>
-			{isLoaded && (
-				<ul>
-				<li>
-					<ProfileButton user={sessionUser} />
-				</li>
-				</ul>
-			)}
-		</div>
+				{isLoaded && (
+					<ul>
+						<li>
+							<ProfileButton user={sessionUser} />
+						</li>
+					</ul>
+				)}
+			</div>
 		</div>
 	);
 }

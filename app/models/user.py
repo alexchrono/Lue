@@ -17,7 +17,8 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     selected_avatar= db.Column(db.String(200),default='https://i.imgur.com/V26j32L.png')
     level = db.Column(db.Integer,default=1,nullable=False)
-    health = db.Column(db.Numeric(10,2),default=Decimal('0.00'),nullable=False)
+    health = db.Column(db.Numeric(10,2),default=Decimal('50.00'),nullable=False)
+    current_health= db.Column(db.Numeric(10,2),default=Decimal('50.00'),nullable=False)
     gold = db.Column(db.Numeric(10, 2), default=Decimal('0.00'), nullable=False)
     exp = db.Column(db.Numeric(10, 2), default=Decimal('0.00'), nullable=False)
 
@@ -40,6 +41,7 @@ class User(db.Model, UserMixin):
             'selectedAvatar': self.selected_avatar,
             'level': self.level,
             'health': self.health,
+            'currentHealth': self.current_health,
             'gold': self.gold,
             'exp': self.exp,
 

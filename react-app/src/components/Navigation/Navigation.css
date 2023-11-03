@@ -6,6 +6,12 @@
   display: none;
 }
 
+.healthbar {
+  flex-basis: 80%;
+  border: 5px solid black;
+  display: flex;
+
+}
 .navbar-container {
   height: 10%;
   min-height: 10%;
@@ -15,6 +21,7 @@
 
 .logo, .dropdown {
   flex: 1;
+  flex-basis:10%;
 }
 
 .dropdown {
@@ -23,4 +30,8 @@
 
 .fancy-text {
   flex:8;
+}
+
+.currentHealth {
+  background-color: green;
 }
