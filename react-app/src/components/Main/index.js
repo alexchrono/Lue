@@ -8,6 +8,8 @@ import './main.css';
 export default function Main() {
     const user = useSelector((state) => state.session.user)
     const history= useHistory()
+    const [habit,setHabit]=useState('')
+    const [daily,setDaily]=useState('')
 
     useEffect(() => {
         if (!user) {
@@ -40,11 +42,55 @@ export default function Main() {
 
 
         </div>
+        <div className='buffer'></div>
 
         <div className='tables'>
-        <div className='habits'></div>
-        <div className='dailies'></div>
+        <div className='habits'>
+
+        <div className='habits-topMenu'><div className='fifteen-percent bigtextcenter'>Habits</div>
+        <div className='forty-percent'><form
+          onSubmit={()=>{return 7}}
+        >
+            <input
+              type="text"
+              value={habit}
+              onChange={(e) => setHabit(e.target.value)}
+              required
+              //   placeholder="Title"
+            />
+            </form>
+            </div><div className='fifteen-percent menu-text'>all</div>
+            <div className='fifteen-percent menu-text'>weak</div>
+            <div className='fifteen-percent menu-text' style={{borderRight: 'none'}}>strong</div></div>
+        <div className='habits-card'> <div className='fifteen-percent invisi'></div>
+        <div className='habits-card-center'></div>
         </div>
+
+        </div>
+        <div className='center-buffer'></div>
+        <div className='dailies'>
+        <div className='habits-topMenu'><div className='fifteen-percent bigtextcenter'>Dailies</div>
+        <div className='forty-percent'><form
+          onSubmit={()=>{return 7}}
+        >
+            <input
+              type="text"
+              value={daily}
+              onChange={(e) => setDaily(e.target.value)}
+              required
+              //   placeholder="Title"
+            />
+            </form>
+            </div><div className='fifteen-percent menu-text'>due Today</div>
+            <div className='fifteen-percent menu-text'>completed</div>
+            <div className='fifteen-percent menu-text' style={{borderRight: 'none'}}>upcoming</div></div>
+            <div className='habits-card'> <div className='fifteen-percent invisi'></div>
+        <div className='habits-card-center'></div>
+        </div>
+        </div>
+
+        </div>
+
         </div>
     )
 
