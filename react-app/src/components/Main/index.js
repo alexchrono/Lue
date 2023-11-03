@@ -23,6 +23,7 @@ export default function Main() {
     }
 
     return (
+        <div className= 'main-main-container'>
         <div className="stats-container">
             <div className="avatar">
             <img src={`${user.selectedAvatar}`}></img> </div>
@@ -38,6 +39,12 @@ export default function Main() {
 
 
 
+        </div>
+
+        <div className='tables'>
+        <div className='habits'></div>
+        <div className='dailies'></div>
+        </div>
         </div>
     )
 

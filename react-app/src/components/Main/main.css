@@ -1,5 +1,6 @@
 .stats-container {
     display: flex;
+    flex-direction: row;
 }
 
 .avatar, .stats, .inspirational-quote {
@@ -9,12 +10,16 @@
 
 .avatar{
     flex-basis: 20%;
+    height: auto;
+    overflow: hidden;
 }
 
 .avatar img {
     width: 100%;
     height: auto;
     display: block;
+    object-fit: contain;
+    max-height: 100%;
 }
 
 .stats {
@@ -25,4 +30,39 @@
 
 .inspirational-quote {
     flex-basis: 60%;
+}
+
+.main-main-container{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap:wrap;
+    width: 100%;
+}
+
+.habits {
+    border: 5px solid black;
+    box-sizing: border-box;
+
+    width: 50%;
+    height: 100%;
+
+}
+
+.dailies {
+
+        border: 5px solid black;
+        box-sizing: border-box;
+
+        width: 50%;
+        height: 100%;
+
+
+}
+
+.tables {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 69%;
 }
