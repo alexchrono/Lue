@@ -34,9 +34,9 @@ function Navigation({ isLoaded }) {
 			<div className='dropdown'>
 				{isLoaded && (
 					<ul>
-						<li>
+						{/* <li> */}
 							<ProfileButton user={sessionUser} />
-						</li>
+						{/* </li> */}
 					</ul>
 				)}
 			</div>

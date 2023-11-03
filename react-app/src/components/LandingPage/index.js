@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUp } from '../../store/session';
+import { signUp,login } from '../../store/session';
+
 
 import './LandingPage.css';
 
@@ -16,6 +17,7 @@ export default function LandingPage() {
     const [didPicChange, setDidPicChange] = useState('')
     const [newAvatar, setNewAvatar] = useState("")
     const dispatch = useDispatch()
+    const [errors,setErrors]=useState({})
 
     const handleAvatarChange = (e) => {
         setNewAvatar(e.target.files[0])
@@ -36,6 +38,17 @@ export default function LandingPage() {
 
 
     }
+
+    const loginDemo = async (e) => {
+        e.preventDefault();
+        const data = await dispatch(login('demo@aa.io', 'password'));
+        if (data && data.errors) {
+
+          setErrors(data.errors);
+        } else {
+            history.push('/main')
+        }
+      };
 
 
 
@@ -120,6 +133,9 @@ export default function LandingPage() {
                     />
 
                     <button className="signup-button" type="submit">Sign Up</button>
+                    <button onClick={loginDemo}>
+              Log in as Demo
+            </button>
 
 
 

@@ -4,13 +4,28 @@ import { NavLink,useHistory } from 'react-router-dom';
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
+import { login } from "../../store/session";
 import SignupFormModal from "../SignupFormModal";
+
+
 
 function ProfileButton({ user }) {
   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const history=useHistory()
+  const [errors,setErrors]=useState({})
+
+  const loginDemo = async (e) => {
+    e.preventDefault();
+    const data = await dispatch(login('demo@aa.io', 'password'));
+    if (data && data.errors) {
+
+      setErrors(data.errors);
+    } else {
+        history.push('/main')
+    }
+  };
 
   const openMenu = () => {
     if (showMenu) return;
@@ -64,11 +79,16 @@ function ProfileButton({ user }) {
               modalComponent={<LoginFormModal />}
             />
 
-            <OpenModalButton
+            <button onClick={loginDemo}>
+              Log in as Demo
+            </button>
+
+
+            {/* <OpenModalButton
               buttonText="Sign Up"
               onItemClick={closeMenu}
               modalComponent={<SignupFormModal />}
-            />
+            /> */}
           </>
         )}
       </ul>
