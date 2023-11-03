@@ -14,7 +14,7 @@ function Navigation({ isLoaded }) {
 		<div className='navbar-container'>
 
 			<div className='logo'>
-				<NavLink exact to="/">Lue</NavLink>
+				<NavLink exact to="/"><img src='https://lue-cs.s3.amazonaws.com/5851de8541214012adc2e14963f49746.png'></img></NavLink>
 			</div>
 			{!sessionUser && (
 				<div className='fancy-text'>

@@ -31,7 +31,7 @@ function ProfileButton({ user }) {
     return () => document.removeEventListener("click", closeMenu);
   }, [showMenu]);
 
-  
+
 
   const handleLogout = (e) => {
     e.preventDefault();
@@ -45,7 +45,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <i className="fas fa-user-circle" />
+        <img src='https://lue-cs.s3.amazonaws.com/3b92de1d2dd3453bbb012a4345b4c0ca.png'></img>
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
