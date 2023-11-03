@@ -29,8 +29,9 @@ return (
 <div className='habits-card'> <div className='fifteen-percent invisi'></div>
 <div className='habits-card-center'>
     <div className='bad-habit-emoti'><img
-            src={`${process.env.PUBLIC_URL}/></div>
-    <div className='main-body-habit-card'></div>
+            src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`} className='sadFace'/></div>
+    <div className='main-body-habit-card'> </div><div className='ellipsis'><img
+            src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`} className='ellipsis-pic'/></div>
     {/* <div className='good-habit-emoti'></div> */}
 </div>
 </div>

@@ -180,11 +180,24 @@ form input {
 }
 
 .main-body-habit-card {
-    width:80%;
-    border: 5px solid black;
+    width:75%;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
     box-sizing: border-box;
     height: 100%;
 
+}
+
+.ellipsis {
+    width:5%;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 8 8;
 }
 
 .good-habit-emoti {
@@ -192,4 +205,27 @@ form input {
     border: 5px solid black;
     box-sizing: border-box;
     height: 100%;
+}
+
+.sadFace {
+
+
+}
+
+.ellipsis-pic {
+    /* display: flex; */
+    display: none;
+    height: 100%;
+    width: auto;
+    max-width: 200%;
+    box-sizing:  border-box;
+    object-fit: contain;
+    margin: 0 auto;
+    padding: 0px;
+    align-self: center;
+
+}
+
+.habits-card-center:hover .ellipsis-pic {
+    display: block;
 }
