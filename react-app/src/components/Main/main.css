@@ -163,9 +163,33 @@ form input {
     border: 5px solid black;
     box-sizing: border-box;
     height: 100%;
+    display: flex;
+    flex-direction: row;
 
 }
 
 .center-buffer{
     width:1%;
+}
+
+.bad-habit-emoti {
+    width:20%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.main-body-habit-card {
+    width:80%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
+
+}
+
+.good-habit-emoti {
+    width:20%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
 }

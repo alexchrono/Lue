@@ -27,7 +27,11 @@ return (
     <div className='fifteen-percent menu-text'>weak</div>
     <div className='fifteen-percent menu-text' style={{borderRight: 'none'}}>strong</div></div>
 <div className='habits-card'> <div className='fifteen-percent invisi'></div>
-<div className='habits-card-center'></div>
+<div className='habits-card-center'>
+    <div className='bad-habit-emoti'></div>
+    <div className='main-body-habit-card'></div>
+    {/* <div className='good-habit-emoti'></div> */}
+</div>
 </div>
 
 </div>)
