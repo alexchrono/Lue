@@ -1,12 +1,39 @@
-import React, { useState,useSelector } from 'react';
+import React, { useState,useSelector,useEffect,useRef } from 'react';
 
 
 
 export default function Habits({user}){
 
 const [habit,setHabit]=useState('')
+const [dropDown, setDropDown] = useState(false);
+const [showMenu, setShowMenu] = useState(false);
+const ulRef = useRef();
 
 
+
+const openMenu = () => {
+  if (showMenu) return;
+  setShowMenu(true);
+};
+
+useEffect(() => {
+  if (!showMenu) return;
+
+  const closeMenu = (e) => {
+    if (!ulRef.current.contains(e.target)) {
+      setShowMenu(false);
+    }
+  };
+
+  document.addEventListener("click", closeMenu);
+
+  return () => document.removeEventListener("click", closeMenu);
+}, [showMenu]);
+
+
+const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
+
+const closeMenu = () => setShowMenu(false);
 
 return (
 <div className='habits'>
@@ -31,9 +58,32 @@ return (
     <div className='bad-habit-emoti'><img
             src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`} className='sadFace'/></div>
     <div className='main-body-habit-card'> </div><div className='ellipsis'><img
-            src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`} className='ellipsis-pic'/></div>
+            src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`} className='ellipsis-pic' onClick={openMenu}/></div></div>
+            {showMenu && (
+              <div className='fifteen-percent no-border'>
+            <div className='backG'>
+            <ul className={ulClassName} ref={ulRef}>
+
+              <>
+
+               <li>Option 1</li>
+               <li>Option 2</li>
+               <li>Option 3</li>
+               </>
+
+
+               </ul>
+            </div>
+            </div>
+            )}
+
+
+
+
+
+
     {/* <div className='good-habit-emoti'></div> */}
-</div>
+
 </div>
 
 </div>)

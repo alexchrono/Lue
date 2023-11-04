@@ -117,6 +117,9 @@
     visibility: hidden;
 
 }
+.no-border {
+    border: none;
+}
 .forty-percent {
     border-right: 5px solid black;
     box-sizing: border-box;
@@ -229,3 +232,20 @@ form input {
 .habits-card-center:hover .ellipsis-pic {
     display: block;
 }
+
+.ellipsis-dropdown {
+    position: relative;
+    /* text-decoration: none; */
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .backG {
+    /* position: absolute;
+    width: 5%;
+    height:15%; */
+    /* border: 1px solid blue; */
+
+  }
