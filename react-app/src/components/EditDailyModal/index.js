@@ -33,7 +33,7 @@ export default function EditDailyModal() {
     <div className='overallSizeEditModal'>
       <div className='topEditContainer'>
         <div className='editHabit'>
-          <h1>Edit Habit</h1>
+          <h1>Edit Daily</h1>
         </div>
         <div className='buttonsEditHabit'>
           <button className='cancel' type='button' onClick={closeModal}>
