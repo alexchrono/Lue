@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import OpenModalButton from "../OpenModalButton";
+import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 
 
 export default function EditDailyModal() {
@@ -9,19 +11,23 @@ export default function EditDailyModal() {
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
   const [difficulty, setDifficulty] = useState("");
-  const [resetRate,setResetRate]= useState("")
+  const [repeatTimeFrame,setRepeatTimeFrame]= useState("")
+  const [repeatRateNumbers,setRepeatRateNumbers]=useState("")
   const [errors, setErrors] = useState([]);
   const [alignment,setAlignment] = useState("")
+  const [startDate,setStartDate] = useState('')
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(title, notes));
-    if (data) {
-      setErrors(data);
-    } else {
-      closeModal()
-    }
+    // const data = await dispatch(login(title, notes));
+    // if (data) {
+    //   setErrors(data);
+    // } else {
+    //   closeModal()
+    // }
+    console.log('handleSubmitInDailyModalsetup')
+    closeModal()
   };
 
   const handlePicClick = (value) => {
@@ -72,33 +78,12 @@ export default function EditDailyModal() {
             </textarea>
             </label>
 
-            <div className="alignment-choice">
 
-            <div className="pic-container">
-                <img
-                  src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
-                  className='sadFace'
-                  onClick={() => handlePicClick('bad')}
-                  alt="Bad Habit"
-                />
-                <p className="pic-caption">Bad Habit</p>
-              </div>
-
-              <div className="pic-container">
-                <img
-                  src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
-                  className='happyFace'
-                  onClick={() => handlePicClick('good')}
-                  alt="Good Habit"
-                />
-                <p className="pic-caption">Good Habit</p>
-              </div>
-            </div>
             <label>
 
             Difficulty Level:
 
-              <select name='difficulty' id='difficulty' onChange={(e) => setDifficulty(e.target.value)}>
+              <select name='difficulty' id='difficulty' value={difficulty}onChange={(e) => setDifficulty(e.target.value)}>
                 <option value='1'>No Sweat</option>
                 <option value='2'>Bit of Sweat</option>
                 <option value='3'>Hard Work</option>
@@ -108,16 +93,43 @@ export default function EditDailyModal() {
 
               <label>
 
-            Reset my count every:
+              <label>
+              Start Date
+              <input
+                type="date"
+                value={startDate}
+                onChange={(e) => setStartDate(e.target.value)}
+                // required
+              />
+            </label>
 
-              <select name='reset' id='reset' onChange={(e) => setResetRate(e.target.value)}>
+
+
+            Repeats:
+
+              <select name='reset' id='reset' value={repeatTimeFrame}onChange={(e) => setRepeatTimeFrame(e.target.value)}>
                 <option value='daily'>Daily</option>
                 <option value='weekly'>Weakly</option>
                 <option value='monthly'>Monthly</option>
-                <option value='4'>Super duper Challenging!</option>
+                <option value='yearly'>Yearly</option>
               </select>
 
             </label>
+
+            <label>
+              Repeat every
+              <input
+                type="number"
+                value={repeatRateNumbers}
+                onChange={(e) => setRepeatRateNumbers(e.target.value)}
+                min="0"
+                max="20"
+                step="1"
+                // required
+              />
+            </label>
+
+
           </form>
 
 
@@ -128,6 +140,21 @@ export default function EditDailyModal() {
 
 
       </div>
+
+      <OpenModalButton
+              buttonText={
+                <>
+                  <span className="menu-icon">
+
+                  </span>{" "}
+                  Delete
+                </>
+              }
+              modalComponent={<DeleteHabitOrDaily
+                //  playlistId={playlistId}
+                 />}
+              // onClick={() => setShowMenu(false)}
+            />
       </div>
 
     </>

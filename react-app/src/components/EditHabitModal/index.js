@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import OpenModalButton from "../OpenModalButton";
+import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 
 
 export default function EditHabitModal() {
@@ -121,6 +123,8 @@ export default function EditHabitModal() {
           </form>
 
 
+
+
         </div>
 
         <div className='fifteen-percent no-border'></div>
@@ -128,6 +132,20 @@ export default function EditHabitModal() {
 
 
       </div>
+      <OpenModalButton
+              buttonText={
+                <>
+                  <span className="menu-icon">
+
+                  </span>{" "}
+                  Delete
+                </>
+              }
+              modalComponent={<DeleteHabitOrDaily
+                //  playlistId={playlistId}
+                 />}
+              // onClick={() => setShowMenu(false)}
+            />
       </div>
 
     </>

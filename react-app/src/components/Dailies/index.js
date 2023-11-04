@@ -74,9 +74,13 @@ return (
               backgroundColor: 'green',
               height: '100%',
               margin: '0'
-            }}/>):(<>click
-            <p>when</p>
-            <p>done</p></>)}
+            }}/>):(<img
+              src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`} className='sadFace' style={{
+                width: `100%`,
+                backgroundColor: 'gray',
+                height: '100%',
+                margin: '0'
+              }}/>)}
             </div>
 
     <div className='main-body-habit-card'> </div><div className='ellipsis'><img
