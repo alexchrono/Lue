@@ -24,7 +24,8 @@ class User(db.Model, UserMixin):
     exp = db.Column(db.Numeric(10, 2), default=Decimal('0.00'), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
-
+    users_habits = db.relationship('Habit',back_populates='habits_of_user')
+    users_dailies= db.relationship('Daily',back_populates='dailies_of_user')
     @property
     def password(self):
         return self.hashed_password
@@ -47,6 +48,8 @@ class User(db.Model, UserMixin):
             'currentHealth': self.current_health,
             'gold': self.gold,
             'exp': self.exp,
+            'usersHabits': [habit.id for habit in self.users_habits],
+            'usersDailies': [daily.id for daily in self.users_dailies],
             'created_at': self.created_at,
             'updated_at': self.updated_at
 

@@ -18,6 +18,8 @@ class Habit(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    habits_of_user = db.relationship('User', back_populates='users_habits')
     def to_dict(self):
         return {
             'id': self.id,
