@@ -11,7 +11,7 @@ class Habit(db.Model):
     title = db.Column(db.String, nullable=False)
     position = db.Column(db.Integer)
     notes = db.Column(db.Text)
-    alignment = db.Column(db.Boolean,default='good')
+    alignment = db.Column(db.Boolean,default=True)
     counter = db.Column(db.Integer, default=0)
     difficulty = db.Column(db.Integer,default=1)
     reset_rate=db.Column(db.String,default='daily')

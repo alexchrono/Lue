@@ -13,7 +13,7 @@ export default function EditHabitModal() {
   const [difficulty, setDifficulty] = useState("");
   const [resetRate,setResetRate]= useState("")
   const [errors, setErrors] = useState([]);
-  const [alignment,setAlignment] = useState("")
+  const [alignment,setAlignment] = useState(true)
   const { closeModal } = useModal();
 
   const handleSubmit = async (e) => {
@@ -80,7 +80,7 @@ export default function EditHabitModal() {
                 <img
                   src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
                   className='sadFace'
-                  onClick={() => handlePicClick('bad')}
+                  onClick={() => handlePicClick(false)}
                   alt="Bad Habit"
                 />
                 <p className="pic-caption">Bad Habit</p>
@@ -90,7 +90,7 @@ export default function EditHabitModal() {
                 <img
                   src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
                   className='happyFace'
-                  onClick={() => handlePicClick('good')}
+                  onClick={() => handlePicClick(true)}
                   alt="Good Habit"
                 />
                 <p className="pic-caption">Good Habit</p>
