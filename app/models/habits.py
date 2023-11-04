@@ -11,10 +11,13 @@ class Habit(db.Model):
     title = db.Column(db.String, nullable=False)
     position = db.Column(db.Integer)
     notes = db.Column(db.Text)
-    alignment = db.Column(db.Boolean, nullable=False)
+    alignment = db.Column(db.Boolean,default='good')
     counter = db.Column(db.Integer, default=0)
-    difficulty = db.Column(db.String)
+    difficulty = db.Column(db.Integer,default=1)
+    reset_rate=db.Column(db.String,default='daily')
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
     def to_dict(self):
         return {
             'id': self.id,
@@ -24,7 +27,10 @@ class Habit(db.Model):
             'alignment': self.alignment,
             'counter': self.counter,
             'difficulty': self.difficulty,
-            'user_id': self.user_id,
+            'resetRate': self.reset_rate,
+            'userId': self.user_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }
 
 # Table habits {

@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from datetime import datetime
+from datetime import date
 
 class Daily(db.Model):
     __tablename__ = 'dailies'
@@ -9,29 +10,32 @@ class Daily(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String, nullable=False)
+    position=db.Column(db.Integer)
     notes = db.Column(db.String)
-    difficulty = db.Column(db.String)
-    startDate = db.Column(db.Date, nullable=False)
-    repeats = db.Column(db.String, nullable=False)
-    repeat_quantity = db.Column(db.Integer)
-    repeat_day = db.Column(db.String)
+    counter = db.Column(db.Integer, default=0)
+    difficulty = db.Column(db.Integer,default=1)
+    start_date = db.Column(db.Date, default=date.today)
+    repeat_time_frame = db.Column(db.String, default='daily')
+    repeat_quantity = db.Column(db.Integer,default=1)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    # created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
-    # updated_at = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
     def to_dict(self):
         return {
             'id': self.id,
             'title': self.title,
+            'position': self.position,
             'notes': self.notes,
+            'counter': self.counter,
+
             'difficulty': self.difficulty,
-            'startDate': self.startDate.isoformat() if self.startDate else None,
-            'repeats': self.repeats,
-            'repeat_quantity': self.repeat_quantity,
-            'repeat_day': self.repeat_day,
-            'user_id': self.user_id
-            # 'created_at': self.created_at.isoformat(),
-            # 'updated_at': self.updated_at.isoformat(),
+            'startDate': self.start_date,
+            'repeatTimeFrame': self.repeat_time_frame,
+            'repeatQuantity': self.repeat_quantity,
+            'user_id': self.user_id,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }
 
 
