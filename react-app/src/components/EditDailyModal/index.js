@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 
 
-export default function EditHabitModal() {
+export default function EditDailyModal() {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");

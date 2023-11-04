@@ -1,6 +1,7 @@
 import React, { useState,useSelector,useEffect,useRef } from 'react';
 import OpenModalButton from '../OpenModalButton';
 import EditHabitModal from '../EditHabitModal'
+import DeleteHabitOrDaily from '../DeleteHabitOrDaily';
 
 export default function Habits({user}){
 
@@ -90,10 +91,10 @@ return (
                     <img
             src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`} className='ellipsis-pic' onClick={()=>setShowMenu(false)}/>
                   </span>{" "}
-                  Deletebutrightnowgoestoedit
+                  Delete
                 </>
               }
-              modalComponent={<EditHabitModal
+              modalComponent={<DeleteHabitOrDaily
                 //  playlistId={playlistId}
                  />}
               onClick={() => setShowMenu(false)}

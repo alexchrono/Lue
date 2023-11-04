@@ -6,12 +6,14 @@
     flex-grow: 1;
 }
 
-.avatar, .stats, .inspirational-quote {
+.avatar,
+.stats,
+.inspirational-quote {
     padding: 10px;
     box-sizing: border-box;
 }
 
-.avatar{
+.avatar {
     flex-basis: 20%;
     height: auto;
     overflow: hidden;
@@ -30,11 +32,12 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-    flex-grow:2;
+    flex-grow: 2;
 }
+
 .stats span {
     height: 20%;
-    font-size:1.5em;
+    font-size: 1.5em;
 }
 
 .inspirational-quote {
@@ -45,15 +48,15 @@
     align-items: center;
     justify-content: center;
     font-size: 5em;
-    flex-wrap:nowrap;
+    flex-wrap: nowrap;
 
 }
 
-.main-main-container{
+.main-main-container {
     display: flex;
     flex-direction: column;
     height: 100%;
-    flex-wrap:wrap;
+    flex-wrap: wrap;
     width: 100%;
 }
 
@@ -70,11 +73,11 @@
 
 .dailies {
 
-        border: 2px solid black;
-        box-sizing: border-box;
+    border: 2px solid black;
+    box-sizing: border-box;
 
-        width: 50%;
-        height: 100%;
+    width: 50%;
+    height: 100%;
 
 
 }
@@ -101,6 +104,7 @@
     width: 100%;
 
 }
+
 .fifteen-percent {
     border-right: 5px solid black;
     box-sizing: border-box;
@@ -117,9 +121,11 @@
     visibility: hidden;
 
 }
+
 .no-border {
     border: none;
 }
+
 .forty-percent {
     border-right: 5px solid black;
     box-sizing: border-box;
@@ -138,10 +144,11 @@
 }
 
 .bigtextcenter {
-    font-size:2.5em;
+    font-size: 2.5em;
     text-align: center;
     align-self: center;
 }
+
 form {
     height: 100%;
 }
@@ -152,7 +159,34 @@ form input {
     width: 100%;
     height: 100%;
     font-size: 1.5em
+}
 
+form textarea {
+    border: 5px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em
+}
+
+.alignment-choice {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pic-container {
+    text-align: center;
+    width: 15%;
+}
+
+.pic-container img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.pic-caption {
+    margin-top: 5px;
 }
 
 .menu-text {
@@ -171,19 +205,21 @@ form input {
 
 }
 
-.center-buffer{
-    width:1%;
+
+
+.center-buffer {
+    width: 1%;
 }
 
 .bad-habit-emoti {
-    width:20%;
+    width: 20%;
     border: 5px solid black;
     box-sizing: border-box;
     height: 100%;
 }
 
 .main-body-habit-card {
-    width:75%;
+    width: 75%;
     border-top: 5px solid black;
     border-bottom: 5px solid black;
     box-sizing: border-box;
@@ -192,7 +228,7 @@ form input {
 }
 
 .ellipsis {
-    width:5%;
+    width: 5%;
     border-top: 5px solid black;
     border-bottom: 5px solid black;
     border-right: 5px solid black;
@@ -204,16 +240,13 @@ form input {
 }
 
 .good-habit-emoti {
-    width:20%;
+    width: 20%;
     border: 5px solid black;
     box-sizing: border-box;
     height: 100%;
 }
 
-.sadFace {
-
-
-}
+.sadFace {}
 
 .ellipsis-pic {
     /* display: flex; */
@@ -221,7 +254,7 @@ form input {
     height: 100%;
     width: auto;
     max-width: 200%;
-    box-sizing:  border-box;
+    box-sizing: border-box;
     object-fit: contain;
     margin: 0 auto;
     padding: 0px;
@@ -235,18 +268,48 @@ form input {
 
 .ellipsis-dropdown {
     position: relative;
-    font-size:1.1em;
+    font-size: 1.1em;
     /* text-decoration: none; */
-  }
+}
 
-  .hidden {
+.hidden {
     display: none;
-  }
+}
 
-  .backG {
-    /* position: absolute;
-    width: 5%;
-    height:15%; */
-    /* border: 1px solid blue; */
 
-  }
+
+.topEditContainer {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainBodyEditHabit {
+    width: 100%;
+    height: 89%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+/* .editHabitsForm {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+
+} */
+
+form select {
+    width: 100%;
+    text-align: center;
+}
+
+/* .overallSizeEditModal {
+height: 200%;
+width: 100%;
+} */
