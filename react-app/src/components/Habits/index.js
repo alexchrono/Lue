@@ -1,6 +1,6 @@
 import React, { useState,useSelector,useEffect,useRef } from 'react';
-
-
+import OpenModalButton from '../OpenModalButton';
+import EditHabitModal from '../EditHabitModal'
 
 export default function Habits({user}){
 
@@ -66,9 +66,38 @@ return (
 
               <>
 
-               <li>Option 1</li>
-               <li>Option 2</li>
-               <li>Option 3</li>
+               <li><OpenModalButton
+              buttonText={
+                <>
+                  <span className="menu-icon">
+                    <img
+            src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`} className='ellipsis-pic' onClick={()=>setShowMenu(false)}/>
+                  </span>{" "}
+                  Edit
+                </>
+              }
+              modalComponent={<EditHabitModal
+                //  playlistId={playlistId}
+                 />}
+              onClick={() => setShowMenu(false)}
+            /></li>
+               <li>To Top</li>
+               <li>To Bottom</li>
+               <li><OpenModalButton
+              buttonText={
+                <>
+                  <span className="menu-icon">
+                    <img
+            src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`} className='ellipsis-pic' onClick={()=>setShowMenu(false)}/>
+                  </span>{" "}
+                  Deletebutrightnowgoestoedit
+                </>
+              }
+              modalComponent={<EditHabitModal
+                //  playlistId={playlistId}
+                 />}
+              onClick={() => setShowMenu(false)}
+            /></li>
                </>
 
 
