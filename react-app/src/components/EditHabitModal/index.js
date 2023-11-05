@@ -1,12 +1,12 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { login } from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
 import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 
 
-export default function EditHabitModal() {
+export default function EditHabitModal({habitId}) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -15,7 +15,22 @@ export default function EditHabitModal() {
   const [errors, setErrors] = useState([]);
   const [alignment,setAlignment] = useState(true)
   const { closeModal } = useModal();
+  const userHabits= useSelector((state) => state.session.user.usersHabitsObj);
 
+  useEffect(() => {
+    if (userHabits && habitId) {
+      const test=userHabits[habitId]
+      setTitle(test.title)
+      setNotes(test.notes)
+      setDifficulty(test.difficulty)
+      setResetRate(test.resetRate)
+      setAlignment(test.alignment)
+
+    }
+  }, [userHabits,habitId]);
+
+  console.log('inside edithabitmodal my userhabits are',userHabits)
+  console.log('userhabits at habitid is',userHabits[habitId])
   const handleSubmit = async (e) => {
     e.preventDefault();
     const data = await dispatch(login(title, notes));
@@ -27,8 +42,12 @@ export default function EditHabitModal() {
   };
 
   const handlePicClick = (value) => {
+    console.log('inside handlePicClick*****')
+    console.log("setAlignmentTO",value)
     setAlignment(value);
   };
+
+  console.log('INSIDE EDITHABITMODAL HABITID IS',habitId)
 
   return (
     <>
@@ -79,18 +98,19 @@ export default function EditHabitModal() {
             <div className="pic-container">
                 <img
                   src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
-                  className='sadFace'
                   onClick={() => handlePicClick(false)}
+
+                  className={!alignment? 'sadFace blueborder': 'sadFace'}
                   alt="Bad Habit"
                 />
                 <p className="pic-caption">Bad Habit</p>
               </div>
 
-              <div className="pic-container">
+              <div className="pic-container" >
                 <img
                   src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
-                  className='happyFace'
                   onClick={() => handlePicClick(true)}
+                  className={alignment?'happyFace blueborder': 'happyFace'}
                   alt="Good Habit"
                 />
                 <p className="pic-caption">Good Habit</p>
@@ -110,13 +130,12 @@ export default function EditHabitModal() {
 
               <label>
 
-            Reset my count every:
+            Reset my count:
 
               <select name='reset' id='reset' onChange={(e) => setResetRate(e.target.value)}>
                 <option value='daily'>Daily</option>
                 <option value='weekly'>Weakly</option>
                 <option value='monthly'>Monthly</option>
-                <option value='4'>Super duper Challenging!</option>
               </select>
 
             </label>
