@@ -16,6 +16,8 @@ export default function Habits({ user }) {
   console.log('USER IN HABITS IS',user2)
   console.log('users habits are',user2.usersHabitsObj)
   console.log('users habits array is',user2.usersHabitsArray)
+  const userHabits=user2.usersHabitsObj
+  const userArray=user2.usersHabitsArray
 
   const openMenu = () => {
     if (showMenu) return;
@@ -68,16 +70,30 @@ export default function Habits({ user }) {
         <div className='fifteen-percent menu-text'>weak</div>
         <div className='fifteen-percent menu-text' style={{ borderRight: 'none' }}>strong</div>
       </div>
-      <div className='habits-card'>
+      {userArray?.map((habitId,index)=>(
+ <div className='habits-card'>
         <div className='fifteen-percent invisi'></div>
         <div className='habits-card-center'>
           <div className='bad-habit-emoti'>
+            {user2 && userHabits[habitId] && !userHabits[habitId].alignment? (
             <img
               src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
               className='sadFace'
+            />):(
+              <img
+              src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
+              className='sadFace'
             />
+            )
+            }
+
+
+
           </div>
-          <div className='main-body-habit-card'></div>
+          <div className='main-body-habit-card'>
+            <h3>{userHabits[habitId].title}</h3>
+            <p>{userHabits[habitId].notes}</p>
+          </div>
           <div className='ellipsis'>
             <img
               src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
@@ -128,7 +144,8 @@ export default function Habits({ user }) {
             </div>
           </div>
         )}
-      </div>
+      </div>))}
+
     </div>
   );
 }
