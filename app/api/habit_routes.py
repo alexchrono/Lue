@@ -11,26 +11,20 @@ habit_routes = Blueprint('habits', __name__)
 def makeNewHabit():
     data=request.json
     habit=data.get('habit')
-    
+
 
     if habit:
-        updated_habits=Habit.query.all()
-        upd_habit_obj={}
-        for ele in updated_habits:
-            upd_habit_obj[ele.id]=ele.to_dict()
-
 
         new_habit= Habit(
             title=habit,
             user_id=current_user.id
-
-
         )
 
         db.session.add(new_habit)
         db.session.commit()
+        updated_habits=[hab.to_dict() for hab in Habit.query.all()]
         # ,"upd_list":upd_habit_list}
-        return {'all_habits':upd_habit_obj,'new_habit':new_habit.to_dict()}
+        return {'all_habits':updated_habits,'new_habit':new_habit.to_dict()}
 
 
 
