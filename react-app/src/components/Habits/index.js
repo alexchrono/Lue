@@ -14,6 +14,7 @@ export default function Habits({ user }) {
   const userHabits= useSelector((state) => state.session.user.usersHabitsObj);
   const userArray= useSelector((state) => state.session.user.usersHabitsArray);
   const habitz = useSelector((state) => state.session?.habits?.allIds);
+  const [openHabit,setOpenHabit]=useState(null)
 
 
   // console.log('USER IN HABITS IS',user2)
@@ -26,6 +27,17 @@ export default function Habits({ user }) {
     if (showMenu) return;
     setShowMenu(true);
   };
+
+  const handleEllipsisClick=(habitId)=>{
+    console.log('INSIDE HANDLE ELLIPSIS CLICK')
+    if(openHabit===habitId){
+      console.log("openHabitId already set to what we clicked")
+      setOpenHabit(null)
+    }else {
+      setOpenHabit(habitId)
+      console.log('OPENHABITID IS NOW',habitId)
+    }
+  }
 
   const MakeNewHabit = async (e) => {
     e.preventDefault();
@@ -102,11 +114,16 @@ export default function Habits({ user }) {
             <img
               src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
               className='ellipsis-pic'
-              onClick={openMenu}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleEllipsisClick(habitId);
+                openMenu()
+
+              }}
             />
           </div>
         </div>
-        {showMenu && (
+        {openHabit===habitId && showMenu && (
           <div className='fifteen-percent no-border'>
             <div className='backG'>
               <ul className={ulClassName} ref={ulRef}>
