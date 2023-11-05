@@ -4,10 +4,12 @@ import EditDailyModal from '../EditDailyModal';
 import DeleteHabitOrDaily from '../DeleteHabitOrDaily';
 import { useDispatch, useSelector } from 'react-redux';
 
+
 export default function Dailies({ user }) {
   const [daily, setDaily] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const [isDone, setIsDone] = useState(false);
+  const [clickedDailyCheck,setClickedDailyCheck]=useState([])
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
@@ -15,8 +17,15 @@ export default function Dailies({ user }) {
   const userArray = user2.usersDailiesArray;
   const [openDaily,setOpenDaily]=useState(null)
 
-  const handleCheckmark = () => {
-    setIsDone(!isDone);
+  const handleCheckmark = (dailyId) => {
+    let newArray=[]
+    if (!clickedDailyCheck.includes(dailyId)){
+    setClickedDailyCheck([...clickedDailyCheck,dailyId])}
+    else{
+      newArray=clickedDailyCheck.filter((ele)=>ele!==dailyId)
+      setClickedDailyCheck(newArray)
+    }
+    // setIsDone(!isDone);
   };
 
   const openMenu = () => {
@@ -73,8 +82,10 @@ export default function Dailies({ user }) {
         <div className='habits-card'>
           <div className='fifteen-percent invisi'></div>
           <div className='habits-card-center'>
-            <div className='bad-habit-emoti' onClick={handleCheckmark}>
-              {isDone ? (
+            <div className='bad-habit-emoti' onClick={(e)=>{
+              e.stopPropagation();
+              handleCheckmark(dailyId)}}>
+              {clickedDailyCheck && clickedDailyCheck.includes(dailyId) ? (
                 <img
                   src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
                   className='sadFace'
