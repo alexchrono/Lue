@@ -120,7 +120,7 @@ export default function EditHabitModal({habitId}) {
 
             Difficulty Level:
 
-              <select name='difficulty' id='difficulty' onChange={(e) => setDifficulty(e.target.value)}>
+              <select name='difficulty' id='difficulty' value={difficulty}onChange={(e) => setDifficulty(e.target.value)}>
                 <option value='1'>No Sweat</option>
                 <option value='2'>Bit of Sweat</option>
                 <option value='3'>Hard Work</option>
@@ -132,7 +132,7 @@ export default function EditHabitModal({habitId}) {
 
             Reset my count:
 
-              <select name='reset' id='reset' onChange={(e) => setResetRate(e.target.value)}>
+              <select name='reset' id='reset' value={resetRate} onChange={(e) => setResetRate(e.target.value)}>
                 <option value='daily'>Daily</option>
                 <option value='weekly'>Weakly</option>
                 <option value='monthly'>Monthly</option>
