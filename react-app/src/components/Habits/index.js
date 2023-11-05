@@ -171,7 +171,7 @@ export default function Habits({ user }) {
                         </span> Delete
                       </>
                     }
-                    modalComponent={<DeleteHabitOrDaily />}
+                    modalComponent={<DeleteHabitOrDaily formType={'habit'} targetId={habitId} title={userHabits[habitId].title}/>}
                     onClick={() => setShowMenu(false)}
                   />
                 </li>

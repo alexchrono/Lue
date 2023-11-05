@@ -26,15 +26,45 @@ def makeNewHabit():
         # ,"upd_list":upd_habit_list}
         return {'all_habits':updated_habits,'new_habit':new_habit.to_dict()}
 
+    return {"test": "7"}
 
 
+@habit_routes.route('/edit-habit', methods=['POST'])
+def editHabit():
+    ic('inside our edit habit route')
+    data=request.json
+    ic(data)
+    id=data.get('habitId')
+    title=data.get('title')
+    notes=data.get('notes')
+    difficulty=data.get('difficulty')
+    resetRate=data.get('resetRate')
+    alignment=data.get('alignment')
+    ic(title)
+    ic(notes)
+    ic(difficulty)
+    ic(resetRate)
+    ic(alignment)
+    target=Habit.query.get(id)
+    ic(target)
+    if target:
+        target.title=data.get('title')
+        target.notes=data.get('notes')
+        target.difficulty=data.get('difficulty')
+        target.reset_rate=data.get('resetRate')
+        target.alignment=data.get('alignment')
+        db.session.commit()
+        return target.to_dict()
+
+    return {"test": "7"}
+
+@habit_routes.route('/delete-habit', methods=['POST'])
+def deleteHabit():
+    ic('inside our DELETE habit route')
+    data=request.json
+    targetId=data.get('targetId')
+    ic(data)
+    ic(targetId)
 
 
-
-
-
-
-    """
-    Query for all users and returns them in a list of user dictionaries
-    """
     return {"test": "7"}

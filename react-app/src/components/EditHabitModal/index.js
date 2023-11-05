@@ -4,6 +4,7 @@ import { useDispatch,useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
 import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
+import { ThunkEditHabit } from "../../store/habit";
 
 
 export default function EditHabitModal({habitId}) {
@@ -33,11 +34,14 @@ export default function EditHabitModal({habitId}) {
   console.log('userhabits at habitid is',userHabits[habitId])
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const data = await dispatch(login(title, notes));
+    const updatedHabit={habitId,title,notes,difficulty,resetRate,alignment}
+    const data = await dispatch(ThunkEditHabit(updatedHabit));
     if (data) {
-      setErrors(data);
-    } else {
       closeModal()
+
+    } else {
+      setErrors(data);
+
     }
   };
 
@@ -70,9 +74,9 @@ export default function EditHabitModal({habitId}) {
         <div className='habits-card-center'>
           <form onSubmit={handleSubmit} className='editHabitsForm'>
             <ul>
-              {errors.map((error, idx) => (
+              {/* {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
-              ))}
+              ))} */}
             </ul>
             <label>
               Title

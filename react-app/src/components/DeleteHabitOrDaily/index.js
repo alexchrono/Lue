@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
+import { ThunkDeleteHabit } from "../../store/habit";
 
-
-export default function DeleteHabitOrDaily({formType}) {
+export default function DeleteHabitOrDaily({formType,targetId,title}) {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState([]);
@@ -12,8 +12,8 @@ export default function DeleteHabitOrDaily({formType}) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    console.log(7)
-    closeModal()
+    const data = await dispatch(ThunkDeleteHabit(targetId))
+
     return 7
     // const data = await dispatch(login(email, password));
     // if (data) {
@@ -23,11 +23,18 @@ export default function DeleteHabitOrDaily({formType}) {
     // }
   };
 const ourDisplay= formType==='habit'? "Habit" : "Daily"
-const ourName= 'jujuFornow'
+const ourName='steve'
+
+console.log("🚀 ~ file: index.js:27 ~ DeleteHabitOrDaily ~ formType:", formType)
+
+console.log("🚀 ~ file: index.js:29 ~ DeleteHabitOrDaily ~ targetId:", targetId)
+
+console.log("🚀 ~ file: index.js:31 ~ DeleteHabitOrDaily ~ title:", title)
 
   return (
     <>
-      <h1>Are you sure you want to delete the {ourDisplay}: {ourName} ? </h1>
+      <h1>Are you sure you want to delete the {ourDisplay}</h1>
+      <h3>{title} ? </h3>
       <div className="alignment-choice">
 
 <div className="pic-container">
