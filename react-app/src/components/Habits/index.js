@@ -10,6 +10,12 @@ export default function Habits({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef();
   const dispatch = useDispatch();
+  const user2 = useSelector((state) => state.session.user);
+
+
+  console.log('USER IN HABITS IS',user2)
+  console.log('users habits are',user2.usersHabitsObj)
+  console.log('users habits array is',user2.usersHabitsArray)
 
   const openMenu = () => {
     if (showMenu) return;
