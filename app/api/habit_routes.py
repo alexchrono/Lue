@@ -11,6 +11,7 @@ habit_routes = Blueprint('habits', __name__)
 def makeNewHabit():
     data=request.json
     habit=data.get('habit')
+    
 
     if habit:
         updated_habits=Habit.query.all()
