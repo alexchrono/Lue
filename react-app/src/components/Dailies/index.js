@@ -5,7 +5,7 @@ import DeleteHabitOrDaily from '../DeleteHabitOrDaily';
 import { useDispatch, useSelector } from 'react-redux';
 
 export default function Dailies({ user }) {
-  const [habit, setHabit] = useState('');
+  const [daily, setDaily] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const [isDone, setIsDone] = useState(false);
   const ulRef = useRef();
@@ -13,6 +13,7 @@ export default function Dailies({ user }) {
   const user2 = useSelector((state) => state.session.user);
   const userDailies = user2.usersDailiesObj;
   const userArray = user2.usersDailiesArray;
+  const [openDaily,setOpenDaily]=useState(null)
 
   const handleCheckmark = () => {
     setIsDone(!isDone);
@@ -22,6 +23,17 @@ export default function Dailies({ user }) {
     if (showMenu) return;
     setShowMenu(true);
   };
+
+  const handleEllipsisClick=(dailyId)=>{
+    console.log('INSIDE HANDLE ELLIPSIS CLICK')
+    if(openDaily===dailyId){
+      console.log("openDailyId already set to what we clicked")
+      setOpenDaily(null)
+    }else {
+      setOpenDaily(dailyId)
+      console.log('OPENHABITID IS NOW',dailyId)
+    }
+  }
 
   useEffect(() => {
     if (!showMenu) return;
@@ -47,8 +59,8 @@ export default function Dailies({ user }) {
           <form onSubmit={() => { return 7 }}>
             <input
               type="text"
-              value={habit}
-              onChange={(e) => setHabit(e.target.value)}
+              value={daily}
+              onChange={(e) => setDaily(e.target.value)}
               required
             />
           </form>
@@ -84,11 +96,16 @@ export default function Dailies({ user }) {
               <img
                 src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
                 className='ellipsis-pic'
-                onClick={openMenu}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleEllipsisClick(dailyId);
+                  openMenu()
+
+                }}
               />
             </div>
           </div>
-          {showMenu && (
+          {openDaily===dailyId && showMenu && (
             <div className='fifteen-percent no-border'>
               <div className='backG'>
                 <ul className={ulClassName} ref={ulRef}>
