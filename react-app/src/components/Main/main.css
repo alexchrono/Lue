@@ -314,6 +314,17 @@ form select {
     width: 90%;
 }
 
+.red {
+    background-color: red;
+    height: 100%;
+    width: 100%;
+}
+.green {
+    background-color: green;
+    height: 100%;
+    width: 100%;
+}
+
 /* .overallSizeEditModal {
 height: 200%;
 width: 100%;

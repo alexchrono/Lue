@@ -8,6 +8,7 @@ import { ThunkNewHabit } from '../../store/habit';
 export default function Habits({ user }) {
   const [habit, setHabit] = useState('');
   const [showMenu, setShowMenu] = useState(false);
+  const [clickedEmoti,setClickedEmoti]=useState([])
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
@@ -39,6 +40,17 @@ export default function Habits({ user }) {
     }
   }
 
+  const handleEmotiClick = (habitId) => {
+    let newArray=[]
+    if (!clickedEmoti.includes(habitId)){
+    setClickedEmoti([...clickedEmoti,habitId])}
+    else{
+      newArray=clickedEmoti.filter((ele)=>ele!==habitId)
+      setClickedEmoti(newArray)
+    }
+    // setIsDone(!isDone);
+  };
+
   const MakeNewHabit = async (e) => {
     e.preventDefault();
     let test = await dispatch(ThunkNewHabit(habit));
@@ -52,7 +64,7 @@ export default function Habits({ user }) {
     if (!showMenu) return;
 
     const closeMenu = (e) => {
-      if (ulRef.current && !ulRef.current.contains(e.target)) {
+      if (ulRef.current && !ulRef?.current?.contains(e.target)) {
         setShowMenu(false);
       }
     };
@@ -90,15 +102,17 @@ export default function Habits({ user }) {
  <div className='habits-card'>
         <div className='fifteen-percent invisi'></div>
         <div className='habits-card-center'>
-          <div className='bad-habit-emoti'>
+          <div className='bad-habit-emoti' onClick={(e)=>{
+              e.stopPropagation();
+              handleEmotiClick(habitId)}}>
             {user2 && userHabits[habitId] && !userHabits[habitId].alignment? (
             <img
               src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
-              className='sadFace'
+              className={clickedEmoti && clickedEmoti.includes(habitId)? 'sadFace red': 'sadFace'}
             />):(
               <img
               src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
-              className='sadFace'
+              className={clickedEmoti && clickedEmoti.includes(habitId)? 'sadFace green': 'sadFace'}
             />
             )
             }
