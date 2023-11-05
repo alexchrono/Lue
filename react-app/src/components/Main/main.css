@@ -68,7 +68,7 @@
 
     width: 50%;
     height: 100%;
-    overflow-y: scroll;
+    overflow-y:scroll;
 
 }
 
@@ -319,25 +319,32 @@ form select {
     height: 100%;
     width: 100%;
 }
-
 .green {
     background-color: green;
     height: 100%;
     width: 100%;
 }
 
-@keyframes blink {
-
-    0%,
-    100% {
-        border-color: transparent;
-    }
-
-    50% {
-        border-color: blue;
-    }
+/* @keyframes blink {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: blue;
+  }
 }
 
 .blueborder {
-    animation: blink 1s linear infinite;
+  animation: blink 1s linear infinite;
+} */
+.blueborder {
+    border: 2px solid blue;
+    /* height: 100%;
+    width: 100%;
+    border: 2px solid blue; */
 }
+
+/* .overallSizeEditModal {
+height: 200%;
+width: 100%;
+} */
