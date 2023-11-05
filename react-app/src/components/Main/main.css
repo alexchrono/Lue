@@ -309,6 +309,10 @@ form select {
     text-align: center;
 }
 
+.special90 {
+    width: 90%;
+}
+
 /* .overallSizeEditModal {
 height: 200%;
 width: 100%;

@@ -38,6 +38,17 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        userHabits={}
+        userDailies={}
+        userHabitsArray=[]
+        userDailiesArray=[]
+        for ele in self.users_habits:
+            userHabitsArray.append(ele.id)
+            userHabits[ele.id]=ele.to_dict()
+        for ele2 in self.users_dailies:
+            userDailiesArray.append(ele2.id)
+            userDailies[ele2.id]=ele2.to_dict()
+
         return {
             'id': self.id,
             'username': self.username,
@@ -48,8 +59,10 @@ class User(db.Model, UserMixin):
             'currentHealth': self.current_health,
             'gold': self.gold,
             'exp': self.exp,
-            'usersHabits': [habit.id for habit in self.users_habits],
-            'usersDailies': [daily.id for daily in self.users_dailies],
+            'usersHabitsArray': userHabitsArray,
+            'usersHabitsObj': userHabits,
+            'usersDailiesArray': userDailiesArray,
+            'usersDailiesObj':userDailies,
             'created_at': self.created_at,
             'updated_at': self.updated_at
 
