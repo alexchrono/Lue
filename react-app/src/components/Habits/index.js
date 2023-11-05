@@ -11,13 +11,16 @@ export default function Habits({ user }) {
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
+  const userHabits= useSelector((state) => state.session.user.usersHabitsObj);
+  const userArray= useSelector((state) => state.session.user.usersHabitsArray);
+  const habitz = useSelector((state) => state.session?.habits?.allIds);
 
 
-  console.log('USER IN HABITS IS',user2)
-  console.log('users habits are',user2.usersHabitsObj)
-  console.log('users habits array is',user2.usersHabitsArray)
-  const userHabits=user2.usersHabitsObj
-  const userArray=user2.usersHabitsArray
+  // console.log('USER IN HABITS IS',user2)
+  // console.log('users habits are',user2.usersHabitsObj)
+  // console.log('users habits array is',user2.usersHabitsArray)
+  // const userHabits=user2.usersHabitsObj
+  // const userArray=user2.usersHabitsArray
 
   const openMenu = () => {
     if (showMenu) return;
@@ -28,6 +31,7 @@ export default function Habits({ user }) {
     e.preventDefault();
     let test = await dispatch(ThunkNewHabit(habit));
     if (test) {
+      setHabit('')
       return test;
     }
   };
@@ -44,7 +48,7 @@ export default function Habits({ user }) {
     document.addEventListener('click', closeMenu);
 
     return () => document.removeEventListener('click', closeMenu);
-  }, [showMenu]);
+  }, [showMenu,habitz]);
 
   const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
 
