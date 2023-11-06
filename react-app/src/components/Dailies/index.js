@@ -3,6 +3,7 @@ import OpenModalButton from '../OpenModalButton';
 import EditDailyModal from '../EditDailyModal';
 import DeleteHabitOrDaily from '../DeleteHabitOrDaily';
 import { useDispatch, useSelector } from 'react-redux';
+import { ThunkNewDaily } from '../../store/daily';
 
 
 export default function Dailies({ user }) {
@@ -13,9 +14,12 @@ export default function Dailies({ user }) {
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
-  const userDailies = user2.usersDailiesObj;
-  const userArray = user2.usersDailiesArray;
+  const userDailies = useSelector((state) => state.dailies.byId);
+  const userArray =  useSelector((state) => state.dailies.allIds);
   const [openDaily,setOpenDaily]=useState(null)
+
+  console.log('IN DAILIES USERDAILIES IS',userDailies)
+  console.log('in dailies userarray is',userArray)
 
   const handleCheckmark = (dailyId) => {
     let newArray=[]
@@ -44,6 +48,16 @@ export default function Dailies({ user }) {
     }
   }
 
+
+  const MakeNewDaily = async (e) => {
+    e.preventDefault();
+    let test = await dispatch(ThunkNewDaily(daily));
+    if (test) {
+      setDaily('')
+      return test;
+    }
+  };
+
   useEffect(() => {
     if (!showMenu) return;
 
@@ -56,7 +70,7 @@ export default function Dailies({ user }) {
     document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  }, [showMenu,userArray]);
 
   const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
 
@@ -65,7 +79,7 @@ export default function Dailies({ user }) {
       <div className='habits-topMenu'>
         <div className='fifteen-percent bigtextcenter'>Dailies</div>
         <div className='forty-percent'>
-          <form onSubmit={() => { return 7 }}>
+          <form onSubmit={MakeNewDaily}>
             <input
               type="text"
               value={daily}
@@ -100,8 +114,8 @@ export default function Dailies({ user }) {
               )}
             </div>
             <div className='main-body-habit-card'>
-              <h3>{userDailies[dailyId].title}</h3>
-              <p>{userDailies[dailyId].notes}</p>
+              <h3>{userDailies[dailyId]?.title}</h3>
+              <p>{userDailies[dailyId]?.notes}</p>
             </div>
             <div className='ellipsis'>
               <img

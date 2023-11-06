@@ -14,7 +14,6 @@ export default function Habits({ user }) {
   const user2 = useSelector((state) => state.session.user);
   const userHabits= useSelector((state) => state.habits.byId);
   const userArray= useSelector((state) => state.habits.allIds);
-  const habitz = useSelector((state) => state.habits?.allIds);
   const testeroo =useSelector((state) => state.habits);
   console.log("🚀 ~ file: index.js:20 ~ Habits ~ testeroo:", testeroo)
   const [openHabit,setOpenHabit]=useState(null)
@@ -75,7 +74,7 @@ export default function Habits({ user }) {
     document.addEventListener('click', closeMenu);
 
     return () => document.removeEventListener('click', closeMenu);
-  }, [showMenu,habitz]);
+  }, [showMenu,userArray]);
 
   const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
 
