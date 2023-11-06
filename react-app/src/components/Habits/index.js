@@ -19,7 +19,7 @@ export default function Habits({ user }) {
   const [openHabit,setOpenHabit]=useState(null)
 
 
-  
+
 
   // console.log('USER IN HABITS IS',user2)
   // console.log('users habits are',user2.usersHabitsObj)
@@ -112,10 +112,12 @@ export default function Habits({ user }) {
             <img
               src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
               className={clickedEmoti && clickedEmoti.includes(habitId)? 'sadFace red': 'sadFace'}
+              style={{ width: '100%',height: '100%', margin: '0' }}
             />):(
               <img
               src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
               className={clickedEmoti && clickedEmoti.includes(habitId)? 'sadFace green': 'sadFace'}
+              style={{ width: '100%',height: '100%', margin: '0' }}
             />
             )
             }
