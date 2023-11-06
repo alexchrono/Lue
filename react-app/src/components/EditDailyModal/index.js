@@ -28,9 +28,11 @@ export default function EditDailyModal({dailyId}) {
       setTitle(test.title)
       setNotes(test.notes)
       setDifficulty(test.difficulty)
-      setStartDate(test.start_date)
+      const starDate= new Date(test.startDate)
+      const formattedStartDate = starDate.toISOString().split('T')[0];
+      setStartDate(formattedStartDate)
       setRepeatTimeFrame(test.repeat_time_frame)
-      setRepeatRateNumbers(test.repeat_quantity)
+      setRepeatRateNumbers(parseInt(test.repeatQuantity))
 
     }
   }, [userDailies,dailyId]);
