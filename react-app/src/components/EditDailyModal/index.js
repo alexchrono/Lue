@@ -19,7 +19,7 @@ export default function EditDailyModal({dailyId}) {
   const [startDate,setStartDate] = useState('')
   const { closeModal } = useModal();
   const userDailies= useSelector((state) => state.session.user.usersDailiesObj);
-
+  const userArray =  useSelector((state) => state.dailies.allIds);
   console.log('INSIDE DAILIES EDIT USERDAILIES IS',userDailies)
 
   useEffect(() => {
@@ -38,18 +38,21 @@ export default function EditDailyModal({dailyId}) {
       setRepeatRateNumbers(parseInt(test?.repeatQuantity))
 
     }
-  }, [userDailies,dailyId]);
+  }, [userDailies,userArray,dailyId,repeatTimeFrame]);
 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const updatedDaily={dailyId,title,notes,difficulty,startDate,repeatTimeFrame,repeatRateNumbers}
     const data= await dispatch(ThunkEditDaily(updatedDaily));
-    if (data) {
+    if (data?.title) {
       closeModal()
 
-    } else {
+    } else if (data?.errors){
+      console.log('WE GOT SOME ERRORS N OUR FORMS,data is******',data)
+      console.log('DATA . ERRORS IS',data?.errors)
       setErrors(data);
+      console.log('WE CURRENTLY SET ERRORS WITH JUST DATA OR ',data)
 
     }
   };

@@ -8,6 +8,10 @@ from datetime import datetime
 daily_routes = Blueprint('dailies', __name__)
 
 
+def custError(errors,field,message):
+    errors[field]=message
+    return errors
+
 
 @daily_routes.route('/get-all-users-dailies',methods=['GET'])
 def getAllDailies():
@@ -81,6 +85,7 @@ def makeNewDaily():
 
 @daily_routes.route('/edit-daily', methods=['POST'])
 def editDaily():
+    errors={}
     ic('inside our edit DAILY route')
     data=request.json
     ic(data)
@@ -100,6 +105,11 @@ def editDaily():
     ic(startDate)
     target=Daily.query.get(id)
     ic(target)
+
+    if len(data.get('title'))<3 or len(data.get('title'))>30:
+        custError(errors,'title','title must be between 3 and 30 characters')
+    if not data.get('difficulty'):
+        custError(errors,'difficulty','difficulty is required.')
     if target:
         target.title=data.get('title')
         target.notes=data.get('notes')
@@ -111,6 +121,7 @@ def editDaily():
         target.repeat_quantity=data.get('repeatRateNumbers')
         target.updated_at = datetime.utcnow()
         db.session.commit()
+
         return target.to_dict()
         return {"test": "7"}
 

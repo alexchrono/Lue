@@ -69,7 +69,7 @@ export default function Dailies({ user }) {
     if (!userArray.length) {
       fetchData()
     }
-  }, [userArray]);
+  }, [userArray,dispatch]);
 
   useEffect(() => {
     if (!showMenu) return;
