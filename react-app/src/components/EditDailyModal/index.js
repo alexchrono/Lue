@@ -7,7 +7,7 @@ import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 import { ThunkEditDaily } from "../../store/daily";
 
 
-export default function EditDailyModal({dailyId}) {
+export default function EditDailyModal({dailyId,daily}) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -23,19 +23,19 @@ export default function EditDailyModal({dailyId}) {
   console.log('INSIDE DAILIES EDIT USERDAILIES IS',userDailies)
 
   useEffect(() => {
-    if (userDailies && dailyId) {
-      const test=userDailies[dailyId]
-      console.log('IN USE EFFECT TEST IS',test)
-      setTitle(test?.title)
-      setNotes(test?.notes)
-      setDifficulty(test?.difficulty)
-      if (test?.startDate){
-      const starDate= new Date(test?.startDate)
+    if (daily) {
+      // const test=userDailies[dailyId]
+      // console.log('IN USE EFFECT TEST IS',test)
+      setTitle(daily?.title)
+      setNotes(daily?.notes)
+      setDifficulty(daily?.difficulty)
+      if (daily?.startDate){
+      const starDate= new Date(daily?.startDate)
       const formattedStartDate = starDate?.toISOString().split('T')[0];
       setStartDate(formattedStartDate)}
-      setRepeatTimeFrame(test?.repeatTimeFrame)
+      setRepeatTimeFrame(daily?.repeatTimeFrame)
       console.log('IN USE EFFECT REPEAT TIME FRAME IS',repeatTimeFrame)
-      setRepeatRateNumbers(parseInt(test?.repeatQuantity))
+      setRepeatRateNumbers(parseInt(daily?.repeatQuantity))
 
     }
   }, [userDailies,userArray,dailyId,repeatTimeFrame]);

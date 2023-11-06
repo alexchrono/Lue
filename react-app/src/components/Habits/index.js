@@ -184,7 +184,7 @@ export default function Habits({ user }) {
                           </span> Edit
                         </>
                       }
-                      modalComponent={<EditHabitModal habitId={habitId} />}
+                      modalComponent={<EditHabitModal habitId={habitId} habit={userHabits[habitId]} />}
                       onClick={() => setShowMenu(false)}
                     />
                   </li>

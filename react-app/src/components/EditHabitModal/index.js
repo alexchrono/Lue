@@ -7,7 +7,7 @@ import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 import { ThunkEditHabit } from "../../store/habit";
 
 
-export default function EditHabitModal({habitId}) {
+export default function EditHabitModal({habitId,habit}) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -19,16 +19,16 @@ export default function EditHabitModal({habitId}) {
   const userHabits= useSelector((state) => state.session.user.usersHabitsObj);
 
   useEffect(() => {
-    if (userHabits && habitId) {
-      const test=userHabits[habitId]
-      setTitle(test?.title)
-      setNotes(test?.notes)
-      setDifficulty(test?.difficulty)
-      setResetRate(test?.resetRate)
-      setAlignment(test?.alignment)
+    if (habit) {
+      // const test=userHabits[habitId]
+      setTitle(habit?.title)
+      setNotes(habit?.notes)
+      setDifficulty(habit?.difficulty)
+      setResetRate(habit?.resetRate)
+      setAlignment(habit?.alignment)
 
     }
-  }, [userHabits,habitId]);
+  }, [userHabits,habitId,habit]);
 
   console.log('inside edithabitmodal my userhabits are',userHabits)
   console.log('userhabits at habitid is',userHabits[habitId])
