@@ -3,6 +3,7 @@ from flask_login import login_required
 from app.models import User,Habit,db
 from flask_login import current_user
 from icecream import ic
+from datetime import datetime
 
 habit_routes = Blueprint('habits', __name__)
 
@@ -82,18 +83,18 @@ def makeNewHabit():
 def editHabit():
     ic('inside our edit habit route')
     data=request.json
-    ic(data)
-    id=data.get('habitId')
-    title=data.get('title')
-    notes=data.get('notes')
-    difficulty=data.get('difficulty')
-    resetRate=data.get('resetRate')
-    alignment=data.get('alignment')
-    ic(title)
-    ic(notes)
-    ic(difficulty)
-    ic(resetRate)
-    ic(alignment)
+    # ic(data)
+    # id=data.get('habitId')
+    # title=data.get('title')
+    # notes=data.get('notes')
+    # difficulty=data.get('difficulty')
+    # resetRate=data.get('resetRate')
+    # alignment=data.get('alignment')
+    # ic(title)
+    # ic(notes)
+    # ic(difficulty)
+    # ic(resetRate)
+    # ic(alignment)
     target=Habit.query.get(id)
     ic(target)
     if target:
@@ -102,6 +103,8 @@ def editHabit():
         target.difficulty=data.get('difficulty')
         target.reset_rate=data.get('resetRate')
         target.alignment=data.get('alignment')
+        target.updated_at = datetime.utcnow()
+
         db.session.commit()
         return target.to_dict()
 

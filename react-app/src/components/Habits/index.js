@@ -75,7 +75,7 @@ export default function Habits({ user }) {
     document.addEventListener('click', closeMenu);
 
     return () => document.removeEventListener('click', closeMenu);
-  }, [showMenu,userArray]);
+  }, [showMenu,userArray,userHabits]);
 
   const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
 

@@ -70,7 +70,7 @@ export default function Dailies({ user }) {
     document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu,userArray]);
+  }, [showMenu,userArray,userDailies]);
 
   const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
 
@@ -168,7 +168,7 @@ export default function Dailies({ user }) {
                           Delete
                         </>
                       }
-                      modalComponent={<DeleteHabitOrDaily />}
+                      modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title}/>}
                       onClick={() => setShowMenu(false)}
                     />
                   </li>

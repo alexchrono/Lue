@@ -3,13 +3,14 @@ from flask_login import login_required
 from app.models import User,Habit,db,Daily
 from flask_login import current_user
 from icecream import ic
+from datetime import datetime
 
 daily_routes = Blueprint('dailies', __name__)
 
 
 
 @daily_routes.route('/get-all-users-dailies',methods=['GET'])
-def getAllHabits():
+def getAllDailies():
     currentUserObj=User.query.get(current_user.id)
         # ic(currentUserObj)
         # ic(currentUserObj.users_habits)
@@ -27,7 +28,7 @@ def getAllHabits():
 
 
 @daily_routes.route('/new-daily', methods=['POST'])
-def makeNewHabit():
+def makeNewDaily():
     data=request.json
     daily=data.get('daily')
 
@@ -78,47 +79,55 @@ def makeNewHabit():
 #     return {"test": "7"}
 
 
-@daily_routes.route('/edit-habit', methods=['POST'])
-def editHabit():
-    ic('inside our edit habit route')
+@daily_routes.route('/edit-daily', methods=['POST'])
+def editDaily():
+    ic('inside our edit DAILY route')
     data=request.json
     ic(data)
-    id=data.get('habitId')
+    id=data.get('dailyId')
+    ic(id)
     title=data.get('title')
-    notes=data.get('notes')
-    difficulty=data.get('difficulty')
-    resetRate=data.get('resetRate')
-    alignment=data.get('alignment')
     ic(title)
+    notes=data.get('notes')
     ic(notes)
+    difficulty=data.get('difficulty')
     ic(difficulty)
-    ic(resetRate)
-    ic(alignment)
-    target=Habit.query.get(id)
+    resetRateNumbers=data.get('repeatRateNumbers')
+    ic(resetRateNumbers)
+    ourTimeFrame=data.get('repeatTimeFrame')
+    ic(ourTimeFrame)
+    startDate=data.get('startDate')
+    ic(startDate)
+    target=Daily.query.get(id)
     ic(target)
     if target:
         target.title=data.get('title')
         target.notes=data.get('notes')
         target.difficulty=data.get('difficulty')
-        target.reset_rate=data.get('resetRate')
-        target.alignment=data.get('alignment')
+        if startDate:
+            target.start_date = datetime.strptime(startDate, '%Y-%m-%d').date()
+
+        target.repeat_time_frame=data.get('repeatTimeFrame')
+        target.repeat_quantity=data.get('repeatRateNumbers')
+        target.updated_at = datetime.utcnow()
         db.session.commit()
         return target.to_dict()
+        return {"test": "7"}
 
     return {"test": "7"}
 
-@daily_routes.route('/delete-habit', methods=['POST'])
-def deleteHabit():
-    ic('inside our DELETE habit route')
+@daily_routes.route('/delete-daily', methods=['POST'])
+def deleteDaily():
+    ic('inside our DELETE daily route')
     data=request.json
     targetId=data.get('targetId')
     ic(data)
     ic(targetId)
-    targetDeletion=Habit.query.get(int(targetId))
+    targetDeletion=Daily.query.get(int(targetId))
     ic(targetDeletion)
 
     if targetDeletion is None:
-        return {'errors': {'error':'Habit not found'}}, 404
+        return {'errors': {'error':'daily not found'}}, 404
     copyTargetDeletion=targetDeletion.to_dict()
     db.session.delete(targetDeletion)
     db.session.commit()

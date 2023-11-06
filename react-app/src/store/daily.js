@@ -1,8 +1,8 @@
 // constants
-const CREATE_DAILY = "habit/CREATE_DAILY";
-const EDIT_DAILY = "habit/EDIT_DAILY";
-const DELETE_DAILY = "habit/DELETE_DAILY";
-const GET_ALL_DAILIES = 'habit/GET_ALL_DAILIES'
+const CREATE_DAILY = "daily/CREATE_DAILY";
+const EDIT_DAILY = "daily/EDIT_DAILY";
+const DELETE_DAILY = "daily/DELETE_DAILY";
+const GET_ALL_DAILIES = 'daily/GET_ALL_DAILIES'
 
 
 
@@ -105,7 +105,7 @@ function normalizeData(listDict, newItem) {
 export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
     console.log('at least i hit the THUNKDELETEHABIT thunk')
     console.log("🚀 ~ file: habit.js:89 ~ targetIDintheThunk", targetId)
-    const response = await fetch("/api/dailies/delete-habit", {
+    const response = await fetch("/api/dailies/delete-daily", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
 export const ThunkEditDaily = (updatedDaily) => async (dispatch) => {
     console.log('at least i hit the THUNKEDITHABIT thunk')
     console.log("🚀 ~ file: habit.js:89 ~ ThunkEditHabit ~ updatedHabit:", updatedDaily)
-    const response = await fetch("/api/dailies/edit-habit", {
+    const response = await fetch("/api/dailies/edit-daily", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -144,7 +144,9 @@ export const ThunkEditDaily = (updatedDaily) => async (dispatch) => {
     });
 
     if (response.ok) {
+        console.log('RESPONSE IS OK SO WE BACK IN THUNK')
         const data = await response.json();
+        console.log('DATA BACK IN OUR THUNK IS',data)
         await dispatch(actionEditDaily(data));
         return data;
     } else if (response.status < 500) {
@@ -230,6 +232,8 @@ export default function reducer(state = initialState, action) {
         case EDIT_DAILY:
             newState = {...state}
             newState.byId[action.payload.id]=action.payload
+            let copy1Array=[...newState.allIds]
+            newState.allIds=copy1Array
             return newState
 
         case DELETE_DAILY:

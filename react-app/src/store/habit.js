@@ -221,7 +221,7 @@ export default function reducer(state = initialState, action) {
 
             newState.byId[action.payload.id]=action.payload
 
-            
+
             // newState.allIds.push(action.payload.id)
             // newState.allIds=newState.allIds.map(id=>parseInt(id))
 
@@ -231,6 +231,8 @@ export default function reducer(state = initialState, action) {
         case EDIT_HABIT:
             newState = {...state}
             newState.byId[action.payload.id]=action.payload
+            let copy1Array=[...newState.allIds]
+            newState.allIds=copy1Array
             return newState
 
         case DELETE_HABIT:

@@ -3,6 +3,7 @@ import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { ThunkDeleteHabit } from "../../store/habit";
+import { ThunkDeleteDaily } from "../../store/daily";
 
 export default function DeleteHabitOrDaily({formType,targetId,title}) {
   const dispatch = useDispatch();
@@ -12,12 +13,24 @@ export default function DeleteHabitOrDaily({formType,targetId,title}) {
 
   const handleDelete = async (e) => {
     e.preventDefault();
+    if (formType==='habit'){
     const data = await dispatch(ThunkDeleteHabit(targetId))
     if (data){
       closeModal()
     }
 
     return 7
+  }
+  else {
+    const data = await dispatch(ThunkDeleteDaily(targetId))
+    if (data){
+      closeModal()
+    }
+
+    return 7
+
+
+  }
     // const data = await dispatch(login(email, password));
     // if (data) {
     //   setErrors(data);

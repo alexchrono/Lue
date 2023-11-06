@@ -25,14 +25,17 @@ export default function EditDailyModal({dailyId}) {
   useEffect(() => {
     if (userDailies && dailyId) {
       const test=userDailies[dailyId]
-      setTitle(test.title)
-      setNotes(test.notes)
-      setDifficulty(test.difficulty)
-      const starDate= new Date(test.startDate)
-      const formattedStartDate = starDate.toISOString().split('T')[0];
-      setStartDate(formattedStartDate)
-      setRepeatTimeFrame(test.repeat_time_frame)
-      setRepeatRateNumbers(parseInt(test.repeatQuantity))
+      console.log('IN USE EFFECT TEST IS',test)
+      setTitle(test?.title)
+      setNotes(test?.notes)
+      setDifficulty(test?.difficulty)
+      if (test.startDate){
+      const starDate= new Date(test?.startDate)
+      const formattedStartDate = starDate?.toISOString().split('T')[0];
+      setStartDate(formattedStartDate)}
+      setRepeatTimeFrame(test?.repeatTimeFrame)
+      console.log('IN USE EFFECT REPEAT TIME FRAME IS',repeatTimeFrame)
+      setRepeatRateNumbers(parseInt(test?.repeatQuantity))
 
     }
   }, [userDailies,dailyId]);
