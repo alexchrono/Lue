@@ -37,7 +37,9 @@ def makeNewHabit():
 
         new_habit= Habit(
             title=habit,
-            user_id=current_user.id
+            notes='click menu to set me up!',
+            user_id=current_user.id,
+
         )
 
         db.session.add(new_habit)

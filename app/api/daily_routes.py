@@ -8,9 +8,11 @@ from datetime import datetime
 daily_routes = Blueprint('dailies', __name__)
 
 
-def custError(errors,field,message):
-    errors[field]=message
-    return errors
+def custError(err,field,message):
+    if 'errors' not in err:
+        err["errors"]={}
+    err["errors"][field]=message
+    return err
 
 
 @daily_routes.route('/get-all-users-dailies',methods=['GET'])
@@ -85,7 +87,7 @@ def makeNewDaily():
 
 @daily_routes.route('/edit-daily', methods=['POST'])
 def editDaily():
-    errors={}
+    err={}
     ic('inside our edit DAILY route')
     data=request.json
     ic(data)
@@ -107,9 +109,13 @@ def editDaily():
     ic(target)
 
     if len(data.get('title'))<3 or len(data.get('title'))>30:
-        custError(errors,'title','title must be between 3 and 30 characters')
-    if not data.get('difficulty'):
-        custError(errors,'difficulty','difficulty is required.')
+        custError(err,'title','Title must be between 3 and 30 characters')
+    if data.get('difficulty') not in [1,2,3,4]:
+        custError(err,'difficulty','Difficulty field is required. Please enter valid selection from dropdown')
+
+    if 'errors' in err:
+        print('THIS IS ERR DAWG******',err)
+        return jsonify(err), 400
     if target:
         target.title=data.get('title')
         target.notes=data.get('notes')

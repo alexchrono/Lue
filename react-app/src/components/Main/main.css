@@ -325,6 +325,10 @@ form select {
     width: 100%;
 }
 
+.errors {
+    color: red;
+    font-weight: bold;
+}
 /* @keyframes blink {
   0%, 100% {
     border-color: transparent;

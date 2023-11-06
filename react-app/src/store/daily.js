@@ -152,9 +152,11 @@ export const ThunkEditDaily = (updatedDaily) => async (dispatch) => {
     } else if (response.status < 500) {
         console.log('WE HIT OUR ELSE')
         const data = await response.json();
-        if (data.errors) {
-            return data.errors;
-        }
+        console.log('DATA IN OUR RETURN ERRORS EDIT DAILY IS',data)
+        return data
+        // if (data.errors) {
+        //     return data.errors;
+        // }
     } else {
         return ["An error occurred. Please try again."];
     }

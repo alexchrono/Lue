@@ -21,11 +21,11 @@ export default function EditHabitModal({habitId}) {
   useEffect(() => {
     if (userHabits && habitId) {
       const test=userHabits[habitId]
-      setTitle(test.title)
-      setNotes(test.notes)
-      setDifficulty(test.difficulty)
-      setResetRate(test.resetRate)
-      setAlignment(test.alignment)
+      setTitle(test?.title)
+      setNotes(test?.notes)
+      setDifficulty(test?.difficulty)
+      setResetRate(test?.resetRate)
+      setAlignment(test?.alignment)
 
     }
   }, [userHabits,habitId]);
@@ -34,6 +34,9 @@ export default function EditHabitModal({habitId}) {
   console.log('userhabits at habitid is',userHabits[habitId])
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (notes==='click menu to set me up!'){
+      setNotes('')
+    }
     const updatedHabit={habitId,title,notes,difficulty,resetRate,alignment}
     const data = await dispatch(ThunkEditHabit(updatedHabit));
     if (data) {

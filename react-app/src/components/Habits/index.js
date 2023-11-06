@@ -126,19 +126,27 @@ export default function Habits({ user }) {
               e.stopPropagation();
               handleEmotiClick(habitId)
             }}>
-              {user2 && userHabits[habitId] && !userHabits[habitId].alignment ? (
-                <img
-                  src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
-                  className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
-                  style={{ width: '100%', height: '100%', margin: '0' }}
-                />) : (
-                <img
-                  src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
-                  className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace green' : 'sadFace'}
-                  style={{ width: '100%', height: '100%', margin: '0' }}
-                />
-              )
-              }
+    {user2 && userHabits[habitId] ? (
+  userHabits[habitId].created_at === userHabits[habitId].updated_at && userHabits[habitId].notes==='click menu to set me up!'? (
+    <img
+      src={`${process.env.PUBLIC_URL}/icons/emoji-neutral-bs.svg`}
+      className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
+      style={{ width: '100%', height: '100%', margin: '0' }}
+    />
+  ) : !userHabits[habitId].alignment ? (
+    <img
+      src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
+      className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
+      style={{ width: '100%', height: '100%', margin: '0' }}
+    />
+  ) : (
+    <img
+      src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
+      className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace green' : 'sadFace'}
+      style={{ width: '100%', height: '100%', margin: '0' }}
+    />
+  )
+) : null}
 
 
 

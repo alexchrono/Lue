@@ -29,7 +29,7 @@ export default function EditDailyModal({dailyId}) {
       setTitle(test?.title)
       setNotes(test?.notes)
       setDifficulty(test?.difficulty)
-      if (test.startDate){
+      if (test?.startDate){
       const starDate= new Date(test?.startDate)
       const formattedStartDate = starDate?.toISOString().split('T')[0];
       setStartDate(formattedStartDate)}
@@ -45,18 +45,24 @@ export default function EditDailyModal({dailyId}) {
     e.preventDefault();
     const updatedDaily={dailyId,title,notes,difficulty,startDate,repeatTimeFrame,repeatRateNumbers}
     const data= await dispatch(ThunkEditDaily(updatedDaily));
-    if (data?.title) {
+    if (data?.errors){
+    console.log('WE GOT SOME ERRORS N OUR FORMS,data is******',data)
+    console.log('DATA . ERRORS IS',data?.errors)
+    setErrors(data.errors);
+    console.log('WE CURRENTLY SET ERRORS WITH JUST DATA OR ',data)
+  }
+    else if (data?.title) {
       closeModal()
 
-    } else if (data?.errors){
-      console.log('WE GOT SOME ERRORS N OUR FORMS,data is******',data)
-      console.log('DATA . ERRORS IS',data?.errors)
-      setErrors(data);
-      console.log('WE CURRENTLY SET ERRORS WITH JUST DATA OR ',data)
+    // } else if (data?.errors){
+    //   console.log('WE GOT SOME ERRORS N OUR FORMS,data is******',data)
+    //   console.log('DATA . ERRORS IS',data?.errors)
+    //   setErrors(data);
+    //   console.log('WE CURRENTLY SET ERRORS WITH JUST DATA OR ',data)
 
-    }
+    // }
   };
-
+  }
 
   return (
     <>
@@ -91,11 +97,14 @@ export default function EditDailyModal({dailyId}) {
                 onChange={(e) => setTitle(e.target.value)}
                 // required
               />
+
             </label>
+            {errors.title && <p className="errors">{errors.title}</p>}
             <label>
               Notes
               <textarea
                 value={notes}
+                placeholder="Optional"
                 onChange={(e) => setNotes(e.target.value)}
                 // required
               >
