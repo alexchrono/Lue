@@ -158,16 +158,16 @@ export const ThunkEditDaily = (updatedDaily) => async (dispatch) => {
     }
 };
 
-export const ThunkNewDaily = (habit) => async (dispatch) => {
-    console.log('at least i hit the thunk')
-    console.log("🚀 ~ file: habit.js:72 ~ ThunkNewHabitINSIDETHUNK ~ habit:", habit)
-    const response = await fetch("/api/dailies/new-habit", {
+export const ThunkNewDaily = (daily) => async (dispatch) => {
+    console.log('at least i hit the thunk for new ddailies')
+
+    const response = await fetch("/api/dailies/new-daily", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
         },
 
-        body: JSON.stringify({ habit: habit }),
+        body: JSON.stringify({ daily: daily }),
     });
 
     if (response.ok) {

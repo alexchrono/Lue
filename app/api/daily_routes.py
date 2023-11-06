@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify,request
 from flask_login import login_required
-from app.models import User,Habit,db
+from app.models import User,Habit,db,Daily
 from flask_login import current_user
 from icecream import ic
 
@@ -26,20 +26,20 @@ def getAllHabits():
 
 
 
-@daily_routes.route('/new-habit', methods=['POST'])
+@daily_routes.route('/new-daily', methods=['POST'])
 def makeNewHabit():
     data=request.json
-    habit=data.get('habit')
+    daily=data.get('daily')
 
 
-    if habit:
+    if daily:
 
-        new_habit= Habit(
-            title=habit,
+        new_daily= Daily(
+            title=daily,
             user_id=current_user.id
         )
 
-        db.session.add(new_habit)
+        db.session.add(new_daily)
         db.session.commit()
 
         # currentUserObj=User.query.get(current_user.id)
@@ -52,7 +52,7 @@ def makeNewHabit():
         # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
         # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
-        return new_habit.to_dict()
+        return new_daily.to_dict()
     #should i also return user here? or is backfill sufficient? lets test it
 
     return {"test": "7"}

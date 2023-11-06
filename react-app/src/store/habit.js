@@ -221,6 +221,7 @@ export default function reducer(state = initialState, action) {
 
             newState.byId[action.payload.id]=action.payload
 
+            
             // newState.allIds.push(action.payload.id)
             // newState.allIds=newState.allIds.map(id=>parseInt(id))
 
