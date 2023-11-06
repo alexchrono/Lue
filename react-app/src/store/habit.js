@@ -2,7 +2,14 @@
 const CREATE_HABIT = "habit/CREATE_HABIT";
 const EDIT_HABIT = "habit/EDIT_HABIT";
 const DELETE_HABIT = "habit/DELETE_HABIT";
+const GET_ALL_HABITS = 'habit/GET_ALL_HABITS'
 
+
+
+const actionGetAllHabits = (data) => ({
+    type: GET_ALL_HABITS,
+    payload: data,
+});
 
 const actionCreateHabit = (data) => ({
     type: CREATE_HABIT,
@@ -162,8 +169,9 @@ export const ThunkNewHabit = (habit) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        const newData = normalizeData(data.all_habits, data.new_habit)
-        await dispatch(actionCreateHabit(newData));
+        // const newData = normalizeData(data.all_habits, data.new_habit)
+        console.log('***************data going to action in create is',data)
+        await dispatch(actionCreateHabit(data));
         return data;
     } else if (response.status < 500) {
         console.log('WE HIT OUR ELSE')
@@ -176,14 +184,45 @@ export const ThunkNewHabit = (habit) => async (dispatch) => {
     }
 };
 
+export const ThunkGetAllHabits = () => async (dispatch) => {
+    const response = await fetch("/api/habits/get-all-users-habits", {
+      method: "GET"
+    });
+
+    if (response.ok) {
+      const data = await response.json();
+      const newData = normalizeData(data.all_habits, data.new_habit);
+      await dispatch(actionGetAllHabits(newData));
+      return data;
+    } else if (response.status < 500) {
+      const data = await response.json();
+      if (data.errors) {
+        return data.errors;
+      }
+    } else {
+      return ["An error occurred. Please try again."];
+    }
+  };
+
 export default function reducer(state = initialState, action) {
     let newState
     switch (action.type) {
-        case CREATE_HABIT:
+        case GET_ALL_HABITS:
             newState = { byId: { ...action.payload.all_things }, allIds: [...action.payload.all_ids] }
+            return newState
 
+        case CREATE_HABIT:
+            let copyOfArray=[...state.allIds]
+            copyOfArray.push(action.payload.id)
+            newState = { byId: { ...state.byId }, allIds: copyOfArray }
+
+            newState.byId[action.payload.id]=action.payload
+
+            // newState.allIds.push(action.payload.id)
+            // newState.allIds=newState.allIds.map(id=>parseInt(id))
 
             return newState;
+
 
         case EDIT_HABIT:
             newState = {...state}

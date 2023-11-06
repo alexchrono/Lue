@@ -7,6 +7,25 @@ from icecream import ic
 habit_routes = Blueprint('habits', __name__)
 
 
+
+@habit_routes.route('/get-all-users-habits',methods=['GET'])
+def getAllHabits():
+    currentUserObj=User.query.get(current_user.id)
+        # ic(currentUserObj)
+        # ic(currentUserObj.users_habits)
+    if not currentUserObj:
+        return {'message':'there was an error'}
+
+    updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
+
+    print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
+    # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
+        # ,"upd_list":upd_habit_list}
+    return {'all_habits':updated_habits}
+
+
+
+
 @habit_routes.route('/new-habit', methods=['POST'])
 def makeNewHabit():
     data=request.json
@@ -22,11 +41,40 @@ def makeNewHabit():
 
         db.session.add(new_habit)
         db.session.commit()
-        updated_habits=[hab.to_dict() for hab in Habit.query.all()]
+
+        # currentUserObj=User.query.get(current_user.id)
+        # ic(currentUserObj)
+        # ic(currentUserObj.users_habits)
+
+
+        # updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
+
+        # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
+        # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
-        return {'all_habits':updated_habits,'new_habit':new_habit.to_dict()}
+        return new_habit.to_dict()
 
     return {"test": "7"}
+# @habit_routes.route('/new-habit', methods=['POST'])
+# def makeNewHabit():
+#     data=request.json
+#     habit=data.get('habit')
+
+
+#     if habit:
+
+#         new_habit= Habit(
+#             title=habit,
+#             user_id=current_user.id
+#         )
+
+#         db.session.add(new_habit)
+#         db.session.commit()
+#         updated_habits=[hab.to_dict() for hab in Habit.query.all()]
+#         # ,"upd_list":upd_habit_list}
+#         return {'all_habits':updated_habits,'new_habit':new_habit.to_dict()}
+
+#     return {"test": "7"}
 
 
 @habit_routes.route('/edit-habit', methods=['POST'])
@@ -75,4 +123,3 @@ def deleteHabit():
     return copyTargetDeletion,200
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403
-    

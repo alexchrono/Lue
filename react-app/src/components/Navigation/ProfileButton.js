@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
 import { login } from "../../store/session";
 import SignupFormModal from "../SignupFormModal";
+import { ThunkGetAllHabits } from "../../store/habit";
 
 
 
@@ -23,7 +24,11 @@ function ProfileButton({ user }) {
 
       setErrors(data.errors);
     } else {
-        history.push('/main')
+
+      console.log('AM I HITTIN GTHE ELSE?!!?!?!')
+      console.log('what is data here',data)
+        await dispatch(ThunkGetAllHabits())
+         history.push('/main')
     }
   };
 
