@@ -95,7 +95,7 @@ def editHabit():
     # ic(difficulty)
     # ic(resetRate)
     # ic(alignment)
-    target=Habit.query.get(id)
+    target=Habit.query.get(data.get('habitId'))
     ic(target)
     if target:
         target.title=data.get('title')
