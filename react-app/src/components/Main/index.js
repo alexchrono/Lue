@@ -3,19 +3,29 @@ import { NavLink,useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import Habits from '../Habits';
 import Dailies from '../Dailies';
+import { ThunkGetAllHabits } from '../../store/habit';
+import { ThunkGetAllDailies } from '../../store/daily';
 import './main.css';
+
 
 
 export default function Main() {
     const user = useSelector((state) => state.session.user)
     const history= useHistory()
-
+    const userArray= useSelector((state) => state?.habits?.allIds);
+    const user2Array =  useSelector((state) => state?.dailies?.allIds);
 
 
     useEffect(() => {
+
         if (!user) {
             history.push('/')
             }
+
+
+        // await dispatch(ThunkGetAllHabits())
+        // await dispatch(ThunkGetAllDailies())
+
 
     }, [user,history]);
 

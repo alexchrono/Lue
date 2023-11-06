@@ -4,6 +4,7 @@ import EditDailyModal from '../EditDailyModal';
 import DeleteHabitOrDaily from '../DeleteHabitOrDaily';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkNewDaily } from '../../store/daily';
+import { ThunkGetAllDailies } from '../../store/daily';
 
 
 export default function Dailies({ user }) {
@@ -57,6 +58,18 @@ export default function Dailies({ user }) {
       return test;
     }
   };
+
+  useEffect(() => {
+
+    const fetchData = async () => {
+
+      await dispatch(ThunkGetAllDailies());
+
+    };
+    if (!userArray.length) {
+      fetchData()
+    }
+  }, [userArray]);
 
   useEffect(() => {
     if (!showMenu) return;
