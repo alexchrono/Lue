@@ -148,7 +148,7 @@ export default function Dailies({ user }) {
                           Edit
                         </>
                       }
-                      modalComponent={<EditDailyModal />}
+                      modalComponent={<EditDailyModal dailyId={dailyId}/>}
                       onClick={() => setShowMenu(false)}
                     />
                   </li>

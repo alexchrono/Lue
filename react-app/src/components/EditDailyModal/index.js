@@ -1,12 +1,13 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { login } from "../../store/session";
-import { useDispatch } from "react-redux";
+import { useDispatch,useSelector } from "react-redux";
 import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
 import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
+import { ThunkEditDaily } from "../../store/daily";
 
 
-export default function EditDailyModal() {
+export default function EditDailyModal({dailyId}) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -17,22 +18,37 @@ export default function EditDailyModal() {
   const [alignment,setAlignment] = useState("")
   const [startDate,setStartDate] = useState('')
   const { closeModal } = useModal();
+  const userDailies= useSelector((state) => state.session.user.usersDailiesObj);
+
+  console.log('INSIDE DAILIES EDIT USERDAILIES IS',userDailies)
+
+  useEffect(() => {
+    if (userDailies && dailyId) {
+      const test=userDailies[dailyId]
+      setTitle(test.title)
+      setNotes(test.notes)
+      setDifficulty(test.difficulty)
+      setStartDate(test.start_date)
+      setRepeatTimeFrame(test.repeat_time_frame)
+      setRepeatRateNumbers(test.repeat_quantity)
+
+    }
+  }, [userDailies,dailyId]);
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // const data = await dispatch(login(title, notes));
-    // if (data) {
-    //   setErrors(data);
-    // } else {
-    //   closeModal()
-    // }
-    console.log('handleSubmitInDailyModalsetup')
-    closeModal()
+    const updatedDaily={dailyId,title,notes,difficulty,startDate,repeatTimeFrame,repeatRateNumbers}
+    const data= await dispatch(ThunkEditDaily(updatedDaily));
+    if (data) {
+      closeModal()
+
+    } else {
+      setErrors(data);
+
+    }
   };
 
-  const handlePicClick = (value) => {
-    setAlignment(value);
-  };
 
   return (
     <>
@@ -55,9 +71,9 @@ export default function EditDailyModal() {
         <div className='habits-card-center'>
           <form onSubmit={handleSubmit} className='editHabitsForm'>
             <ul>
-              {errors.map((error, idx) => (
+              {/* {errors.map((error, idx) => (
                 <li key={idx}>{error}</li>
-              ))}
+              ))} */}
             </ul>
             <label>
               Title
