@@ -65,6 +65,14 @@ def deleteHabit():
     targetId=data.get('targetId')
     ic(data)
     ic(targetId)
+    targetDeletion=Habit.query.get(id)
 
-
-    return {"test": "7"}
+    if targetDeletion is None:
+        return {'errors': {'error':'Habit not found'}}, 404
+    copyTargetDeletion=targetDeletion.to_dict()
+    db.session.delete(targetDeletion)
+    db.session.commit()
+    return copyTargetDeletion,200
+    # elif album.user_owner != current_user.id:
+    #     return {'errors': {'error':'forbidden'}}, 403
+    
