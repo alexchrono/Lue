@@ -19,6 +19,7 @@ export default function Habits({ user }) {
   const [openHabit,setOpenHabit]=useState(null)
 
 
+  
 
   // console.log('USER IN HABITS IS',user2)
   // console.log('users habits are',user2.usersHabitsObj)
