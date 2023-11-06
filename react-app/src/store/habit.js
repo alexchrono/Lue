@@ -116,7 +116,10 @@ export const ThunkDeleteHabit = (targetId) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        await dispatch(actionDeleteHabit(data));
+        console.log('**************RESPONSE WAS OK AND WE GOT DATA BVACK',data)
+        console.log("🚀 ~ file: habit.js:121 ~ ThunkDeleteHabit ~ data:", data)
+        console.log("🚀 ~ file: habit.js:122 ~ ThunkDeleteHabit ~ data.targetDeletion:", data.targetDeletion)
+        await dispatch(actionDeleteHabit(data.targetDeletion));
         return data;
     } else if (response.status < 500) {
         console.log('WE HIT OUR ELSE')
@@ -228,6 +231,15 @@ export default function reducer(state = initialState, action) {
             newState = {...state}
             newState.byId[action.payload.id]=action.payload
             return newState
+
+        case DELETE_HABIT:
+            newState = {...state}
+            delete newState.byId[action.payload]
+            let copyArray=[...newState.allIds]
+            let returnArray=copyArray.filter((ele)=>ele !==action.payload)
+            newState.allIds=returnArray
+            return newState
+
 
         default:
             return state;

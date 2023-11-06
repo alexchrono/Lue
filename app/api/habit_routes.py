@@ -53,6 +53,7 @@ def makeNewHabit():
         # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
         return new_habit.to_dict()
+    #should i also return user here? or is backfill sufficient? lets test it
 
     return {"test": "7"}
 # @habit_routes.route('/new-habit', methods=['POST'])
@@ -113,13 +114,15 @@ def deleteHabit():
     targetId=data.get('targetId')
     ic(data)
     ic(targetId)
-    targetDeletion=Habit.query.get(id)
+    targetDeletion=Habit.query.get(int(targetId))
+    ic(targetDeletion)
 
     if targetDeletion is None:
         return {'errors': {'error':'Habit not found'}}, 404
     copyTargetDeletion=targetDeletion.to_dict()
     db.session.delete(targetDeletion)
     db.session.commit()
-    return copyTargetDeletion,200
+    ic(copyTargetDeletion)
+    return {"targetDeletion":int(targetId)}
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403

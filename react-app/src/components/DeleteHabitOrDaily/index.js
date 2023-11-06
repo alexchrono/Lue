@@ -13,6 +13,9 @@ export default function DeleteHabitOrDaily({formType,targetId,title}) {
   const handleDelete = async (e) => {
     e.preventDefault();
     const data = await dispatch(ThunkDeleteHabit(targetId))
+    if (data){
+      closeModal()
+    }
 
     return 7
     // const data = await dispatch(login(email, password));

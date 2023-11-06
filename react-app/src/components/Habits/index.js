@@ -12,12 +12,14 @@ export default function Habits({ user }) {
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
-  const userHabits= useSelector((state) => state.session.user.usersHabitsObj);
-  const userArray= useSelector((state) => state.session.user.usersHabitsArray);
-  const habitz = useSelector((state) => state.session?.habits?.allIds);
+  const userHabits= useSelector((state) => state.habits.byId);
+  const userArray= useSelector((state) => state.habits.allIds);
+  const habitz = useSelector((state) => state.habits?.allIds);
+  const testeroo =useSelector((state) => state.habits);
+  console.log("🚀 ~ file: index.js:20 ~ Habits ~ testeroo:", testeroo)
   const [openHabit,setOpenHabit]=useState(null)
 
-  
+
 
   // console.log('USER IN HABITS IS',user2)
   // console.log('users habits are',user2.usersHabitsObj)
