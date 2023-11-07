@@ -7,7 +7,11 @@ from datetime import datetime
 
 habit_routes = Blueprint('habits', __name__)
 
-
+def custError(err,field,message):
+    if 'errors' not in err:
+        err["errors"]={}
+    err["errors"][field]=message
+    return err
 
 @habit_routes.route('/get-all-users-habits',methods=['GET'])
 def getAllHabits():
@@ -39,6 +43,7 @@ def makeNewHabit():
             title=habit,
             notes='click menu to set me up!',
             user_id=current_user.id,
+            untouched=True
 
         )
 
@@ -83,34 +88,41 @@ def makeNewHabit():
 
 @habit_routes.route('/edit-habit', methods=['POST'])
 def editHabit():
-    ic('inside our edit habit route')
-    data=request.json
-    # ic(data)
-    # id=data.get('habitId')
-    # title=data.get('title')
-    # notes=data.get('notes')
-    # difficulty=data.get('difficulty')
-    # resetRate=data.get('resetRate')
-    # alignment=data.get('alignment')
-    # ic(title)
-    # ic(notes)
-    # ic(difficulty)
-    # ic(resetRate)
-    # ic(alignment)
-    target=Habit.query.get(data.get('habitId'))
-    ic(target)
+    err = {}
+    data = request.json
+
+    title = data.get('title')
+    difficulty = int(data.get('difficulty'))
+    alignment = data.get('alignment')
+    reset_rate = data.get('resetRate')
+    habit_id = data.get('habitId')
+    notes = data.get('notes')
+
+    if not title or len(title) < 3 or len(title) > 30:
+        custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
+    if difficulty not in [1, 2, 3, 4]:
+        custError(err, 'difficulty', 'Difficulty field is required. Please enter valid selection from dropdown')
+    if alignment not in [True, False]:
+        custError(err, 'alignment', 'Please choose whether this is a good or bad habit')
+    if reset_rate not in ['daily', 'weekly', 'monthly']:
+        custError(err, 'resetRate', 'Please choose how often to reset the counter')
+    if 'errors' in err:
+
+        return jsonify(err), 400
+    target = Habit.query.get(habit_id)
     if target:
-        target.title=data.get('title')
-        target.notes=data.get('notes')
-        target.difficulty=data.get('difficulty')
-        target.reset_rate=data.get('resetRate')
-        target.alignment=data.get('alignment')
+        target.title = title
+        target.notes = notes
+        target.difficulty = difficulty
+        target.reset_rate = reset_rate
+        target.alignment = alignment
         target.updated_at = datetime.utcnow()
+        target.untouched = False
 
         db.session.commit()
         return target.to_dict()
 
-    return {"test": "7"}
+    return jsonify({"error":"The Habit could not be found"}),400
 
 @habit_routes.route('/delete-habit', methods=['POST'])
 def deleteHabit():

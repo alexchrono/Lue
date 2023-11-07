@@ -24,8 +24,6 @@ export default function EditDailyModal({dailyId,daily}) {
 
   useEffect(() => {
     if (daily) {
-      // const test=userDailies[dailyId]
-      // console.log('IN USE EFFECT TEST IS',test)
       setTitle(daily?.title)
       setNotes(daily?.notes)
       setDifficulty(daily?.difficulty)
@@ -54,13 +52,6 @@ export default function EditDailyModal({dailyId,daily}) {
     else if (data?.title) {
       closeModal()
 
-    // } else if (data?.errors){
-    //   console.log('WE GOT SOME ERRORS N OUR FORMS,data is******',data)
-    //   console.log('DATA . ERRORS IS',data?.errors)
-    //   setErrors(data);
-    //   console.log('WE CURRENTLY SET ERRORS WITH JUST DATA OR ',data)
-
-    // }
   };
   }
 

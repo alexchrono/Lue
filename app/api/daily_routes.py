@@ -43,7 +43,8 @@ def makeNewDaily():
 
         new_daily= Daily(
             title=daily,
-            user_id=current_user.id
+            user_id=current_user.id,
+            untouched=True
         )
 
         db.session.add(new_daily)
@@ -108,8 +109,8 @@ def editDaily():
     target=Daily.query.get(id)
     ic(target)
 
-    if len(data.get('title'))<3 or len(data.get('title'))>30:
-        custError(err,'title','Title must be between 3 and 30 characters')
+    if not data.get('title') or len(data.get('title'))<3 or len(data.get('title'))>30:
+        custError(err,'title','Title is required and must be between 3 and 30 characters')
     if data.get('difficulty') not in [1,2,3,4]:
         custError(err,'difficulty','Difficulty field is required. Please enter valid selection from dropdown')
 

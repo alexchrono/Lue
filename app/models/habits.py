@@ -16,6 +16,7 @@ class Habit(db.Model):
     difficulty = db.Column(db.Integer,default=1)
     reset_rate=db.Column(db.String,default='daily')
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    untouched=db.Column(db.Boolean)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
@@ -33,6 +34,7 @@ class Habit(db.Model):
             'difficulty': self.difficulty,
             'resetRate': self.reset_rate,
             'userId': self.user_id,
+            'untouched': self.untouched,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

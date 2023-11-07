@@ -127,7 +127,7 @@ export default function Habits({ user }) {
               handleEmotiClick(habitId)
             }}>
     {user2 && userHabits[habitId] ? (
-  userHabits[habitId].created_at === userHabits[habitId].updated_at && userHabits[habitId].notes==='click menu to set me up!'? (
+  userHabits[habitId].untouched? (
     <img
       src={`${process.env.PUBLIC_URL}/icons/emoji-neutral-bs.svg`}
       className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}

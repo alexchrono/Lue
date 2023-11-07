@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: adf848db2bc0
+Revision ID: 9a437da871d1
 Revises: 
-Create Date: 2023-11-04 18:40:25.428854
+Create Date: 2023-11-06 17:16:38.927453
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'adf848db2bc0'
+revision = '9a437da871d1'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -46,6 +46,7 @@ def upgrade():
     sa.Column('repeat_time_frame', sa.String(), nullable=True),
     sa.Column('repeat_quantity', sa.Integer(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('untouched', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
@@ -61,6 +62,7 @@ def upgrade():
     sa.Column('difficulty', sa.Integer(), nullable=True),
     sa.Column('reset_rate', sa.String(), nullable=True),
     sa.Column('user_id', sa.Integer(), nullable=False),
+    sa.Column('untouched', sa.Boolean(), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
