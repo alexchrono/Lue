@@ -33,9 +33,15 @@ def getAllHabits():
 
 @habit_routes.route('/new-habit', methods=['POST'])
 def makeNewHabit():
+    err={}
     data=request.json
     habit=data.get('habit')
 
+    if not habit or len(habit) < 3 or len(habit) > 30:
+        custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
+
+    if 'errors' in err:
+        return jsonify(err), 400
 
     if habit:
 
@@ -63,7 +69,7 @@ def makeNewHabit():
         return new_habit.to_dict()
     #should i also return user here? or is backfill sufficient? lets test it
 
-    return {"test": "7"}
+    return jsonify({"error":"The Daily could not be found"}),400
 # @habit_routes.route('/new-habit', methods=['POST'])
 # def makeNewHabit():
 #     data=request.json

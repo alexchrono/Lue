@@ -18,7 +18,7 @@ export default function Dailies({ user }) {
   const userDailies = useSelector((state) => state.dailies.byId);
   const userArray = useSelector((state) => state.dailies.allIds);
   const [openDaily, setOpenDaily] = useState(null)
-
+  const [errors, setErrors] = useState([]);
   console.log('IN DAILIES USERDAILIES IS', userDailies)
   console.log('in dailies userarray is', userArray)
 
@@ -59,6 +59,11 @@ export default function Dailies({ user }) {
       return test;
     }
   };
+  useEffect(() => {
+    if (errors && errors.title) {
+      alert(`Error: ${errors.title}`);
+    }
+  }, [errors]);
 
   useEffect(() => {
 

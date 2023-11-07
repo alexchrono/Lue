@@ -5,11 +5,12 @@ import EditHabitModal from '../EditHabitModal';
 import DeleteHabitOrDaily from '../DeleteHabitOrDaily';
 import { ThunkNewHabit } from '../../store/habit';
 import { ThunkGetAllHabits } from '../../store/habit';
-
+import ErrorComponent from '../errorShow';
 export default function Habits({ user }) {
   const [habit, setHabit] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const [clickedEmoti, setClickedEmoti] = useState([])
+  const [errors, setErrors] = useState([]);
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
@@ -57,12 +58,21 @@ export default function Habits({ user }) {
   const MakeNewHabit = async (e) => {
     e.preventDefault();
     let test = await dispatch(ThunkNewHabit(habit));
-    if (test) {
+    if(test?.errors){
+
+      setErrors(test.errors)
+    }
+    else if (test.title) {
       setHabit('')
       return test;
     }
   };
 
+  // useEffect(() => {
+  //   if (errors && errors.title) {
+  //     alert(`Error: Habit titles must be between 3-30 characters`);
+  //   }
+  // }, [errors]);
 
 
   useEffect(() => {
@@ -97,6 +107,8 @@ export default function Habits({ user }) {
   const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
 
   return (
+    <>
+    {errors.title && (<ErrorComponent errorMessage={errors.title} setErrors={setErrors} setHabit={setHabit} />)}
     <div className='habits'>
       <div className='habits-topMenu'>
         <div className='fifteen-percent bigtextcenter'>Habits</div>
@@ -213,5 +225,6 @@ export default function Habits({ user }) {
         </div>))}
 
     </div>
+    </>
   );
 }
