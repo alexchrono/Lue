@@ -1,23 +1,46 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
-function Navigation({ isLoaded }){
+function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
+	console.log(sessionUser)
+	const healthPercentage = (sessionUser?.health / sessionUser?.currentHealth) * 100;
+	const healthColor = healthPercentage > 65 ? 'green' : healthPercentage >= 40 ? 'yellow' : 'red';
 
 	return (
-		<ul>
-			<li>
-				<NavLink exact to="/">Home</NavLink>
-			</li>
-			{isLoaded && (
-				<li>
-					<ProfileButton user={sessionUser} />
-				</li>
+		<div className='navbar-container'>
+
+			<div className='logo'>
+				<NavLink exact to="/"><img src='https://lue-cs.s3.amazonaws.com/5851de8541214012adc2e14963f49746.png'></img></NavLink>
+			</div>
+			{!sessionUser && (
+				<div className='fancy-text'>
+					Level Up Everything
+				</div>
 			)}
-		</ul>
+			{sessionUser && (
+				<div className='healthbar'>
+					<div className='currentHealth' style={{
+						width: `${healthPercentage}%`,
+						backgroundColor: healthColor
+					}}></div>
+
+				</div>
+			)}
+
+			<div className='dropdown'>
+				{isLoaded && (
+					<ul>
+						{/* <li> */}
+							<ProfileButton user={sessionUser} />
+						{/* </li> */}
+					</ul>
+				)}
+			</div>
+		</div>
 	);
 }
 

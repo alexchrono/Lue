@@ -2,6 +2,7 @@ from .db import db, environment, SCHEMA, add_prefix_for_prod
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from decimal import Decimal
+from datetime import datetime
 
 
 
@@ -16,11 +17,15 @@ class User(db.Model, UserMixin):
     email = db.Column(db.String(255), nullable=False, unique=True)
     hashed_password = db.Column(db.String(255), nullable=False)
     selected_avatar= db.Column(db.String(200),default='https://i.imgur.com/V26j32L.png')
-    level = db.Column(db.Integer,default=1,nullable=False)
-    health = db.Column(db.Numeric(10,2),default=Decimal('0.00'),nullable=False)
+    level = db.Column(db.Integer,default=1)
+    health = db.Column(db.Numeric(10,2),default=Decimal('50.00'),nullable=False)
+    current_health= db.Column(db.Numeric(10,2),default=Decimal('50.00'),nullable=False)
     gold = db.Column(db.Numeric(10, 2), default=Decimal('0.00'), nullable=False)
     exp = db.Column(db.Numeric(10, 2), default=Decimal('0.00'), nullable=False)
-
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+    users_habits = db.relationship('Habit',back_populates='habits_of_user')
+    users_dailies= db.relationship('Daily',back_populates='dailies_of_user')
     @property
     def password(self):
         return self.hashed_password
@@ -33,6 +38,17 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        userHabits={}
+        userDailies={}
+        userHabitsArray=[]
+        userDailiesArray=[]
+        for ele in self.users_habits:
+            userHabitsArray.append(ele.id)
+            userHabits[ele.id]=ele.to_dict()
+        for ele2 in self.users_dailies:
+            userDailiesArray.append(ele2.id)
+            userDailies[ele2.id]=ele2.to_dict()
+
         return {
             'id': self.id,
             'username': self.username,
@@ -40,8 +56,15 @@ class User(db.Model, UserMixin):
             'selectedAvatar': self.selected_avatar,
             'level': self.level,
             'health': self.health,
+            'currentHealth': self.current_health,
             'gold': self.gold,
             'exp': self.exp,
+            'usersHabitsArray': userHabitsArray,
+            'usersHabitsObj': userHabits,
+            'usersDailiesArray': userDailiesArray,
+            'usersDailiesObj':userDailies,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
 
 
         }

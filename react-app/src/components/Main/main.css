@@ -1,0 +1,362 @@
+.stats-container {
+    display: flex;
+    flex-direction: row;
+    height: 26%;
+    max-height: 26%;
+    flex-grow: 1;
+}
+
+.avatar,
+.stats,
+.inspirational-quote {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.avatar {
+    flex-basis: 20%;
+    height: auto;
+    overflow: hidden;
+}
+
+.avatar img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: contain;
+    max-height: 100%;
+}
+
+.stats {
+    flex-basis: 20%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-grow: 2;
+}
+
+.stats span {
+    height: 20%;
+    font-size: 1.5em;
+}
+
+.inspirational-quote {
+    flex-basis: 60%;
+    display: flex;
+    height: 100%;
+    flex-grow: 2 2 auto;
+    align-items: center;
+    justify-content: center;
+    font-size: 5em;
+    flex-wrap: nowrap;
+
+}
+
+.main-main-container {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    flex-wrap: wrap;
+    width: 100%;
+}
+
+.habits {
+    border: 2px solid black;
+    box-sizing: border-box;
+    display: flex-box;
+    flex-direction: column;
+
+    width: 50%;
+    height: 90%;
+    overflow-y:scroll;
+
+}
+
+.dailies {
+
+    border: 2px solid black;
+    box-sizing: border-box;
+
+    width: 50%;
+    height: 100%;
+
+
+}
+
+.tables {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 60%;
+}
+
+.buffer {
+    min-height: 10%;
+}
+
+
+
+.habits-topMenu {
+    border: 1px solid black;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    height: 10%;
+    width: 100%;
+
+}
+
+.fifteen-percent {
+    border-right: 5px solid black;
+    box-sizing: border-box;
+    width: 15%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+}
+
+.invisi {
+    border: none;
+    visibility: hidden;
+
+}
+
+.no-border {
+    border: none;
+}
+
+.forty-percent {
+    border-right: 5px solid black;
+    box-sizing: border-box;
+    width: 40%;
+    height: 100%;
+}
+
+.habits-card {
+
+    box-sizing: border-box;
+    height: 20%;
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.bigtextcenter {
+    font-size: 2.5em;
+    text-align: center;
+    align-self: center;
+}
+
+form {
+    height: 100%;
+}
+
+form input {
+    border: 5px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em
+}
+
+form textarea {
+    border: 5px solid black;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font-size: 1.5em
+}
+
+.alignment-choice {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.pic-container {
+    text-align: center;
+    width: 15%;
+}
+
+.pic-container img {
+    width: 100%;
+    cursor: pointer;
+}
+
+.pic-caption {
+    margin-top: 5px;
+}
+
+.menu-text {
+    font-size: 1em;
+    text-align: center;
+    align-self: center;
+}
+
+.habits-card-center {
+    width: 70%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+
+}
+
+
+
+.center-buffer {
+    width: 1%;
+}
+
+.bad-habit-emoti {
+    width: 20%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.main-body-habit-card {
+    width: 75%;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
+
+}
+
+.ellipsis {
+    width: 5%;
+    border-top: 5px solid black;
+    border-bottom: 5px solid black;
+    border-right: 5px solid black;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-grow: 8 8;
+}
+
+.good-habit-emoti {
+    width: 20%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
+}
+
+.sadFace {}
+
+.ellipsis-pic {
+    /* display: flex; */
+    display: none;
+    height: 100%;
+    width: auto;
+    max-width: 200%;
+    box-sizing: border-box;
+    object-fit: contain;
+    margin: 0 auto;
+    padding: 0px;
+    align-self: center;
+
+}
+
+.habits-card-center:hover .ellipsis-pic {
+    display: block;
+}
+
+.ellipsis-dropdown {
+    position: relative;
+    font-size: 1.1em;
+    /* text-decoration: none; */
+}
+
+.hidden {
+    display: none;
+}
+
+
+
+.topEditContainer {
+    display: flex;
+    width: 100%;
+    height: 10%;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.mainBodyEditHabit {
+    width: 100%;
+    height: 89%;
+    border: 5px solid black;
+    box-sizing: border-box;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+/* .editHabitsForm {
+    display: flex;
+    height: 100%;
+    width: 100%;
+    flex-direction: column;
+
+} */
+
+form select {
+    width: 100%;
+    text-align: center;
+}
+
+.special90 {
+    width: 90%;
+}
+
+.red {
+    background-color: red;
+    height: 100%;
+    width: 100%;
+}
+.green {
+    background-color: green;
+    height: 100%;
+    width: 100%;
+}
+
+.errors {
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
+
+.feErrors{
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
+}
+/* @keyframes blink {
+  0%, 100% {
+    border-color: transparent;
+  }
+  50% {
+    border-color: blue;
+  }
+}
+
+.blueborder {
+  animation: blink 1s linear infinite;
+} */
+.blueborder {
+    border: 2px solid blue;
+    /* height: 100%;
+    width: 100%;
+    border: 2px solid blue; */
+}
+
+/* .overallSizeEditModal {
+height: 200%;
+width: 100%;
+} */

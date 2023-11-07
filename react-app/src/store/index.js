@@ -1,9 +1,13 @@
 import { createStore, combineReducers, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import session from './session'
+import habits from './habit'
+import dailies from './daily'
 
 const rootReducer = combineReducers({
   session,
+  habits,
+  dailies
 });
 
 

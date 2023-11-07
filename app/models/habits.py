@@ -11,10 +11,19 @@ class Habit(db.Model):
     title = db.Column(db.String, nullable=False)
     position = db.Column(db.Integer)
     notes = db.Column(db.Text)
-    alignment = db.Column(db.Boolean, nullable=False)
+    alignment = db.Column(db.Boolean)
     counter = db.Column(db.Integer, default=0)
-    difficulty = db.Column(db.String)
+    difficulty = db.Column(db.Integer)
+    reset_rate=db.Column(db.String)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
+    untouched=db.Column(db.Boolean,default=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+
+    habits_of_user = db.relationship('User', back_populates='users_habits')
+
+    # usebackref instead of backpopulates?
     def to_dict(self):
         return {
             'id': self.id,
@@ -24,7 +33,11 @@ class Habit(db.Model):
             'alignment': self.alignment,
             'counter': self.counter,
             'difficulty': self.difficulty,
-            'user_id': self.user_id,
+            'resetRate': self.reset_rate,
+            'userId': self.user_id,
+            'untouched': self.untouched,
+            'created_at': self.created_at,
+            'updated_at': self.updated_at
         }
 
 # Table habits {
