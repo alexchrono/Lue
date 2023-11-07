@@ -8,7 +8,8 @@ export default function ErrorComponent({ errorMessage,setErrors,setHabit }) {
     return (
         <>
       <div className="error-popup">
-        Error: {errorMessage}
+        <h1>Error</h1>
+       <p class='para'>{errorMessage}</p>
         <button onClick={(e)=>{
             setHabit('');
             setErrors([])

@@ -108,7 +108,7 @@ export default function Habits({ user }) {
 
   return (
     <>
-    {errors.title && (<ErrorComponent errorMessage={errors.title} setErrors={setErrors} setHabit={setHabit} />)}
+    {errors.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
     <div className='habits'>
       <div className='habits-topMenu'>
         <div className='fifteen-percent bigtextcenter'>Habits</div>
@@ -120,7 +120,7 @@ export default function Habits({ user }) {
                 className='special90'
                 value={habit}
                 onChange={(e) => setHabit(e.target.value)}
-                required
+                // required
               />
               <button type='submit'>+</button>
             </div>
