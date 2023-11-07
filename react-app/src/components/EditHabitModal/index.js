@@ -59,7 +59,7 @@ export default function EditHabitModal({ habitId, habit }) {
     if (!title || title.length < 3 || title.length > 30) {
       custError(err, 'title', 'Title is required and must be between 3 and 30 characters');
     }
-    if (![1, 2, 3, 4].includes(difficulty)) {
+    if (!["1", "2", "3", "4"].includes(difficulty)) {
       custError(err, 'difficulty', 'Difficulty field is required. Please enter valid selection from dropdown');
     }
     if (![true, false].includes(alignment)) {
