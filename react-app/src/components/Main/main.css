@@ -328,6 +328,14 @@ form select {
 .errors {
     color: red;
     font-weight: bold;
+    text-align: center;
+}
+
+.feErrors{
+    color: red;
+    font-weight: bold;
+    text-decoration: underline;
+    text-align: center;
 }
 /* @keyframes blink {
   0%, 100% {

@@ -15,12 +15,21 @@ export default function EditDailyModal({ dailyId, daily }) {
   const [repeatTimeFrame, setRepeatTimeFrame] = useState("")
   const [repeatRateNumbers, setRepeatRateNumbers] = useState('')
   const [errors, setErrors] = useState([]);
+  const [errorsFe,setErrorsFe] = useState([])
   const [alignment, setAlignment] = useState("")
   const [startDate, setStartDate] = useState('')
   const { closeModal } = useModal();
   const userDailies = useSelector((state) => state.session.user.usersDailiesObj);
   const userArray = useSelector((state) => state.dailies.allIds);
   console.log('INSIDE DAILIES EDIT USERDAILIES IS', userDailies)
+
+  function custError(err,field,message){
+    if (!err.errors) {
+        err.errors={}}
+    err.errors[field]=message
+    return err
+
+  }
 
   useEffect(() => {
     if (daily) {
@@ -48,6 +57,30 @@ export default function EditDailyModal({ dailyId, daily }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (notes === 'optional') {
+      setNotes('')
+    }
+    let err={}
+    if (!title || title.length < 3 || title.length > 30) {
+      custError(err, 'title', 'Title is required and must be between 3 and 30 characters');
+    }
+    if (![1, 2, 3, 4].includes(difficulty)) {
+      custError(err, 'difficulty', 'Difficulty field is required. Please enter valid selection from dropdown');
+    }
+    if (repeatTimeFrame === '' || !['daily', 'weekly', 'monthly'].includes(repeatTimeFrame)) {
+      custError(err, 'repeatTimeFrame', 'Please choose how often this should occur');
+    }
+    if (!startDate) {
+      custError(err, 'startDate', 'startDate is required');
+    }
+    if (repeatRateNumbers === null || repeatRateNumbers <= 0 || repeatRateNumbers >= 21) {
+      custError(err, 'repeatQuantity', 'Repeat quantity must be a number from 1 to 20.');
+    }
+    if(err.errors){
+      setErrorsFe(err.errors)
+      return
+    }
+    else {
     const updatedDaily = { dailyId, title, notes, difficulty, startDate, repeatTimeFrame, repeatRateNumbers }
     const data = await dispatch(ThunkEditDaily(updatedDaily));
     if (data?.errors) {
@@ -61,6 +94,17 @@ export default function EditDailyModal({ dailyId, daily }) {
 
     };
   }
+  }
+
+
+
+
+
+
+
+
+
+
 
   return (
     <>
@@ -97,7 +141,7 @@ export default function EditDailyModal({ dailyId, daily }) {
                 />
 
               </label>
-              {errors.title && <p className="errors">{errors.title}</p>}
+              {errors.title ? <p className="errors">{errors.title}</p> : errorsFe.title ? <p className="feErrors">{errorsFe.title}</p> : null}
               <label>
                 Notes
                 <textarea
@@ -122,7 +166,7 @@ export default function EditDailyModal({ dailyId, daily }) {
                   <option value='4'>Super duper Challenging!</option>
                 </select>
               </label>
-              {errors.difficulty && <p className="errors">{errors.difficulty}</p>}
+              {errors.difficulty ? <p className="errors">{errors.difficulty}</p> : errorsFe.difficulty ? <p className="feErrors">{errorsFe.difficulty}</p> : null}
               <label>
 
                 <label>
@@ -134,7 +178,7 @@ export default function EditDailyModal({ dailyId, daily }) {
                   // required
                   />
                 </label>
-                {errors.startDate && <p className="errors">{errors.startDate}</p>}
+                {errors.startDate ? <p className="errors">{errors.startDate}</p> : errorsFe.startDate ? <p className="feErrors">{errorsFe.startDate}</p> : null}
 
 
 
@@ -149,7 +193,7 @@ export default function EditDailyModal({ dailyId, daily }) {
                 </select>
 
               </label>
-              {errors.repeatTimeFrame && <p className="errors">{errors.repeatTimeFrame}</p>}
+              {errors.repeatTimeFrame ? <p className="errors">{errors.repeatTimeFrame}</p> : errorsFe.repeatTimeFrame ? <p className="feErrors">{errorsFe.repeatTimeFrame}</p> : null}
 
               <label>
                 Repeat every
@@ -163,7 +207,7 @@ export default function EditDailyModal({ dailyId, daily }) {
                 // required
                 />
               </label>
-              {errors.repeatQuantity && <p className="errors">{errors.repeatQuantity}</p>}
+              {errors.repeatQuantity ? <p className="errors">{errors.repeatQuantity}</p> : errorsFe.repeatQuantity ? <p className="feErrors">{errorsFe.repeatQuantity}</p> : null}
 
 
             </form>
