@@ -11,23 +11,24 @@ export default function Dailies({ user }) {
   const [daily, setDaily] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const [isDone, setIsDone] = useState(false);
-  const [clickedDailyCheck,setClickedDailyCheck]=useState([])
+  const [clickedDailyCheck, setClickedDailyCheck] = useState([])
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
   const userDailies = useSelector((state) => state.dailies.byId);
-  const userArray =  useSelector((state) => state.dailies.allIds);
-  const [openDaily,setOpenDaily]=useState(null)
+  const userArray = useSelector((state) => state.dailies.allIds);
+  const [openDaily, setOpenDaily] = useState(null)
 
-  console.log('IN DAILIES USERDAILIES IS',userDailies)
-  console.log('in dailies userarray is',userArray)
+  console.log('IN DAILIES USERDAILIES IS', userDailies)
+  console.log('in dailies userarray is', userArray)
 
   const handleCheckmark = (dailyId) => {
-    let newArray=[]
-    if (!clickedDailyCheck.includes(dailyId)){
-    setClickedDailyCheck([...clickedDailyCheck,dailyId])}
-    else{
-      newArray=clickedDailyCheck.filter((ele)=>ele!==dailyId)
+    let newArray = []
+    if (!clickedDailyCheck.includes(dailyId)) {
+      setClickedDailyCheck([...clickedDailyCheck, dailyId])
+    }
+    else {
+      newArray = clickedDailyCheck.filter((ele) => ele !== dailyId)
       setClickedDailyCheck(newArray)
     }
     // setIsDone(!isDone);
@@ -38,14 +39,14 @@ export default function Dailies({ user }) {
     setShowMenu(true);
   };
 
-  const handleEllipsisClick=(dailyId)=>{
+  const handleEllipsisClick = (dailyId) => {
     console.log('INSIDE HANDLE ELLIPSIS CLICK')
-    if(openDaily===dailyId){
+    if (openDaily === dailyId) {
       console.log("openDailyId already set to what we clicked")
       setOpenDaily(null)
-    }else {
+    } else {
       setOpenDaily(dailyId)
-      console.log('OPENHABITID IS NOW',dailyId)
+      console.log('OPENHABITID IS NOW', dailyId)
     }
   }
 
@@ -69,7 +70,7 @@ export default function Dailies({ user }) {
     if (!userArray.length) {
       fetchData()
     }
-  }, [userArray,dispatch]);
+  }, [userArray, dispatch]);
 
   useEffect(() => {
     if (!showMenu) return;
@@ -83,7 +84,7 @@ export default function Dailies({ user }) {
     document.addEventListener("click", closeMenu);
 
     return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu,userArray,userDailies]);
+  }, [showMenu, userArray, userDailies]);
 
   const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
 
@@ -109,10 +110,18 @@ export default function Dailies({ user }) {
         <div className='habits-card'>
           <div className='fifteen-percent invisi'></div>
           <div className='habits-card-center'>
-            <div className='bad-habit-emoti' onClick={(e)=>{
+            <div className='bad-habit-emoti' onClick={(e) => {
               e.stopPropagation();
-              handleCheckmark(dailyId)}}>
-              {clickedDailyCheck && clickedDailyCheck.includes(dailyId) ? (
+              handleCheckmark(dailyId)
+            }}>
+              {userDailies[dailyId].untouched ? (
+                <img
+                  src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
+                  className='sadFace'
+                  style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
+                />
+
+              ) : clickedDailyCheck && clickedDailyCheck.includes(dailyId) ? (
                 <img
                   src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
                   className='sadFace'
@@ -125,6 +134,7 @@ export default function Dailies({ user }) {
                   style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
                 />
               )}
+
             </div>
             <div className='main-body-habit-card'>
               <h3>{userDailies[dailyId]?.title}</h3>
@@ -143,7 +153,7 @@ export default function Dailies({ user }) {
               />
             </div>
           </div>
-          {openDaily===dailyId && showMenu && (
+          {openDaily === dailyId && showMenu && (
             <div className='fifteen-percent no-border'>
               <div className='backG'>
                 <ul className={ulClassName} ref={ulRef}>
@@ -161,7 +171,7 @@ export default function Dailies({ user }) {
                           Edit
                         </>
                       }
-                      modalComponent={<EditDailyModal dailyId={dailyId} daily={userDailies[dailyId]}/>}
+                      modalComponent={<EditDailyModal dailyId={dailyId} daily={userDailies[dailyId]} />}
                       onClick={() => setShowMenu(false)}
                     />
                   </li>
@@ -181,7 +191,7 @@ export default function Dailies({ user }) {
                           Delete
                         </>
                       }
-                      modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title}/>}
+                      modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} />}
                       onClick={() => setShowMenu(false)}
                     />
                   </li>

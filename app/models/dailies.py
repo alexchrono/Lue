@@ -18,7 +18,7 @@ class Daily(db.Model):
     repeat_time_frame = db.Column(db.String, default='daily')
     repeat_quantity = db.Column(db.Integer,default=1)
     user_id = db.Column(db.Integer, db.ForeignKey(add_prefix_for_prod('users.id')), nullable=False)
-    untouched=db.Column(db.Boolean)
+    untouched=db.Column(db.Boolean,default=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
     dailies_of_user= db.relationship('User',back_populates='users_dailies')
@@ -36,6 +36,7 @@ class Daily(db.Model):
             'repeatTimeFrame': self.repeat_time_frame,
             'repeatQuantity': self.repeat_quantity,
             'user_id': self.user_id,
+            'untouched': self.untouched,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }

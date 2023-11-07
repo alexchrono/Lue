@@ -89,50 +89,52 @@ def makeNewDaily():
 @daily_routes.route('/edit-daily', methods=['POST'])
 def editDaily():
     err={}
-    ic('inside our edit DAILY route')
     data=request.json
-    ic(data)
     id=data.get('dailyId')
     ic(id)
     title=data.get('title')
-    ic(title)
     notes=data.get('notes')
-    ic(notes)
     difficulty=data.get('difficulty')
     ic(difficulty)
     resetRateNumbers=data.get('repeatRateNumbers')
     ic(resetRateNumbers)
     ourTimeFrame=data.get('repeatTimeFrame')
-    ic(ourTimeFrame)
     startDate=data.get('startDate')
-    ic(startDate)
+
+    if not title or len(title) < 3 or len(title) > 30:
+        custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
+    if difficulty not in [1, 2, 3, 4]:
+        custError(err, 'difficulty', 'Difficulty field is required. Please enter valid selection from dropdown')
+    if ourTimeFrame =='' or ourTimeFrame not in ['daily', 'weekly', 'monthly']:
+        custError(err, 'repeatTimeFrame', 'Please choose how often this should occur')
+    if not startDate:
+        custError(err,'startDate','startDate is required')
+    if resetRateNumbers==None or resetRateNumbers<=0 or resetRateNumbers>=21:
+        custError(err,'repeatQuantity','Repeat quantity must be a number from 1 to 20.')
+    if 'errors' in err:
+
+
+        return jsonify(err), 400
+
     target=Daily.query.get(id)
     ic(target)
 
-    if not data.get('title') or len(data.get('title'))<3 or len(data.get('title'))>30:
-        custError(err,'title','Title is required and must be between 3 and 30 characters')
-    if data.get('difficulty') not in [1,2,3,4]:
-        custError(err,'difficulty','Difficulty field is required. Please enter valid selection from dropdown')
-
-    if 'errors' in err:
-        print('THIS IS ERR DAWG******',err)
-        return jsonify(err), 400
     if target:
-        target.title=data.get('title')
-        target.notes=data.get('notes')
-        target.difficulty=data.get('difficulty')
-        if startDate:
-            target.start_date = datetime.strptime(startDate, '%Y-%m-%d').date()
+        target.title=title
+        target.notes=notes
+        target.difficulty=difficulty
+        target.start_date = datetime.strptime(startDate, '%Y-%m-%d').date()
 
-        target.repeat_time_frame=data.get('repeatTimeFrame')
-        target.repeat_quantity=data.get('repeatRateNumbers')
+        target.repeat_time_frame=ourTimeFrame
+        target.repeat_quantity=resetRateNumbers
         target.updated_at = datetime.utcnow()
+        target.untouched = False
         db.session.commit()
 
         return target.to_dict()
-        return {"test": "7"}
 
-    return {"test": "7"}
+
+    return jsonify({"error":"The Daily could not be found"}),400
 
 @daily_routes.route('/delete-daily', methods=['POST'])
 def deleteDaily():
