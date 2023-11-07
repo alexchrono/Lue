@@ -6,12 +6,13 @@ import DeleteHabitOrDaily from '../DeleteHabitOrDaily';
 import { ThunkNewHabit } from '../../store/habit';
 import { ThunkGetAllHabits } from '../../store/habit';
 import ErrorComponent from '../errorShow';
+
 export default function Habits({ user }) {
   const [habit, setHabit] = useState('');
   const [showMenu, setShowMenu] = useState(false);
   const [clickedEmoti, setClickedEmoti] = useState([])
   const [errors, setErrors] = useState([]);
- 
+
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);

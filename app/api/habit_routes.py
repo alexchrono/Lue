@@ -69,7 +69,7 @@ def makeNewHabit():
         return new_habit.to_dict()
     #should i also return user here? or is backfill sufficient? lets test it
 
-    return jsonify({"error":"The Daily could not be found"}),400
+    return jsonify({"error":"There was an error in making the Habit"}),400
 # @habit_routes.route('/new-habit', methods=['POST'])
 # def makeNewHabit():
 #     data=request.json

@@ -5,7 +5,7 @@ import DeleteHabitOrDaily from '../DeleteHabitOrDaily';
 import { useDispatch, useSelector } from 'react-redux';
 import { ThunkNewDaily } from '../../store/daily';
 import { ThunkGetAllDailies } from '../../store/daily';
-
+import ErrorComponent from '../errorShow';
 
 export default function Dailies({ user }) {
   const [daily, setDaily] = useState('');
@@ -54,16 +54,16 @@ export default function Dailies({ user }) {
   const MakeNewDaily = async (e) => {
     e.preventDefault();
     let test = await dispatch(ThunkNewDaily(daily));
-    if (test) {
+    if(test?.errors){
+
+      setErrors(test.errors)
+    }
+    else if (test.title) {
       setDaily('')
       return test;
     }
   };
-  useEffect(() => {
-    if (errors && errors.title) {
-      alert(`Error: ${errors.title}`);
-    }
-  }, [errors]);
+
 
   useEffect(() => {
 
@@ -94,6 +94,9 @@ export default function Dailies({ user }) {
   const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
 
   return (
+    <>
+    {errors.title && (<ErrorComponent errorMessage={'Daily titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setDaily} />)}
+
     <div className='habits'>
       <div className='habits-topMenu'>
         <div className='fifteen-percent bigtextcenter'>Dailies</div>
@@ -207,5 +210,5 @@ export default function Dailies({ user }) {
         </div>
       ))}
     </div>
-  );
+  </>);
 }

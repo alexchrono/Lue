@@ -35,8 +35,16 @@ def getAllDailies():
 
 @daily_routes.route('/new-daily', methods=['POST'])
 def makeNewDaily():
+    err={}
     data=request.json
     daily=data.get('daily')
+
+    if not daily or len(daily) < 3 or len(daily) > 30:
+        custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
+
+    if 'errors' in err:
+        return jsonify(err), 400
+
 
 
     if daily:
@@ -63,7 +71,7 @@ def makeNewDaily():
         return new_daily.to_dict()
     #should i also return user here? or is backfill sufficient? lets test it
 
-    return {"test": "7"}
+    return jsonify({"error":"There was an error in making the daily"}),400
 # @daily_routes.route('/new-habit', methods=['POST'])
 # def makeNewHabit():
 #     data=request.json
