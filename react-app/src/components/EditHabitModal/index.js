@@ -25,7 +25,6 @@ export default function EditHabitModal({ habitId, habit }) {
     if (habit) {
       setTitle(habit?.title)
       if (habit.untouched) {
-        setNotes('optional')
         setAlignment('')
         setDifficulty('')
         setPicPass(true)
@@ -159,6 +158,7 @@ export default function EditHabitModal({ habitId, habit }) {
                 <textarea
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
+                  placeholder="Optional"
                 // required
                 >
                 </textarea>

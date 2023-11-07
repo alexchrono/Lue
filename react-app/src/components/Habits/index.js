@@ -110,6 +110,7 @@ export default function Habits({ user }) {
 
   return (
     <>
+    {errors.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
     {errors.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
     <div className='habits'>
       <div className='habits-topMenu'>
@@ -138,12 +139,17 @@ export default function Habits({ user }) {
           <div className='habits-card-center'>
             <div className='bad-habit-emoti' onClick={(e) => {
               e.stopPropagation();
-              handleEmotiClick(habitId)
+              if(!userHabits[habitId].untouched){
+                handleEmotiClick(habitId)}
+                else {
+                  console.log('HIT OUR RELSE WE CLICKING NORMAL PC')
+                  // <ErrorComponent errorMessage={'You need to edit this habit before it becomes active'} setErrors={setErrors} setHabit={setHabit} />
+                }
             }}>
     {user2 && userHabits[habitId] ? (
   userHabits[habitId].untouched? (
     <img
-      src={`${process.env.PUBLIC_URL}/icons/emoji-neutral-bs.svg`}
+      src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
       className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
       style={{ width: '100%', height: '100%', margin: '0' }}
     />

@@ -47,7 +47,6 @@ def makeNewHabit():
 
         new_habit= Habit(
             title=habit,
-            notes='click menu to set me up!',
             user_id=current_user.id,
             untouched=True
 
