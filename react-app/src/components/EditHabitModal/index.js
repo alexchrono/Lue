@@ -14,6 +14,7 @@ export default function EditHabitModal({ habitId, habit }) {
   const [difficulty, setDifficulty] = useState("");
   const [resetRate, setResetRate] = useState("")
   const [errors, setErrors] = useState([]);
+  const [errorsFe,setErrorsFe] = useState([])
   const [picPass, setPicPass] = useState(false)
   const [alignment, setAlignment] = useState(true)
   const { closeModal } = useModal();
@@ -50,6 +51,7 @@ export default function EditHabitModal({ habitId, habit }) {
     }
 
     const updatedHabit = { habitId, title, notes, difficulty, resetRate, alignment }
+    if (alignment!== true || alignment !== false )
     const data = await dispatch(ThunkEditHabit(updatedHabit));
     if (data?.errors){
       console.log('WE GOT SOME ERRORS N OUR FORMS,data is******',data)
@@ -69,6 +71,7 @@ export default function EditHabitModal({ habitId, habit }) {
     console.log("setAlignmentTO", value)
     setPicPass(false)
     setAlignment(value);
+
   };
 
   console.log('INSIDE EDITHABITMODAL HABITID IS', habitId)
@@ -141,7 +144,7 @@ export default function EditHabitModal({ habitId, habit }) {
                   <p className="pic-caption">Good Habit</p>
                 </div>
               </div>
-              {errors.alignment && <p className="errors">{errors.alignment}</p>}
+              {errors.alignment ? (<p className="errors">{errors.alignment}</p>) : errorsFe.alignment ? (<p className="errors">{errorsFe.alignment}</p>) : null}
               <label>
 
                 {!habit.untouched && ('Difficulty Level:')}

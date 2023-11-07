@@ -123,7 +123,7 @@ export default function Dailies({ user }) {
                 <img
                   src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
                   className='sadFace'
-                  style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
+                  style={{ width: '100%', height: '100%', margin: '0' }}
                 />
 
               ) : clickedDailyCheck && clickedDailyCheck.includes(dailyId) ? (
