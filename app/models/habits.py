@@ -20,6 +20,7 @@ class Habit(db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow)
     updated_at = db.Column(db.DateTime, default=datetime.utcnow)
 
+
     habits_of_user = db.relationship('User', back_populates='users_habits')
 
     # usebackref instead of backpopulates?
