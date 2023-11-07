@@ -34,6 +34,20 @@ export default function Habits({ user }) {
     setShowMenu(true);
   };
 
+  const badTranslator = {
+    1: -0.2,
+    2: -2.5,
+    3: -3.9,
+    4: -5.4
+  }
+
+  const goodTranslator = {
+    1: {gold: .09,exp:1},
+    2: {gold: .84,exp:5},
+    3: {gold:1.19,exp:7},
+    4: {gold:1.55,exp:9}
+  }
+
   const handleEllipsisClick = (habitId) => {
     console.log('INSIDE HANDLE ELLIPSIS CLICK')
     if (openHabit === habitId) {
@@ -69,6 +83,29 @@ export default function Habits({ user }) {
       return test;
     }
   };
+
+  const HandleDislikeOrLike = async (e,goodOrBad,difficulty) => {
+    e.preventDefault();
+
+    console.log('THIS IS A DISLIKE WE INSIDE THE FUNCTION')
+    console.log('good or bad is ',goodOrBad)
+    if (goodOrBad==='bad'){
+      let change=badTranslator[difficulty]
+      console.log('CHANGE IS***********',change)
+    }
+    if (goodOrBad==='unbad'){
+      let change=-(badTranslator[difficulty])
+      console.log('unclicked bad change change is',change)
+
+    }
+    console.log('difficulty in the function is',difficulty)
+
+    // let test = await dispatch(ThunkNewHabit(habit));
+
+
+  }
+
+
 
   // useEffect(() => {
   //   if (errors && errors.title) {
@@ -158,6 +195,17 @@ export default function Habits({ user }) {
       src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
       className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
       style={{ width: '100%', height: '100%', margin: '0' }}
+      onClick={(e)=>{
+        if (clickedEmoti && clickedEmoti.includes(habitId))
+        {
+          HandleDislikeOrLike(e,'unbad',userHabits[habitId].difficulty)
+
+
+          console.log('*************OK WE GOT CHANGE THIS UNDOES THE NEGATIVE EFFECTS')}
+      else {
+        HandleDislikeOrLike(e,'bad',userHabits[habitId].difficulty)
+        console.log('**********OK WE GOT CHANGE THIS TAKES AWAY HP')
+      } }}
     />
   ) : (
     <img
