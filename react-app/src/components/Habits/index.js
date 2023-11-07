@@ -98,12 +98,26 @@ export default function Habits({ user }) {
       console.log('unclicked bad change change is',change)
 
     }
-    console.log('difficulty in the function is',difficulty)
+    if (goodOrBad==='good'){
+      let change=goodTranslator[difficulty]
+      console.log('POSITIVE CHANGE IS***********',change)
+      console.log('POSITIVE CHANGE in GOLD IS***********',change.gold)
+      console.log('POSITIVE CHANGE IN EXP IS****',change.exp)
+    }
+    if (goodOrBad==='ungood') {
+      let change = goodTranslator[difficulty]
+      console.log('UNDOING POSITIVE CHANGE IS***********',change)
+      console.log('UNDOING POSITIVE CHANGE in GOLD IS***********',-(change.gold))
+      console.log('UNDOING POSITIVE CHANGE IN EXP IS****',-(change.exp))
+    }
+
+    }
+
 
     // let test = await dispatch(ThunkNewHabit(habit));
 
 
-  }
+ 
 
 
 
@@ -212,6 +226,17 @@ export default function Habits({ user }) {
       src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
       className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace green' : 'sadFace'}
       style={{ width: '100%', height: '100%', margin: '0' }}
+      onClick={(e)=>{
+        if (clickedEmoti && clickedEmoti.includes(habitId))
+        {
+          HandleDislikeOrLike(e,'ungood',userHabits[habitId].difficulty)
+
+
+          console.log('*************OK WE GOT CHANGE THIS UNDOES THE CLICK OF A POSITIVE EFFECT')}
+      else {
+        HandleDislikeOrLike(e,'good',userHabits[habitId].difficulty)
+        console.log('**********OK WE GOT CHANGE THIS POSITIVVE CHANGE THIS ADDS GOLD AND EXP')
+      } }}
     />
   )
 ) : null}
