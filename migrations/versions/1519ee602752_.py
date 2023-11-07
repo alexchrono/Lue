@@ -1,16 +1,21 @@
 """empty message
 
-Revision ID: 9a437da871d1
-Revises: 
-Create Date: 2023-11-06 17:16:38.927453
+Revision ID: 1519ee602752
+Revises:
+Create Date: 2023-11-07 12:20:34.394351
 
 """
 from alembic import op
 import sqlalchemy as sa
 
+import os
+environment = os.getenv("FLASK_ENV")
+SCHEMA = os.environ.get("SCHEMA")
+
+
 
 # revision identifiers, used by Alembic.
-revision = '9a437da871d1'
+revision = '1519ee602752'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,16 +30,18 @@ def upgrade():
     sa.Column('hashed_password', sa.String(length=255), nullable=False),
     sa.Column('selected_avatar', sa.String(length=200), nullable=True),
     sa.Column('level', sa.Integer(), nullable=True),
-    sa.Column('health', sa.Numeric(precision=10, scale=2), nullable=False),
-    sa.Column('current_health', sa.Numeric(precision=10, scale=2), nullable=False),
-    sa.Column('gold', sa.Numeric(precision=10, scale=2), nullable=False),
-    sa.Column('exp', sa.Numeric(precision=10, scale=2), nullable=False),
+    sa.Column('health', sa.Numeric(precision=10, scale=2), nullable=True),
+    sa.Column('current_health', sa.Numeric(precision=10, scale=2), nullable=True),
+    sa.Column('gold', sa.Numeric(precision=10, scale=2), nullable=True),
+    sa.Column('exp', sa.Numeric(precision=10, scale=2), nullable=True),
     sa.Column('created_at', sa.DateTime(), nullable=True),
     sa.Column('updated_at', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id'),
     sa.UniqueConstraint('email'),
     sa.UniqueConstraint('username')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE users SET SCHEMA {SCHEMA};")
     op.create_table('dailies',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
@@ -52,6 +59,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE dailies SET SCHEMA {SCHEMA};")
     op.create_table('habits',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('title', sa.String(), nullable=False),
@@ -68,6 +77,8 @@ def upgrade():
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
+    if environment == "production":
+        op.execute(f"ALTER TABLE habits SET SCHEMA {SCHEMA};")
     # ### end Alembic commands ###
 
 
