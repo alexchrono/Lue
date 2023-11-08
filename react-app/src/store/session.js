@@ -90,7 +90,7 @@ export const ThunkEditHealth = (healthOrExp) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        await dispatch(actionEditHealthOrExp(data));
+        await dispatch(actionEditHealthOrExp(data.current_user));
         return data;
     } else if (response.status < 500) {
         console.log('WE HIT OUR ELSE')

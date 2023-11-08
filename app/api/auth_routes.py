@@ -11,7 +11,9 @@ auth_routes = Blueprint('auth', __name__)
 
 
 def expFinder():
+
     targetExp=current_user.level*25
+    ic(targetExp)
     return targetExp
 
 
@@ -102,19 +104,32 @@ def editHealth():
     ic(data2)
     data=data2.get("healthOrExp")
     ic(data)
+    ic(data.get('health'))
+    ic(data.get('gold'))
     if (data.get('health')):
+        ic('inside data.getHealth check')
+        ic(current_user)
+        ic(current_user.current_health)
         health=Decimal(data.get('health'))
         if current_user:
             current_user.current_health= (current_user.current_health+health)
             db.session.commit()
-            return current_user.to_dict()
+            return {"victory": False,"current_user": current_user.to_dict()}
         else:
             return jsonify({"error":"There was an error while updating your health"}),400
     elif (data.get('gold')):
+        ic('inside ddata.get gold check')
         gold=Decimal(data.get('gold'))
+        ic(gold)
         exp=Decimal(data.get('exp'))
+        ic(exp)
         if current_user:
+            ic('inside current user check')
             current_user.gold= (current_user.gold+gold)
+            ic(current_user.exp)
+            ic(exp)
+
+
             if current_user.exp + exp >= expFinder():
                 falseExp= current_user.exp+exp
                 realExp= falseExp-expFinder()
@@ -122,15 +137,14 @@ def editHealth():
                 current_user.health+=10
                 current_user.current_health=current_user.health
                 current_user.exp=realExp
-                current_user.just_gained_level=True
                 db.session.commit()
-                return current_user.to_dict()
+                return jsonify({"victory": True, "current_user": current_user.to_dict()})
             else:
 
 
                 current_user.exp= (current_user.exp+exp)
                 db.session.commit()
-                return current_user.to_dict()
+                return jsonify({"victory": False, "current_user": current_user.to_dict()})
         else:
             return jsonify({"error":"There was an error while updating your Gold and exp"}),400
 

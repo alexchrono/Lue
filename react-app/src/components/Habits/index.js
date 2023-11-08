@@ -14,7 +14,7 @@ export default function Habits({ user }) {
   const [clickedEmoti, setClickedEmoti] = useState([])
   const [errors, setErrors] = useState([]);
 
-  
+
   const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
@@ -122,6 +122,10 @@ export default function Habits({ user }) {
 
     if (change) {
       const test= await dispatch(ThunkEditHealth(change))
+
+      if (test.victory) {
+        alert('OH MY GERDDDD YOU GAINED A LEVEL')
+      }
 
     }
 

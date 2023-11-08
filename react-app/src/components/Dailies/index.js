@@ -56,6 +56,9 @@ export default function Dailies({ user }) {
     if(change) {
       console.log('THE CHANG EISSSSSSSSSSSSS',change)
       const test= await dispatch(ThunkEditHealth(change))
+      if (test.victory) {
+        alert('OH MY GERDDDD YOU GAINED A LEVEL')
+      }
     }
   }
 

@@ -4,7 +4,14 @@ from flask_login import UserMixin
 from decimal import Decimal
 from datetime import datetime
 
+def default_health():
+    return Decimal('50.00')
 
+def default_gold_or_exp():
+    return Decimal('0.00')
+
+def current_date():
+    return datetime.utcnow()
 
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
@@ -18,13 +25,12 @@ class User(db.Model, UserMixin):
     hashed_password = db.Column(db.String(255), nullable=False)
     selected_avatar= db.Column(db.String(200),default='https://i.imgur.com/V26j32L.png')
     level = db.Column(db.Integer,default=1)
-    health = db.Column(db.Numeric(10,2),default=Decimal('50.00'))
-    current_health= db.Column(db.Numeric(10,2),default=Decimal('50.00'))
-    gold = db.Column(db.Numeric(10, 2), default=Decimal('0.00'))
-    exp = db.Column(db.Numeric(10, 2), default=Decimal('0.00'))
-    just_gained_level=db.Column(db.Boolean, default=False)
-    created_at = db.Column(db.DateTime, default=datetime.utcnow)
-    updated_at = db.Column(db.DateTime, default=datetime.utcnow)
+    health = db.Column(db.Numeric(10,2),default=default_health)
+    current_health= db.Column(db.Numeric(10,2),default=default_health)
+    gold = db.Column(db.Numeric(10, 2), default=default_gold_or_exp)
+    exp = db.Column(db.Numeric(10, 2), default=default_gold_or_exp)
+    created_at = db.Column(db.DateTime, default=current_date)
+    updated_at = db.Column(db.DateTime, default=current_date)
     users_habits = db.relationship('Habit',back_populates='habits_of_user')
     users_dailies= db.relationship('Daily',back_populates='dailies_of_user')
     @property
@@ -60,7 +66,6 @@ class User(db.Model, UserMixin):
             'currentHealth': self.current_health,
             'gold': self.gold,
             'exp': self.exp,
-            'justGainedLevel': self.just_gained_level,
             'usersHabitsArray': userHabitsArray,
             'usersHabitsObj': userHabits,
             'usersDailiesArray': userDailiesArray,
