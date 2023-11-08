@@ -33,61 +33,37 @@ def getAllHabits():
 
 @habit_routes.route('/new-habit', methods=['POST'])
 def makeNewHabit():
-    err={}
-    data=request.json
-    habit=data.get('habit')
-    ic(current_user)
+    err = {}
+    data = request.json
+    habit_title = data.get('habit')
 
-
-
-
-    if not habit or len(habit) < 3 or len(habit) > 30:
-        custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
-
-    if 'errors' in err:
+    if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
+        err['title'] = 'Title is required and must be between 3 and 30 characters'
         return jsonify(err), 400
 
-    if habit:
+    for habit in current_user.users_habits:
+        habit.position += 1
+
+    new_habit = Habit(
+        title=habit_title,
+        user_id=current_user.id,
+        untouched=True,
+        position=1
+    )
+    db.session.add(new_habit)
+    db.session.commit()
+
+    ourGuyDict=current_user.to_dict()
+    updatedArray=ourGuyDict.get("usersHabitsArray")
+    
 
 
 
 
-
-
-        new_habit= Habit(
-            title=habit,
-            user_id=current_user.id,
-            untouched=True,
-            position=0
-
-        )
-
-        db.session.add(new_habit)
-        db.session.commit()
-
-
-        # currentUserObj=User.query.get(current_user.id)
-        # ic(currentUserObj)
-        # ic(currentUserObj.users_habits)
-
-
-        # updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
-
-        # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
-        # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
-        # ,"upd_list":upd_habit_list}
-        test=current_user.to_dict()
-        objToUpdate=test.get('usersHabitsObj')
-        ic(objToUpdate)
-        for ele in objToUpdate:
-            objToUpdate[ele]["position"]+=1
-        ic(objToUpdate)
-        arrayToUpdate=test.get("usersHabitsArray")
-        ic(arrayToUpdate)
-        return new_habit.to_dict()
+    return jsonify({"newHabit":new_habit.to_dict(),"newArray":updatedArray})
     #should i also return user here? or is backfill sufficient? lets test it
 
-    return jsonify({"error":"There was an error in making the Habit"}),400
+
 # @habit_routes.route('/new-habit', methods=['POST'])
 # def makeNewHabit():
 #     data=request.json
