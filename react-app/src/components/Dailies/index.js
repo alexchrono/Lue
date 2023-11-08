@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ThunkNewDaily, ThunkGetAllDailies } from '../../store/daily';
 import { ThunkEditHealth } from '../../store/session';
 import ErrorComponent from '../errorShow';
+import ShowVictory from '../ShowVictory';
 
 export default function Dailies({ user }) {
   const [daily, setDaily] = useState('');
@@ -18,6 +19,7 @@ export default function Dailies({ user }) {
   const [openDaily, setOpenDaily] = useState(null);
   const [errors, setErrors] = useState([]);
   const [showVictory, setShowVictory] = useState(false);
+  const [victoryDeets,setVictoryDeets]=useState({})
 
   const handleCheckmark = (e, dailyId) => {
     e.stopPropagation();
@@ -59,6 +61,7 @@ export default function Dailies({ user }) {
       const test= await dispatch(ThunkEditHealth(change))
       if (test.victory) {
         setShowVictory(true);
+        setVictoryDeets(test.victoryDeets)
       }
     }
   }
@@ -108,7 +111,7 @@ export default function Dailies({ user }) {
   return (
     <>
       {errors.title && (<ErrorComponent errorMessage={'Daily titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setDaily} />)}
-      {showVictory && <ErrorComponent errorMessage={'OH MY GERDDDD YOU GAINED A LEVEL'} setVictory={setShowVictory} />}
+      {showVictory && <ShowVictory  setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Dailies</div>

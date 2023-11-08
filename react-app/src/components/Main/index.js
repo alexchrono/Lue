@@ -47,6 +47,7 @@ export default function Main() {
             <div className="avatar">
             <img src={`${user.selectedAvatar}`}></img> </div>
             <div className='stats'><span>level: {user.level}</span>
+            <span>title: {user.levelTitle}</span>
             <span>Health: {user.currentHealth} / {user.health}</span>
             <span>Exp: {user.exp} / {expFinder()} </span>
             <span>Gold: {user.gold}</span>

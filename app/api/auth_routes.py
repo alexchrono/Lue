@@ -9,7 +9,28 @@ from decimal import Decimal
 
 auth_routes = Blueprint('auth', __name__)
 
-
+level_titles = {
+    1: 'Novice',
+    2: 'Apprentice',
+    3: 'Initiate',
+    4: 'Squire',
+    5: 'Journeyman',
+    6: 'Adventurer',
+    7: 'Warrior',
+    8: 'Veteran',
+    9: 'Knight',
+    10: 'Guardian',
+    11: 'Ranger',
+    12: 'Captain',
+    13: 'Defender',
+    14: 'Sentinel',
+    15: 'Champion',
+    16: 'Warlord',
+    17: 'High Knight',
+    18: 'Paladin',
+    19: 'Ascendant',
+    20: 'Master',
+}
 def expFinder():
 
     targetExp=current_user.level*25
@@ -131,20 +152,33 @@ def editHealth():
 
 
             if current_user.exp + exp >= expFinder():
+                victoryDeets={}
                 falseExp= current_user.exp+exp
                 realExp= falseExp-expFinder()
+                oldTitle=level_titles[current_user.level]
+                newTitle=level_titles[(current_user.level+1)]
+                victoryDeets['levelGrowth']=f"You went from level {current_user.level} to {(current_user.level+1)}"
                 current_user.level +=1
+                copyCurrentTitle=current_user.level_title
+
+                victoryDeets['healthIncrease']=f"Your Health increased from {current_user.health} to {(current_user.health+10)} and has been fully restored"
                 current_user.health+=10
                 current_user.current_health=current_user.health
                 current_user.exp=realExp
+                copyExp=realExp
+
+
                 db.session.commit()
-                return jsonify({"victory": True, "current_user": current_user.to_dict()})
+                victoryDeets['nextLevel']=f"You currently have {copyExp} exp and your next level will  be gained at {expFinder()} "
+                victoryDeets['newTitle']=f'Your title changed from {oldTitle} to {newTitle}!!'
+                victoryDeets['endingLine']='Enjoy your promotion.  You did great!'
+                return jsonify({"victory": True, "victoryDeets":victoryDeets, "current_user": current_user.to_dict()})
             else:
 
-
-                current_user.exp= (current_user.exp+exp)
-                db.session.commit()
-                return jsonify({"victory": False, "current_user": current_user.to_dict()})
+                if current_user.exp+exp>=0:
+                    current_user.exp= (current_user.exp+exp)
+                    db.session.commit()
+                    return jsonify({"victory": False, "current_user": current_user.to_dict()})
         else:
             return jsonify({"error":"There was an error while updating your Gold and exp"}),400
 

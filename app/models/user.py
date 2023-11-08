@@ -13,6 +13,29 @@ def default_gold_or_exp():
 def current_date():
     return datetime.utcnow()
 
+level_titles = {
+    1: 'Novice',
+    2: 'Apprentice',
+    3: 'Initiate',
+    4: 'Squire',
+    5: 'Journeyman',
+    6: 'Adventurer',
+    7: 'Warrior',
+    8: 'Veteran',
+    9: 'Knight',
+    10: 'Guardian',
+    11: 'Ranger',
+    12: 'Captain',
+    13: 'Defender',
+    14: 'Sentinel',
+    15: 'Champion',
+    16: 'Warlord',
+    17: 'High Knight',
+    18: 'Paladin',
+    19: 'Ascendant',
+    20: 'Master',
+}
+
 class User(db.Model, UserMixin):
     __tablename__ = 'users'
 
@@ -37,6 +60,9 @@ class User(db.Model, UserMixin):
     def password(self):
         return self.hashed_password
 
+    @property
+    def level_title(self):
+        return level_titles.get(self.level,"Transcendent")
     @password.setter
     def password(self, password):
         self.hashed_password = generate_password_hash(password)
@@ -62,6 +88,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'selectedAvatar': self.selected_avatar,
             'level': self.level,
+            'levelTitle': self.level_title,
             'health': self.health,
             'currentHealth': self.current_health,
             'gold': self.gold,

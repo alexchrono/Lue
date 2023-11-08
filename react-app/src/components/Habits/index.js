@@ -7,6 +7,7 @@ import { ThunkNewHabit } from '../../store/habit';
 import { ThunkGetAllHabits } from '../../store/habit';
 import { ThunkEditHealth } from '../../store/session';
 import ErrorComponent from '../errorShow';
+import ShowVictory from '../ShowVictory';
 
 export default function Habits({ user }) {
   const [habit, setHabit] = useState('');
@@ -22,7 +23,7 @@ export default function Habits({ user }) {
   const userArray = useSelector((state) => state.habits.allIds);
   const [openHabit, setOpenHabit] = useState(null)
   const [showVictory, setShowVictory] = useState(false);
-
+  const [victoryDeets,setVictoryDeets]=useState({})
 
 
 
@@ -126,6 +127,7 @@ export default function Habits({ user }) {
 
       if (test.victory) {
         setShowVictory(true);
+        setVictoryDeets(test.victoryDeets)
 
       }
 
@@ -210,7 +212,7 @@ export default function Habits({ user }) {
     <>
       {errors.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
       {errors.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
-      {showVictory && <ErrorComponent errorMessage={'OH MY GERDDDD YOU GAINED A LEVEL'} setVictory={setShowVictory} />}
+      {showVictory && <ShowVictory  setVictory={setShowVictory} victoryDeets={victoryDeets}/>}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Habits</div>
