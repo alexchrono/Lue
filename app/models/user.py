@@ -72,7 +72,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
-        ic('IN DEF TO DICT SELF')
+
         userHabits={}
         userDailies={}
         userHabitsArray=[]
@@ -83,11 +83,11 @@ class User(db.Model, UserMixin):
 
             userHabits[ele.id]=ele.to_dict()
             userHabitsArray.append((ele.id,ele.position))
-        ic(userHabits)
+
         for ele2 in self.users_dailies:
             userDailiesArray.append((ele2.id,ele2.position))
             userDailies[ele2.id]=ele2.to_dict()
-        ic(userDailies)
+
 
         sortedUserHabitsArray = sorted(userHabitsArray, key=lambda habit: habit[1])
         sortedUserDailiesArray = sorted(userDailiesArray, key=lambda daily: daily[1])

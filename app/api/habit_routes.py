@@ -36,6 +36,10 @@ def makeNewHabit():
     err={}
     data=request.json
     habit=data.get('habit')
+    ic(current_user)
+
+
+
 
     if not habit or len(habit) < 3 or len(habit) > 30:
         custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
@@ -47,15 +51,20 @@ def makeNewHabit():
 
 
 
+
+
+
         new_habit= Habit(
             title=habit,
             user_id=current_user.id,
-            untouched=True
+            untouched=True,
+            position=0
 
         )
 
         db.session.add(new_habit)
         db.session.commit()
+
 
         # currentUserObj=User.query.get(current_user.id)
         # ic(currentUserObj)
@@ -67,6 +76,14 @@ def makeNewHabit():
         # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
         # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
+        test=current_user.to_dict()
+        objToUpdate=test.get('usersHabitsObj')
+        ic(objToUpdate)
+        for ele in objToUpdate:
+            objToUpdate[ele]["position"]+=1
+        ic(objToUpdate)
+        arrayToUpdate=test.get("usersHabitsArray")
+        ic(arrayToUpdate)
         return new_habit.to_dict()
     #should i also return user here? or is backfill sufficient? lets test it
 
