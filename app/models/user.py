@@ -75,12 +75,17 @@ class User(db.Model, UserMixin):
         userDailies={}
         userHabitsArray=[]
         userDailiesArray=[]
+        # userHabitsArray.append(ele.id)
+        # userDailiesArray.append(ele2.id)
         for ele in self.users_habits:
-            userHabitsArray.append(ele.id)
+
             userHabits[ele.id]=ele.to_dict()
         for ele2 in self.users_dailies:
-            userDailiesArray.append(ele2.id)
+
             userDailies[ele2.id]=ele2.to_dict()
+
+        userHabitsArray = [habit.id for habit in sorted(self.users_habits, key=lambda habit: habit.position)]
+        userDailiesArray = [daily.id for daily in sorted(self.users_dailies, key=lambda daily: daily.position)]
 
         return {
             'id': self.id,

@@ -113,6 +113,7 @@ def editHabit():
         custError(err, 'resetRate', 'Please choose how often to reset the counter')
     if 'errors' in err:
 
+
         return jsonify(err), 400
     target = Habit.query.get(habit_id)
     if target:
