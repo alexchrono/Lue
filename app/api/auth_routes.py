@@ -10,6 +10,11 @@ from decimal import Decimal
 auth_routes = Blueprint('auth', __name__)
 
 
+def expFinder():
+    targetExp=current_user.level*25
+    return targetExp
+
+
 def validation_errors_to_error_messages(validation_errors):
     """
     Simple function that turns the WTForms validation errors into a simple list
@@ -110,9 +115,22 @@ def editHealth():
         exp=Decimal(data.get('exp'))
         if current_user:
             current_user.gold= (current_user.gold+gold)
-            current_user.exp= (current_user.exp+exp)
-            db.session.commit()
-            return current_user.to_dict()
+            if current_user.exp + exp >= expFinder():
+                falseExp= current_user.exp+exp
+                realExp= falseExp-expFinder()
+                current_user.level +=1
+                current_user.health+=10
+                current_user.current_health=current_user.health
+                current_user.exp=realExp
+                current_user.just_gained_level=True
+                db.session.commit()
+                return current_user.to_dict()
+            else:
+
+
+                current_user.exp= (current_user.exp+exp)
+                db.session.commit()
+                return current_user.to_dict()
         else:
             return jsonify({"error":"There was an error while updating your Gold and exp"}),400
 

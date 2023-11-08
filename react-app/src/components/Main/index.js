@@ -5,6 +5,7 @@ import Habits from '../Habits';
 import Dailies from '../Dailies';
 import { ThunkGetAllHabits } from '../../store/habit';
 import { ThunkGetAllDailies } from '../../store/daily';
+import ErrorComponent from '../errorShow';
 import './main.css';
 
 
@@ -55,13 +56,17 @@ export default function Main() {
             <div className='inspirational-quote'>Life is what you make it</div>
 
 
-
+            {/* justGainedLevel */}
 
 
         </div>
         <div className='buffer'></div>
 
         <div className='tables'>
+            {user?.justGainedLevel && (
+                <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`}  />
+            )}
+
             <Habits user={user}/>
 
         <div className='center-buffer'></div>
