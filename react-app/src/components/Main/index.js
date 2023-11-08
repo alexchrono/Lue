@@ -15,6 +15,11 @@ export default function Main() {
     const userArray= useSelector((state) => state?.habits?.allIds);
     const user2Array =  useSelector((state) => state?.dailies?.allIds);
 
+    const expFinder=()=>{
+        let targetExp=user.level * 25
+        return targetExp
+    }
+
 
     useEffect(() => {
 
@@ -41,9 +46,8 @@ export default function Main() {
             <div className="avatar">
             <img src={`${user.selectedAvatar}`}></img> </div>
             <div className='stats'><span>level: {user.level}</span>
-            <span>Current Health: {user.currentHealth}</span>
-            <span>Max Health: {user.health}</span>
-            <span>Exp: {user.exp}</span>
+            <span>Health: {user.currentHealth} / {user.health}</span>
+            <span>Exp: {user.exp} / {expFinder()} </span>
             <span>Gold: {user.gold}</span>
 
 

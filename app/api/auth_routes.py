@@ -106,8 +106,8 @@ def editHealth():
         else:
             return jsonify({"error":"There was an error while updating your health"}),400
     elif (data.get('gold')):
-        gold=data.get('gold')
-        exp=data.get('exp')
+        gold=Decimal(data.get('gold'))
+        exp=Decimal(data.get('exp'))
         if current_user:
             current_user.gold= (current_user.gold+gold)
             current_user.exp= (current_user.exp+exp)
