@@ -7,7 +7,7 @@ import './Navigation.css';
 function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user);
 	console.log(sessionUser)
-	const healthPercentage = (sessionUser?.health / sessionUser?.currentHealth) * 100;
+	const healthPercentage = (sessionUser?.currentHealth/sessionUser?.health ) * 100;
 	const healthColor = healthPercentage > 65 ? 'green' : healthPercentage >= 40 ? 'yellow' : 'red';
 
 	return (
