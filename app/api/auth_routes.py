@@ -100,7 +100,7 @@ def editHealth():
     if (data.get('health')):
         health=Decimal(data.get('health'))
         if current_user:
-            current_user.health= (current_user.health+health)
+            current_user.current_health= (current_user.current_health+health)
             db.session.commit()
             return current_user.to_dict()
         else:
