@@ -45,6 +45,8 @@ def makeNewHabit():
 
     if habit:
 
+
+
         new_habit= Habit(
             title=habit,
             user_id=current_user.id,

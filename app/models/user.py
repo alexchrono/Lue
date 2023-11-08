@@ -3,6 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from decimal import Decimal
 from datetime import datetime
+from icecream import ic
 
 def default_health():
     return Decimal('50.00')
@@ -71,6 +72,7 @@ class User(db.Model, UserMixin):
         return check_password_hash(self.password, password)
 
     def to_dict(self):
+        ic('IN DEF TO DICT SELF')
         userHabits={}
         userDailies={}
         userHabitsArray=[]
@@ -80,12 +82,19 @@ class User(db.Model, UserMixin):
         for ele in self.users_habits:
 
             userHabits[ele.id]=ele.to_dict()
+            userHabitsArray.append((ele.id,ele.position))
+        ic(userHabits)
         for ele2 in self.users_dailies:
-
+            userDailiesArray.append((ele2.id,ele2.position))
             userDailies[ele2.id]=ele2.to_dict()
+        ic(userDailies)
 
-        userHabitsArray = [habit.id for habit in sorted(self.users_habits, key=lambda habit: habit.position)]
-        userDailiesArray = [daily.id for daily in sorted(self.users_dailies, key=lambda daily: daily.position)]
+        sortedUserHabitsArray = sorted(userHabitsArray, key=lambda habit: habit[1])
+        sortedUserDailiesArray = sorted(userDailiesArray, key=lambda daily: daily[1])
+
+        sortedUserHabitsArray = [habit[0] for habit in sortedUserHabitsArray]
+        sortedUserDailiesArray = [daily[0] for daily in sortedUserDailiesArray]
+
 
         return {
             'id': self.id,
@@ -98,9 +107,9 @@ class User(db.Model, UserMixin):
             'currentHealth': self.current_health,
             'gold': self.gold,
             'exp': self.exp,
-            'usersHabitsArray': userHabitsArray,
+            'usersHabitsArray': sortedUserHabitsArray,
             'usersHabitsObj': userHabits,
-            'usersDailiesArray': userDailiesArray,
+            'usersDailiesArray': sortedUserDailiesArray,
             'usersDailiesObj':userDailies,
             'created_at': self.created_at,
             'updated_at': self.updated_at
