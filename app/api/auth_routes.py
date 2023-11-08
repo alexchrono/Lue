@@ -5,6 +5,7 @@ from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
 from icecream import ic
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename,remove_file_from_s3
+from decimal import Decimal
 
 auth_routes = Blueprint('auth', __name__)
 
@@ -88,6 +89,32 @@ def sign_up():
         return user.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 
+
+@auth_routes.route('/edit-health-or-exp', methods=['POST'])
+def editHealth():
+    ic('DID WE EVEN HIT OUR ROUTE')
+    data2= request.json
+    ic(data2)
+    data=data2.get("healthOrExp")
+    ic(data)
+    if (data.get('health')):
+        health=Decimal(data.get('health'))
+        if current_user:
+            current_user.health= (current_user.health+health)
+            db.session.commit()
+            return current_user.to_dict()
+        else:
+            return jsonify({"error":"There was an error while updating your health"}),400
+    elif (data.get('gold')):
+        gold=data.get('gold')
+        exp=data.get('exp')
+        if current_user:
+            current_user.gold= (current_user.gold+gold)
+            current_user.exp= (current_user.exp+exp)
+            db.session.commit()
+            return current_user.to_dict()
+        else:
+            return jsonify({"error":"There was an error while updating your Gold and exp"}),400
 
 @auth_routes.route('/unauthorized')
 def unauthorized():
