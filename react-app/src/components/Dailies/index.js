@@ -39,6 +39,80 @@ export default function Dailies({ user }) {
     setShowMenu(true);
   };
 
+  // const badTranslator = {
+  //   1: -0.2,
+  //   2: -2.5,
+  //   3: -3.9,
+  //   4: -5.4
+  // }
+
+  const goodTranslator = {
+    1: { gold: .12, exp: 1 },
+    2: { gold: 1.2, exp: 7 },
+    3: { gold: 1.8, exp: 11 },
+    4: { gold: 2.4, exp: 14 }
+  }
+
+  const HandleDislikeOrLike = async (e, goodOrBad, difficulty) => {
+    e.preventDefault();
+
+    console.log('THIS IS A DISLIKE WE INSIDE THE FUNCTION')
+    console.log('good or bad is ', goodOrBad)
+    let change={}
+    switch (goodOrBad) {
+      case 'good':
+        change = goodTranslator[difficulty]
+        console.log('POSITIVE CHANGE IS***********', change)
+        console.log('POSITIVE CHANGE in GOLD IS***********', change.gold)
+        console.log('POSITIVE CHANGE IN EXP IS****', change.exp)
+        break
+      case 'ungood':
+        change = goodTranslator[difficulty]
+        change.gold = -(change.gold)
+        change.exp = -(change.exp)
+        console.log('UNDOING POSITIVE CHANGE IS***********', change)
+        console.log('UNDOING POSITIVE CHANGE in GOLD IS***********', change.gold)
+        console.log('UNDOING POSITIVE CHANGE IN EXP IS****', change.exp)
+        break
+      default:
+        console.log('something went wrong with our switch')
+
+    }
+
+    if (change) {
+      // const test= await dispatch(ThunkEditDaily(change))
+
+    }
+
+
+
+
+
+    // if (goodOrBad === 'bad') {
+    //   let change = badTranslator[difficulty]
+    //   console.log('CHANGE IS***********', change)
+    // }
+    // if (goodOrBad === 'unbad') {
+    //   let change = -(badTranslator[difficulty])
+    //   console.log('unclicked bad change change is', change)
+
+    // }
+    // if (goodOrBad === 'good') {
+    //   let change = goodTranslator[difficulty]
+    //   console.log('POSITIVE CHANGE IS***********', change)
+    //   console.log('POSITIVE CHANGE in GOLD IS***********', change.gold)
+    //   console.log('POSITIVE CHANGE IN EXP IS****', change.exp)
+    // }
+    // if (goodOrBad === 'ungood') {
+    //   let change = goodTranslator[difficulty]
+
+    //   console.log('UNDOING POSITIVE CHANGE IS***********', change)
+    //   console.log('UNDOING POSITIVE CHANGE in GOLD IS***********', -(change.gold))
+    //   console.log('UNDOING POSITIVE CHANGE IN EXP IS****', -(change.exp))
+    // }
+
+  }
+
   const handleEllipsisClick = (dailyId) => {
     console.log('INSIDE HANDLE ELLIPSIS CLICK')
     if (openDaily === dailyId) {
@@ -134,12 +208,20 @@ export default function Dailies({ user }) {
                   src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
                   className='sadFace'
                   style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
+                  onClick={(e) => {
+                    if (clickedDailyCheck && clickedDailyCheck.includes(dailyId)) {
+                      HandleDislikeOrLike(e, 'good', userDailies[dailyId].difficulty)}
+                    else {
+                      HandleDislikeOrLike(e, 'ungood', userDailies[dailyId].difficulty)
+
+                    }}}
                 />
               ) : (
                 <img
                   src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
                   className='sadFace'
                   style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
+                  
                 />
               )}
 
