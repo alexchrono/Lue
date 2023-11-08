@@ -21,6 +21,7 @@ export default function Habits({ user }) {
   const userHabits = useSelector((state) => state.habits.byId);
   const userArray = useSelector((state) => state.habits.allIds);
   const [openHabit, setOpenHabit] = useState(null)
+  const [showVictory, setShowVictory] = useState(false);
 
 
 
@@ -124,7 +125,8 @@ export default function Habits({ user }) {
       const test= await dispatch(ThunkEditHealth(change))
 
       if (test.victory) {
-        alert('OH MY GERDDDD YOU GAINED A LEVEL')
+        setShowVictory(true);
+
       }
 
     }
@@ -208,6 +210,7 @@ export default function Habits({ user }) {
     <>
       {errors.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
       {errors.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
+      {showVictory && <ErrorComponent errorMessage={'OH MY GERDDDD YOU GAINED A LEVEL'} setVictory={setShowVictory} />}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Habits</div>

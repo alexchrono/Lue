@@ -17,6 +17,7 @@ export default function Dailies({ user }) {
   const userArray = useSelector((state) => state.dailies.allIds);
   const [openDaily, setOpenDaily] = useState(null);
   const [errors, setErrors] = useState([]);
+  const [showVictory, setShowVictory] = useState(false);
 
   const handleCheckmark = (e, dailyId) => {
     e.stopPropagation();
@@ -57,7 +58,7 @@ export default function Dailies({ user }) {
       console.log('THE CHANG EISSSSSSSSSSSSS',change)
       const test= await dispatch(ThunkEditHealth(change))
       if (test.victory) {
-        alert('OH MY GERDDDD YOU GAINED A LEVEL')
+        setShowVictory(true);
       }
     }
   }
@@ -107,6 +108,7 @@ export default function Dailies({ user }) {
   return (
     <>
       {errors.title && (<ErrorComponent errorMessage={'Daily titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setDaily} />)}
+      {showVictory && <ErrorComponent errorMessage={'OH MY GERDDDD YOU GAINED A LEVEL'} setVictory={setShowVictory} />}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
