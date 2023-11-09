@@ -53,6 +53,7 @@ class User(db.Model, UserMixin):
     current_health= db.Column(db.Numeric(10,2),default=default_health)
     gold = db.Column(db.Numeric(10, 2), default=default_gold_or_exp)
     exp = db.Column(db.Numeric(10, 2), default=default_gold_or_exp)
+    new_user=db.Column(db.Boolean,default=False)
     created_at = db.Column(db.DateTime, default=current_date)
     updated_at = db.Column(db.DateTime, default=current_date)
     users_habits = db.relationship('Habit',back_populates='habits_of_user')
@@ -107,6 +108,7 @@ class User(db.Model, UserMixin):
             'currentHealth': self.current_health,
             'gold': self.gold,
             'exp': self.exp,
+            'newUser':self.new_user,
             'usersHabitsArray': sortedUserHabitsArray,
             'usersHabitsObj': userHabits,
             'usersDailiesArray': sortedUserDailiesArray,

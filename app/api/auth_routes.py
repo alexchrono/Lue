@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, session, request
-from app.models import User, db
+from app.models import User, db, Habit,Daily
 from app.forms import LoginForm
 from app.forms import SignUpForm
 from flask_login import current_user, login_user, logout_user, login_required
@@ -108,16 +108,52 @@ def sign_up():
                 username=form.data['username'],
                 email=form.data['email'],
                 password=form.data['password'],
-                selected_avatar=url
+                selected_avatar=url,
+                new_user=True
 
             )
+
+
         db.session.add(user)
         db.session.commit()
+
+        new_habit = Habit(
+        title='my first Habit',
+        user_id=user.id,
+        untouched=True,
+        position=1
+        )
+
+        new_daily= Daily(
+            title='my first Daily',
+            user_id=user.id,
+            untouched=True,
+            position=1
+        )
+
+
+
+        db.session.add(new_habit)
+        db.session.add(new_daily)
+        db.session.commit()
+
+
+
+
         login_user(user)
         return user.to_dict()
     ic(form.errors)
     return jsonify({'errors': form.errors}), 401
 
+@auth_routes.route('/edit-new-user', methods=['PATCH'])
+def editUser():
+    if current_user:
+        current_user.new_user = False
+        db.session.commit()
+        return jsonify(current_user.to_dict()), 200
+    else:
+
+        return jsonify({"error":"There was an error updating  your character"}),400
 
 @auth_routes.route('/edit-health-or-exp', methods=['POST'])
 def editHealth():

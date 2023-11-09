@@ -210,11 +210,17 @@ export default function Habits({ user }) {
 
   const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
 
+  console.log('IN HABITS USER 2 IS LIKE*****',user2)
+  console.log('USER 2 .NEWUSER ISSSSSSSSSSSSSSSS')
+
+  console.log("🚀 ~ file: index.js:216 ~ Habits ~ user2:", user2)
+  console.log("🚀 ~ file: index.js:216 ~ Habits ~ user2.newUser:", user2.newUser)
   return (
     <>
-      {errors.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
-      {errors.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
-      {showVictory && <ShowVictory  setVictory={setShowVictory} victoryDeets={victoryDeets}/>}
+      {user2?.newUser && (<ShowVictory formType='newUser' setVictory={setShowVictory} victoryDeets={victoryDeets}/>)}
+      {errors?.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
+      {errors?.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
+      {showVictory && <ShowVictory  formType={'levelUp'}setVictory={setShowVictory} victoryDeets={victoryDeets}/>}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Habits</div>
