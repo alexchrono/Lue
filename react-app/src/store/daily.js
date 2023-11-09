@@ -84,21 +84,23 @@ const initialState = { byId: {}, allIds: [] };
 // 		dispatch(removeUser());
 // 	}
 // };
-function normalizeData(listDict, newItem) {
+
+
+function normalizeData(allDailies, newItem) {
     const normalized = {};
     let normalizedArray = []
 
-    listDict.forEach((ele) => {
+    allDailies.all_dailies.forEach((ele) => {
         normalized[ele.id] = ele;
-        normalizedArray.push(parseInt(ele.id))
+        // normalizedArray.push(parseInt(ele.id))
     });
 
     if (newItem) {
         normalized[newItem.id] = newItem
-        normalizedArray.push(parseInt(newItem.id))
+        // normalizedArray.push(parseInt(newItem.id))
 
     }
-    return { 'all_things': normalized, 'all_ids': normalizedArray }
+    return { 'all_things': normalized, 'all_ids': allDailies.arrayDailies }
 }
 
 
@@ -111,12 +113,12 @@ export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
             'Content-Type': 'application/json',
         },
 
-        body: JSON.stringify({targetId:targetId}),
+        body: JSON.stringify({ targetId: targetId }),
     });
 
     if (response.ok) {
         const data = await response.json();
-        console.log('**************RESPONSE WAS OK AND WE GOT DATA BVACK',data)
+        console.log('**************RESPONSE WAS OK AND WE GOT DATA BVACK', data)
         console.log("🚀 ~ file: habit.js:121 ~ ThunkDeleteHabit ~ data:", data)
         console.log("🚀 ~ file: habit.js:122 ~ ThunkDeleteHabit ~ data.targetDeletion:", data.targetDeletion)
         await dispatch(actionDeleteDaily(data.targetDeletion));
@@ -146,13 +148,13 @@ export const ThunkEditDaily = (updatedDaily) => async (dispatch) => {
     if (response.ok) {
         console.log('RESPONSE IS OK SO WE BACK IN THUNK')
         const data = await response.json();
-        console.log('DATA BACK IN OUR THUNK IS',data)
+        console.log('DATA BACK IN OUR THUNK IS', data)
         await dispatch(actionEditDaily(data));
         return data;
     } else if (response.status < 500) {
         console.log('WE HIT OUR ELSE')
         const data = await response.json();
-        console.log('DATA IN OUR RETURN ERRORS EDIT DAILY IS',data)
+        console.log('DATA IN OUR RETURN ERRORS EDIT DAILY IS', data)
         return data
         // if (data.errors) {
         //     return data.errors;
@@ -177,7 +179,7 @@ export const ThunkNewDaily = (daily) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         // const newData = normalizeData(data.all_habits, data.new_habit)
-        console.log('***************data going to action in create is',data)
+        console.log('***************data going to action in create is', data)
         await dispatch(actionCreateDaily(data));
         return data;
     } else if (response.status < 500) {
@@ -191,23 +193,23 @@ export const ThunkNewDaily = (daily) => async (dispatch) => {
 
 export const ThunkGetAllDailies = () => async (dispatch) => {
     const response = await fetch("/api/dailies/get-all-users-dailies", {
-      method: "GET"
+        method: "GET"
     });
 
     if (response.ok) {
-      const data = await response.json();
-      const newData = normalizeData(data.all_dailies);
-      await dispatch(actionGetAllDailies(newData));
-      return data;
+        const data = await response.json();
+        const newData = normalizeData(data);
+        await dispatch(actionGetAllDailies(newData));
+        return data;
     } else if (response.status < 500) {
-      const data = await response.json();
-      if (data.errors) {
-        return data.errors;
-      }
+        const data = await response.json();
+        if (data.errors) {
+            return data.errors;
+        }
     } else {
-      return ["An error occurred. Please try again."];
+        return ["An error occurred. Please try again."];
     }
-  };
+};
 
 export default function reducer(state = initialState, action) {
     let newState
@@ -217,10 +219,10 @@ export default function reducer(state = initialState, action) {
             return newState
 
         case CREATE_DAILY:
-            let copyOfArray=[...action.payload.newArray]
+            let copyOfArray = [...action.payload.newArray]
             newState = { byId: { ...state.byId }, allIds: copyOfArray }
 
-            newState.byId[action.payload.newDaily.id]=action.payload.newDaily
+            newState.byId[action.payload.newDaily.id] = action.payload.newDaily
 
             // newState.allIds.push(action.payload.id)
             // newState.allIds=newState.allIds.map(id=>parseInt(id))
@@ -229,18 +231,18 @@ export default function reducer(state = initialState, action) {
 
 
         case EDIT_DAILY:
-            newState = {...state}
-            newState.byId[action.payload.id]=action.payload
-            let copy1Array=[...newState.allIds]
-            newState.allIds=copy1Array
+            newState = { ...state }
+            newState.byId[action.payload.id] = action.payload
+            let copy1Array = [...newState.allIds]
+            newState.allIds = copy1Array
             return newState
 
         case DELETE_DAILY:
-            newState = {...state}
+            newState = { ...state }
             delete newState.byId[action.payload]
-            let copyArray=[...newState.allIds]
-            let returnArray=copyArray.filter((ele)=>ele !==action.payload)
-            newState.allIds=returnArray
+            let copyArray = [...newState.allIds]
+            let returnArray = copyArray.filter((ele) => ele !== action.payload)
+            newState.allIds = returnArray
             return newState
 
 

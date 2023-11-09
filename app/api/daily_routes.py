@@ -25,10 +25,12 @@ def getAllDailies():
 
     updated_dailies=[daily.to_dict() for daily in currentUserObj.users_dailies]
 
+    updated_dailies_array=currentUserObj.users_dailies_array[:]
+
     print('RIGHT BEFORE RETURNING in route UPDATED DAILIES IS',updated_dailies)
     # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
-    return {'all_dailies':updated_dailies}
+    return {'all_dailies': updated_dailies,'arrayDailies': updated_dailies_array}
 
 
 
