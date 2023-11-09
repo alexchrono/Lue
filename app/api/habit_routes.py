@@ -22,11 +22,13 @@ def getAllHabits():
         return {'message':'there was an error'}
 
     updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
+    # current_user.set_habits_and_dailies()
+    updated_habits_array=currentUserObj.users_habits_array[:]
 
     print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
     # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
-    return {'all_habits':updated_habits}
+    return {'all_habits':updated_habits,'arrayHabits':updated_habits_array}
 
 
 
