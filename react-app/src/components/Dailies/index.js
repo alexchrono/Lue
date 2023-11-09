@@ -14,12 +14,14 @@ export default function Dailies({ user }) {
   const [clickedDailyCheck, setClickedDailyCheck] = useState([]);
   const ulRef = useRef();
   const dispatch = useDispatch();
+  const user2 = useSelector((state) => state.session.user);
   const userDailies = useSelector((state) => state.dailies.byId);
   const userArray = useSelector((state) => state.dailies.allIds);
   const [openDaily, setOpenDaily] = useState(null);
   const [errors, setErrors] = useState([]);
   const [showVictory, setShowVictory] = useState(false);
   const [victoryDeets,setVictoryDeets]=useState({})
+  const [needsLoading, setNeedsLoading] = useState(true);
 
   const handleCheckmark = (e, dailyId) => {
     e.stopPropagation();
@@ -89,11 +91,12 @@ export default function Dailies({ user }) {
   useEffect(() => {
     const fetchData = async () => {
       await dispatch(ThunkGetAllDailies());
+      setNeedsLoading(false)
     };
-    if (!userArray.length) {
-      fetchData();
+    if (user2 && needsLoading) {
+      fetchData()
     }
-  }, [userArray.length, dispatch]);
+  }, [user2,dispatch,needsLoading]);
 
   useEffect(() => {
     if (!showMenu) return;

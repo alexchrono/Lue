@@ -35,6 +35,8 @@ export default function LandingPage() {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        setErrors({});
+        setErrorsFe([]);
         let err = {}
 
         if (!userName || userName.length < 3 || userName.length > 15) {
@@ -63,13 +65,14 @@ export default function LandingPage() {
             formData.append('username', userName);
             formData.append('email', email);
             formData.append('password', password);
+            formData.append('confirm_password',confirmPassword)
             if (newAvatar) {
                 formData.append('selected_avatar', newAvatar);
             }
 
             const success = await dispatch(signUp(formData))
 
-            if (success.errors) {
+            if (success?.errors) {
                 setErrors(success.errors)
             }
 

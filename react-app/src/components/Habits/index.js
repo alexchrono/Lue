@@ -24,6 +24,7 @@ export default function Habits({ user }) {
   const [openHabit, setOpenHabit] = useState(null)
   const [showVictory, setShowVictory] = useState(false);
   const [victoryDeets,setVictoryDeets]=useState({})
+  const [needsLoading, setNeedsLoading] = useState(true);
 
 
 
@@ -182,12 +183,13 @@ export default function Habits({ user }) {
     const fetchData = async () => {
 
       await dispatch(ThunkGetAllHabits());
+      setNeedsLoading(false)
 
     };
-    if (!userArray.length) {
+    if (user2 && needsLoading) {
       fetchData()
     }
-  }, [userArray]);
+  }, [user2,dispatch,needsLoading]);
 
   useEffect(() => {
     if (!showMenu) return;
