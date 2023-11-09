@@ -43,6 +43,8 @@ def makeNewHabit():
     if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
         err['title'] = 'Title is required and must be between 3 and 30 characters'
         return jsonify(err), 400
+    if 'errors' in err:
+        return jsonify(err), 400
 
     for habit in current_user.users_habits:
         habit.position += 1

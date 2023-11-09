@@ -39,44 +39,47 @@ def getAllDailies():
 def makeNewDaily():
     err={}
     data=request.json
-    daily=data.get('daily')
-    ic(daily)
+    daily_title=data.get('daily')
+    
 
-    if not daily or len(daily) < 3 or len(daily) > 30:
+    if not daily_title or len(daily_title) < 3 or len(daily_title) > 30:
         custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
 
     if 'errors' in err:
         return jsonify(err), 400
 
+    for daily in current_user.users_dailies:
+        daily.position += 1
 
 
-    if daily:
-
-        new_daily= Daily(
-            title=daily,
-            user_id=current_user.id,
-            untouched=True,
-            position=1
-        )
-
-        db.session.add(new_daily)
-        db.session.commit()
-        current_user.set_habits_and_dailies()
-
-        ourGuyDict=current_user.to_dict()
-        updatedArray=ourGuyDict.get("usersDailiesArray")
-
-        # currentUserObj=User.query.get(current_user.id)
-        # ic(currentUserObj)
-        # ic(currentUserObj.users_habits)
 
 
-        # updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
 
-        # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
-        # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
-        # ,"upd_list":upd_habit_list}
-        return jsonify({"newDaily":new_daily.to_dict(),"newArray":updatedArray})
+    new_daily= Daily(
+        title=daily_title,
+        user_id=current_user.id,
+        untouched=True,
+        position=1
+    )
+
+    db.session.add(new_daily)
+    db.session.commit()
+    current_user.set_habits_and_dailies()
+
+    ourGuyDict=current_user.to_dict()
+    updatedArray=ourGuyDict.get("usersDailiesArray")
+
+    # currentUserObj=User.query.get(current_user.id)
+    # ic(currentUserObj)
+    # ic(currentUserObj.users_habits)
+
+
+    # updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
+
+    # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
+    # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
+    # ,"upd_list":upd_habit_list}
+    return jsonify({"newDaily":new_daily.to_dict(),"newArray":updatedArray})
     #should i also return user here? or is backfill sufficient? lets test it
 
     return jsonify({"error":"There was an error in making the daily"}),400
