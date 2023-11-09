@@ -132,6 +132,7 @@ export default function Dailies({ user }) {
           <div className='fifteen-percent menu-text'>Completed</div>
           <div className='fifteen-percent menu-text' style={{ borderRight: 'none' }}>Upcoming</div>
         </div>
+        <div className='allHabits'>
         {userArray?.map((dailyId, index) => (
           <div className='habits-card' key={dailyId}>
             <div className='fifteen-percent invisi'></div>
@@ -219,6 +220,7 @@ export default function Dailies({ user }) {
             )}
           </div>
         ))}
+        </div>
       </div>
     </>
   );
