@@ -99,6 +99,7 @@ def editHabit():
     habit_id = data.get('habitId')
     notes = data.get('notes')
 
+
     if not title or len(title) < 3 or len(title) > 30:
         custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
     if difficulty not in [1, 2, 3, 4]:
