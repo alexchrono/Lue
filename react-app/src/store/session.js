@@ -113,10 +113,10 @@ export const signUp = (formData) => async (dispatch) => {
 		dispatch(setUser(data));
 		return null;
 	} else if (response.status < 500) {
+
 		const data = await response.json();
-		if (data.errors) {
-			return data.errors;
-		}
+		console.log('DATA WE RETURNING IS',data)
+		return data
 	} else {
 		return ["An error occurred. Please try again."];
 	}

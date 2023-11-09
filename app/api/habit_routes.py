@@ -55,12 +55,13 @@ def makeNewHabit():
 
     ourGuyDict=current_user.to_dict()
     updatedArray=ourGuyDict.get("usersHabitsArray")
-    
+
 
 
 
 
     return jsonify({"newHabit":new_habit.to_dict(),"newArray":updatedArray})
+
     #should i also return user here? or is backfill sufficient? lets test it
 
 

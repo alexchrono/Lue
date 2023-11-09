@@ -115,7 +115,8 @@ def sign_up():
         db.session.commit()
         login_user(user)
         return user.to_dict()
-    return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+    ic(form.errors)
+    return jsonify({'errors': form.errors}), 401
 
 
 @auth_routes.route('/edit-health-or-exp', methods=['POST'])
