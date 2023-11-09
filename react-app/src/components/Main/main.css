@@ -369,3 +369,21 @@ form select {
 height: 200%;
 width: 100%;
 } */
+
+.allButtons {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 10px;
+  }
+.editButtons {
+    display: flex;
+    justify-content: center;
+    flex-grow: 1;
+    margin-left: 10%;
+}
+
+.deleteButton {
+    display: flex;
+    width:10%;
+}

@@ -114,12 +114,7 @@ export default function EditDailyModal({ dailyId, daily }) {
             <h1>Edit Daily</h1>
           </div>
           <div className='buttonsEditHabit'>
-            <button className='cancel' type='button' onClick={closeModal}>
-              Cancel
-            </button>
-            <button className='save' type='button' onClick={handleSubmit}>
-              Save
-            </button>
+
           </div>
         </div>
         <div className='mainBodyEditHabit'>
@@ -220,7 +215,16 @@ export default function EditDailyModal({ dailyId, daily }) {
 
 
         </div>
-
+        <div className='allButtons'>
+        <div className='editButtons'>
+        <button className='cancel' type='button' onClick={closeModal}>
+              Cancel
+            </button>
+            <button className='save' type='button' onClick={handleSubmit}>
+              Save
+            </button>
+          </div>
+          <div className='deleteButton'>
         <OpenModalButton
           buttonText={
             <>
@@ -235,8 +239,9 @@ export default function EditDailyModal({ dailyId, daily }) {
           />}
         // onClick={() => setShowMenu(false)}
         />
+        </div>
       </div>
-
+      </div>
     </>
   );
 }
