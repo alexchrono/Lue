@@ -242,6 +242,8 @@ export default function Habits({ user }) {
           <div className='fifteen-percent menu-text'>weak</div>
           <div className='fifteen-percent menu-text' style={{ borderRight: 'none' }}>strong</div>
         </div>
+        <div className='allHabits'>
+
         {userArray?.map((habitId, index) => (
           <div className='habits-card'>
             <div className='fifteen-percent invisi'></div>
@@ -365,7 +367,7 @@ export default function Habits({ user }) {
               </div>
             )}
           </div>))}
-
+                  </div>
       </div>
     </>
   );
