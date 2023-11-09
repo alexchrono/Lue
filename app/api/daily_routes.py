@@ -102,7 +102,7 @@ def editDaily():
     ic(id)
     title=data.get('title')
     notes=data.get('notes')
-    difficulty=data.get('difficulty')
+    difficulty=int(data.get('difficulty'))
     ic(difficulty)
     resetRateNumbers=data.get('repeatRateNumbers')
     ic(resetRateNumbers)

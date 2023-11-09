@@ -168,7 +168,7 @@ export default function Dailies({ user }) {
                   onClick={(e) => {
                     e.stopPropagation();
                     handleEllipsisClick(dailyId);
-                    setShowMenu(!showMenu);
+                    setShowMenu(true);
                   }}
                 />
               </div>

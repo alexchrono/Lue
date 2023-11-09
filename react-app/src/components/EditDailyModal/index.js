@@ -158,7 +158,7 @@ export default function EditDailyModal({ dailyId, daily }) {
 
                 Difficulty Level:
 
-                <select name='difficulty' id='difficulty' value={difficulty} onChange={(e) => setDifficulty(parseInt(e.target.value))}>
+                <select name='difficulty' id='difficulty' value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
                   <option value='' disabled>Difficulty Level</option>
                   <option value='1'>No Sweat</option>
                   <option value='2'>Bit of Sweat</option>
