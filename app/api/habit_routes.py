@@ -36,6 +36,7 @@ def makeNewHabit():
     err = {}
     data = request.json
     habit_title = data.get('habit')
+    ic(habit_title)
 
     if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
         err['title'] = 'Title is required and must be between 3 and 30 characters'
@@ -52,9 +53,11 @@ def makeNewHabit():
     )
     db.session.add(new_habit)
     db.session.commit()
+    current_user.set_habits_and_dailies()
 
     ourGuyDict=current_user.to_dict()
     updatedArray=ourGuyDict.get("usersHabitsArray")
+    ic(updatedArray)
 
 
 

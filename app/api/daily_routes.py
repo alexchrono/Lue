@@ -38,6 +38,7 @@ def makeNewDaily():
     err={}
     data=request.json
     daily=data.get('daily')
+    ic(daily)
 
     if not daily or len(daily) < 3 or len(daily) > 30:
         custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
@@ -52,11 +53,16 @@ def makeNewDaily():
         new_daily= Daily(
             title=daily,
             user_id=current_user.id,
-            untouched=True
+            untouched=True,
+            position=1
         )
 
         db.session.add(new_daily)
         db.session.commit()
+        current_user.set_habits_and_dailies()
+
+        ourGuyDict=current_user.to_dict()
+        updatedArray=ourGuyDict.get("usersDailiesArray")
 
         # currentUserObj=User.query.get(current_user.id)
         # ic(currentUserObj)
@@ -68,7 +74,7 @@ def makeNewDaily():
         # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
         # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
-        return new_daily.to_dict()
+        return jsonify({"newDaily":new_daily.to_dict(),"newArray":updatedArray})
     #should i also return user here? or is backfill sufficient? lets test it
 
     return jsonify({"error":"There was an error in making the daily"}),400

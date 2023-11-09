@@ -342,6 +342,10 @@ form select {
     text-decoration: underline;
     text-align: center;
 }
+
+.changeToHand:hover {
+    cursor: pointer;
+  }
 /* @keyframes blink {
   0%, 100% {
     border-color: transparent;

@@ -268,7 +268,7 @@ export default function Habits({ user }) {
                   ) : !userHabits[habitId].alignment ? (
                     <img
                       src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
-                      className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
+                      className={`changeToHand ${clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}`}
                       style={{ width: '100%', height: '100%', margin: '0' }}
                       onClick={(e) => {
                         if (clickedEmoti && clickedEmoti.includes(habitId)) {
@@ -286,8 +286,9 @@ export default function Habits({ user }) {
                   ) : (
                     <img
                       src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
-                      className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace green' : 'sadFace'}
+                      className={`changeToHand ${clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace green' : 'sadFace'}`}
                       style={{ width: '100%', height: '100%', margin: '0' }}
+
                       onClick={(e) => {
                         if (clickedEmoti && clickedEmoti.includes(habitId)) {
                           HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty)

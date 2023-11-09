@@ -141,6 +141,7 @@ def sign_up():
 
 
         login_user(user)
+        current_user.set_habits_and_dailies()
         return user.to_dict()
     ic(form.errors)
     return jsonify({'errors': form.errors}), 401

@@ -140,20 +140,20 @@ export default function Dailies({ user }) {
               <div className='bad-habit-emoti' onClick={(e) => handleCheckmark(e, dailyId)}>
                 {userDailies[dailyId].untouched ? (
                   <img
-                    src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
-                    className='sadFace'
+                    src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
+                    className=' sadFace'
                     style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
                   />
                 ) : clickedDailyCheck.includes(dailyId) ? (
                   <img
                     src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
-                    className='sadFace'
+                    className='changeToHand sadFace'
                     style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
                   />
                 ) : (
                   <img
                     src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
-                    className='sadFace'
+                    className='changeToHand sadFace'
                     style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
                   />
                 )}

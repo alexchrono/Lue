@@ -57,7 +57,9 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, default=current_date)
     updated_at = db.Column(db.DateTime, default=current_date)
     users_habits = db.relationship('Habit',back_populates='habits_of_user')
+    users_habits_array = db.Column(db.PickleType, default=list)
     users_dailies= db.relationship('Daily',back_populates='dailies_of_user')
+    users_dailies_array = db.Column(db.PickleType, default=list)
     @property
     def password(self):
         return self.hashed_password
@@ -76,26 +78,29 @@ class User(db.Model, UserMixin):
 
         userHabits={}
         userDailies={}
-        userHabitsArray=[]
-        userDailiesArray=[]
+        # userHabitsArray=[]
+        # userDailiesArray=[]
         # userHabitsArray.append(ele.id)
         # userDailiesArray.append(ele2.id)
         for ele in self.users_habits:
+            if ele.id:
 
-            userHabits[ele.id]=ele.to_dict()
-            userHabitsArray.append((ele.id,ele.position))
+                userHabits[ele.id]=ele.to_dict()
+                # userHabitsArray.append((ele.id,ele.position))
 
         for ele2 in self.users_dailies:
-            userDailiesArray.append((ele2.id,ele2.position))
-            userDailies[ele2.id]=ele2.to_dict()
+            if ele2.id:
+                # userDailiesArray.append((ele2.id,ele2.position))
+                userDailies[ele2.id]=ele2.to_dict()
 
 
-        sortedUserHabitsArray = sorted(userHabitsArray, key=lambda habit: habit[1])
-        sortedUserDailiesArray = sorted(userDailiesArray, key=lambda daily: daily[1])
+        # sortedUserHabitsArray = sorted(userHabitsArray, key=lambda habit: habit[1])
+        # sortedUserDailiesArray = sorted(userDailiesArray, key=lambda daily: daily[1])
 
-        sortedUserHabitsArray = [habit[0] for habit in sortedUserHabitsArray]
-        sortedUserDailiesArray = [daily[0] for daily in sortedUserDailiesArray]
-
+        # sortedUserHabitsArray = [habit[0] for habit in sortedUserHabitsArray]
+        # sortedUserDailiesArray = [daily[0] for daily in sortedUserDailiesArray]
+        # sortedUserDailiesArray=[]
+        # sortedUserHabitsArray=[]
 
         return {
             'id': self.id,
@@ -109,15 +114,39 @@ class User(db.Model, UserMixin):
             'gold': self.gold,
             'exp': self.exp,
             'newUser':self.new_user,
-            'usersHabitsArray': sortedUserHabitsArray,
+            'usersHabitsArray': self.users_habits_array,
             'usersHabitsObj': userHabits,
-            'usersDailiesArray': sortedUserDailiesArray,
+            'usersDailiesArray': self.users_dailies_array,
             'usersDailiesObj':userDailies,
             'created_at': self.created_at,
             'updated_at': self.updated_at
 
 
         }
+
+    def set_habits_and_dailies(self):
+        # user_habits = {}
+        # user_dailies = {}
+        user_habits_array = []
+        user_dailies_array = []
+
+        for habit in self.users_habits:
+            if habit.id:
+                # user_habits[habit.id] = habit.to_dict()
+                user_habits_array.append((habit.id, habit.position))
+
+        for daily in self.users_dailies:
+            if daily.id:
+                # user_dailies[daily.id] = daily.to_dict()
+                user_dailies_array.append((daily.id, daily.position))
+
+        sorted_user_habits_array = sorted(user_habits_array, key=lambda habit: habit[1])
+        sorted_user_dailies_array = sorted(user_dailies_array, key=lambda daily: daily[1])
+
+        self.users_habits_array = [habit[0] for habit in sorted_user_habits_array]
+        self.users_dailies_array = [daily[0] for daily in sorted_user_dailies_array]
+
+        db.session.commit()
 
 
 
