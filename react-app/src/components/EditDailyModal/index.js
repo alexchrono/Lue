@@ -20,8 +20,7 @@ export default function EditDailyModal({ dailyId, daily }) {
   const [startDate, setStartDate] = useState('')
   const { closeModal } = useModal();
   const userDailies = useSelector((state) => state.session.user.usersDailiesObj);
-  const userArray = useSelector((state) => state.dailies.allIds);
-  console.log('INSIDE DAILIES EDIT USERDAILIES IS', userDailies)
+
 
   function custError(err,field,message){
     if (!err.errors) {
@@ -52,7 +51,7 @@ export default function EditDailyModal({ dailyId, daily }) {
 
       }
     }
-  }, [dailyId, daily]);
+  }, [userDailies,dailyId, daily]);
 
 
   const handleSubmit = async (e) => {
@@ -105,6 +104,7 @@ export default function EditDailyModal({ dailyId, daily }) {
 
 
 
+  console.log("🚀 ~ file: index.js:107 ~ EditDailyModal ~ dailyId:", dailyId)
 
   return (
     <>
@@ -234,9 +234,7 @@ export default function EditDailyModal({ dailyId, daily }) {
               Delete
             </>
           }
-          modalComponent={<DeleteHabitOrDaily
-          //  playlistId={playlistId}
-          />}
+          modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} />}
         // onClick={() => setShowMenu(false)}
         />
         </div>

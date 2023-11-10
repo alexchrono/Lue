@@ -240,9 +240,7 @@ export default function EditHabitModal({ habitId, habit }) {
               Delete
             </>
           }
-          modalComponent={<DeleteHabitOrDaily
-          //  playlistId={playlistId}
-          />}
+          modalComponent={<DeleteHabitOrDaily formType={'habit'} targetId={habitId} title={userHabits[habitId].title} />}
         // onClick={() => setShowMenu(false)}
         />
       </div>
