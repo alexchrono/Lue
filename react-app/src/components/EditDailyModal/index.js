@@ -20,8 +20,7 @@ export default function EditDailyModal({ dailyId, daily }) {
   const [startDate, setStartDate] = useState('')
   const { closeModal } = useModal();
   const userDailies = useSelector((state) => state.session.user.usersDailiesObj);
-  const userArray = useSelector((state) => state.dailies.allIds);
-  console.log('INSIDE DAILIES EDIT USERDAILIES IS', userDailies)
+
 
   function custError(err,field,message){
     if (!err.errors) {
@@ -52,7 +51,7 @@ export default function EditDailyModal({ dailyId, daily }) {
 
       }
     }
-  }, [dailyId, daily]);
+  }, [userDailies,dailyId, daily]);
 
 
   const handleSubmit = async (e) => {
@@ -105,6 +104,7 @@ export default function EditDailyModal({ dailyId, daily }) {
 
 
 
+  console.log("🚀 ~ file: index.js:107 ~ EditDailyModal ~ dailyId:", dailyId)
 
   return (
     <>
@@ -114,12 +114,7 @@ export default function EditDailyModal({ dailyId, daily }) {
             <h1>Edit Daily</h1>
           </div>
           <div className='buttonsEditHabit'>
-            <button className='cancel' type='button' onClick={closeModal}>
-              Cancel
-            </button>
-            <button className='save' type='button' onClick={handleSubmit}>
-              Save
-            </button>
+
           </div>
         </div>
         <div className='mainBodyEditHabit'>
@@ -158,7 +153,7 @@ export default function EditDailyModal({ dailyId, daily }) {
 
                 Difficulty Level:
 
-                <select name='difficulty' id='difficulty' value={difficulty} onChange={(e) => setDifficulty(parseInt(e.target.value))}>
+                <select name='difficulty' id='difficulty' value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
                   <option value='' disabled>Difficulty Level</option>
                   <option value='1'>No Sweat</option>
                   <option value='2'>Bit of Sweat</option>
@@ -220,7 +215,16 @@ export default function EditDailyModal({ dailyId, daily }) {
 
 
         </div>
-
+        <div className='allButtons'>
+        <div className='editButtons'>
+        <button className='cancel' type='button' onClick={closeModal}>
+              Cancel
+            </button>
+            <button className='save' type='button' onClick={handleSubmit}>
+              Save
+            </button>
+          </div>
+          <div className='deleteButton'>
         <OpenModalButton
           buttonText={
             <>
@@ -230,13 +234,12 @@ export default function EditDailyModal({ dailyId, daily }) {
               Delete
             </>
           }
-          modalComponent={<DeleteHabitOrDaily
-          //  playlistId={playlistId}
-          />}
+          modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} />}
         // onClick={() => setShowMenu(false)}
         />
+        </div>
       </div>
-
+      </div>
     </>
   );
 }

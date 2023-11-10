@@ -19,15 +19,15 @@ export default function DeleteHabitOrDaily({formType,targetId,title}) {
       closeModal()
     }
 
-    return 7
+
   }
   else {
+    console.log('WE HIT OUR ELSE BRO')
     const data = await dispatch(ThunkDeleteDaily(targetId))
     if (data){
       closeModal()
     }
 
-    return 7
 
 
   }

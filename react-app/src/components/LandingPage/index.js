@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { signUp,login } from '../../store/session';
+import { signUp, login } from '../../store/session';
 
 
 import './LandingPage.css';
@@ -17,38 +17,80 @@ export default function LandingPage() {
     const [didPicChange, setDidPicChange] = useState('')
     const [newAvatar, setNewAvatar] = useState("")
     const dispatch = useDispatch()
-    const [errors,setErrors]=useState({})
+    const [errors, setErrors] = useState({})
+    const [errorsFe, setErrorsFe] = useState([])
 
     const handleAvatarChange = (e) => {
         setNewAvatar(e.target.files[0])
     }
+    function custError(err, field, message) {
+        if (!err.errors) {
+            err.errors = {}
+        }
+        err.errors[field] = message
+        return err
+
+    }
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-        const formData = new FormData()
-        formData.append('username', userName);
-        formData.append('email', email);
-        formData.append('password', password);
-        if (newAvatar) {
-            formData.append('selected_avatar', newAvatar);
+        setErrors({});
+        setErrorsFe([]);
+        let err = {}
+
+        if (!userName || userName.length < 3 || userName.length > 15) {
+            custError(err, 'userName', 'userName is required and must be between 3 and 15 characters');
+        }
+        if (!email || email.length < 8 || email.length > 30 || !emailRegex.test(email)) {
+            custError(err, 'email', 'email is required and must be between 8-30 characters and in the correct format');
+        }
+        if (!password || password.length < 8 || password.length > 30) {
+            custError(err, 'password', 'password is required and must be between 8 and 30 characters')
         }
 
-        const success = await dispatch(signUp(formData))
+        if(confirmPassword!==password) {
+            custError(err, 'passwordConfirmation', 'password confirmation does not match password')
+        }
+
+        if (err.errors) {
+            setErrorsFe(err.errors)
+            return
+        }
+        else {
 
 
 
+            const formData = new FormData()
+            formData.append('username', userName);
+            formData.append('email', email);
+            formData.append('password', password);
+            formData.append('confirm_password',confirmPassword)
+            if (newAvatar) {
+                formData.append('selected_avatar', newAvatar);
+            }
+
+            const success = await dispatch(signUp(formData))
+
+            if (success?.errors) {
+                setErrors(success.errors)
+            }
+
+
+        }
     }
 
     const loginDemo = async (e) => {
         e.preventDefault();
         const data = await dispatch(login('demo@aa.io', 'password'));
+        console.log('DATA WE GETTING BAKC IS')
         if (data && data.errors) {
 
-          setErrors(data.errors);
+            setErrors(data.errors);
         } else {
             history.push('/main')
         }
-      };
+    };
 
 
 
@@ -92,6 +134,7 @@ export default function LandingPage() {
                         autoComplete="off"
 
                     />
+                    {errors.userName ? <p className="errors">{errors.userName}</p> : errorsFe.userName ? <p className="feErrors">{errorsFe.userName}</p> : null}
 
                     <input
                         type="text"
@@ -102,6 +145,7 @@ export default function LandingPage() {
 
 
                     />
+                    {errors.email ? <p className="errors">{errors.email}</p> : errorsFe.email ? <p className="feErrors">{errorsFe.email}</p> : null}
 
                     <input
                         type="password"
@@ -111,6 +155,8 @@ export default function LandingPage() {
                         placeholder="Password"
 
                     />
+                    {errors.password ? <p className="errors">{errors.password}</p> : errorsFe.password ? <p className="feErrors">{errorsFe.password}</p> : null}
+
 
                     <input
                         type="password"
@@ -119,6 +165,8 @@ export default function LandingPage() {
                         placeholder="Confirm Password"
                         autoComplete="off"
                     />
+
+                    {errors.passwordConfirmation ? <p className="errors">{errors.passwordConfirmation}</p> : errorsFe.passwordConfirmation ? <p className="feErrors">{errorsFe.passwordConfirmation}</p> : null}
 
                     <input
                         type="file"
@@ -134,8 +182,8 @@ export default function LandingPage() {
 
                     <button className="signup-button" type="submit">Sign Up</button>
                     <button onClick={loginDemo}>
-              Log in as Demo
-            </button>
+                        Log in as Demo
+                    </button>
 
 
 

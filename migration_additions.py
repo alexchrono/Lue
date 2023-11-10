@@ -14,9 +14,4 @@
     #     op.execute(f"ALTER TABLE dailies SET SCHEMA {SCHEMA};")
     # if environment == "production":
     #     op.execute(f"ALTER TABLE habits SET SCHEMA {SCHEMA};")
-    # if environment == "production":
-    #     op.execute(f"ALTER TABLE songs SET SCHEMA {SCHEMA};")
-    # if environment == "production":
-    #     op.execute(f"ALTER TABLE likes SET SCHEMA {SCHEMA};")
-    # if environment == "production":
-    #     op.execute(f"ALTER TABLE playlist_songs SET SCHEMA {SCHEMA};")
+

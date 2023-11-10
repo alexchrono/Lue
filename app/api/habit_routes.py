@@ -22,53 +22,92 @@ def getAllHabits():
         return {'message':'there was an error'}
 
     updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
+    current_user.set_habits_and_dailies()
+    updated_habits_array=currentUserObj.users_habits_array[:]
 
     print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
     # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
-    return {'all_habits':updated_habits}
+    return {'all_habits':updated_habits,'arrayHabits':updated_habits_array}
 
 
+
+
+# @habit_routes.route('/new-habit', methods=['POST'])
+# def makeNewHabit():
+#     err = {}
+#     data = request.json
+#     habit_title = data.get('habit')
+#     ic(habit_title)
+
+#     if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
+#         custError(err, 'title', 'Habit Title is required and must be between 3 and 30 characters')
+
+#     if 'errors' in err:
+#         return jsonify(err), 400
+
+#     new_habit = Habit(
+#         title=habit_title,
+#         user_id=current_user.id,
+#         untouched=True,
+#         position=0
+#     )
+#     db.session.add(new_habit)
+#     db.session.commit()
+
+#     for habit in current_user.users_habits:
+#         habit.position += 1
+
+#     db.session.commit()
+
+#     current_user.set_habits_and_dailies()
+
+#     ourGuyDict = current_user.to_dict()
+#     updatedArray = ourGuyDict.get("usersHabitsArray")
+
+#     return jsonify({"newHabit": new_habit.to_dict(), "newArray": updatedArray})
 
 
 @habit_routes.route('/new-habit', methods=['POST'])
 def makeNewHabit():
-    err={}
-    data=request.json
-    habit=data.get('habit')
+    err = {}
+    data = request.json
+    habit_title = data.get('habit')
+    ic(habit_title)
 
-    if not habit or len(habit) < 3 or len(habit) > 30:
-        custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
+    if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
+        custError(err, 'title', 'Habit Title is required and must be between 3 and 30 characters')
 
     if 'errors' in err:
         return jsonify(err), 400
 
-    if habit:
+    new_habit = Habit(
+        title=habit_title,
+        user_id=current_user.id,
+        untouched=True,
+        position=0
+    )
+    db.session.add(new_habit)
+    db.session.commit()
 
-        new_habit= Habit(
-            title=habit,
-            user_id=current_user.id,
-            untouched=True
+    for habit in current_user.users_habits:
+            habit.position=habit.position+1
 
-        )
+    db.session.commit()
 
-        db.session.add(new_habit)
-        db.session.commit()
+    current_user.set_habits_and_dailies()
 
-        # currentUserObj=User.query.get(current_user.id)
-        # ic(currentUserObj)
-        # ic(currentUserObj.users_habits)
+    ourGuyDict = current_user.to_dict()
+    updatedArray = ourGuyDict.get("usersHabitsArray")
+    updatedObj= ourGuyDict.get("usersHabitsObj")
 
+    ic(updatedObj)
 
-        # updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
+    return jsonify({ "newArray": updatedArray,'habitsObj':updatedObj})
 
-        # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
-        # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
-        # ,"upd_list":upd_habit_list}
-        return new_habit.to_dict()
     #should i also return user here? or is backfill sufficient? lets test it
 
-    return jsonify({"error":"There was an error in making the Habit"}),400
+
 # @habit_routes.route('/new-habit', methods=['POST'])
 # def makeNewHabit():
 #     data=request.json
@@ -103,6 +142,7 @@ def editHabit():
     habit_id = data.get('habitId')
     notes = data.get('notes')
 
+
     if not title or len(title) < 3 or len(title) > 30:
         custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
     if difficulty not in [1, 2, 3, 4]:
@@ -112,6 +152,7 @@ def editHabit():
     if reset_rate not in ['daily', 'weekly', 'monthly']:
         custError(err, 'resetRate', 'Please choose how often to reset the counter')
     if 'errors' in err:
+
 
         return jsonify(err), 400
     target = Habit.query.get(habit_id)
@@ -129,22 +170,35 @@ def editHabit():
 
     return jsonify({"error":"The Habit could not be found"}),400
 
-@habit_routes.route('/delete-habit', methods=['POST'])
-def deleteHabit():
+@habit_routes.route('/delete-habit/<int:id>', methods=['DELETE'])
+def deleteHabit(id):
+
     ic('inside our DELETE habit route')
-    data=request.json
-    targetId=data.get('targetId')
-    ic(data)
-    ic(targetId)
-    targetDeletion=Habit.query.get(int(targetId))
+
+    ic(id)
+    targetDeletion=Habit.query.get(id)
     ic(targetDeletion)
+    positionOfDeletee=targetDeletion.position
+
+    ic(positionOfDeletee)
 
     if targetDeletion is None:
         return {'errors': {'error':'Habit not found'}}, 404
     copyTargetDeletion=targetDeletion.to_dict()
     db.session.delete(targetDeletion)
     db.session.commit()
+    for habit in current_user.users_habits:
+        if habit.position>positionOfDeletee:
+            habit.position=habit.position-1
+    db.session.commit()
+
+    current_user.set_habits_and_dailies()
+    ourGuyDict=current_user.to_dict()
+    updatedObj=ourGuyDict.get('usersHabitsObj')
+    updatedArray=ourGuyDict.get("usersHabitsArray")
+    ic(updatedArray)
+
     ic(copyTargetDeletion)
-    return {"targetDeletion":int(targetId)}
+    return jsonify({"newArray":updatedArray,"habitsObj":updatedObj})
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403

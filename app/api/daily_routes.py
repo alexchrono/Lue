@@ -24,54 +24,53 @@ def getAllDailies():
         return {'message':'there was an error'}
 
     updated_dailies=[daily.to_dict() for daily in currentUserObj.users_dailies]
+    current_user.set_habits_and_dailies()
+    updated_dailies_array=currentUserObj.users_dailies_array[:]
 
     print('RIGHT BEFORE RETURNING in route UPDATED DAILIES IS',updated_dailies)
     # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
         # ,"upd_list":upd_habit_list}
-    return {'all_dailies':updated_dailies}
+    return {'all_dailies': updated_dailies,'arrayDailies': updated_dailies_array}
 
 
 
 
 @daily_routes.route('/new-daily', methods=['POST'])
 def makeNewDaily():
-    err={}
-    data=request.json
-    daily=data.get('daily')
+    err = {}
+    data = request.json
+    daily_title = data.get('daily')
 
-    if not daily or len(daily) < 3 or len(daily) > 30:
-        custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
+    if not daily_title or len(daily_title) < 3 or len(daily_title) > 30:
+        custError(err, 'title', 'Daily Title is required and must be between 3 and 30 characters')
+        if 'errors' in err:
+            return jsonify(err), 400
+    ic(current_user.users_dailies)
+    new_daily = Daily(
+        title=daily_title,
+        user_id=current_user.id,
+        untouched=True,
+        position=0
+    )
+    db.session.add(new_daily)
+    db.session.commit()
 
-    if 'errors' in err:
-        return jsonify(err), 400
-
-
-
-    if daily:
-
-        new_daily= Daily(
-            title=daily,
-            user_id=current_user.id,
-            untouched=True
-        )
-
-        db.session.add(new_daily)
-        db.session.commit()
-
-        # currentUserObj=User.query.get(current_user.id)
-        # ic(currentUserObj)
-        # ic(currentUserObj.users_habits)
+    for daily in current_user.users_dailies:
+        ic(daily.position)
+        daily.position=daily.position+1
+    db.session.commit()
 
 
-        # updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
+    current_user.set_habits_and_dailies()
 
-        # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
-        # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
-        # ,"upd_list":upd_habit_list}
-        return new_daily.to_dict()
+
+    ourGuyDict = current_user.to_dict()
+    updatedArray = ourGuyDict.get("usersDailiesArray")
+    updatedObj= ourGuyDict.get("usersDailiesObj")
+
+    return jsonify({"newArray": updatedArray, "dailiesObj": updatedObj})
     #should i also return user here? or is backfill sufficient? lets test it
 
-    return jsonify({"error":"There was an error in making the daily"}),400
 # @daily_routes.route('/new-habit', methods=['POST'])
 # def makeNewHabit():
 #     data=request.json
@@ -102,7 +101,7 @@ def editDaily():
     ic(id)
     title=data.get('title')
     notes=data.get('notes')
-    difficulty=data.get('difficulty')
+    difficulty=int(data.get('difficulty'))
     ic(difficulty)
     resetRateNumbers=data.get('repeatRateNumbers')
     ic(resetRateNumbers)
@@ -144,22 +143,27 @@ def editDaily():
 
     return jsonify({"error":"The Daily could not be found"}),400
 
-@daily_routes.route('/delete-daily', methods=['POST'])
-def deleteDaily():
+@daily_routes.route('/delete-daily/<int:id>', methods=['DELETE'])
+def deleteDaily(id):
     ic('inside our DELETE daily route')
-    data=request.json
-    targetId=data.get('targetId')
-    ic(data)
-    ic(targetId)
-    targetDeletion=Daily.query.get(int(targetId))
-    ic(targetDeletion)
+    targetDeletion=Daily.query.get(id)
+    positionOfDeletee=targetDeletion.position
 
     if targetDeletion is None:
         return {'errors': {'error':'daily not found'}}, 404
     copyTargetDeletion=targetDeletion.to_dict()
     db.session.delete(targetDeletion)
     db.session.commit()
-    ic(copyTargetDeletion)
-    return {"targetDeletion":int(targetId)}
+    for daily in current_user.users_dailies:
+        if daily.position>positionOfDeletee:
+            daily.position=daily.position-1
+    db.session.commit()
+
+    current_user.set_habits_and_dailies()
+    ourGuyDict=current_user.to_dict()
+    updatedObj=ourGuyDict.get('usersDailiesObj')
+    updatedArray=ourGuyDict.get("usersDailiesArray")
+
+    return jsonify({"newArray":updatedArray,"dailiesObj":updatedObj})
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403

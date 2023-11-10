@@ -126,12 +126,7 @@ export default function EditHabitModal({ habitId, habit }) {
             <h1>Edit Habit</h1>
           </div>
           <div className='buttonsEditHabit'>
-            <button className='cancel' type='button' onClick={closeModal}>
-              Cancel
-            </button>
-            <button className='save' type='button' onClick={handleSubmit}>
-              Save
-            </button>
+
           </div>
         </div>
         <div className='mainBodyEditHabit'>
@@ -226,6 +221,16 @@ export default function EditHabitModal({ habitId, habit }) {
 
 
         </div>
+        <div className='allButtons'>
+        <div className='editButtons'>
+        <button className='cancel' type='button' onClick={closeModal}>
+              Cancel
+            </button>
+            <button className='save' type='button' onClick={handleSubmit}>
+              Save
+            </button>
+            </div>
+            <div className='deleteButton'>
         <OpenModalButton
           buttonText={
             <>
@@ -235,11 +240,11 @@ export default function EditHabitModal({ habitId, habit }) {
               Delete
             </>
           }
-          modalComponent={<DeleteHabitOrDaily
-          //  playlistId={playlistId}
-          />}
+          modalComponent={<DeleteHabitOrDaily formType={'habit'} targetId={habitId} title={userHabits[habitId].title} />}
         // onClick={() => setShowMenu(false)}
         />
+      </div>
+      </div>
       </div>
 
     </>

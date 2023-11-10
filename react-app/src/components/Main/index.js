@@ -5,6 +5,7 @@ import Habits from '../Habits';
 import Dailies from '../Dailies';
 import { ThunkGetAllHabits } from '../../store/habit';
 import { ThunkGetAllDailies } from '../../store/daily';
+import ErrorComponent from '../errorShow';
 import './main.css';
 
 
@@ -14,6 +15,11 @@ export default function Main() {
     const history= useHistory()
     const userArray= useSelector((state) => state?.habits?.allIds);
     const user2Array =  useSelector((state) => state?.dailies?.allIds);
+
+    const expFinder=()=>{
+        let targetExp=user.level * 25
+        return targetExp
+    }
 
 
     useEffect(() => {
@@ -41,9 +47,9 @@ export default function Main() {
             <div className="avatar">
             <img src={`${user.selectedAvatar}`}></img> </div>
             <div className='stats'><span>level: {user.level}</span>
-            <span>Current Health: {user.currentHealth}</span>
-            <span>Max Health: {user.health}</span>
-            <span>Exp: {user.exp}</span>
+            <span>title: {user.levelTitle}</span>
+            <span>Health: {user.currentHealth} / {user.health}</span>
+            <span>Exp: {user.exp} / {expFinder()} </span>
             <span>Gold: {user.gold}</span>
 
 
@@ -51,13 +57,17 @@ export default function Main() {
             <div className='inspirational-quote'>Life is what you make it</div>
 
 
-
+            {/* justGainedLevel */}
 
 
         </div>
         <div className='buffer'></div>
 
         <div className='tables'>
+            {user?.justGainedLevel && (
+                <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`}  />
+            )}
+
             <Habits user={user}/>
 
         <div className='center-buffer'></div>
