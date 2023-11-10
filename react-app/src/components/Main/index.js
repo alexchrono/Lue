@@ -61,6 +61,7 @@ export default function Main() {
 
 
         </div>
+        <img className = 'sword-Divider' src={`${process.env.PUBLIC_URL}/icons/sword-flipped-divider3.png`}></img>
         <div className='buffer'></div>
 
         <div className='tables'>
