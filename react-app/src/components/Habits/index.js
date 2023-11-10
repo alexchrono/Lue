@@ -246,10 +246,11 @@ export default function Habits({ user }) {
           <div className='fifteen-percent menu-text' style={{ borderRight: 'none' }}>strong</div>
         </div>
         <div className='allHabits'>
+          <div className='fifteenPercentNoGutter'></div>
 
+        <div className='habits-card-center2'>
         {userArray?.map((habitId, index) => (
           <div className='habits-card'>
-            <div className='fifteen-percent invisi'></div>
             <div className='habits-card-center'>
               <div className='bad-habit-emoti' onClick={(e) => {
                 e.stopPropagation();
@@ -370,8 +371,9 @@ export default function Habits({ user }) {
                 </div>
               </div>
             )}
-          </div>))}
+          </div>))} </div>
                   </div>
+                  {/* remove above div when bring back other code */}
       </div>
     </>
   );

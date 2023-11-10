@@ -119,6 +119,8 @@ html {
     border-left: 2px dotted black;
     border-bottom: 2px dotted black;
     border-radius:5px;
+    display: flex;
+    flex-direction: row;
 }
 
 .fifteen-percent {
@@ -216,14 +218,28 @@ form textarea {
 }
 
 .habits-card-center {
-    width: 70%;
+    width: 100%;
+    flex-basis: 85%;
     border: 5px solid black;
     box-sizing: border-box;
     height: 100%;
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
 
 }
+.habits-card-center2 {
+    flex-basis: 85%;
+    width: 100%;
+    box-sizing: border-box;
+    height: 100%;
+    display: inline-flex;
+    flex-direction: column;
+    /* display: flex;
+    flex-direction: row; */
+    background: green;
+
+}
+
 
 
 
@@ -501,4 +517,14 @@ width: 100%;
     vertical-align: center;
     font-size: 3em;
     flex-wrap: nowrap;
+}
+
+.fifteenPercentNoGutter{
+    width: 15%;
+    height:100%;
+    flex-basis: 15%;
+    flex-grow:3;
+    background: red;
+    box-sizing: border-box;
+    overflow: display;
 }
