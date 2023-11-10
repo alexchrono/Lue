@@ -24,7 +24,7 @@ def getAllDailies():
         return {'message':'there was an error'}
 
     updated_dailies=[daily.to_dict() for daily in currentUserObj.users_dailies]
-
+    current_user.set_habits_and_dailies()
     updated_dailies_array=currentUserObj.users_dailies_array[:]
 
     print('RIGHT BEFORE RETURNING in route UPDATED DAILIES IS',updated_dailies)
@@ -40,10 +40,10 @@ def makeNewDaily():
     err={}
     data=request.json
     daily_title=data.get('daily')
-    
+
 
     if not daily_title or len(daily_title) < 3 or len(daily_title) > 30:
-        custError(err, 'title', 'Title is required and must be between 3 and 30 characters')
+        custError(err, 'title', 'Daily Title is required and must be between 3 and 30 characters')
 
     if 'errors' in err:
         return jsonify(err), 400
@@ -155,14 +155,11 @@ def editDaily():
 
     return jsonify({"error":"The Daily could not be found"}),400
 
-@daily_routes.route('/delete-daily', methods=['POST'])
-def deleteDaily():
+@daily_routes.route('/delete-daily/<int:id>', methods=['DELETE'])
+def deleteDaily(id):
     ic('inside our DELETE daily route')
-    data=request.json
-    targetId=data.get('targetId')
-    ic(data)
-    ic(targetId)
-    targetDeletion=Daily.query.get(int(targetId))
+    ic(id)
+    targetDeletion=Daily.query.get(id)
     ic(targetDeletion)
 
     if targetDeletion is None:
@@ -171,6 +168,6 @@ def deleteDaily():
     db.session.delete(targetDeletion)
     db.session.commit()
     ic(copyTargetDeletion)
-    return {"targetDeletion":int(targetId)}
+    return {"targetDeletion":id}
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403

@@ -22,7 +22,7 @@ def getAllHabits():
         return {'message':'there was an error'}
 
     updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
-    # current_user.set_habits_and_dailies()
+    current_user.set_habits_and_dailies()
     updated_habits_array=currentUserObj.users_habits_array[:]
 
     print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
@@ -41,33 +41,31 @@ def makeNewHabit():
     ic(habit_title)
 
     if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
-        err['title'] = 'Title is required and must be between 3 and 30 characters'
-        return jsonify(err), 400
+        custError(err, 'title', 'Habit Title is required and must be between 3 and 30 characters')
+
     if 'errors' in err:
         return jsonify(err), 400
-
-    for habit in current_user.users_habits:
-        habit.position += 1
 
     new_habit = Habit(
         title=habit_title,
         user_id=current_user.id,
         untouched=True,
-        position=1
+        position=0
     )
     db.session.add(new_habit)
     db.session.commit()
+
+    for habit in current_user.users_habits:
+            habit.position += 1
+
+    db.session.commit()
+
     current_user.set_habits_and_dailies()
 
-    ourGuyDict=current_user.to_dict()
-    updatedArray=ourGuyDict.get("usersHabitsArray")
-    ic(updatedArray)
+    ourGuyDict = current_user.to_dict()
+    updatedArray = ourGuyDict.get("usersHabitsArray")
 
-
-
-
-
-    return jsonify({"newHabit":new_habit.to_dict(),"newArray":updatedArray})
+    return jsonify({"newHabit": new_habit.to_dict(), "newArray": updatedArray})
 
     #should i also return user here? or is backfill sufficient? lets test it
 
@@ -134,22 +132,35 @@ def editHabit():
 
     return jsonify({"error":"The Habit could not be found"}),400
 
-@habit_routes.route('/delete-habit', methods=['POST'])
-def deleteHabit():
+@habit_routes.route('/delete-habit/<int:id>', methods=['DELETE'])
+def deleteHabit(id):
+
     ic('inside our DELETE habit route')
-    data=request.json
-    targetId=data.get('targetId')
-    ic(data)
-    ic(targetId)
-    targetDeletion=Habit.query.get(int(targetId))
+
+    ic(id)
+    targetDeletion=Habit.query.get(id)
+    positionOfDeletee=targetDeletion.position
     ic(targetDeletion)
+    ic(positionOfDeletee)
 
     if targetDeletion is None:
         return {'errors': {'error':'Habit not found'}}, 404
     copyTargetDeletion=targetDeletion.to_dict()
     db.session.delete(targetDeletion)
     db.session.commit()
+    for habit in current_user.users_habits:
+        if habit.position>positionOfDeletee:
+            habit.position -= 1
+    db.session.commit()
+
+    current_user.set_habits_and_dailies()
+    ourGuyDict=current_user.to_dict()
+    updatedObjects=ourGuyDict.get('usersHabitsObj')
+    updatedArray=ourGuyDict.get("usersHabitsArray")
+    ic(updatedObjects)
+    ic(updatedArray)
+
     ic(copyTargetDeletion)
-    return {"targetDeletion":int(targetId)}
+    return jsonify({"targetDeletion":id,"newArray":updatedArray})
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403

@@ -107,13 +107,12 @@ function normalizeData(allHabits, newItem) {
 export const ThunkDeleteHabit = (targetId) => async (dispatch) => {
     console.log('at least i hit the THUNKDELETEHABIT thunk')
     console.log("🚀 ~ file: habit.js:89 ~ targetIDintheThunk", targetId)
-    const response = await fetch("/api/habits/delete-habit", {
-        method: "POST",
+    targetId=parseInt(targetId)
+    const response = await fetch(`/api/habits/delete-habit/${targetId}`, {
+        method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
-        },
-
-        body: JSON.stringify({ targetId: targetId }),
+        }
     });
 
     if (response.ok) {
@@ -121,7 +120,7 @@ export const ThunkDeleteHabit = (targetId) => async (dispatch) => {
         console.log('**************RESPONSE WAS OK AND WE GOT DATA BVACK', data)
         console.log("🚀 ~ file: habit.js:121 ~ ThunkDeleteHabit ~ data:", data)
         console.log("🚀 ~ file: habit.js:122 ~ ThunkDeleteHabit ~ data.targetDeletion:", data.targetDeletion)
-        await dispatch(actionDeleteHabit(data.targetDeletion));
+        await dispatch(actionDeleteHabit(data));
         return data;
     } else if (response.status < 500) {
         console.log('WE HIT OUR ELSE')
@@ -243,8 +242,8 @@ export default function reducer(state = initialState, action) {
 
         case DELETE_HABIT:
             newState = { ...state }
-            delete newState.byId[action.payload]
-            let copyArray = [...newState.allIds]
+            delete newState.byId[action.payload.targetDeletion]
+            let copyArray = [...action.payload.newArray]
             let returnArray = copyArray.filter((ele) => ele !== action.payload)
             newState.allIds = returnArray
             return newState

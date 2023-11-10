@@ -107,13 +107,12 @@ function normalizeData(allDailies, newItem) {
 export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
     console.log('at least i hit the THUNKDELETEHABIT thunk')
     console.log("🚀 ~ file: habit.js:89 ~ targetIDintheThunk", targetId)
-    const response = await fetch("/api/dailies/delete-daily", {
-        method: "POST",
+    targetId=parseInt(targetId)
+    const response = await fetch(`/api/dailies/delete-daily/${targetId}`, {
+        method: "DELETE",
         headers: {
             'Content-Type': 'application/json',
-        },
-
-        body: JSON.stringify({ targetId: targetId }),
+        }
     });
 
     if (response.ok) {

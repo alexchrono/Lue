@@ -79,12 +79,12 @@ export default function Habits({ user }) {
   const MakeNewHabit = async (e) => {
     e.preventDefault();
     let test = await dispatch(ThunkNewHabit(habit));
+    setHabit('')
     if (test?.errors) {
 
       setErrors(test.errors)
     }
     else if (test.title) {
-      setHabit('')
       return test;
     }
   };
@@ -309,8 +309,8 @@ export default function Habits({ user }) {
 
               </div>
               <div className='main-body-habit-card'>
-                <h3>{userHabits[habitId].title}</h3>
-                <p>{userHabits[habitId].notes}</p>
+                <h3>{userHabits[habitId]?.title}</h3>
+                <p>{userHabits[habitId]?.notes}</p>
               </div>
               <div className='ellipsis'>
                 <img
