@@ -137,6 +137,12 @@ html {
     visibility: hidden;
 
 }
+.invisi2 {
+    border: none;
+    /* background-color:#602399 */
+    background-color: #074d47;
+
+}
 
 .no-border {
     border: none;

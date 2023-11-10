@@ -249,7 +249,7 @@ export default function Habits({ user }) {
 
         {userArray?.map((habitId, index) => (
           <div className='habits-card'>
-            <div className='fifteen-percent invisi'></div>
+            <div className='fifteen-percent invisi2'></div>
             <div className='habits-card-center'>
               <div className='bad-habit-emoti' onClick={(e) => {
                 e.stopPropagation();
@@ -328,8 +328,9 @@ export default function Habits({ user }) {
                 />
               </div>
             </div>
+            <div className='fifteen-percent invisi2'>
             {openHabit === habitId && showMenu && (
-              <div className='fifteen-percent no-border'>
+
                 <div className='backG'>
                   <ul className={ulClassName} ref={ulRef}>
                     <li>
@@ -368,8 +369,8 @@ export default function Habits({ user }) {
                     </li>
                   </ul>
                 </div>
-              </div>
-            )}
+
+            )}</div>
           </div>))}
                   </div>
       </div>
