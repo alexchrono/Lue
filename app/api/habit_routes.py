@@ -176,7 +176,6 @@ def deleteHabit(id):
     ic('inside our DELETE habit route')
 
     ic(id)
-    test1=Habit.query.get(1)
     targetDeletion=Habit.query.get(id)
     ic(targetDeletion)
     positionOfDeletee=targetDeletion.position

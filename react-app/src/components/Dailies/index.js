@@ -139,7 +139,7 @@ export default function Dailies({ user }) {
             <div className='fifteen-percent invisi'></div>
             <div className='habits-card-center'>
               <div className='bad-habit-emoti' onClick={(e) => handleCheckmark(e, dailyId)}>
-                {userDailies[dailyId].untouched ? (
+                {userDailies[dailyId]?.untouched ? (
                   <img
                     src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
                     className=' sadFace'

@@ -120,7 +120,7 @@ export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
         console.log('**************RESPONSE WAS OK AND WE GOT DATA BVACK', data)
         console.log("🚀 ~ file: habit.js:121 ~ ThunkDeleteHabit ~ data:", data)
         console.log("🚀 ~ file: habit.js:122 ~ ThunkDeleteHabit ~ data.targetDeletion:", data.targetDeletion)
-        await dispatch(actionDeleteDaily(data.targetDeletion));
+        await dispatch(actionDeleteDaily(data));
         return data;
     } else if (response.status < 500) {
         console.log('WE HIT OUR ELSE')
@@ -236,10 +236,10 @@ export default function reducer(state = initialState, action) {
 
         case DELETE_DAILY:
             newState = { ...state }
-            delete newState.byId[action.payload]
-            let copyArray = [...newState.allIds]
-            let returnArray = copyArray.filter((ele) => ele !== action.payload)
-            newState.allIds = returnArray
+            let copyArray = [...action.payload.newArray]
+
+            newState = { byId: { ...action.payload.dailiesObj }, allIds: copyArray }
+
             return newState
 
 

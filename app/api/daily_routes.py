@@ -146,16 +146,24 @@ def editDaily():
 @daily_routes.route('/delete-daily/<int:id>', methods=['DELETE'])
 def deleteDaily(id):
     ic('inside our DELETE daily route')
-    ic(id)
     targetDeletion=Daily.query.get(id)
-    ic(targetDeletion)
+    positionOfDeletee=targetDeletion.position
 
     if targetDeletion is None:
         return {'errors': {'error':'daily not found'}}, 404
     copyTargetDeletion=targetDeletion.to_dict()
     db.session.delete(targetDeletion)
     db.session.commit()
-    ic(copyTargetDeletion)
-    return {"targetDeletion":id}
+    for daily in current_user.users_dailies:
+        if daily.position>positionOfDeletee:
+            daily.position=daily.position-1
+    db.session.commit()
+
+    current_user.set_habits_and_dailies()
+    ourGuyDict=current_user.to_dict()
+    updatedObj=ourGuyDict.get('usersDailiesObj')
+    updatedArray=ourGuyDict.get("usersDailiesArray")
+
+    return jsonify({"newArray":updatedArray,"dailiesObj":updatedObj})
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403
