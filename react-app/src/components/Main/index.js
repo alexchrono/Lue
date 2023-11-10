@@ -54,14 +54,15 @@ export default function Main() {
 
 
             </div>
-            <div className='inspirational-quote'>Life is what you make it</div>
+            <div className='inspirational-quote'>
 
-
-            {/* justGainedLevel */}
-
-
-        </div>
         <img className = 'sword-Divider' src={`${process.env.PUBLIC_URL}/icons/sword-flipped-divider3.png`}></img>
+        <div className='fiftyheight'><div className='bad-spot'></div><div className='sweet-spot'><div className='text-finally'>Life is...</div></div></div>
+        <div className='fiftyheight'><div className='bad-spot'></div><div className='sweet-spot'><div className='text-finally'>What you make of it</div></div></div>
+        {/* <div className="LifeIs">Life is what you make it</div> */}
+        </div>
+        </div>
+
         <div className='buffer'></div>
 
         <div className='tables'>

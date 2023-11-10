@@ -6,6 +6,7 @@
   white-space: nowrap;
   max-width: calc(100vw - 10px);
   box-sizing: border-box;
+  z-index: 10000;
 
 }
 
@@ -13,6 +14,7 @@
   padding: 3px;
   white-space: normal;
   border: 2px solid transparent;
+
 }
 
 .profile-dropdown li:hover {
