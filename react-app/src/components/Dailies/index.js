@@ -79,11 +79,12 @@ export default function Dailies({ user }) {
   const MakeNewDaily = async (e) => {
     e.preventDefault();
     let test = await dispatch(ThunkNewDaily(daily));
+    setDaily('')
     if (test?.errors) {
       setErrors(test.errors);
     }
     else if (test.title) {
-      setDaily('');
+
       return test;
     }
   };

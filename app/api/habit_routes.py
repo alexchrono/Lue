@@ -33,6 +33,41 @@ def getAllHabits():
 
 
 
+# @habit_routes.route('/new-habit', methods=['POST'])
+# def makeNewHabit():
+#     err = {}
+#     data = request.json
+#     habit_title = data.get('habit')
+#     ic(habit_title)
+
+#     if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
+#         custError(err, 'title', 'Habit Title is required and must be between 3 and 30 characters')
+
+#     if 'errors' in err:
+#         return jsonify(err), 400
+
+#     new_habit = Habit(
+#         title=habit_title,
+#         user_id=current_user.id,
+#         untouched=True,
+#         position=0
+#     )
+#     db.session.add(new_habit)
+#     db.session.commit()
+
+#     for habit in current_user.users_habits:
+#         habit.position += 1
+
+#     db.session.commit()
+
+#     current_user.set_habits_and_dailies()
+
+#     ourGuyDict = current_user.to_dict()
+#     updatedArray = ourGuyDict.get("usersHabitsArray")
+
+#     return jsonify({"newHabit": new_habit.to_dict(), "newArray": updatedArray})
+
+
 @habit_routes.route('/new-habit', methods=['POST'])
 def makeNewHabit():
     err = {}
@@ -56,7 +91,7 @@ def makeNewHabit():
     db.session.commit()
 
     for habit in current_user.users_habits:
-            habit.position += 1
+            habit.position=habit.position+1
 
     db.session.commit()
 
@@ -64,8 +99,11 @@ def makeNewHabit():
 
     ourGuyDict = current_user.to_dict()
     updatedArray = ourGuyDict.get("usersHabitsArray")
+    updatedObj= ourGuyDict.get("usersHabitsObj")
 
-    return jsonify({"newHabit": new_habit.to_dict(), "newArray": updatedArray})
+    ic(updatedObj)
+
+    return jsonify({ "newArray": updatedArray,'habitsObj':updatedObj})
 
     #should i also return user here? or is backfill sufficient? lets test it
 

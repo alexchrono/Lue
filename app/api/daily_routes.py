@@ -37,25 +37,21 @@ def getAllDailies():
 
 @daily_routes.route('/new-daily', methods=['POST'])
 def makeNewDaily():
-    err={}
-    data=request.json
-    daily_title=data.get('daily')
-
+    err = {}
+    data = request.json
+    daily_title = data.get('daily')
 
     if not daily_title or len(daily_title) < 3 or len(daily_title) > 30:
         custError(err, 'title', 'Daily Title is required and must be between 3 and 30 characters')
-
-    if 'errors' in err:
-        return jsonify(err), 400
-
+        if 'errors' in err:
+            return jsonify(err), 400
+    ic(current_user.users_dailies)
     for daily in current_user.users_dailies:
+        ic(daily.position)
         daily.position += 1
+    db.session.commit()
 
-
-
-
-
-    new_daily= Daily(
+    new_daily = Daily(
         title=daily_title,
         user_id=current_user.id,
         untouched=True,
@@ -64,25 +60,16 @@ def makeNewDaily():
 
     db.session.add(new_daily)
     db.session.commit()
+
     current_user.set_habits_and_dailies()
+    db.session.commit()
 
-    ourGuyDict=current_user.to_dict()
-    updatedArray=ourGuyDict.get("usersDailiesArray")
+    ourGuyDict = current_user.to_dict()
+    updatedArray = ourGuyDict.get("usersDailiesArray")
 
-    # currentUserObj=User.query.get(current_user.id)
-    # ic(currentUserObj)
-    # ic(currentUserObj.users_habits)
-
-
-    # updated_habits=[hab.to_dict() for hab in currentUserObj.users_habits]
-
-    # print('RIGHT BEFORE RETURNING in route UPDATED HABITS IS',updated_habits)
-    # print('RIGHT BEFORE RETURNING in routeNEW H ABIT IS',new_habit)
-    # ,"upd_list":upd_habit_list}
-    return jsonify({"newDaily":new_daily.to_dict(),"newArray":updatedArray})
+    return jsonify({"newDaily": new_daily.to_dict(), "newArray": updatedArray})
     #should i also return user here? or is backfill sufficient? lets test it
 
-    return jsonify({"error":"There was an error in making the daily"}),400
 # @daily_routes.route('/new-habit', methods=['POST'])
 # def makeNewHabit():
 #     data=request.json

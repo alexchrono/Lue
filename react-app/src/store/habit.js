@@ -222,9 +222,9 @@ export default function reducer(state = initialState, action) {
 
         case CREATE_HABIT:
             let copyOfArray = [...action.payload.newArray]
-            newState = { byId: { ...state.byId }, allIds: copyOfArray }
+            newState = { byId: { ...action.payload.habitsObj }, allIds: copyOfArray }
 
-            newState.byId[action.payload.newHabit.id] = action.payload.newHabit
+            
 
 
             // newState.allIds.push(action.payload.id)
