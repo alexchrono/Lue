@@ -208,7 +208,15 @@ def editHealth():
 
                 db.session.commit()
                 victoryDeets['nextLevel']=f"You currently have {copyExp} exp and your next level will  be gained at {expFinder()} "
-                victoryDeets['newTitle']=f' are now an {newTitle}.'
+                first_letter = newTitle[0].lower()
+                if first_letter in ['a', 'e', 'i', 'o', 'u']:
+                    aOrAN = 'an'
+                else:
+                    aOrAN = 'a'
+
+
+
+                victoryDeets['newTitle']=f' are now {aOrAN} {newTitle}.'
                 victoryDeets['endingLine']='Enjoy your promotion.  You did great!'
                 return jsonify({"victory": True, "victoryDeets":victoryDeets, "current_user": current_user.to_dict()})
             else:

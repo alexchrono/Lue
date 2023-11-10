@@ -115,7 +115,7 @@ export default function Dailies({ user }) {
   return (
     <>
       {errors.title && (<ErrorComponent errorMessage={'Daily titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setDaily} />)}
-      {showVictory && <ShowVictory  setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
