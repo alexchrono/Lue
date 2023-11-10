@@ -219,9 +219,7 @@ export default function reducer(state = initialState, action) {
 
         case CREATE_DAILY:
             let copyOfArray = [...action.payload.newArray]
-            newState = { byId: { ...state.byId }, allIds: copyOfArray }
-
-            newState.byId[action.payload.newDaily.id] = action.payload.newDaily
+            newState = { byId: { ...action.payload.dailiesObj }, allIds: copyOfArray }
 
             // newState.allIds.push(action.payload.id)
             // newState.allIds=newState.allIds.map(id=>parseInt(id))

@@ -46,28 +46,29 @@ def makeNewDaily():
         if 'errors' in err:
             return jsonify(err), 400
     ic(current_user.users_dailies)
-    for daily in current_user.users_dailies:
-        ic(daily.position)
-        daily.position += 1
-    db.session.commit()
-
     new_daily = Daily(
         title=daily_title,
         user_id=current_user.id,
         untouched=True,
-        position=1
+        position=0
     )
-
     db.session.add(new_daily)
     db.session.commit()
 
-    current_user.set_habits_and_dailies()
+    for daily in current_user.users_dailies:
+        ic(daily.position)
+        daily.position=daily.position+1
     db.session.commit()
+
+
+    current_user.set_habits_and_dailies()
+
 
     ourGuyDict = current_user.to_dict()
     updatedArray = ourGuyDict.get("usersDailiesArray")
+    updatedObj= ourGuyDict.get("usersDailiesObj")
 
-    return jsonify({"newDaily": new_daily.to_dict(), "newArray": updatedArray})
+    return jsonify({"newArray": updatedArray, "dailiesObj": updatedObj})
     #should i also return user here? or is backfill sufficient? lets test it
 
 # @daily_routes.route('/new-habit', methods=['POST'])
