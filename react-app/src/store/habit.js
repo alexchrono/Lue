@@ -1,4 +1,4 @@
-import insertCss from "eva-icons";
+
 
 // constants
 const CREATE_HABIT = "habit/CREATE_HABIT";
