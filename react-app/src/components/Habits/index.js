@@ -248,6 +248,7 @@ export default function Habits({ user }) {
         <div className='allHabits'>
           <div className='fifteenPercentNoGutter'></div>
 
+
         <div className='habits-card-center2'>
         {userArray?.map((habitId, index) => (
           <div className='habits-card'>
