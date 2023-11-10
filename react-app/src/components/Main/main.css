@@ -1,3 +1,7 @@
+html {
+    background: rgb(221,221,221);
+
+}
 .stats-container {
     display: flex;
     flex-direction: row;
@@ -326,6 +330,7 @@ form select {
 }
 
 .special90 {
+    flex-basis: 90%;
     box-sizing: border-box;
     border-right: 3px solid black;
     width: 90%;
@@ -333,7 +338,26 @@ form select {
     font-size: 1.5em
 
 }
+
+.tenpercent {
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.tenpercent button {
+    height: 100%;
+}
+.tenpercent img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
 .forgigs {
+    display: flex;
+    flex-direction: row;
     width: 100%;
     height:100%;
 }
@@ -418,6 +442,8 @@ width: 100%;
     width: auto;
     object-fit: cover;
     z-index: -1;
+    /* mix-blend-mode: multiply; */
+    /* box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); */
 
 }
 

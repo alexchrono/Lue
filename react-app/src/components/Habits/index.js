@@ -234,7 +234,10 @@ export default function Habits({ user }) {
                   onChange={(e) => setHabit(e.target.value)}
                 // required
                 />
-                <button type='submit'>+</button>
+                <div class='tenpercent'>
+                <button type='submit'><img
+                      src={`${process.env.PUBLIC_URL}/icons/fi-plus-fndtn.svg`}></img></button>
+              </div>
               </div>
             </form>
           </div>

@@ -110,7 +110,8 @@ export default function LandingPage() {
         <div className='main-container'>
             <div className='left-container'>
                 <div className='pic-box-container'>
-                    <img src='https://i.imgur.com/DafdjXQ.png' className='pic' alt=''></img>
+                <img src={`${process.env.PUBLIC_URL}/icons/cloud-spinning.gif`}></img>
+                    {/* <img src='https://i.imgur.com/DafdjXQ.png' className='pic' alt=''></img> */}
                 </div>
 
                 <div className='left-bottom-quote'>
