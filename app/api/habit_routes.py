@@ -176,9 +176,11 @@ def deleteHabit(id):
     ic('inside our DELETE habit route')
 
     ic(id)
+    test1=Habit.query.get(1)
     targetDeletion=Habit.query.get(id)
-    positionOfDeletee=targetDeletion.position
     ic(targetDeletion)
+    positionOfDeletee=targetDeletion.position
+
     ic(positionOfDeletee)
 
     if targetDeletion is None:
@@ -188,17 +190,16 @@ def deleteHabit(id):
     db.session.commit()
     for habit in current_user.users_habits:
         if habit.position>positionOfDeletee:
-            habit.position -= 1
+            habit.position=habit.position-1
     db.session.commit()
 
     current_user.set_habits_and_dailies()
     ourGuyDict=current_user.to_dict()
-    updatedObjects=ourGuyDict.get('usersHabitsObj')
+    updatedObj=ourGuyDict.get('usersHabitsObj')
     updatedArray=ourGuyDict.get("usersHabitsArray")
-    ic(updatedObjects)
     ic(updatedArray)
 
     ic(copyTargetDeletion)
-    return jsonify({"targetDeletion":id,"newArray":updatedArray})
+    return jsonify({"newArray":updatedArray,"habitsObj":updatedObj})
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403

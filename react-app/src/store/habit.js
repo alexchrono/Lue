@@ -224,7 +224,7 @@ export default function reducer(state = initialState, action) {
             let copyOfArray = [...action.payload.newArray]
             newState = { byId: { ...action.payload.habitsObj }, allIds: copyOfArray }
 
-            
+
 
 
             // newState.allIds.push(action.payload.id)
@@ -242,10 +242,11 @@ export default function reducer(state = initialState, action) {
 
         case DELETE_HABIT:
             newState = { ...state }
-            delete newState.byId[action.payload.targetDeletion]
+
             let copyArray = [...action.payload.newArray]
-            let returnArray = copyArray.filter((ele) => ele !== action.payload)
-            newState.allIds = returnArray
+
+            newState = { byId: { ...action.payload.habitsObj }, allIds: copyArray }
+
             return newState
 
 
