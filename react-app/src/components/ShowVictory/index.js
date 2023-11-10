@@ -11,8 +11,8 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
     return (
         <>
             {formType === 'levelUp' && (
-                <div className="error-popup">
-                    <h1>You've gained A level!!!!</h1>
+                <div className="error-popup green">
+                    <h1>You gained A level!</h1>
                     <p className='para'>{`${victoryDeets.levelGrowth} & ${victoryDeets.newTitle}`}</p>
                     <p className='para'>{victoryDeets.healthIncrease}</p>
                     <p className='para'>{victoryDeets.nextLevel}</p>

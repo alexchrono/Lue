@@ -199,7 +199,7 @@ def editHealth():
                 current_user.level +=1
                 copyCurrentTitle=current_user.level_title
 
-                victoryDeets['healthIncrease']=f"Your Health increased from {current_user.health} to {(current_user.health+10)} and has been fully restored"
+                victoryDeets['healthIncrease']=f"Your max-health has increased from {current_user.health} to {(current_user.health+10)} and you've been fully healed."
                 current_user.health+=10
                 current_user.current_health=current_user.health
                 current_user.exp=realExp
@@ -208,7 +208,7 @@ def editHealth():
 
                 db.session.commit()
                 victoryDeets['nextLevel']=f"You currently have {copyExp} exp and your next level will  be gained at {expFinder()} "
-                victoryDeets['newTitle']=f'Your title changed from {oldTitle} to {newTitle}!!'
+                victoryDeets['newTitle']=f' are now an {newTitle}.'
                 victoryDeets['endingLine']='Enjoy your promotion.  You did great!'
                 return jsonify({"victory": True, "victoryDeets":victoryDeets, "current_user": current_user.to_dict()})
             else:
