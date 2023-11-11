@@ -96,6 +96,7 @@ export default function Habits({ user }) {
 
   const HandleDislikeOrLike = async (e, goodOrBad, difficulty,habitId) => {
     e.preventDefault();
+    const key='habit'
 
     console.log('ENTERED HANDLE DISLIKE WITH HABIT ID OF',habitId)
     let change = {}
@@ -135,7 +136,7 @@ export default function Habits({ user }) {
     }
 
     if (change) {
-      const test = await dispatch(ThunkEditHealth(change,copyArray))
+      const test = await dispatch(ThunkEditHealth(change,copyArray,key))
 
       if (test.victory) {
         setShowVictory(true);

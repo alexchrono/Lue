@@ -105,7 +105,7 @@ export const ThunkEditNewUser = () => async (dispatch) => {
     }
 };
 
-export const ThunkEditHealth = (healthOrExp,clickedStuff) => async (dispatch) => {
+export const ThunkEditHealth = (healthOrExp,clickedStuff,key) => async (dispatch) => {
     console.log('at least i hit the THUNKEDITHEALTH thunk')
 
 	console.log("🚀 ~ file: session.js:73 ~ ThunkEditHealth ~ health:", healthOrExp)
@@ -116,7 +116,7 @@ export const ThunkEditHealth = (healthOrExp,clickedStuff) => async (dispatch) =>
             'Content-Type': 'application/json',
         },
 
-        body: JSON.stringify({healthOrExp:healthOrExp,clickedStuff:clickedStuff}),
+        body: JSON.stringify({healthOrExp:healthOrExp,clickedStuff:clickedStuff,key:key}),
     });
 
     if (response.ok) {

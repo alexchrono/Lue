@@ -163,6 +163,8 @@ def editHealth():
     ic(data2)
     data=data2.get("healthOrExp")
     arrayStuff=data2.get('clickedStuff')
+    key=data2.get('key')
+    ic(key)
     ic(arrayStuff)
     ic(data)
     ic(data.get('health'))
@@ -190,9 +192,10 @@ def editHealth():
         exp=Decimal(data.get('exp'))
         ic(exp)
         if current_user:
-            ic('inside current user check')
-            current_user.users_clicked_habits=arrayStuff
-            current_user.users_clicked_dailies=arrayStuff
+            if key=='habit':
+                current_user.users_clicked_habits=arrayStuff
+            elif key=='daily':
+                current_user.users_clicked_dailies=arrayStuff
             current_user.gold= (current_user.gold+gold)
             ic(current_user.exp)
             ic(exp)
