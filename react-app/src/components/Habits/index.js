@@ -110,18 +110,21 @@ export default function Habits({ user }) {
     switch (goodOrBad) {
       case 'bad':
         change.health = badTranslator[difficulty]
-        setLocalArray([...localArray,habitId])
+        copyArray.push(habitId)
+        setLocalArray(copyArray)
         console.log('clicked bad*******COPY ARRAY IS NOW****', copyArray)
         break
       case 'unbad':
         change.health = -(badTranslator[difficulty])
-        setLocalArray(localArray.filter((ele) => ele !== habitId))
+        copyArray=copyArray.filter((ele) => ele !== habitId)
+        setLocalArray(copyArray)
         //     setClickedEmoti(newArray)
         console.log('unclicked bad change COPY ARRAY IS NOW', copyArray)
         break
       case 'good':
         change = goodTranslator[difficulty]
-        setLocalArray([...localArray,habitId])
+        copyArray.push(habitId)
+        setLocalArray(copyArray)
         console.log('POSITIVE CHANGE IS******COPY ARRAY IS NOW*****', copyArray)
         console.log('POSITIVE CHANGE in GOLD IS***********', change.gold)
         console.log('POSITIVE CHANGE IN EXP IS****', change.exp)
@@ -130,7 +133,8 @@ export default function Habits({ user }) {
         change = goodTranslator[difficulty]
         change.gold = -(change.gold)
         change.exp = -(change.exp)
-        setLocalArray(localArray.filter((ele) => ele !== habitId))
+        copyArray=copyArray.filter((ele) => ele !== habitId)
+        setLocalArray(copyArray)
         console.log('UNDOING POSITIVE CHANGE IS*******COPY ARRAY IS NOW****', copyArray)
         console.log('UNDOING POSITIVE CHANGE in GOLD IS***********', change.gold)
         console.log('UNDOING POSITIVE CHANGE IN EXP IS****', change.exp)
@@ -141,7 +145,7 @@ export default function Habits({ user }) {
     }
 
     if (change) {
-      const test = await dispatch(ThunkEditHealth(change,localArray,key))
+      const test = await dispatch(ThunkEditHealth(change,copyArray,key))
 
       if (test.victory) {
         setShowVictory(true);
