@@ -13,6 +13,9 @@
     width: 100%;
     background-color: black;
 }
+.ellipsa li {
+    list-style-type: none;
+}
 
 .menu-item-button {
     display: flex;
