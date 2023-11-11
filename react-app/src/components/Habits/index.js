@@ -15,7 +15,7 @@ export default function Habits({ user }) {
   // const [showMenu, setShowMenu] = useState(false);
   const [clickedEmoti, setClickedEmoti] = useState([])
   const [errors, setErrors] = useState([]);
-  const [hideModal,setHideModal]=useState(false)
+  const [hideModal, setHideModal] = useState(false)
 
 
 
@@ -26,7 +26,7 @@ export default function Habits({ user }) {
   const userArray = useSelector((state) => state.habits.allIds);
   const [openHabit, setOpenHabit] = useState(null)
   const [showVictory, setShowVictory] = useState(false);
-  const [victoryDeets,setVictoryDeets]=useState({})
+  const [victoryDeets, setVictoryDeets] = useState({})
   const [needsLoading, setNeedsLoading] = useState(true);
 
 
@@ -97,7 +97,7 @@ export default function Habits({ user }) {
 
     console.log('THIS IS A DISLIKE WE INSIDE THE FUNCTION')
     console.log('good or bad is ', goodOrBad)
-    let change={}
+    let change = {}
     switch (goodOrBad) {
       case 'bad':
         change.health = badTranslator[difficulty]
@@ -127,7 +127,7 @@ export default function Habits({ user }) {
     }
 
     if (change) {
-      const test= await dispatch(ThunkEditHealth(change))
+      const test = await dispatch(ThunkEditHealth(change))
 
       if (test.victory) {
         setShowVictory(true);
@@ -192,7 +192,7 @@ export default function Habits({ user }) {
     if (user2 && needsLoading) {
       fetchData()
     }
-  }, [user2,dispatch,needsLoading]);
+  }, [user2, dispatch, needsLoading]);
 
   // useEffect(() => {
   //   if (!showMenu) return;
@@ -213,17 +213,17 @@ export default function Habits({ user }) {
 
   // const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
 
-  console.log('IN HABITS USER 2 IS LIKE*****',user2)
+  console.log('IN HABITS USER 2 IS LIKE*****', user2)
   console.log('USER 2 .NEWUSER ISSSSSSSSSSSSSSSS')
 
   console.log("🚀 ~ file: index.js:216 ~ Habits ~ user2:", user2)
   console.log("🚀 ~ file: index.js:216 ~ Habits ~ user2.newUser:", user2.newUser)
   return (
     <>
-      {user2?.newUser && (<ShowVictory formType='newUser' setVictory={setShowVictory} victoryDeets={victoryDeets}/>)}
+      {user2?.newUser && (<ShowVictory formType='newUser' setVictory={setShowVictory} victoryDeets={victoryDeets} />)}
       {/* {errors?.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)} */}
       {errors?.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
-      {showVictory && <ShowVictory  formType={'levelUp'}setVictory={setShowVictory} victoryDeets={victoryDeets}/>}
+      {showVictory && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Habits</div>
@@ -238,9 +238,9 @@ export default function Habits({ user }) {
                 // required
                 />
                 <div class='tenpercent'>
-                <button type='submit'><img
-                      src={`${process.env.PUBLIC_URL}/icons/fi-plus-fndtn.svg`}></img></button>
-              </div>
+                  <button type='submit'><img
+                    src={`${process.env.PUBLIC_URL}/icons/fi-plus-fndtn.svg`}></img></button>
+                </div>
               </div>
             </form>
           </div>
@@ -250,93 +250,97 @@ export default function Habits({ user }) {
         </div>
         <div className='allHabits'>
 
-        {userArray?.map((habitId, index) => (
-          <div className='habits-card'>
-            <div className='fifteen-percent invisi2'></div>
-            <div className='habits-card-center'>
-              <div className='bad-habit-emoti' onClick={(e) => {
-                e.stopPropagation();
-                if (!userHabits[habitId].untouched) {
-                  handleEmotiClick(habitId)
-                }
-                else {
-                  console.log('HIT OUR RELSE WE CLICKING NORMAL PC')
-                  // <ErrorComponent errorMessage={'You need to edit this habit before it becomes active'} setErrors={setErrors} setHabit={setHabit} />
-                }
-              }}>
-                {user2 && userHabits[habitId] ? (
-                  userHabits[habitId].untouched ? (
-                    <img
-                      src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
-                      className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
-                      style={{ width: '100%', height: '100%', margin: '0' }}
-                    />
-                  ) : !userHabits[habitId].alignment ? (
-                    <img
-                      src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
-                      className={`changeToHand ${clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}`}
-                      style={{ width: '100%', height: '100%', margin: '0' }}
-                      onClick={(e) => {
-                        if (clickedEmoti && clickedEmoti.includes(habitId)) {
-                          HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty)
+          {userArray?.map((habitId, index) => (
+            <div className='habits-card'>
+              <div className='fifteen-percent invisi2'></div>
+              <div className='habits-card-center'>
+                <div className='bad-habit-emoti' onClick={(e) => {
+                  e.stopPropagation();
+                  if (!userHabits[habitId].untouched) {
+                    handleEmotiClick(habitId)
+                  }
+                  else {
+                    console.log('HIT OUR RELSE WE CLICKING NORMAL PC')
+                    // <ErrorComponent errorMessage={'You need to edit this habit before it becomes active'} setErrors={setErrors} setHabit={setHabit} />
+                  }
+                }}>
+                  {user2 && userHabits[habitId] ? (
+                    userHabits[habitId].untouched ? (
+                      <img
+                        src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
+                        className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
+                        style={{ width: '100%', height: '100%', margin: '0' }}
+                      />
+                    ) : !userHabits[habitId].alignment ? (
+                      <img
+                        src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
+                        className={`changeToHand ${clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}`}
+                        style={{ width: '100%', height: '100%', margin: '0' }}
+                        onClick={(e) => {
+                          if (clickedEmoti && clickedEmoti.includes(habitId)) {
+                            HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty)
 
 
-                          console.log('*************OK WE GOT CHANGE THIS UNDOES THE NEGATIVE EFFECTS')
-                        }
-                        else {
-                          HandleDislikeOrLike(e, 'bad', userHabits[habitId].difficulty)
-                          console.log('**********OK WE GOT CHANGE THIS TAKES AWAY HP')
-                        }
-                      }}
-                    />
-                  ) : (
-                    <img
-                      src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
-                      className={`changeToHand ${clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace green' : 'sadFace'}`}
-                      style={{ width: '100%', height: '100%', margin: '0' }}
+                            console.log('*************OK WE GOT CHANGE THIS UNDOES THE NEGATIVE EFFECTS')
+                          }
+                          else {
+                            HandleDislikeOrLike(e, 'bad', userHabits[habitId].difficulty)
+                            console.log('**********OK WE GOT CHANGE THIS TAKES AWAY HP')
+                          }
+                        }}
+                      />
+                    ) : (
+                      <img
+                        src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
+                        className={`changeToHand ${clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace green' : 'sadFace'}`}
+                        style={{ width: '100%', height: '100%', margin: '0' }}
 
-                      onClick={(e) => {
-                        if (clickedEmoti && clickedEmoti.includes(habitId)) {
-                          HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty)
-
-
-                          console.log('*************OK WE GOT CHANGE THIS UNDOES THE CLICK OF A POSITIVE EFFECT')
-                        }
-                        else {
-                          HandleDislikeOrLike(e, 'good', userHabits[habitId].difficulty)
-                          console.log('**********OK WE GOT CHANGE THIS POSITIVVE CHANGE THIS ADDS GOLD AND EXP')
-                        }
-                      }}
-                    />
-                  )
-                ) : null}
+                        onClick={(e) => {
+                          if (clickedEmoti && clickedEmoti.includes(habitId)) {
+                            HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty)
 
 
+                            console.log('*************OK WE GOT CHANGE THIS UNDOES THE CLICK OF A POSITIVE EFFECT')
+                          }
+                          else {
+                            HandleDislikeOrLike(e, 'good', userHabits[habitId].difficulty)
+                            console.log('**********OK WE GOT CHANGE THIS POSITIVVE CHANGE THIS ADDS GOLD AND EXP')
+                          }
+                        }}
+                      />
+                    )
+                  ) : null}
+
+
+
+                </div>
+                <div className='main-body-habit-card'>
+                  <h3>{userHabits[habitId]?.title}</h3>
+                  <p>{
+                    userHabits[habitId]?.notes && userHabits[habitId]?.notes.length > 46
+                      ? userHabits[habitId]?.notes.substring(0, userHabits[habitId]?.notes.lastIndexOf(' ', 46)) + '...'
+                      : userHabits[habitId]?.notes
+                  }</p>
+                </div>
+                <div className='ellipsis'>
+                  <img
+                    src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
+                    className='ellipsis-pic'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleEllipsisClick(habitId);
+                      // openMenu()
+                    }}
+                  />
+                </div>
+              </div>
+              <div className='fifteen-percent invisi2'>
+                {openHabit === habitId && (
+                  <EllipsisMenu formType='habit' id={habitId} habitOrDaily={userHabits[habitId]} setter={setOpenHabit} />)}
 
               </div>
-              <div className='main-body-habit-card'>
-                <h3>{userHabits[habitId]?.title}</h3>
-                <p>{userHabits[habitId]?.notes}</p>
-              </div>
-              <div className='ellipsis'>
-                <img
-                  src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
-                  className='ellipsis-pic'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleEllipsisClick(habitId);
-                    // openMenu()
-                  }}
-                />
-              </div>
-            </div>
-            <div className='fifteen-percent invisi2'>
-            {openHabit === habitId  && (
-<EllipsisMenu formType='habit' id={habitId}  habitOrDaily={userHabits[habitId]} setter={setOpenHabit} />)}
-
-            </div>
-          </div>))}
-                  </div>
+            </div>))}
+        </div>
       </div>
     </>
   );

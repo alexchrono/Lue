@@ -21,7 +21,7 @@ export default function Dailies({ user }) {
   const [openDaily, setOpenDaily] = useState(null);
   const [errors, setErrors] = useState([]);
   const [showVictory, setShowVictory] = useState(false);
-  const [victoryDeets,setVictoryDeets]=useState({})
+  const [victoryDeets, setVictoryDeets] = useState({})
   const [needsLoading, setNeedsLoading] = useState(true);
 
   const handleCheckmark = (e, dailyId) => {
@@ -59,9 +59,9 @@ export default function Dailies({ user }) {
       default:
         console.log('something went wrong with our switch')
     }
-    if(change) {
-      console.log('THE CHANG EISSSSSSSSSSSSS',change)
-      const test= await dispatch(ThunkEditHealth(change))
+    if (change) {
+      console.log('THE CHANG EISSSSSSSSSSSSS', change)
+      const test = await dispatch(ThunkEditHealth(change))
       if (test.victory) {
         setShowVictory(true);
         setVictoryDeets(test.victoryDeets)
@@ -98,7 +98,7 @@ export default function Dailies({ user }) {
     if (user2 && needsLoading) {
       fetchData()
     }
-  }, [user2,dispatch,needsLoading]);
+  }, [user2, dispatch, needsLoading]);
 
   // useEffect(() => {
   //   if (!showMenu) return;
@@ -122,18 +122,18 @@ export default function Dailies({ user }) {
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
           <div className='forty-percent'>
             <form onSubmit={MakeNewDaily}>
-            <div className='forgigs'>
-              <input
-                type="text"
-                className='special90'
-                value={daily}
-                onChange={(e) => setDaily(e.target.value)}
+              <div className='forgigs'>
+                <input
+                  type="text"
+                  className='special90'
+                  value={daily}
+                  onChange={(e) => setDaily(e.target.value)}
                 // required
-              />
-              <div class='tenpercent'>
-                <button type='submit'><img
-                      src={`${process.env.PUBLIC_URL}/icons/fi-plus-fndtn.svg`}></img></button>
-              </div>
+                />
+                <div class='tenpercent'>
+                  <button type='submit'><img
+                    src={`${process.env.PUBLIC_URL}/icons/fi-plus-fndtn.svg`}></img></button>
+                </div>
               </div>
             </form>
           </div>
@@ -142,54 +142,56 @@ export default function Dailies({ user }) {
           <div className='fifteen-percent menu-text' style={{ borderRight: 'none' }}>Upcoming</div>
         </div>
         <div className='allHabits'>
-        {userArray?.map((dailyId, index) => (
-          <div className='habits-card'>
-            <div className='fifteen-percent invisi2'></div>
-            <div className='habits-card-center'>
-              <div className='bad-habit-emoti' onClick={(e) => handleCheckmark(e, dailyId)}>
-                {userDailies[dailyId]?.untouched ? (
+          {userArray?.map((dailyId, index) => (
+            <div className='habits-card'>
+              <div className='fifteen-percent invisi2'></div>
+              <div className='habits-card-center'>
+                <div className='bad-habit-emoti' onClick={(e) => handleCheckmark(e, dailyId)}>
+                  {userDailies[dailyId]?.untouched ? (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
+                      className=' sadFace'
+                      style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
+                    />
+                  ) : clickedDailyCheck.includes(dailyId) ? (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
+                      className='changeToHand sadFace'
+                      style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
+                    />
+                  ) : (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
+                      className='changeToHand sadFace'
+                      style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
+                    />
+                  )}
+                </div>
+                <div className='main-body-habit-card'>
+                  <h3>{userDailies[dailyId]?.title}</h3>
+                  <p>{userDailies[dailyId]?.notes && userDailies[dailyId]?.notes.length > 46
+                    ? userDailies[dailyId].notes.substring(0, userDailies[dailyId].notes.lastIndexOf(' ', 46)) + '...'
+                    : userDailies[dailyId].notes}</p>
+                </div>
+                <div className='ellipsis'>
                   <img
-                    src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
-                    className=' sadFace'
-                    style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
+                    src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
+                    className='ellipsis-pic'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleEllipsisClick(dailyId);
+                      // setShowMenu(true);
+                    }}
                   />
-                ) : clickedDailyCheck.includes(dailyId) ? (
-                  <img
-                    src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
-                    className='changeToHand sadFace'
-                    style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
-                  />
-                ) : (
-                  <img
-                    src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
-                    className='changeToHand sadFace'
-                    style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
-                  />
-                )}
+                </div>
               </div>
-              <div className='main-body-habit-card'>
-                <h3>{userDailies[dailyId]?.title}</h3>
-                <p>{userDailies[dailyId]?.notes}</p>
-              </div>
-              <div className='ellipsis'>
-                <img
-                  src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
-                  className='ellipsis-pic'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleEllipsisClick(dailyId);
-                    // setShowMenu(true);
-                  }}
-                />
-              </div>
-            </div>
-            <div className='fifteen-percent invisi2'>
-            {openDaily === dailyId && (
-              <EllipsisMenu formType='daily' id={dailyId}  habitOrDaily={userDailies[dailyId]} setter={setOpenDaily} />)}
+              <div className='fifteen-percent invisi2'>
+                {openDaily === dailyId && (
+                  <EllipsisMenu formType='daily' id={dailyId} habitOrDaily={userDailies[dailyId]} setter={setOpenDaily} />)}
 
               </div>
-              </div>))}
-                  </div>
+            </div>))}
+        </div>
       </div>
     </>
   );
