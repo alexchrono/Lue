@@ -18,24 +18,30 @@ export default function Dailies({ user }) {
   const user2 = useSelector((state) => state.session.user);
   const userDailies = useSelector((state) => state.dailies.byId);
   const userArray = useSelector((state) => state.dailies.allIds);
+  const clickedEmoti= useSelector((state) => state.session.user.usersClickedDailies)
+  const [localArray,setLocalArray]=useState([])
   const [openDaily, setOpenDaily] = useState(null);
   const [errors, setErrors] = useState([]);
   const [showVictory, setShowVictory] = useState(false);
   const [victoryDeets, setVictoryDeets] = useState({})
   const [needsLoading, setNeedsLoading] = useState(true);
 
-  const handleCheckmark = (e, dailyId) => {
-    e.stopPropagation();
-    let newArray;
-    if (!clickedDailyCheck.includes(dailyId)) {
-      newArray = [...clickedDailyCheck, dailyId];
-      HandleGoldOrHurt(e, 'good', userDailies[dailyId].difficulty);
-    } else {
-      newArray = clickedDailyCheck.filter((ele) => ele !== dailyId);
-      HandleGoldOrHurt(e, 'ungood', userDailies[dailyId].difficulty);
-    }
-    setClickedDailyCheck(newArray);
-  };
+  useEffect(() => {
+    setLocalArray(clickedEmoti);
+  }, []);
+
+  // const handleCheckmark = (e, dailyId) => {
+  //   e.stopPropagation();
+  //   let newArray;
+  //   if (!clickedDailyCheck.includes(dailyId)) {
+  //     newArray = [...clickedDailyCheck, dailyId];
+  //     HandleGoldOrHurt(e, 'good', userDailies[dailyId].difficulty);
+  //   } else {
+  //     newArray = clickedDailyCheck.filter((ele) => ele !== dailyId);
+  //     HandleGoldOrHurt(e, 'ungood', userDailies[dailyId].difficulty);
+  //   }
+  //   setClickedDailyCheck(newArray);
+  // };
 
   const goodTranslator = {
     1: { gold: .12, exp: 1 },
@@ -44,24 +50,32 @@ export default function Dailies({ user }) {
     4: { gold: 2.4, exp: 14 }
   }
 
-  const HandleGoldOrHurt = async (e, goodOrBad, difficulty) => {
+  const HandleGoldOrHurt = async (e, goodOrBad, difficulty,dailyId) => {
     e.preventDefault();
+    const key='daily'
+    let copyArray=[...localArray]
+
     let change = {}
     switch (goodOrBad) {
       case 'good':
         change = goodTranslator[difficulty];
+
+        copyArray.push(dailyId)
+        setLocalArray(copyArray)
         break;
       case 'ungood':
         change = goodTranslator[difficulty];
         change.gold = -(change.gold);
         change.exp = -(change.exp);
+        copyArray=copyArray.filter((ele) => ele !== dailyId)
+        setLocalArray(copyArray)
         break;
       default:
         console.log('something went wrong with our switch')
     }
     if (change) {
       console.log('THE CHANG EISSSSSSSSSSSSS', change)
-      const test = await dispatch(ThunkEditHealth(change))
+      const test = await dispatch(ThunkEditHealth(change,copyArray,key))
       if (test.victory) {
         setShowVictory(true);
         setVictoryDeets(test.victoryDeets)
@@ -146,22 +160,24 @@ export default function Dailies({ user }) {
             <div className='habits-card'>
               <div className='fifteen-percent invisi2'></div>
               <div className='habits-card-center'>
-                <div className='bad-habit-emoti' onClick={(e) => handleCheckmark(e, dailyId)}>
+                <div className='bad-habit-emoti'>
                   {userDailies[dailyId]?.untouched ? (
                     <img
                       src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
                       className=' sadFace'
                       style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
                     />
-                  ) : clickedDailyCheck.includes(dailyId) ? (
+                  ) : localArray?.includes(dailyId) ? (
                     <img
                       src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
+                      onClick={(e) => HandleGoldOrHurt(e,'ungood', userDailies[dailyId].difficulty, dailyId)}
                       className='changeToHand sadFace'
                       style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
                     />
                   ) : (
                     <img
                       src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
+                      onClick={(e) => HandleGoldOrHurt(e,'good', userDailies[dailyId].difficulty, dailyId)}
                       className='changeToHand sadFace'
                       style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
                     />
