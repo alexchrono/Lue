@@ -26,10 +26,15 @@ export default function Habits({ user }) {
   const userHabits = useSelector((state) => state.habits.byId);
   const userArray = useSelector((state) => state.habits.allIds);
   const clickedEmoti= useSelector((state) => state.session.user.usersClickedHabits)
+  const [localArray,setLocalArray]=useState([])
   const [openHabit, setOpenHabit] = useState(null)
   const [showVictory, setShowVictory] = useState(false);
   const [victoryDeets, setVictoryDeets] = useState({})
   const [needsLoading, setNeedsLoading] = useState(true);
+
+  useEffect(() => {
+    setLocalArray(clickedEmoti);
+  }, []);
 
 
 
@@ -100,23 +105,23 @@ export default function Habits({ user }) {
 
     console.log('ENTERED HANDLE DISLIKE WITH HABIT ID OF',habitId)
     let change = {}
-    let copyArray= [...clickedEmoti]
+    let copyArray= [...localArray]
     console.log('copyArray starts off as',copyArray)
     switch (goodOrBad) {
       case 'bad':
         change.health = badTranslator[difficulty]
-        copyArray.push(habitId)
+        setLocalArray([...localArray,habitId])
         console.log('clicked bad*******COPY ARRAY IS NOW****', copyArray)
         break
       case 'unbad':
         change.health = -(badTranslator[difficulty])
-        copyArray = copyArray.filter((ele) => ele !== habitId)
+        setLocalArray(localArray.filter((ele) => ele !== habitId))
         //     setClickedEmoti(newArray)
         console.log('unclicked bad change COPY ARRAY IS NOW', copyArray)
         break
       case 'good':
         change = goodTranslator[difficulty]
-        copyArray.push(habitId)
+        setLocalArray([...localArray,habitId])
         console.log('POSITIVE CHANGE IS******COPY ARRAY IS NOW*****', copyArray)
         console.log('POSITIVE CHANGE in GOLD IS***********', change.gold)
         console.log('POSITIVE CHANGE IN EXP IS****', change.exp)
@@ -125,7 +130,7 @@ export default function Habits({ user }) {
         change = goodTranslator[difficulty]
         change.gold = -(change.gold)
         change.exp = -(change.exp)
-        copyArray = copyArray.filter((ele) => ele !== habitId)
+        setLocalArray(localArray.filter((ele) => ele !== habitId))
         console.log('UNDOING POSITIVE CHANGE IS*******COPY ARRAY IS NOW****', copyArray)
         console.log('UNDOING POSITIVE CHANGE in GOLD IS***********', change.gold)
         console.log('UNDOING POSITIVE CHANGE IN EXP IS****', change.exp)
@@ -136,7 +141,7 @@ export default function Habits({ user }) {
     }
 
     if (change) {
-      const test = await dispatch(ThunkEditHealth(change,copyArray,key))
+      const test = await dispatch(ThunkEditHealth(change,localArray,key))
 
       if (test.victory) {
         setShowVictory(true);
@@ -230,6 +235,7 @@ export default function Habits({ user }) {
   console.log('USER 2 .NEWUSER ISSSSSSSSSSSSSSSS')
 
   console.log("🚀 ~ file: index.js:216 ~ Habits ~ user2:", user2)
+  console.log("🚀 ~ file: index.js:239 ~ Habits ~ localArray:", localArray)
 
   return (
     <>
@@ -272,16 +278,16 @@ export default function Habits({ user }) {
                     userHabits[habitId].untouched ? (
                       <img
                         src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
-                        className={clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}
+                        className={localArray && localArray.includes(habitId) ? 'sadFace red' : 'sadFace'}
                         style={{ width: '100%', height: '100%', margin: '0' }}
                       />
                     ) : !userHabits[habitId].alignment ? (
                       <img
                         src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
-                        className={`changeToHand ${clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace red' : 'sadFace'}`}
+                        className={`changeToHand ${localArray && localArray.includes(habitId) ? 'sadFace red' : 'sadFace'}`}
                         style={{ width: '100%', height: '100%', margin: '0' }}
                         onClick={(e) => {
-                          if (clickedEmoti && clickedEmoti.includes(habitId)) {
+                          if (localArray && localArray.includes(habitId)) {
                             HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty,habitId)
 
 
@@ -296,11 +302,11 @@ export default function Habits({ user }) {
                     ) : (
                       <img
                         src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
-                        className={`changeToHand ${clickedEmoti && clickedEmoti.includes(habitId) ? 'sadFace green' : 'sadFace'}`}
+                        className={`changeToHand ${localArray && localArray.includes(habitId) ? 'sadFace green' : 'sadFace'}`}
                         style={{ width: '100%', height: '100%', margin: '0' }}
 
                         onClick={(e) => {
-                          if (clickedEmoti && clickedEmoti.includes(habitId)) {
+                          if (localArray && localArray.includes(habitId)) {
                             HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty,habitId)
 
 
