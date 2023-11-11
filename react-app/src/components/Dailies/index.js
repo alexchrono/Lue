@@ -7,12 +7,13 @@ import { ThunkNewDaily, ThunkGetAllDailies } from '../../store/daily';
 import { ThunkEditHealth } from '../../store/session';
 import ErrorComponent from '../errorShow';
 import ShowVictory from '../ShowVictory';
+import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 
 export default function Dailies({ user }) {
   const [daily, setDaily] = useState('');
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [clickedDailyCheck, setClickedDailyCheck] = useState([]);
-  const ulRef = useRef();
+  // const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
   const userDailies = useSelector((state) => state.dailies.byId);
@@ -28,10 +29,10 @@ export default function Dailies({ user }) {
     let newArray;
     if (!clickedDailyCheck.includes(dailyId)) {
       newArray = [...clickedDailyCheck, dailyId];
-      HandleDislikeOrLike(e, 'good', userDailies[dailyId].difficulty);
+      HandleGoldOrHurt(e, 'good', userDailies[dailyId].difficulty);
     } else {
       newArray = clickedDailyCheck.filter((ele) => ele !== dailyId);
-      HandleDislikeOrLike(e, 'ungood', userDailies[dailyId].difficulty);
+      HandleGoldOrHurt(e, 'ungood', userDailies[dailyId].difficulty);
     }
     setClickedDailyCheck(newArray);
   };
@@ -43,7 +44,7 @@ export default function Dailies({ user }) {
     4: { gold: 2.4, exp: 14 }
   }
 
-  const HandleDislikeOrLike = async (e, goodOrBad, difficulty) => {
+  const HandleGoldOrHurt = async (e, goodOrBad, difficulty) => {
     e.preventDefault();
     let change = {}
     switch (goodOrBad) {
@@ -99,18 +100,18 @@ export default function Dailies({ user }) {
     }
   }, [user2,dispatch,needsLoading]);
 
-  useEffect(() => {
-    if (!showMenu) return;
-    const closeMenu = (e) => {
-      if (!ulRef?.current?.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
-    document.addEventListener("click", closeMenu);
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  // useEffect(() => {
+  //   if (!showMenu) return;
+  //   const closeMenu = (e) => {
+  //     if (!ulRef?.current?.contains(e.target)) {
+  //       setShowMenu(false);
+  //     }
+  //   };
+  //   document.addEventListener("click", closeMenu);
+  //   return () => document.removeEventListener("click", closeMenu);
+  // }, [showMenu]);
 
-  const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
+  // const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
@@ -121,12 +122,19 @@ export default function Dailies({ user }) {
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
           <div className='forty-percent'>
             <form onSubmit={MakeNewDaily}>
+            <div className='forgigs'>
               <input
                 type="text"
+                className='special90'
                 value={daily}
                 onChange={(e) => setDaily(e.target.value)}
-                required
+                // required
               />
+              <div class='tenpercent'>
+                <button type='submit'><img
+                      src={`${process.env.PUBLIC_URL}/icons/fi-plus-fndtn.svg`}></img></button>
+              </div>
+              </div>
             </form>
           </div>
           <div className='fifteen-percent menu-text'>Due Today</div>
@@ -135,8 +143,8 @@ export default function Dailies({ user }) {
         </div>
         <div className='allHabits'>
         {userArray?.map((dailyId, index) => (
-          <div className='habits-card' key={dailyId}>
-            <div className='fifteen-percent invisi'></div>
+          <div className='habits-card'>
+            <div className='fifteen-percent invisi2'></div>
             <div className='habits-card-center'>
               <div className='bad-habit-emoti' onClick={(e) => handleCheckmark(e, dailyId)}>
                 {userDailies[dailyId]?.untouched ? (
@@ -170,58 +178,18 @@ export default function Dailies({ user }) {
                   onClick={(e) => {
                     e.stopPropagation();
                     handleEllipsisClick(dailyId);
-                    setShowMenu(true);
+                    // setShowMenu(true);
                   }}
                 />
               </div>
             </div>
-            {openDaily === dailyId && showMenu && (
-              <div className='fifteen-percent no-border'>
-                <div className='backG'>
-                  <ul className={ulClassName} ref={ulRef}>
-                    <li>
-                      <OpenModalButton
-                        buttonText={
-                          <>
-                            <span className="menu-icon">
-                              <img
-                                src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`}
-                                className='ellipsis-pic'
-                              />
-                            </span>
-                            Edit
-                          </>
-                        }
-                        modalComponent={<EditDailyModal dailyId={dailyId} daily={userDailies[dailyId]} />}
-                        onClick={() => setShowMenu(false)}
-                      />
-                    </li>
-                    <li>To Top</li>
-                    <li>To Bottom</li>
-                    <li>
-                      <OpenModalButton
-                        buttonText={
-                          <>
-                            <span className="menu-icon">
-                              <img
-                                src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`}
-                                className='ellipsis-pic'
-                              />
-                            </span>
-                            Delete
-                          </>
-                        }
-                        modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} />}
-                        onClick={() => setShowMenu(false)}
-                      />
-                    </li>
-                  </ul>
-                </div>
+            <div className='fifteen-percent invisi2'>
+            {openDaily === dailyId && (
+              <EllipsisMenu formType='daily' id={dailyId}  habitOrDaily={userDailies[dailyId]} setter={setOpenDaily} />)}
+
               </div>
-            )}
-          </div>
-        ))}
-        </div>
+              </div>))}
+                  </div>
       </div>
     </>
   );

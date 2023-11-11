@@ -221,7 +221,7 @@ export default function Habits({ user }) {
   return (
     <>
       {user2?.newUser && (<ShowVictory formType='newUser' setVictory={setShowVictory} victoryDeets={victoryDeets}/>)}
-      {errors?.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
+      {/* {errors?.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)} */}
       {errors?.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
       {showVictory && <ShowVictory  formType={'levelUp'}setVictory={setShowVictory} victoryDeets={victoryDeets}/>}
       <div className='habits'>
