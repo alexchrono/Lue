@@ -7,6 +7,7 @@ import { ThunkNewHabit } from '../../store/habit';
 import { ThunkGetAllHabits } from '../../store/habit';
 import { ThunkEditHealth } from '../../store/session';
 import ErrorComponent from '../errorShow';
+import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 import ShowVictory from '../ShowVictory';
 
 export default function Habits({ user }) {
@@ -14,6 +15,8 @@ export default function Habits({ user }) {
   const [showMenu, setShowMenu] = useState(false);
   const [clickedEmoti, setClickedEmoti] = useState([])
   const [errors, setErrors] = useState([]);
+  const [hideModal,setHideModal]=useState(false)
+
 
 
   const ulRef = useRef();
@@ -323,54 +326,15 @@ export default function Habits({ user }) {
                     e.stopPropagation();
                     handleEllipsisClick(habitId);
                     openMenu()
-
                   }}
                 />
               </div>
             </div>
             <div className='fifteen-percent invisi2'>
-            {openHabit === habitId && showMenu && (
+            {openHabit === habitId && showMenu  && (
+<EllipsisMenu formType='habit' id={habitId} setShowMenu={setShowMenu} habitOrDaily={userHabits[habitId]} setter={setOpenHabit} />)}
 
-                <div className='backG'>
-                  <ul className={ulClassName} ref={ulRef}>
-                    <li>
-                      <OpenModalButton
-                        buttonText={
-                          <>
-                            <span className="menu-icon">
-                              <img
-                                src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`}
-                                className='ellipsis-pic'
-                              />
-                            </span> Edit
-                          </>
-                        }
-                        modalComponent={<EditHabitModal habitId={habitId} habit={userHabits[habitId]} />}
-                        onClick={() => setShowMenu(false)}
-                      />
-                    </li>
-                    <li>To Top</li>
-                    <li>To Bottom</li>
-                    <li>
-                      <OpenModalButton
-                        buttonText={
-                          <>
-                            <span className="menu-icon">
-                              <img
-                                src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`}
-                                className='ellipsis-pic'
-                              />
-                            </span> Delete
-                          </>
-                        }
-                        modalComponent={<DeleteHabitOrDaily formType={'habit'} targetId={habitId} title={userHabits[habitId].title} />}
-                        onClick={() => setShowMenu(false)}
-                      />
-                    </li>
-                  </ul>
-                </div>
-
-            )}</div>
+            </div>
           </div>))}
                   </div>
       </div>
