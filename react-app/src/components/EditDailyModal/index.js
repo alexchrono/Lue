@@ -7,7 +7,7 @@ import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 import { ThunkEditDaily } from "../../store/daily";
 
 
-export default function EditDailyModal({ dailyId, daily }) {
+export default function EditDailyModal({ dailyId, daily, setter }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");

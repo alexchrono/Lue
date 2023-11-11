@@ -12,7 +12,7 @@ import ShowVictory from '../ShowVictory';
 
 export default function Habits({ user }) {
   const [habit, setHabit] = useState('');
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [clickedEmoti, setClickedEmoti] = useState([])
   const [errors, setErrors] = useState([]);
   const [hideModal,setHideModal]=useState(false)
@@ -37,10 +37,10 @@ export default function Habits({ user }) {
   // const userHabits=user2.usersHabitsObj
   // const userArray=user2.usersHabitsArray
 
-  const openMenu = () => {
-    if (showMenu) return;
-    setShowMenu(true);
-  };
+  // const openMenu = () => {
+  //   if (showMenu) return;
+  //   setShowMenu(true);
+  // };
 
   const badTranslator = {
     1: -0.2,
@@ -194,24 +194,24 @@ export default function Habits({ user }) {
     }
   }, [user2,dispatch,needsLoading]);
 
-  useEffect(() => {
-    if (!showMenu) return;
+  // useEffect(() => {
+  //   if (!showMenu) return;
 
-    const closeMenu = (e) => {
-      if (ulRef.current && !ulRef?.current?.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
+  //   // // const closeMenu = (e) => {
+  //   // //   if (ulRef.current && !ulRef?.current?.contains(e.target)) {
+  //   // //     setShowMenu(false);
+  //   // //   }
+  //   // // };
 
-    document.addEventListener('click', closeMenu);
+  //   // document.addEventListener('click', closeMenu);
 
-    return () => document.removeEventListener('click', closeMenu);
+  //   // return () => document.removeEventListener('click', closeMenu);
 
 
 
-  }, [showMenu, userArray, userHabits]);
+  // }, [showMenu, userArray, userHabits]);
 
-  const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
+  // const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
 
   console.log('IN HABITS USER 2 IS LIKE*****',user2)
   console.log('USER 2 .NEWUSER ISSSSSSSSSSSSSSSS')
@@ -325,14 +325,14 @@ export default function Habits({ user }) {
                   onClick={(e) => {
                     e.stopPropagation();
                     handleEllipsisClick(habitId);
-                    openMenu()
+                    // openMenu()
                   }}
                 />
               </div>
             </div>
             <div className='fifteen-percent invisi2'>
-            {openHabit === habitId && showMenu  && (
-<EllipsisMenu formType='habit' id={habitId} setShowMenu={setShowMenu} habitOrDaily={userHabits[habitId]} setter={setOpenHabit} />)}
+            {openHabit === habitId  && (
+<EllipsisMenu formType='habit' id={habitId}  habitOrDaily={userHabits[habitId]} setter={setOpenHabit} />)}
 
             </div>
           </div>))}

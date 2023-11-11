@@ -7,7 +7,7 @@ import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 import { ThunkEditHabit } from "../../store/habit";
 
 
-export default function EditHabitModal({ habitId, habit }) {
+export default function EditHabitModal({ habitId, habit, setter }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -19,7 +19,9 @@ export default function EditHabitModal({ habitId, habit }) {
   const [alignment, setAlignment] = useState(true)
   const { closeModal } = useModal();
   const userHabits = useSelector((state) => state.session.user.usersHabitsObj);
-
+  useEffect(()=>{
+    setter(null)
+  },[setter])
 
   useEffect(() => {
     if (habit) {

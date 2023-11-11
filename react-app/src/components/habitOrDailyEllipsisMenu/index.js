@@ -5,7 +5,7 @@ import EditHabitModal from "../EditHabitModal";
 import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 import './ellipsis.css';
 
-export default function EllipsisMenu({ formType, id, setShowMenu, habitOrDaily,setter }) {
+export default function EllipsisMenu({ formType, id, habitOrDaily,setter }) {
     const { closeModal } = useModal();
 
     return (
@@ -13,15 +13,11 @@ export default function EllipsisMenu({ formType, id, setShowMenu, habitOrDaily,s
             <ul className='ellipsa'>
                 <li>
                     <OpenModalButton
-                        buttonText={<button className="menu-item-button"  onClick={async(e)=>{
-                            e.stopPropagation()
-                            await setShowMenu(false);
-                            await setter(null)}
-                        } >Edit</button>}
+                        buttonText={<button className="menu-item-button"   >Edit</button>}
                         modalComponent={
                             formType === 'habit'
-                                ? <EditHabitModal habitId={id} habit={habitOrDaily} />
-                                : <EditDailyModal dailyId={id} daily={habitOrDaily} />
+                                ? <EditHabitModal habitId={id} habit={habitOrDaily} setter={setter} />
+                                : <EditDailyModal dailyId={id} daily={habitOrDaily} setter={setter}/>
                         }
 
                     />
@@ -41,7 +37,7 @@ export default function EllipsisMenu({ formType, id, setShowMenu, habitOrDaily,s
                                 ? <DeleteHabitOrDaily formType={'habit'} targetId={id} title={habitOrDaily.title} />
                                 : <DeleteHabitOrDaily formType={'daily'} targetId={id} title={habitOrDaily.title} />
                         }
-                        onClick={() => setShowMenu(false)}
+                        onClick={() => {return 7}}
                     />
                 </li>
             </ul>
