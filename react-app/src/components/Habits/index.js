@@ -144,6 +144,7 @@ export default function Habits({ user }) {
 
     }
 
+    
     if (change) {
       const test = await dispatch(ThunkEditHealth(change,copyArray,key))
 
