@@ -14,7 +14,7 @@ import ShowVictory from '../ShowVictory';
 export default function Habits({ user }) {
   const [habit, setHabit] = useState('');
   // const [showMenu, setShowMenu] = useState(false);
-  const [clickedEmoti, setClickedEmoti] = useState([])
+  // const [clickedEmoti, setClickedEmoti] = useState([])
   const [errors, setErrors] = useState([]);
   const [hideModal, setHideModal] = useState(false)
 
@@ -25,6 +25,7 @@ export default function Habits({ user }) {
   const user2 = useSelector((state) => state.session.user);
   const userHabits = useSelector((state) => state.habits.byId);
   const userArray = useSelector((state) => state.habits.allIds);
+  const clickedEmoti= useSelector((state) => state.session.user.usersClickedHabits)
   const [openHabit, setOpenHabit] = useState(null)
   const [showVictory, setShowVictory] = useState(false);
   const [victoryDeets, setVictoryDeets] = useState({})
@@ -68,17 +69,17 @@ export default function Habits({ user }) {
     }
   }
 
-  const handleEmotiClick = (habitId) => {
-    let newArray = []
-    if (!clickedEmoti.includes(habitId)) {
-      setClickedEmoti([...clickedEmoti, habitId])
-    }
-    else {
-      newArray = clickedEmoti.filter((ele) => ele !== habitId)
-      setClickedEmoti(newArray)
-    }
-    // setIsDone(!isDone);
-  };
+  // const handleEmotiClick = (habitId) => {
+  //   let newArray = []
+  //   if (!clickedEmoti.includes(habitId)) {
+  //     setClickedEmoti([...clickedEmoti, habitId])
+  //   }
+  //   else {
+  //     newArray = clickedEmoti.filter((ele) => ele !== habitId)
+  //     setClickedEmoti(newArray)
+  //   }
+  //   // setIsDone(!isDone);
+  // };
 
   const MakeNewHabit = async (e) => {
     e.preventDefault();
@@ -93,24 +94,29 @@ export default function Habits({ user }) {
     }
   };
 
-  const HandleDislikeOrLike = async (e, goodOrBad, difficulty) => {
+  const HandleDislikeOrLike = async (e, goodOrBad, difficulty,habitId) => {
     e.preventDefault();
 
-    console.log('THIS IS A DISLIKE WE INSIDE THE FUNCTION')
-    console.log('good or bad is ', goodOrBad)
+    console.log('ENTERED HANDLE DISLIKE WITH HABIT ID OF',habitId)
     let change = {}
+    let copyArray= [...clickedEmoti]
+    console.log('copyArray starts off as',copyArray)
     switch (goodOrBad) {
       case 'bad':
         change.health = badTranslator[difficulty]
-        console.log('CHANGE IS***********', change)
+        copyArray.push(habitId)
+        console.log('clicked bad*******COPY ARRAY IS NOW****', copyArray)
         break
       case 'unbad':
         change.health = -(badTranslator[difficulty])
-        console.log('unclicked bad change change is', change)
+        copyArray = copyArray.filter((ele) => ele !== habitId)
+        //     setClickedEmoti(newArray)
+        console.log('unclicked bad change COPY ARRAY IS NOW', copyArray)
         break
       case 'good':
         change = goodTranslator[difficulty]
-        console.log('POSITIVE CHANGE IS***********', change)
+        copyArray.push(habitId)
+        console.log('POSITIVE CHANGE IS******COPY ARRAY IS NOW*****', copyArray)
         console.log('POSITIVE CHANGE in GOLD IS***********', change.gold)
         console.log('POSITIVE CHANGE IN EXP IS****', change.exp)
         break
@@ -118,7 +124,8 @@ export default function Habits({ user }) {
         change = goodTranslator[difficulty]
         change.gold = -(change.gold)
         change.exp = -(change.exp)
-        console.log('UNDOING POSITIVE CHANGE IS***********', change)
+        copyArray = copyArray.filter((ele) => ele !== habitId)
+        console.log('UNDOING POSITIVE CHANGE IS*******COPY ARRAY IS NOW****', copyArray)
         console.log('UNDOING POSITIVE CHANGE in GOLD IS***********', change.gold)
         console.log('UNDOING POSITIVE CHANGE IN EXP IS****', change.exp)
         break
@@ -128,7 +135,7 @@ export default function Habits({ user }) {
     }
 
     if (change) {
-      const test = await dispatch(ThunkEditHealth(change))
+      const test = await dispatch(ThunkEditHealth(change,copyArray))
 
       if (test.victory) {
         setShowVictory(true);
@@ -195,6 +202,10 @@ export default function Habits({ user }) {
     }
   }, [user2, dispatch, needsLoading]);
 
+  useEffect(() => {
+
+  },[userArray])
+
   // useEffect(() => {
   //   if (!showMenu) return;
 
@@ -218,7 +229,7 @@ export default function Habits({ user }) {
   console.log('USER 2 .NEWUSER ISSSSSSSSSSSSSSSS')
 
   console.log("🚀 ~ file: index.js:216 ~ Habits ~ user2:", user2)
-  console.log("🚀 ~ file: index.js:216 ~ Habits ~ user2.newUser:", user2.newUser)
+
   return (
     <>
       {user2?.newUser && (<ShowVictory formType='newUser' setVictory={setShowVictory} victoryDeets={victoryDeets} />)}
@@ -255,16 +266,7 @@ export default function Habits({ user }) {
             <div className='habits-card'>
               <div className='fifteen-percent invisi2'></div>
               <div className='habits-card-center'>
-                <div className='bad-habit-emoti' onClick={(e) => {
-                  e.stopPropagation();
-                  if (!userHabits[habitId].untouched) {
-                    handleEmotiClick(habitId)
-                  }
-                  else {
-                    console.log('HIT OUR RELSE WE CLICKING NORMAL PC')
-                    // <ErrorComponent errorMessage={'You need to edit this habit before it becomes active'} setErrors={setErrors} setHabit={setHabit} />
-                  }
-                }}>
+                <div className='bad-habit-emoti'>
                   {user2 && userHabits[habitId] ? (
                     userHabits[habitId].untouched ? (
                       <img
@@ -279,13 +281,13 @@ export default function Habits({ user }) {
                         style={{ width: '100%', height: '100%', margin: '0' }}
                         onClick={(e) => {
                           if (clickedEmoti && clickedEmoti.includes(habitId)) {
-                            HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty)
+                            HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty,habitId)
 
 
                             console.log('*************OK WE GOT CHANGE THIS UNDOES THE NEGATIVE EFFECTS')
                           }
                           else {
-                            HandleDislikeOrLike(e, 'bad', userHabits[habitId].difficulty)
+                            HandleDislikeOrLike(e, 'bad', userHabits[habitId].difficulty,habitId)
                             console.log('**********OK WE GOT CHANGE THIS TAKES AWAY HP')
                           }
                         }}
@@ -298,13 +300,13 @@ export default function Habits({ user }) {
 
                         onClick={(e) => {
                           if (clickedEmoti && clickedEmoti.includes(habitId)) {
-                            HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty)
+                            HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty,habitId)
 
 
                             console.log('*************OK WE GOT CHANGE THIS UNDOES THE CLICK OF A POSITIVE EFFECT')
                           }
                           else {
-                            HandleDislikeOrLike(e, 'good', userHabits[habitId].difficulty)
+                            HandleDislikeOrLike(e, 'good', userHabits[habitId].difficulty,habitId)
                             console.log('**********OK WE GOT CHANGE THIS POSITIVVE CHANGE THIS ADDS GOLD AND EXP')
                           }
                         }}
