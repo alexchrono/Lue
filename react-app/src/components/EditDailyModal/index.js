@@ -30,6 +30,9 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
 
   }
 
+  useEffect(()=>{
+    setter(null)
+  },[setter])
   useEffect(() => {
     if (daily) {
       setTitle(daily?.title)
