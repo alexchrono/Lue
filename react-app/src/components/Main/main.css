@@ -223,7 +223,6 @@ form textarea {
 
 .habits-card-center {
     width: 70%;
-    border: 5px solid black;
     box-sizing: border-box;
     height: 100%;
     display: flex;

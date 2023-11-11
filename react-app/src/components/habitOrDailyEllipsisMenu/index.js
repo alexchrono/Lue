@@ -3,10 +3,13 @@ import OpenModalButton from "../OpenModalButton";
 import EditDailyModal from "../EditDailyModal";
 import EditHabitModal from "../EditHabitModal";
 import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
+import { useDispatch, useSelector } from "react-redux";
+import { ThunkMoveHabitBottom } from "../../store/habit";
 import './ellipsis.css';
 
 export default function EllipsisMenu({ formType, id, habitOrDaily,setter }) {
     const { closeModal } = useModal();
+    const dispatch=useDispatch()
 
     return (
         <div className='backGa'>
@@ -26,7 +29,11 @@ export default function EllipsisMenu({ formType, id, habitOrDaily,setter }) {
                     <button className="menu-item-button">To Top</button>
                 </li>
                 <li>
-                    <button className="menu-item-button">To Bottom</button>
+                    <button className="menu-item-button" onClick={async(e)=>{
+                        formType==='habit' && (
+                         await dispatch(ThunkMoveHabitBottom(habitOrDaily)))
+                        // : await dispatch(ThunkMoveDailyBottom(habitOrDaily))
+                    }}>To Bottom</button>
                 </li>
                 <li>
                     <OpenModalButton
