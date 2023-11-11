@@ -34,8 +34,8 @@ export default function EllipsisMenu({ formType, id, habitOrDaily,setter }) {
                         buttonText={<button className="menu-item-button">Delete</button>}
                         modalComponent={
                             formType === 'habit'
-                                ? <DeleteHabitOrDaily formType={'habit'} targetId={id} title={habitOrDaily.title} />
-                                : <DeleteHabitOrDaily formType={'daily'} targetId={id} title={habitOrDaily.title} />
+                                ? <DeleteHabitOrDaily formType={'habit'} targetId={id} title={habitOrDaily.title} setter={setter}/>
+                                : <DeleteHabitOrDaily formType={'daily'} targetId={id} title={habitOrDaily.title} setter={setter}/>
                         }
                         onClick={() => {return 7}}
                     />
