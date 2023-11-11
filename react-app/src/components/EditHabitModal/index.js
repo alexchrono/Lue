@@ -37,7 +37,7 @@ export default function EditHabitModal({ habitId, habit, setter }) {
 
         setNotes(habit?.notes)
         setAlignment(habit?.alignment)
-        setDifficulty(habit?.difficulty)
+        setDifficulty(habit?.difficulty.toString())
         setResetRate(habit?.resetRate)
       }
     }
@@ -191,7 +191,7 @@ export default function EditHabitModal({ habitId, habit, setter }) {
 
                 <select name='difficulty' id='difficulty' value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
                   <option value='' disabled>Difficulty Level</option>
-                  <option value="1">No Sweat</option>
+                  <option value='1'>No Sweat</option>
                   <option value='2'>Bit of Sweat</option>
                   <option value='3'>Hard Work</option>
                   <option value='4'>Super duper Challenging!</option>

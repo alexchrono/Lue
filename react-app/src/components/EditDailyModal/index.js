@@ -37,14 +37,14 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
       const formattedStartDate = starDate?.toISOString().split('T')[0];
       setStartDate(formattedStartDate)
       if (daily.untouched) {
-        setNotes('optional')
+        console.log('THIS DAILY IS UNTOUCHED')
         setDifficulty('')
         setRepeatTimeFrame('')
         setRepeatRateNumbers(1)
 
       } else {
         setNotes(daily?.notes)
-        setDifficulty(daily?.difficulty)
+        setDifficulty(daily?.difficulty.toString())
         setRepeatTimeFrame(daily?.repeatTimeFrame)
 
         setRepeatRateNumbers(parseInt(daily?.repeatQuantity))
@@ -63,7 +63,7 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
     if (!title || title.length < 3 || title.length > 30) {
       custError(err, 'title', 'Title is required and must be between 3 and 30 characters');
     }
-    if (![1, 2, 3, 4].includes(difficulty)) {
+    if (!["1", "2","3", "4"].includes(difficulty)) {
       custError(err, 'difficulty', 'Difficulty field is required. Please enter valid selection from dropdown');
     }
     if (repeatTimeFrame === '' || !['daily', 'weekly', 'monthly'].includes(repeatTimeFrame)) {
@@ -151,7 +151,7 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
 
               <label>
 
-                Difficulty Level:
+               {!daily.untouched && ('Difficulty Level:')}
 
                 <select name='difficulty' id='difficulty' value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
                   <option value='' disabled>Difficulty Level</option>
