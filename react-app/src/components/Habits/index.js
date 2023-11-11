@@ -10,6 +10,7 @@ import ErrorComponent from '../errorShow';
 import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 import ShowVictory from '../ShowVictory';
 
+
 export default function Habits({ user }) {
   const [habit, setHabit] = useState('');
   // const [showMenu, setShowMenu] = useState(false);
