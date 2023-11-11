@@ -34,7 +34,7 @@
     align-items: center;
     font-size: 3em;
     text-align: center;
-    margin: 0px;
+    margin-bottom: 0px;
     padding: 0px;
 }
 
@@ -70,4 +70,23 @@ ul li {
     list-style-type: circle;
     margin-block-start: 0px;
     margin-block-end: 0px;
+}
+
+.letsMakePretty {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 12px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+
+}
+
+.letsMakePretty:hover {
+    color: black;
 }

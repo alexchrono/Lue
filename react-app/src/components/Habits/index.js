@@ -144,7 +144,7 @@ export default function Habits({ user }) {
 
     }
 
-    
+
     if (change) {
       const test = await dispatch(ThunkEditHealth(change,copyArray,key))
 
@@ -330,8 +330,8 @@ export default function Habits({ user }) {
 
                 </div>
                 <div className='main-body-habit-card'>
-                  <h3>{userHabits[habitId]?.title}</h3>
-                  <p>{
+                  <h3 className='topOfCard'>{userHabits[habitId]?.title}</h3>
+                  <p className='bottOfCard'>{
                     userHabits[habitId]?.notes && userHabits[habitId]?.notes.length > 46
                       ? userHabits[habitId]?.notes.substring(0, userHabits[habitId]?.notes.lastIndexOf(' ', 46)) + '...'
                       : userHabits[habitId]?.notes
