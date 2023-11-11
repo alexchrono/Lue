@@ -43,6 +43,7 @@ export default function EditHabitModal({ habitId, habit, setter }) {
     }
   }, [userHabits, habitId, habit]);
 
+  
   function custError(err,field,message){
     if (!err.errors) {
         err.errors={}}
