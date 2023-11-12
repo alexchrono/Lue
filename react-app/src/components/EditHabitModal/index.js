@@ -168,7 +168,7 @@ export default function EditHabitModal({ habitId, habit, setter }) {
                     src={`${process.env.PUBLIC_URL}/icons/face-tired-fa.svg`}
                     onClick={() => handlePicClick(false)}
 
-                    className={!alignment && !picPass ? 'sadFace blueborder' : 'sadFace'}
+                    className={!alignment && !picPass ? 'sadFace blueborder' : 'sadFace invisiborder'}
                     alt="Bad Habit"
                   />
                   <p className="pic-caption">Bad Habit</p>
@@ -178,7 +178,7 @@ export default function EditHabitModal({ habitId, habit, setter }) {
                   <img
                     src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
                     onClick={() => handlePicClick(true)}
-                    className={alignment && !picPass ? 'happyFace blueborder' : 'happyFace'}
+                    className={alignment && !picPass ? 'happyFace blueborder' : 'happyFace invisiborder'}
                     alt="Good Habit"
                   />
                   <p className="pic-caption">Good Habit</p>
@@ -225,24 +225,21 @@ export default function EditHabitModal({ habitId, habit, setter }) {
         </div>
         <div className='allButtons'>
         <div className='editButtons'>
-        <button className='cancel' type='button' onClick={closeModal}>
+        <button className='letsMakePretty' type='button' onClick={closeModal}>
               Cancel
             </button>
-            <button className='save' type='button' onClick={handleSubmit}>
-              Save
+            <button className='letsMakePretty' type='button' onClick={handleSubmit}>
+            &nbsp;Save&nbsp;
             </button>
             </div>
             <div className='deleteButton'>
         <OpenModalButton
-          buttonText={
-            <>
-              <span className="menu-icon">
+        className='canImess'
+          buttonText={<button className="letsMakePrettyDangerous">Delete</button>}
 
-              </span>{" "}
-              Delete
-            </>
-          }
-          modalComponent={<DeleteHabitOrDaily formType={'habit'} targetId={habitId} title={userHabits[habitId]?.title} />}
+          modalComponent={<DeleteHabitOrDaily formType={'habit'} targetId={habitId} title={userHabits[habitId]?.title} setter={(something)=>{
+            return something
+          }}/>}
         // onClick={() => setShowMenu(false)}
         />
       </div>
