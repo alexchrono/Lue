@@ -332,6 +332,9 @@ form textarea {
 form select {
     width: 100%;
     text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
 .special90 {
@@ -524,7 +527,7 @@ font-size: 1em;
 }
 
 .overallSizeEditModal{
-    z-index:10000;
+    z-index: index 9000;
     background: rgb(63,136,185);
     background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
     max-width: 600px;
