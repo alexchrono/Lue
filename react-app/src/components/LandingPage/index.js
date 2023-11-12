@@ -181,6 +181,7 @@ export default function LandingPage() {
                     />
 
                     <button
+                    type='button'
                         className="letsMakePretty"
                         onClick={() => document.getElementById('fileInput').click()}
                     >

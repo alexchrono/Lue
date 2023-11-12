@@ -527,6 +527,9 @@ font-size: 1em;
     z-index:10000;
     background: rgb(63,136,185);
     background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
+
+    /* background: rgb(63,136,185);
+background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, rgba(78,156,171,1) 100%); */
 }
 .deleteButton button {
     margin: 10px;
