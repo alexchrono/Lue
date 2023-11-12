@@ -220,23 +220,17 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
         </div>
         <div className='allButtons'>
         <div className='editButtons'>
-        <button className='cancel' type='button' onClick={closeModal}>
+        <button className='letsMakePretty' type='button' onClick={closeModal}>
               Cancel
             </button>
-            <button className='save' type='button' onClick={handleSubmit}>
-              Save
+            <button className='letsMakePretty' type='button' onClick={handleSubmit}>
+            &nbsp;Save&nbsp;
             </button>
           </div>
           <div className='deleteButton'>
         <OpenModalButton
-          buttonText={
-            <>
-              <span className="menu-icon">
-
-              </span>{" "}
-              Delete
-            </>
-          }
+        className='canImess'
+          buttonText={<button className="letsMakePrettyDangerous">Delete</button>}
           modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} setter={(something)=>{
             return something
           }}/>}
