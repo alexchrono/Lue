@@ -237,7 +237,9 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
               Delete
             </>
           }
-          modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} />}
+          modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} setter={(something)=>{
+            return something
+          }}/>}
         // onClick={() => setShowMenu(false)}
         />
         </div>

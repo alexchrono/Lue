@@ -525,6 +525,7 @@ font-size: 1em;
 
 .overallSizeEditModal{
     z-index:10000;
+    background-color:#bc4af4
 }
 .deleteButton button {
     margin: 10px;
