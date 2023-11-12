@@ -26,7 +26,7 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                     <p className='para'>{victoryDeets.healthIncrease}</p>
                     <p className='para'>{victoryDeets.nextLevel}</p>
                     <p className='para'>{victoryDeets.endingLine}</p>
-                    <button onClick={() => {
+                    <button className='letsMakePretty'onClick={() => {
                         setVictory(false);
                         closeModal();
                     }}>Ok</button>
@@ -44,7 +44,7 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                     <p className='para'>Getting started on anything can be hard...especially when it comes to changing your life. Luckily for you, we are here to help.</p>
                     <p className='para'>We already started you out with two cards you can edit.  When you are ready to begin your adventure, click "Next".</p>
                     <div className='button'>
-                        <button onClick={() => {
+                        <button className='letsMakePretty' onClick={() => {
                             setForm1(false);
                             setForm2(true);
                         }}>Next</button>
@@ -71,7 +71,7 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                     <p className='para'>Welcome to level up everything- may you enjoy your journey of self improvement. Best of luck!</p> */}
 
 <div className='button'>
-                        <button onClick={() => {
+                        <button className='letsMakePretty' onClick={() => {
                             setForm2(false);
                             setForm3(true);
                         }}>Next</button>
@@ -90,7 +90,7 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                 <p></p>
                 <p>Once Again, welcome to Level Up Everything.  You are now free to start your journey.</p>
                 <div className='button'>
-<button onClick={async () => {
+<button className='letsMakePretty' onClick={async () => {
     setForm3(false)
     setVictory(false);
     await dispatch(ThunkEditNewUser());
