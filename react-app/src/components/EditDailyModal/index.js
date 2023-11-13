@@ -114,7 +114,7 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
       <div className='overallSizeEditModal'>
         <div className='topEditContainer'>
           <div className='editHabit'>
-            <h1>Edit Daily</h1>
+            <h1 className='welcomeCongrats3'>Edit Daily</h1>
           </div>
           <div className='buttonsEditHabit'>
 

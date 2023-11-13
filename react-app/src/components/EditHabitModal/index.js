@@ -125,7 +125,7 @@ export default function EditHabitModal({ habitId, habit, setter }) {
       <div className='overallSizeEditModal'>
         <div className='topEditContainer'>
           <div className='editHabit'>
-            <h1>Edit Habit</h1>
+            <h1 className='welcomeCongrats3'>Edit Habit</h1>
           </div>
           <div className='buttonsEditHabit'>
 
