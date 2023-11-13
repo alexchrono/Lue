@@ -7,7 +7,7 @@ from icecream import ic
 from app.api.aws_helpers import upload_file_to_s3, get_unique_filename,remove_file_from_s3
 from decimal import Decimal
 
-auth_routes = Blueprint('auth', __name__)
+auth_routes = Blueprint("auth", __name__)
 
 level_titles = {
     1: 'Novice',
@@ -101,6 +101,7 @@ def sign_up():
             image.filename = get_unique_filename(image.filename)
 
             upload = upload_file_to_s3(image)
+            ic(upload)
             if "url" not in upload:
                 return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
             url=upload['url']
