@@ -49,8 +49,10 @@ const ourName='steve'
 
   return (
     <>
-      <h1>Are you sure you want to delete the {ourDisplay}</h1>
-      <h3>{title} ? </h3>
+    <div className='overallSizeEditModal'>
+
+      <h1 className='welcomeCongrats4'>Are you sure you want to delete the {ourDisplay}</h1>
+      <p className='endofdays'>{title} ? </p>
       <div className="alignment-choice">
 
 <div className="pic-container">
@@ -72,6 +74,7 @@ const ourName='steve'
     />
     <p className="pic-caption">Yes I'm Sure- delete</p>
   </div>
+</div>
 </div>
     </>
   );
