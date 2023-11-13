@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .profile-dropdown {
   position: absolute;
   /* text-decoration: none; */
@@ -6,6 +8,7 @@
   white-space: nowrap;
   max-width: calc(100vw - 10px);
   box-sizing: border-box;
+  z-index: 10000;
 
 }
 
@@ -13,6 +16,7 @@
   padding: 3px;
   white-space: normal;
   border: 2px solid transparent;
+
 }
 
 .profile-dropdown li:hover {
@@ -45,6 +49,7 @@ border: 2px dotted black;
   /* height: 100%;
   max-height: 100%; */
 }
+
 
 .dropdown button:hover {
 cursor: pointer
@@ -119,10 +124,11 @@ ul li {
 .fancy-text {
   flex-basis: 80%;
   align-items: center;
+  font-family: 'Press Start 2P';
 
   display: flex;
   justify-content: center;
-  font-size:4em;
+  font-size:3em;
 }
 
 .currentHealth {

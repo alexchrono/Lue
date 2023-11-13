@@ -49,7 +49,7 @@ export default function LandingPage() {
             custError(err, 'password', 'password is required and must be between 8 and 30 characters')
         }
 
-        if(confirmPassword!==password) {
+        if (confirmPassword !== password) {
             custError(err, 'passwordConfirmation', 'password confirmation does not match password')
         }
 
@@ -65,7 +65,7 @@ export default function LandingPage() {
             formData.append('username', userName);
             formData.append('email', email);
             formData.append('password', password);
-            formData.append('confirm_password',confirmPassword)
+            formData.append('confirm_password', confirmPassword)
             if (newAvatar) {
                 formData.append('selected_avatar', newAvatar);
             }
@@ -110,7 +110,8 @@ export default function LandingPage() {
         <div className='main-container'>
             <div className='left-container'>
                 <div className='pic-box-container'>
-                    <img src='https://i.imgur.com/DafdjXQ.png' className='pic' alt=''></img>
+                    <img src={`${process.env.PUBLIC_URL}/icons/cloud-spinning.gif`}></img>
+                    {/* <img src='https://i.imgur.com/DafdjXQ.png' className='pic' alt=''></img> */}
                 </div>
 
                 <div className='left-bottom-quote'>
@@ -173,15 +174,22 @@ export default function LandingPage() {
                         id="fileInput"
                         onChange={(e) => {
                             setDidPicChange(true);
-
                             handleAvatarChange(e);
                         }}
+                        style={{ display: 'none' }}
                         accept="image/*"
-                        placeholder="Upload avatar (optional)"
                     />
 
-                    <button className="signup-button" type="submit">Sign Up</button>
-                    <button onClick={loginDemo}>
+                    <button
+                    type='button'
+                        className="letsMakePretty"
+                        onClick={() => document.getElementById('fileInput').click()}
+                    >
+                        Upload Avatar (optional)
+                    </button>
+
+                    <button className="letsMakePretty" type="submit">Sign Up</button>
+                    <button className="letsMakePretty" onClick={loginDemo}>
                         Log in as Demo
                     </button>
 

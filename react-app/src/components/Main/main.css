@@ -1,3 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+html {
+    background: rgb(221,221,221);
+
+}
 .stats-container {
     display: flex;
     flex-direction: row;
@@ -41,14 +46,15 @@
 }
 
 .inspirational-quote {
+    position: relative;
     flex-basis: 60%;
     display: flex;
+    flex-direction: column;
     height: 100%;
     flex-grow: 2 2 auto;
-    align-items: center;
-    justify-content: center;
-    font-size: 5em;
-    flex-wrap: nowrap;
+    /* align-items: center;
+    justify-content: center; */
+
 
 }
 
@@ -61,7 +67,7 @@
 }
 
 .habits {
-    border: 2px solid black;
+
     box-sizing: border-box;
     display: flex-box;
     flex-direction: column;
@@ -108,11 +114,16 @@
 .allHabits {
     width: 100%;
     height:90%;
+    box-sizing: border-box;
     overflow-y: scroll;
+    border-right: 2px dotted black;
+    border-left: 2px dotted black;
+    border-bottom: 2px dotted black;
+    border-radius:5px;
 }
 
 .fifteen-percent {
-    border-right: 5px solid black;
+    border-right: 1px solid black;
     box-sizing: border-box;
     width: 15%;
     height: 100%;
@@ -127,13 +138,19 @@
     visibility: hidden;
 
 }
+.invisi2 {
+    border: none;
+    /* background-color:#602399 */
+    background-color: #074d47;
+
+}
 
 .no-border {
     border: none;
 }
 
 .forty-percent {
-    border-right: 5px solid black;
+    border-right: 1px solid black;
     box-sizing: border-box;
     width: 40%;
     height: 100%;
@@ -150,9 +167,14 @@
 }
 
 .bigtextcenter {
-    font-size: 2.5em;
+    font-size: 2em;
     text-align: center;
     align-self: center;
+}
+
+.bigtextcenter,
+.menu-text {
+    box-sizing: border-box;
 }
 
 form {
@@ -160,7 +182,6 @@ form {
 }
 
 form input {
-    border: 5px solid black;
     box-sizing: border-box;
     width: 100%;
     height: 100%;
@@ -203,7 +224,6 @@ form textarea {
 
 .habits-card-center {
     width: 70%;
-    border: 5px solid black;
     box-sizing: border-box;
     height: 100%;
     display: flex;
@@ -288,7 +308,7 @@ form textarea {
     display: flex;
     width: 100%;
     height: 10%;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
 }
 
@@ -313,10 +333,42 @@ form textarea {
 form select {
     width: 100%;
     text-align: center;
+    padding: 10px;
+    border-radius: 4px;
+    font-weight: bold;
 }
 
 .special90 {
+    flex-basis: 90%;
+    box-sizing: border-box;
+    border-right: 3px solid black;
     width: 90%;
+    height: 100%;
+    font-size: 1.5em
+
+}
+
+.tenpercent {
+    flex-basis: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+
+}
+.tenpercent button {
+    height: 100%;
+}
+.tenpercent img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+.forgigs {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height:100%;
 }
 
 .red {
@@ -364,6 +416,9 @@ form select {
     width: 100%;
     border: 2px solid blue; */
 }
+.invisiborder {
+    border: 2px solid transparent;
+}
 
 /* .overallSizeEditModal {
 height: 200%;
@@ -386,4 +441,162 @@ width: 100%;
 .deleteButton {
     display: flex;
     width:10%;
+}
+
+
+.sword-Divider{
+
+    position: absolute;
+    bottom: 0;
+    left: 0;
+
+    height: 100%;
+    width: auto;
+    object-fit: cover;
+    /* z-index: -1; */
+    /* mix-blend-mode: multiply; */
+    /* box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.5); */
+
+}
+
+.LifeIs {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: black;
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
+    z-index: 1;
+    font-size: 5em;
+    flex-wrap: nowrap;
+}
+
+
+.fiftyheight {
+    width: 100%;
+    height:50%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+
+}
+
+.sweet-spot {
+    width: 80%;
+    height: 100%;
+    position: relative;
+    right: 0;
+    box-sizing: border-box;
+
+    padding-bottom: 10px;
+    display: flex;
+
+    align-items: center;
+
+}
+
+.bad-spot {
+    width: 20%;
+    height: 100%;
+    left: 0;
+    box-sizing: border-box;
+
+}
+
+.text-finally {
+
+
+    color: black;
+    text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.8);
+    /* z-index: 1; */
+    margin-left: 10%;
+    vertical-align: center;
+    font-size: 3em;
+    flex-wrap: nowrap;
+}
+
+.topOfCard {
+margin-top: 0px;
+margin: 0px;
+padding: 0px;
+padding-bottom: 0px;
+font-size: 1.5em;
+
+}
+.bottOfCard {
+font-size: 1em;
+}
+
+.overallSizeEditModal{
+    z-index: index 9000;
+    background: rgb(63,136,185);
+    background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
+    max-width: 600px;
+    margin: auto;
+    /* background: rgb(63,136,185);
+background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, rgba(78,156,171,1) 100%); */
+}
+.deleteButton button {
+    margin: 10px;
+    padding: 5px;
+    padding-right: 0px;
+    padding-left: 0px;
+    /* margin-right: 0px; */
+    background-color: rgb(230, 37, 7);
+    display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 4px;
+        text-align: center;
+}
+
+
+.letsMakePrettyDangerous{
+
+        background-color: rgb(230, 37, 7);
+        display: inline-block;
+        border: none;
+        color: rgb(0, 0, 0);
+        font-weight: bold;
+        padding: 2.7% 8%;
+        text-align: center;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 9px;
+
+}
+
+.welcomeCongrats3 {
+    color: white;
+    font-size: 2em;
+    margin: 14px 0px;
+    padding: 11px 0px;
+    font-family: 'Press Start 2P';
+    text-align: center;
+    line-height:1.5;
+    text-shadow: 7px 4px 3px black;
+  }
+
+  .letsMakePretty {
+    background-color: #35ee50;
+    display: inline-block;
+    border: none;
+    color: black;
+    font-weight: bold;
+    padding: 2.7% 8%;
+
+    text-align: center;
+
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 9px;
+    box-shadow: 4px 4px 4px black;
+
+}
+
+.letsMakePretty:hover {
+    color: white;
 }

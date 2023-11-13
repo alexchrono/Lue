@@ -54,12 +54,15 @@ class User(db.Model, UserMixin):
     gold = db.Column(db.Numeric(10, 2), default=default_gold_or_exp)
     exp = db.Column(db.Numeric(10, 2), default=default_gold_or_exp)
     new_user=db.Column(db.Boolean,default=False)
+
     created_at = db.Column(db.DateTime, default=current_date)
     updated_at = db.Column(db.DateTime, default=current_date)
     users_habits = db.relationship('Habit',back_populates='habits_of_user')
     users_habits_array = db.Column(db.PickleType, default=list)
+    users_clicked_habits=db.Column(db.PickleType, default=list)
     users_dailies= db.relationship('Daily',back_populates='dailies_of_user')
     users_dailies_array = db.Column(db.PickleType, default=list)
+    users_clicked_dailies=db.Column(db.PickleType, default=list)
     @property
     def password(self):
         return self.hashed_password
@@ -116,8 +119,10 @@ class User(db.Model, UserMixin):
             'newUser':self.new_user,
             'usersHabitsArray': self.users_habits_array,
             'usersHabitsObj': userHabits,
+            'usersClickedHabits':self.users_clicked_habits,
             'usersDailiesArray': self.users_dailies_array,
             'usersDailiesObj':userDailies,
+            'usersClickedDailies':self.users_clicked_dailies,
             'created_at': self.created_at,
             'updated_at': self.updated_at
 

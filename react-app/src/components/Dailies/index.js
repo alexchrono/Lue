@@ -7,34 +7,41 @@ import { ThunkNewDaily, ThunkGetAllDailies } from '../../store/daily';
 import { ThunkEditHealth } from '../../store/session';
 import ErrorComponent from '../errorShow';
 import ShowVictory from '../ShowVictory';
+import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 
 export default function Dailies({ user }) {
   const [daily, setDaily] = useState('');
-  const [showMenu, setShowMenu] = useState(false);
+  // const [showMenu, setShowMenu] = useState(false);
   const [clickedDailyCheck, setClickedDailyCheck] = useState([]);
-  const ulRef = useRef();
+  // const ulRef = useRef();
   const dispatch = useDispatch();
   const user2 = useSelector((state) => state.session.user);
   const userDailies = useSelector((state) => state.dailies.byId);
   const userArray = useSelector((state) => state.dailies.allIds);
+  const clickedEmoti= useSelector((state) => state.session.user.usersClickedDailies)
+  const [localArray,setLocalArray]=useState([])
   const [openDaily, setOpenDaily] = useState(null);
   const [errors, setErrors] = useState([]);
   const [showVictory, setShowVictory] = useState(false);
-  const [victoryDeets,setVictoryDeets]=useState({})
+  const [victoryDeets, setVictoryDeets] = useState({})
   const [needsLoading, setNeedsLoading] = useState(true);
 
-  const handleCheckmark = (e, dailyId) => {
-    e.stopPropagation();
-    let newArray;
-    if (!clickedDailyCheck.includes(dailyId)) {
-      newArray = [...clickedDailyCheck, dailyId];
-      HandleDislikeOrLike(e, 'good', userDailies[dailyId].difficulty);
-    } else {
-      newArray = clickedDailyCheck.filter((ele) => ele !== dailyId);
-      HandleDislikeOrLike(e, 'ungood', userDailies[dailyId].difficulty);
-    }
-    setClickedDailyCheck(newArray);
-  };
+  useEffect(() => {
+    setLocalArray(clickedEmoti);
+  }, []);
+
+  // const handleCheckmark = (e, dailyId) => {
+  //   e.stopPropagation();
+  //   let newArray;
+  //   if (!clickedDailyCheck.includes(dailyId)) {
+  //     newArray = [...clickedDailyCheck, dailyId];
+  //     HandleGoldOrHurt(e, 'good', userDailies[dailyId].difficulty);
+  //   } else {
+  //     newArray = clickedDailyCheck.filter((ele) => ele !== dailyId);
+  //     HandleGoldOrHurt(e, 'ungood', userDailies[dailyId].difficulty);
+  //   }
+  //   setClickedDailyCheck(newArray);
+  // };
 
   const goodTranslator = {
     1: { gold: .12, exp: 1 },
@@ -43,24 +50,32 @@ export default function Dailies({ user }) {
     4: { gold: 2.4, exp: 14 }
   }
 
-  const HandleDislikeOrLike = async (e, goodOrBad, difficulty) => {
+  const HandleGoldOrHurt = async (e, goodOrBad, difficulty,dailyId) => {
     e.preventDefault();
+    const key='daily'
+    let copyArray=[...localArray]
+
     let change = {}
     switch (goodOrBad) {
       case 'good':
         change = goodTranslator[difficulty];
+
+        copyArray.push(dailyId)
+        setLocalArray(copyArray)
         break;
       case 'ungood':
         change = goodTranslator[difficulty];
         change.gold = -(change.gold);
         change.exp = -(change.exp);
+        copyArray=copyArray.filter((ele) => ele !== dailyId)
+        setLocalArray(copyArray)
         break;
       default:
         console.log('something went wrong with our switch')
     }
-    if(change) {
-      console.log('THE CHANG EISSSSSSSSSSSSS',change)
-      const test= await dispatch(ThunkEditHealth(change))
+    if (change) {
+      console.log('THE CHANG EISSSSSSSSSSSSS', change)
+      const test = await dispatch(ThunkEditHealth(change,copyArray,key))
       if (test.victory) {
         setShowVictory(true);
         setVictoryDeets(test.victoryDeets)
@@ -97,20 +112,20 @@ export default function Dailies({ user }) {
     if (user2 && needsLoading) {
       fetchData()
     }
-  }, [user2,dispatch,needsLoading]);
+  }, [user2, dispatch, needsLoading]);
 
-  useEffect(() => {
-    if (!showMenu) return;
-    const closeMenu = (e) => {
-      if (!ulRef?.current?.contains(e.target)) {
-        setShowMenu(false);
-      }
-    };
-    document.addEventListener("click", closeMenu);
-    return () => document.removeEventListener("click", closeMenu);
-  }, [showMenu]);
+  // useEffect(() => {
+  //   if (!showMenu) return;
+  //   const closeMenu = (e) => {
+  //     if (!ulRef?.current?.contains(e.target)) {
+  //       setShowMenu(false);
+  //     }
+  //   };
+  //   document.addEventListener("click", closeMenu);
+  //   return () => document.removeEventListener("click", closeMenu);
+  // }, [showMenu]);
 
-  const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
+  // const ulClassName = "ellipsis-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
@@ -121,12 +136,19 @@ export default function Dailies({ user }) {
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
           <div className='forty-percent'>
             <form onSubmit={MakeNewDaily}>
-              <input
-                type="text"
-                value={daily}
-                onChange={(e) => setDaily(e.target.value)}
-                required
-              />
+              <div className='forgigs'>
+                <input
+                  type="text"
+                  className='special90'
+                  value={daily}
+                  onChange={(e) => setDaily(e.target.value)}
+                // required
+                />
+                <div class='tenpercent'>
+                  <button type='submit'><img
+                    src={`${process.env.PUBLIC_URL}/icons/fi-plus-fndtn.svg`}></img></button>
+                </div>
+              </div>
             </form>
           </div>
           <div className='fifteen-percent menu-text'>Due Today</div>
@@ -134,93 +156,57 @@ export default function Dailies({ user }) {
           <div className='fifteen-percent menu-text' style={{ borderRight: 'none' }}>Upcoming</div>
         </div>
         <div className='allHabits'>
-        {userArray?.map((dailyId, index) => (
-          <div className='habits-card' key={dailyId}>
-            <div className='fifteen-percent invisi'></div>
-            <div className='habits-card-center'>
-              <div className='bad-habit-emoti' onClick={(e) => handleCheckmark(e, dailyId)}>
-                {userDailies[dailyId]?.untouched ? (
+          {userArray?.map((dailyId, index) => (
+            <div className='habits-card'>
+              <div className='fifteen-percent invisi2'></div>
+              <div className='habits-card-center'>
+                <div className='bad-habit-emoti'>
+                  {userDailies[dailyId]?.untouched ? (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
+                      className=' sadFace'
+                      style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
+                    />
+                  ) : localArray?.includes(dailyId) ? (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
+                      onClick={(e) => HandleGoldOrHurt(e,'ungood', userDailies[dailyId].difficulty, dailyId)}
+                      className='changeToHand sadFace'
+                      style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
+                    />
+                  ) : (
+                    <img
+                      src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
+                      onClick={(e) => HandleGoldOrHurt(e,'good', userDailies[dailyId].difficulty, dailyId)}
+                      className='changeToHand sadFace'
+                      style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
+                    />
+                  )}
+                </div>
+                <div className='main-body-habit-card'>
+                  <h3 className='topOfCard'>{userDailies[dailyId]?.title}</h3>
+                  <p className='bottOfCard'>{userDailies[dailyId]?.notes && userDailies[dailyId]?.notes.length > 46
+                    ? userDailies[dailyId].notes.substring(0, userDailies[dailyId].notes.lastIndexOf(' ', 46)) + '...'
+                    : userDailies[dailyId].notes}</p>
+                </div>
+                <div className='ellipsis'>
                   <img
-                    src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
-                    className=' sadFace'
-                    style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
+                    src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
+                    className='ellipsis-pic'
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleEllipsisClick(dailyId);
+                      // setShowMenu(true);
+                    }}
                   />
-                ) : clickedDailyCheck.includes(dailyId) ? (
-                  <img
-                    src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
-                    className='changeToHand sadFace'
-                    style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
-                  />
-                ) : (
-                  <img
-                    src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
-                    className='changeToHand sadFace'
-                    style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
-                  />
-                )}
-              </div>
-              <div className='main-body-habit-card'>
-                <h3>{userDailies[dailyId]?.title}</h3>
-                <p>{userDailies[dailyId]?.notes}</p>
-              </div>
-              <div className='ellipsis'>
-                <img
-                  src={`${process.env.PUBLIC_URL}/icons/three-dots-vertical-bs.svg`}
-                  className='ellipsis-pic'
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    handleEllipsisClick(dailyId);
-                    setShowMenu(true);
-                  }}
-                />
-              </div>
-            </div>
-            {openDaily === dailyId && showMenu && (
-              <div className='fifteen-percent no-border'>
-                <div className='backG'>
-                  <ul className={ulClassName} ref={ulRef}>
-                    <li>
-                      <OpenModalButton
-                        buttonText={
-                          <>
-                            <span className="menu-icon">
-                              <img
-                                src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`}
-                                className='ellipsis-pic'
-                              />
-                            </span>
-                            Edit
-                          </>
-                        }
-                        modalComponent={<EditDailyModal dailyId={dailyId} daily={userDailies[dailyId]} />}
-                        onClick={() => setShowMenu(false)}
-                      />
-                    </li>
-                    <li>To Top</li>
-                    <li>To Bottom</li>
-                    <li>
-                      <OpenModalButton
-                        buttonText={
-                          <>
-                            <span className="menu-icon">
-                              <img
-                                src={`${process.env.PUBLIC_URL}/icons/pencil-thmfy.svg`}
-                                className='ellipsis-pic'
-                              />
-                            </span>
-                            Delete
-                          </>
-                        }
-                        modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} />}
-                        onClick={() => setShowMenu(false)}
-                      />
-                    </li>
-                  </ul>
                 </div>
               </div>
-            )}
-          </div>
-        ))}
+              <div className='fifteen-percent invisi2'>
+                {openDaily === dailyId && (
+                  <EllipsisMenu formType='daily' id={dailyId} habitOrDaily={userDailies[dailyId]} setter={setOpenDaily} />)}
+
+              </div>
+            </div>))}
         </div>
       </div>
     </>

@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 .main-container {
     display: flex;
     width: 100%;
@@ -28,11 +29,12 @@
     width: 100%;
     height: 20%;
     display: flex;
+    font-family: 'Press Start 2P';
     justify-content: center;
     align-items: center;
-    font-size: 5em;
+    font-size: 3em;
     text-align: center;
-    margin: 0px;
+    margin-bottom: 0px;
     padding: 0px;
 }
 
@@ -44,7 +46,7 @@
 
 .right-box {
     width: 40%;
-    height: 90%;
+    height: 100%;
     display: flex;
     flex-direction: column;
 
@@ -55,6 +57,7 @@
     flex-direction: column;
     align-items: stretch;
     width: 100%;
+    height: 100%;
 }
 
 .signup-form input{
@@ -69,3 +72,5 @@ ul li {
     margin-block-start: 0px;
     margin-block-end: 0px;
 }
+
+

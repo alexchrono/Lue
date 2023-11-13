@@ -7,7 +7,7 @@ import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 import { ThunkEditDaily } from "../../store/daily";
 
 
-export default function EditDailyModal({ dailyId, daily }) {
+export default function EditDailyModal({ dailyId, daily, setter }) {
   const dispatch = useDispatch();
   const [title, setTitle] = useState("");
   const [notes, setNotes] = useState("");
@@ -30,6 +30,9 @@ export default function EditDailyModal({ dailyId, daily }) {
 
   }
 
+  useEffect(()=>{
+    setter(null)
+  },[setter])
   useEffect(() => {
     if (daily) {
       setTitle(daily?.title)
@@ -37,14 +40,14 @@ export default function EditDailyModal({ dailyId, daily }) {
       const formattedStartDate = starDate?.toISOString().split('T')[0];
       setStartDate(formattedStartDate)
       if (daily.untouched) {
-        setNotes('optional')
+        console.log('THIS DAILY IS UNTOUCHED')
         setDifficulty('')
         setRepeatTimeFrame('')
         setRepeatRateNumbers(1)
 
       } else {
         setNotes(daily?.notes)
-        setDifficulty(daily?.difficulty)
+        setDifficulty(daily?.difficulty.toString())
         setRepeatTimeFrame(daily?.repeatTimeFrame)
 
         setRepeatRateNumbers(parseInt(daily?.repeatQuantity))
@@ -63,7 +66,7 @@ export default function EditDailyModal({ dailyId, daily }) {
     if (!title || title.length < 3 || title.length > 30) {
       custError(err, 'title', 'Title is required and must be between 3 and 30 characters');
     }
-    if (![1, 2, 3, 4].includes(difficulty)) {
+    if (!["1", "2","3", "4"].includes(difficulty)) {
       custError(err, 'difficulty', 'Difficulty field is required. Please enter valid selection from dropdown');
     }
     if (repeatTimeFrame === '' || !['daily', 'weekly', 'monthly'].includes(repeatTimeFrame)) {
@@ -111,7 +114,7 @@ export default function EditDailyModal({ dailyId, daily }) {
       <div className='overallSizeEditModal'>
         <div className='topEditContainer'>
           <div className='editHabit'>
-            <h1>Edit Daily</h1>
+            <h1 className='welcomeCongrats3'>Edit Daily</h1>
           </div>
           <div className='buttonsEditHabit'>
 
@@ -151,7 +154,7 @@ export default function EditDailyModal({ dailyId, daily }) {
 
               <label>
 
-                Difficulty Level:
+               {!daily.untouched && ('Difficulty Level:')}
 
                 <select name='difficulty' id='difficulty' value={difficulty} onChange={(e) => setDifficulty(e.target.value)}>
                   <option value='' disabled>Difficulty Level</option>
@@ -217,24 +220,20 @@ export default function EditDailyModal({ dailyId, daily }) {
         </div>
         <div className='allButtons'>
         <div className='editButtons'>
-        <button className='cancel' type='button' onClick={closeModal}>
+        <button className='letsMakePretty' type='button' onClick={closeModal}>
               Cancel
             </button>
-            <button className='save' type='button' onClick={handleSubmit}>
-              Save
+            <button className='letsMakePretty' type='button' onClick={handleSubmit}>
+            &nbsp;Save&nbsp;
             </button>
           </div>
           <div className='deleteButton'>
         <OpenModalButton
-          buttonText={
-            <>
-              <span className="menu-icon">
-
-              </span>{" "}
-              Delete
-            </>
-          }
-          modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} />}
+        className='canImess'
+          buttonText={<button className="letsMakePrettyDangerous">Delete</button>}
+          modalComponent={<DeleteHabitOrDaily formType={'daily'} targetId={dailyId} title={userDailies[dailyId]?.title} setter={(something)=>{
+            return something
+          }}/>}
         // onClick={() => setShowMenu(false)}
         />
         </div>

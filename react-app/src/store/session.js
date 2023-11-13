@@ -105,17 +105,18 @@ export const ThunkEditNewUser = () => async (dispatch) => {
     }
 };
 
-export const ThunkEditHealth = (healthOrExp) => async (dispatch) => {
+export const ThunkEditHealth = (healthOrExp,clickedStuff,key) => async (dispatch) => {
     console.log('at least i hit the THUNKEDITHEALTH thunk')
-	console.log("🚀 ~ file: session.js:73 ~ ThunkEditHealth ~ health:", healthOrExp)
 
+	console.log("🚀 ~ file: session.js:73 ~ ThunkEditHealth ~ health:", healthOrExp)
+    console.log("🚀 ~ file: session.js:113 ~ ThunkEditHealth ~ clickedStuff:", clickedStuff)
     const response = await fetch("/api/auth/edit-health-or-exp", {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
         },
 
-        body: JSON.stringify({healthOrExp:healthOrExp}),
+        body: JSON.stringify({healthOrExp:healthOrExp,clickedStuff:clickedStuff,key:key}),
     });
 
     if (response.ok) {

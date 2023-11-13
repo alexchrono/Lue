@@ -1,15 +1,19 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { login } from "../../store/session";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import { ThunkDeleteHabit } from "../../store/habit";
 import { ThunkDeleteDaily } from "../../store/daily";
 
-export default function DeleteHabitOrDaily({formType,targetId,title}) {
+export default function DeleteHabitOrDaily({formType,targetId,title,setter}) {
   const dispatch = useDispatch();
 
   const [errors, setErrors] = useState([]);
   const { closeModal } = useModal();
+
+  useEffect(()=>{
+    setter(null)
+  },[setter])
 
   const handleDelete = async (e) => {
     e.preventDefault();
