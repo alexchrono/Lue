@@ -21,6 +21,8 @@ export default function LandingPage() {
     const [errorsFe, setErrorsFe] = useState([])
 
     const handleAvatarChange = (e) => {
+        console.log('INSIDE OF H ANDLDE AVATAR CHANGE')
+        console.log("🚀 ~ file: index.js:26 ~ handleAvatarChange ~ e.target.files[0]:", e.target.files[0])
         setNewAvatar(e.target.files[0])
     }
     function custError(err, field, message) {
@@ -135,7 +137,7 @@ export default function LandingPage() {
                         autoComplete="off"
 
                     />
-                    {errors.userName ? <p className="errors">{errors.userName}</p> : errorsFe.userName ? <p className="feErrors">{errorsFe.userName}</p> : null}
+                    {errors.userName ? (<p className="errors">{errors.userName}</p>) : errorsFe.userName ? <p className="feErrors">{errorsFe.userName}</p> : null}
 
                     <input
                         type="text"
@@ -173,6 +175,7 @@ export default function LandingPage() {
                         type="file"
                         id="fileInput"
                         onChange={(e) => {
+                            console.log('CHANGE DDETECTED IN OUR IMAGE')
                             setDidPicChange(true);
                             handleAvatarChange(e);
                         }}
