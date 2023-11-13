@@ -36,7 +36,6 @@ export default function Main() {
     }, [user,history]);
 
 
-    console.log("🚀 ~ file: index.js:20 ~ Main ~ user:", user)
     if(!user){
         return null
     }

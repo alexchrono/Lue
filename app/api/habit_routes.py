@@ -73,7 +73,6 @@ def makeNewHabit():
     err = {}
     data = request.json
     habit_title = data.get('habit')
-    ic(habit_title)
 
     if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
         custError(err, 'title', 'Habit Title is required and must be between 3 and 30 characters')
@@ -101,7 +100,7 @@ def makeNewHabit():
     updatedArray = ourGuyDict.get("usersHabitsArray")
     updatedObj= ourGuyDict.get("usersHabitsObj")
 
-    ic(updatedObj)
+
 
     return jsonify({ "newArray": updatedArray,'habitsObj':updatedObj})
 
@@ -173,14 +172,10 @@ def editHabit():
 @habit_routes.route('/delete-habit/<int:id>', methods=['DELETE'])
 def deleteHabit(id):
 
-    ic('inside our DELETE habit route')
 
-    ic(id)
     targetDeletion=Habit.query.get(id)
-    ic(targetDeletion)
     positionOfDeletee=targetDeletion.position
 
-    ic(positionOfDeletee)
 
     if targetDeletion is None:
         return {'errors': {'error':'Habit not found'}}, 404
@@ -196,9 +191,7 @@ def deleteHabit(id):
     ourGuyDict=current_user.to_dict()
     updatedObj=ourGuyDict.get('usersHabitsObj')
     updatedArray=ourGuyDict.get("usersHabitsArray")
-    ic(updatedArray)
 
-    ic(copyTargetDeletion)
     return jsonify({"newArray":updatedArray,"habitsObj":updatedObj})
     # elif album.user_owner != current_user.id:
     #     return {'errors': {'error':'forbidden'}}, 403

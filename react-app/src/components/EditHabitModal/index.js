@@ -50,8 +50,7 @@ export default function EditHabitModal({ habitId, habit, setter }) {
     return err
 
   }
-  console.log('inside edithabitmodal my userhabits are', userHabits)
-  console.log('userhabits at habitid is', userHabits[habitId])
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (notes === 'optional') {
@@ -81,10 +80,8 @@ export default function EditHabitModal({ habitId, habit, setter }) {
 
     const data = await dispatch(ThunkEditHabit(updatedHabit));
     if (data?.errors){
-      console.log('WE GOT SOME ERRORS N OUR FORMS,data is******',data)
-      console.log('DATA . ERRORS IS',data?.errors)
+
       setErrors(data.errors);
-      console.log('WE CURRENTLY SET ERRORS WITH JUST DATA OR ',data)
     }
       else if (data?.title) {
         closeModal()
@@ -94,14 +91,13 @@ export default function EditHabitModal({ habitId, habit, setter }) {
   };
 
   const handlePicClick = (value) => {
-    console.log('inside handlePicClick*****')
-    console.log("setAlignmentTO", value)
+
     setPicPass(false)
     setAlignment(value);
 
   };
 
-  console.log('INSIDE EDITHABITMODAL HABITID IS', habitId)
+  
 
 
 

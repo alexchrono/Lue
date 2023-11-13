@@ -74,7 +74,7 @@ export default function Dailies({ user }) {
         console.log('something went wrong with our switch')
     }
     if (change) {
-      console.log('THE CHANG EISSSSSSSSSSSSS', change)
+
       const test = await dispatch(ThunkEditHealth(change,copyArray,key))
       if (test.victory) {
         setShowVictory(true);

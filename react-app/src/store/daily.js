@@ -105,8 +105,7 @@ function normalizeData(allDailies, newItem) {
 
 
 export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
-    console.log('at least i hit the THUNKDELETEHABIT thunk')
-    console.log("🚀 ~ file: habit.js:89 ~ targetIDintheThunk", targetId)
+
     targetId=parseInt(targetId)
     const response = await fetch(`/api/dailies/delete-daily/${targetId}`, {
         method: "DELETE",
@@ -117,13 +116,9 @@ export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('**************RESPONSE WAS OK AND WE GOT DATA BVACK', data)
-        console.log("🚀 ~ file: habit.js:121 ~ ThunkDeleteHabit ~ data:", data)
-        console.log("🚀 ~ file: habit.js:122 ~ ThunkDeleteHabit ~ data.targetDeletion:", data.targetDeletion)
         await dispatch(actionDeleteDaily(data));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
         if (data.errors) {
             return data.errors;
@@ -133,8 +128,6 @@ export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
     }
 };
 export const ThunkEditDaily = (updatedDaily) => async (dispatch) => {
-    console.log('at least i hit the THUNKEDITHABIT thunk')
-    console.log("🚀 ~ file: habit.js:89 ~ ThunkEditHabit ~ updatedHabit:", updatedDaily)
     const response = await fetch("/api/dailies/edit-daily", {
         method: "POST",
         headers: {
@@ -145,15 +138,11 @@ export const ThunkEditDaily = (updatedDaily) => async (dispatch) => {
     });
 
     if (response.ok) {
-        console.log('RESPONSE IS OK SO WE BACK IN THUNK')
         const data = await response.json();
-        console.log('DATA BACK IN OUR THUNK IS', data)
         await dispatch(actionEditDaily(data));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
-        console.log('DATA IN OUR RETURN ERRORS EDIT DAILY IS', data)
         return data
         // if (data.errors) {
         //     return data.errors;
@@ -164,7 +153,6 @@ export const ThunkEditDaily = (updatedDaily) => async (dispatch) => {
 };
 
 export const ThunkNewDaily = (daily) => async (dispatch) => {
-    console.log('at least i hit the thunk for new ddailies')
 
     const response = await fetch("/api/dailies/new-daily", {
         method: "POST",
@@ -178,11 +166,9 @@ export const ThunkNewDaily = (daily) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         // const newData = normalizeData(data.all_habits, data.new_habit)
-        console.log('***************data going to action in create is', data)
         await dispatch(actionCreateDaily(data));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
         return data
     } else {

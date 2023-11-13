@@ -64,13 +64,13 @@ export default function Habits({ user }) {
   }
 
   const handleEllipsisClick = (habitId) => {
-    console.log('INSIDE HANDLE ELLIPSIS CLICK')
+
     if (openHabit === habitId) {
-      console.log("openHabitId already set to what we clicked")
+
       setOpenHabit(null)
     } else {
       setOpenHabit(habitId)
-      console.log('OPENHABITID IS NOW', habitId)
+
     }
   }
 
@@ -103,31 +103,29 @@ export default function Habits({ user }) {
     e.preventDefault();
     const key='habit'
 
-    console.log('ENTERED HANDLE DISLIKE WITH HABIT ID OF',habitId)
+
     let change = {}
     let copyArray= [...localArray]
-    console.log('copyArray starts off as',copyArray)
+
     switch (goodOrBad) {
       case 'bad':
         change.health = badTranslator[difficulty]
         copyArray.push(habitId)
         setLocalArray(copyArray)
-        console.log('clicked bad*******COPY ARRAY IS NOW****', copyArray)
+
         break
       case 'unbad':
         change.health = -(badTranslator[difficulty])
         copyArray=copyArray.filter((ele) => ele !== habitId)
         setLocalArray(copyArray)
         //     setClickedEmoti(newArray)
-        console.log('unclicked bad change COPY ARRAY IS NOW', copyArray)
+
         break
       case 'good':
         change = goodTranslator[difficulty]
         copyArray.push(habitId)
         setLocalArray(copyArray)
-        console.log('POSITIVE CHANGE IS******COPY ARRAY IS NOW*****', copyArray)
-        console.log('POSITIVE CHANGE in GOLD IS***********', change.gold)
-        console.log('POSITIVE CHANGE IN EXP IS****', change.exp)
+
         break
       case 'ungood':
         change = goodTranslator[difficulty]
@@ -135,9 +133,7 @@ export default function Habits({ user }) {
         change.exp = -(change.exp)
         copyArray=copyArray.filter((ele) => ele !== habitId)
         setLocalArray(copyArray)
-        console.log('UNDOING POSITIVE CHANGE IS*******COPY ARRAY IS NOW****', copyArray)
-        console.log('UNDOING POSITIVE CHANGE in GOLD IS***********', change.gold)
-        console.log('UNDOING POSITIVE CHANGE IN EXP IS****', change.exp)
+
         break
       default:
         console.log('something went wrong with our switch')
@@ -236,11 +232,6 @@ export default function Habits({ user }) {
 
   // const ulClassName = `ellipsis-dropdown${showMenu ? '' : ' hidden'}`;
 
-  console.log('IN HABITS USER 2 IS LIKE*****', user2)
-  console.log('USER 2 .NEWUSER ISSSSSSSSSSSSSSSS')
-
-  console.log("🚀 ~ file: index.js:216 ~ Habits ~ user2:", user2)
-  console.log("🚀 ~ file: index.js:239 ~ Habits ~ localArray:", localArray)
 
   return (
     <>
@@ -296,11 +287,11 @@ export default function Habits({ user }) {
                             HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty,habitId)
 
 
-                            console.log('*************OK WE GOT CHANGE THIS UNDOES THE NEGATIVE EFFECTS')
+
                           }
                           else {
                             HandleDislikeOrLike(e, 'bad', userHabits[habitId].difficulty,habitId)
-                            console.log('**********OK WE GOT CHANGE THIS TAKES AWAY HP')
+
                           }
                         }}
                       />
@@ -315,11 +306,11 @@ export default function Habits({ user }) {
                             HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty,habitId)
 
 
-                            console.log('*************OK WE GOT CHANGE THIS UNDOES THE CLICK OF A POSITIVE EFFECT')
+
                           }
                           else {
                             HandleDislikeOrLike(e, 'good', userHabits[habitId].difficulty,habitId)
-                            console.log('**********OK WE GOT CHANGE THIS POSITIVVE CHANGE THIS ADDS GOLD AND EXP')
+                            
                           }
                         }}
                       />

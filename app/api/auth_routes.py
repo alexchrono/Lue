@@ -34,7 +34,6 @@ level_titles = {
 def expFinder():
 
     targetExp=current_user.level*25
-    ic(targetExp)
     return targetExp
 
 
@@ -92,16 +91,13 @@ def sign_up():
     """
     form = SignUpForm()
     form['csrf_token'].data = request.cookies['csrf_token']
-    ic(form.data)
     if form.validate_on_submit():
-        ic('atleast inside validate')
         url='https://i.imgur.com/V26j32L.png'
         if form.data['selected_avatar']:
             image=form.data['selected_avatar']
             image.filename = get_unique_filename(image.filename)
 
             upload = upload_file_to_s3(image)
-            ic(upload)
             if "url" not in upload:
                 return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
             url=upload['url']
@@ -144,7 +140,6 @@ def sign_up():
         login_user(user)
         current_user.set_habits_and_dailies()
         return user.to_dict()
-    ic(form.errors)
     return jsonify({'errors': form.errors}), 401
 
 @auth_routes.route('/edit-new-user', methods=['PATCH'])
@@ -159,21 +154,11 @@ def editUser():
 
 @auth_routes.route('/edit-health-or-exp', methods=['POST'])
 def editHealth():
-    ic('DID WE EVEN HIT OUR ROUTE')
     data2= request.json
-    ic(data2)
     data=data2.get("healthOrExp")
     arrayStuff=data2.get('clickedStuff')
     key=data2.get('key')
-    ic(key)
-    ic(arrayStuff)
-    ic(data)
-    ic(data.get('health'))
-    ic(data.get('gold'))
     if (data.get('health')):
-        ic('inside data.getHealth check')
-        ic(current_user)
-        ic(current_user.current_health)
         health=Decimal(data.get('health'))
         if current_user:
             falseHealth=current_user.current_health+health
@@ -187,19 +172,14 @@ def editHealth():
         else:
             return jsonify({"error":"There was an error while updating your health"}),400
     elif (data.get('gold')):
-        ic('inside ddata.get gold check')
         gold=Decimal(data.get('gold'))
-        ic(gold)
         exp=Decimal(data.get('exp'))
-        ic(exp)
         if current_user:
             if key=='habit':
                 current_user.users_clicked_habits=arrayStuff
             elif key=='daily':
                 current_user.users_clicked_dailies=arrayStuff
             current_user.gold= (current_user.gold+gold)
-            ic(current_user.exp)
-            ic(exp)
 
 
             if current_user.exp + exp >= expFinder():
