@@ -105,7 +105,7 @@ export default function Habits({ user }) {
 
 
     let change = {}
-    let copyArray= [...localArray]
+    let copyArray= localArray?.length? [...localArray] : []
 
     switch (goodOrBad) {
       case 'bad':
@@ -143,6 +143,8 @@ export default function Habits({ user }) {
 
     if (change) {
       const test = await dispatch(ThunkEditHealth(change,copyArray,key))
+
+
 
       if (test.victory) {
         setShowVictory(true);
@@ -274,7 +276,7 @@ export default function Habits({ user }) {
                     userHabits[habitId].untouched ? (
                       <img
                         src={`${process.env.PUBLIC_URL}/icons/three-dots-bs.svg`}
-                        className={localArray && localArray.includes(habitId) ? 'sadFace red' : 'sadFace'}
+                        className={localArray && localArray?.includes(habitId) ? 'sadFace red' : 'sadFace'}
                         style={{ width: '100%', height: '100%', margin: '0' }}
                       />
                     ) : !userHabits[habitId].alignment ? (
@@ -283,7 +285,7 @@ export default function Habits({ user }) {
                         className={`changeToHand ${localArray && localArray.includes(habitId) ? 'sadFace red' : 'sadFace'}`}
                         style={{ width: '100%', height: '100%', margin: '0' }}
                         onClick={(e) => {
-                          if (localArray && localArray.includes(habitId)) {
+                          if (localArray?.length && localArray.includes(habitId)) {
                             HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty,habitId)
 
 
@@ -298,11 +300,11 @@ export default function Habits({ user }) {
                     ) : (
                       <img
                         src={`${process.env.PUBLIC_URL}/icons/face-smile-beam-fa.svg`}
-                        className={`changeToHand ${localArray && localArray.includes(habitId) ? 'sadFace green' : 'sadFace'}`}
+                        className={`changeToHand ${localArray?.length && localArray?.includes(habitId) ? 'sadFace green' : 'sadFace'}`}
                         style={{ width: '100%', height: '100%', margin: '0' }}
 
                         onClick={(e) => {
-                          if (localArray && localArray.includes(habitId)) {
+                          if (localArray?.length && localArray.includes(habitId)) {
                             HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty,habitId)
 
 
@@ -310,7 +312,7 @@ export default function Habits({ user }) {
                           }
                           else {
                             HandleDislikeOrLike(e, 'good', userHabits[habitId].difficulty,habitId)
-                            
+
                           }
                         }}
                       />
