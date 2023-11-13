@@ -15,7 +15,7 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
         <>
             {formType === 'levelUp' && (
                 <div className="victory-popup">
-                    <h1>You gained A level!</h1>
+                    <h1 className='welcomeCongrats'>You gained A level!</h1>
                     <div className='victory-celebrate'>
                         <img
                             src={`${process.env.PUBLIC_URL}/icons/2010873_zorropa_black-mage-supreme-victory.gif`}
@@ -35,14 +35,14 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
 
             {formType === 'newUser' && form1 && (
                 <div className='victory-popup2'>
-                    <h1>Welcome to Level Up Everything!</h1>
+                    <h1 className='welcomeCongrats'>Welcome to Level Up Everything!</h1>
                     <div className='victory-welcome'>
                         <img
                             src={`${process.env.PUBLIC_URL}/icons/finalCutDangerousGoAlone.gif`}
                             alt="Welcome"></img>
                     </div>
-                    <p className='para'>Getting started on anything can be hard...especially when it comes to changing your life. Luckily for you, we are here to help.</p>
-                    <p className='para'>We already started you out with two cards you can edit.  When you are ready to begin your adventure, click "Next".</p>
+                    <p className='para2'>Getting started on anything can be hard...especially when it comes to changing your life. Luckily for you we are here to help.</p>
+                    <p className='para2'>We already started you out with two cards you can edit.  When you are ready to begin your adventure, click "Next".</p>
                     <div className='button'>
                         <button className='letsMakePretty' onClick={() => {
                             setForm1(false);
@@ -54,8 +54,8 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
 
             {formType === 'newUser' && form2 && (
                 <div className='victory-popup2'>
-                    <p className='paraHeader'>TO ADD/EDIT A CARD: </p>
-                    <div className='victory-welcome'>
+                    <p className='welcomeCongrats'>ADD/EDIT A CARD: </p>
+                    <div className='victory-welcome2'>
                         <img
                             src={`${process.env.PUBLIC_URL}/icons/finalVersionTutorialGif.gif`}
                             alt="Welcome"></img>
@@ -82,13 +82,14 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
             {formType === 'newUser' && form3 && (
                 <>
                 <div className='victory-popup2'>
-                 <p className='paraHeader'>Leveling up: </p>
-                <p className='para'>Complete good habits or dailies, and your gold/exp will increase.  Complete enough and you will gain a level!  When you gain a level your health is fully restored.</p>
+                 <p className='welcomeCongrats'>Leveling up: </p>
+                 <hr className='hrBreaks'></hr>
+                <p className='para2'>Complete good habits or dailies and your gold and exp will increase.  Complete enough and you gain a level!  When you gain a level your health is fully restored.</p>
 
-                <p className='paraHeader'>Dying/ losing a level: </p>
-                <p className='para'>However, bad habits will decrease your hp.  Mess up too many times and you will die.  You will go back to the previous level and lose all gold and experience</p>
+                <p className='welcomeCongrats'>Dying/ losing a level: </p>
+                <p className='para2'>However, bad habits will decrease your hp.  Mess up too many times and you will die.  You will revert to the previous level and lose all gold and experience</p>
                 <p></p>
-                <p>Once Again, welcome to Level Up Everything.  You are now free to start your journey.</p>
+                <p className='para2 white'>Once Again, welcome to Level Up Everything.  You are now free to start your journey.</p>
                 <div className='button'>
 <button className='letsMakePretty' onClick={async () => {
     setForm3(false)

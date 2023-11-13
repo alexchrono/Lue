@@ -12,7 +12,7 @@ export default function ErrorComponent({ errorMessage,setErrors,setHabit }) {
                     <img
                   src={`${process.env.PUBLIC_URL}/icons/duckhuntDog.gif`}></img>
                   </div>
-        <h1>Error</h1>
+        <h1 className='errorPara'>Error</h1>
        <p class='para'>{errorMessage}</p>
         <button onClick={(e)=>{
             setHabit('');

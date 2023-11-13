@@ -1,4 +1,4 @@
-
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
 .error-popup {
     position: absolute;
     top: 50%;
@@ -37,4 +37,10 @@
 .victory-celebrate img {
   width: 100%;
   height:auto;
+}
+
+.errorPara {
+  font-family: 'Press Start 2P';
+  text-align: center;
+  font-size: 2em;
 }
