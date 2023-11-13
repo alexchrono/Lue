@@ -214,6 +214,7 @@ form textarea {
 
 .pic-caption {
     margin-top: 5px;
+    color: white;
 }
 
 .menu-text {
@@ -600,3 +601,19 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 .letsMakePretty:hover {
     color: white;
 }
+
+.welcomeCongrats4 {
+    color: white;
+    font-size: 1.5em;
+    margin: 14px 0px;
+    padding: 11px 0px;
+    font-family: 'Press Start 2P';
+    text-align: center;
+    line-height:1.5;
+    text-shadow: 7px 4px 3px black;
+  }
+
+  .endofdays {
+    text-align: center;
+    font-size: 3.1em;
+  }
