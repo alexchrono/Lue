@@ -116,6 +116,12 @@ export default function LandingPage() {
 
                 <div className='left-bottom-quote'>
                     Change your life
+
+                    <div className='createdBy'>
+                        Created By:  <a
+            href="https://github.com/alexchrono"
+          >Alex Heasley</a>
+                    </div>
                 </div>
             </div>
             <div className='right-box'>
