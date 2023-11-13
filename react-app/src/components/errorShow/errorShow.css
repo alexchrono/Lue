@@ -46,21 +46,4 @@
   text-shadow: 7px 4px 3px black;
 }
 
-.letsMakePretty {
-  background-color: #4CAF50;
-  border: none;
-  color: white;
-  padding: 12px 24px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  margin: 4px 2px;
-  cursor: pointer;
-  border-radius: 4px;
 
-}
-
-.letsMakePretty:hover {
-  color: black;
-}
