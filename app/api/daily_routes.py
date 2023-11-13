@@ -45,7 +45,6 @@ def makeNewDaily():
         custError(err, 'title', 'Daily Title is required and must be between 3 and 30 characters')
         if 'errors' in err:
             return jsonify(err), 400
-    ic(current_user.users_dailies)
     new_daily = Daily(
         title=daily_title,
         user_id=current_user.id,
@@ -56,7 +55,6 @@ def makeNewDaily():
     db.session.commit()
 
     for daily in current_user.users_dailies:
-        ic(daily.position)
         daily.position=daily.position+1
     db.session.commit()
 
@@ -98,13 +96,10 @@ def editDaily():
     err={}
     data=request.json
     id=data.get('dailyId')
-    ic(id)
     title=data.get('title')
     notes=data.get('notes')
     difficulty=int(data.get('difficulty'))
-    ic(difficulty)
     resetRateNumbers=data.get('repeatRateNumbers')
-    ic(resetRateNumbers)
     ourTimeFrame=data.get('repeatTimeFrame')
     startDate=data.get('startDate')
 
@@ -124,7 +119,6 @@ def editDaily():
         return jsonify(err), 400
 
     target=Daily.query.get(id)
-    ic(target)
 
     if target:
         target.title=title
@@ -145,7 +139,6 @@ def editDaily():
 
 @daily_routes.route('/delete-daily/<int:id>', methods=['DELETE'])
 def deleteDaily(id):
-    ic('inside our DELETE daily route')
     targetDeletion=Daily.query.get(id)
     positionOfDeletee=targetDeletion.position
 

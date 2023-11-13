@@ -97,7 +97,6 @@ export const ThunkEditNewUser = () => async (dispatch) => {
         await dispatch(actionEditNewUser(data));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
         return data
     } else {
@@ -106,10 +105,6 @@ export const ThunkEditNewUser = () => async (dispatch) => {
 };
 
 export const ThunkEditHealth = (healthOrExp,clickedStuff,key) => async (dispatch) => {
-    console.log('at least i hit the THUNKEDITHEALTH thunk')
-
-	console.log("🚀 ~ file: session.js:73 ~ ThunkEditHealth ~ health:", healthOrExp)
-    console.log("🚀 ~ file: session.js:113 ~ ThunkEditHealth ~ clickedStuff:", clickedStuff)
     const response = await fetch("/api/auth/edit-health-or-exp", {
         method: "POST",
         headers: {
@@ -124,7 +119,6 @@ export const ThunkEditHealth = (healthOrExp,clickedStuff,key) => async (dispatch
         await dispatch(actionEditHealthOrExp(data.current_user));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
         return data
     } else {
@@ -146,7 +140,6 @@ export const signUp = (formData) => async (dispatch) => {
 	} else if (response.status < 500) {
 
 		const data = await response.json();
-		console.log('DATA WE RETURNING IS',data)
 		return data
 	} else {
 		return ["An error occurred. Please try again."];

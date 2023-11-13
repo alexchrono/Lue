@@ -40,7 +40,7 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
       const formattedStartDate = starDate?.toISOString().split('T')[0];
       setStartDate(formattedStartDate)
       if (daily.untouched) {
-        console.log('THIS DAILY IS UNTOUCHED')
+
         setDifficulty('')
         setRepeatTimeFrame('')
         setRepeatRateNumbers(1)
@@ -86,10 +86,7 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
     const updatedDaily = { dailyId, title, notes, difficulty, startDate, repeatTimeFrame, repeatRateNumbers }
     const data = await dispatch(ThunkEditDaily(updatedDaily));
     if (data?.errors) {
-      console.log('WE GOT SOME ERRORS N OUR FORMS,data is******', data)
-      console.log('DATA . ERRORS IS', data?.errors)
       setErrors(data.errors);
-      console.log('WE CURRENTLY SET ERRORS WITH JUST DATA OR ', data)
     }
     else if (data?.title) {
       closeModal()
@@ -107,7 +104,6 @@ export default function EditDailyModal({ dailyId, daily, setter }) {
 
 
 
-  console.log("🚀 ~ file: index.js:107 ~ EditDailyModal ~ dailyId:", dailyId)
 
   return (
     <>

@@ -21,8 +21,6 @@ export default function LandingPage() {
     const [errorsFe, setErrorsFe] = useState([])
 
     const handleAvatarChange = (e) => {
-        console.log('INSIDE OF H ANDLDE AVATAR CHANGE')
-        console.log("🚀 ~ file: index.js:26 ~ handleAvatarChange ~ e.target.files[0]:", e.target.files[0])
         setNewAvatar(e.target.files[0])
     }
     function custError(err, field, message) {
@@ -85,7 +83,7 @@ export default function LandingPage() {
     const loginDemo = async (e) => {
         e.preventDefault();
         const data = await dispatch(login('demo@aa.io', 'password'));
-        console.log('DATA WE GETTING BAKC IS')
+
         if (data && data.errors) {
 
             setErrors(data.errors);
@@ -175,7 +173,6 @@ export default function LandingPage() {
                         type="file"
                         id="fileInput"
                         onChange={(e) => {
-                            console.log('CHANGE DDETECTED IN OUR IMAGE')
                             setDidPicChange(true);
                             handleAvatarChange(e);
                         }}

@@ -26,8 +26,6 @@ function ProfileButton({ user }) {
       setErrors(data.errors);
     } else {
 
-      console.log('AM I HITTIN GTHE ELSE?!!?!?!')
-      console.log('what is data here',data)
         await dispatch(ThunkGetAllHabits())
         await dispatch(ThunkGetAllDailies())
         history.push('/main')

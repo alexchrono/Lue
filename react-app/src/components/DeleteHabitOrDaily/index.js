@@ -26,7 +26,7 @@ export default function DeleteHabitOrDaily({formType,targetId,title,setter}) {
 
   }
   else {
-    console.log('WE HIT OUR ELSE BRO')
+
     const data = await dispatch(ThunkDeleteDaily(targetId))
     if (data){
       closeModal()
@@ -45,11 +45,7 @@ export default function DeleteHabitOrDaily({formType,targetId,title,setter}) {
 const ourDisplay= formType==='habit'? "Habit" : "Daily"
 const ourName='steve'
 
-console.log("🚀 ~ file: index.js:27 ~ DeleteHabitOrDaily ~ formType:", formType)
 
-console.log("🚀 ~ file: index.js:29 ~ DeleteHabitOrDaily ~ targetId:", targetId)
-
-console.log("🚀 ~ file: index.js:31 ~ DeleteHabitOrDaily ~ title:", title)
 
   return (
     <>

@@ -105,7 +105,6 @@ function normalizeData(allHabits, newItem) {
 export const ThunkMoveHabitBottom = (habit) => async (dispatch) => {
 
 
-    console.log("🚀 ~ file: habit.js:108 ~ ThunkMoveHabitBottom ~ habit:", habit)
 
     const response = await fetch("/api/habits/move-bottom", {
         method: "POST",
@@ -121,7 +120,6 @@ export const ThunkMoveHabitBottom = (habit) => async (dispatch) => {
         await dispatch(actionEditHabit(data));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
         return data
     } else {
@@ -130,8 +128,6 @@ export const ThunkMoveHabitBottom = (habit) => async (dispatch) => {
 };
 
 export const ThunkDeleteHabit = (targetId) => async (dispatch) => {
-    console.log('at least i hit the THUNKDELETEHABIT thunk')
-    console.log("🚀 ~ file: habit.js:89 ~ targetIDintheThunk", targetId)
     targetId=parseInt(targetId)
     const response = await fetch(`/api/habits/delete-habit/${targetId}`, {
         method: "DELETE",
@@ -142,13 +138,9 @@ export const ThunkDeleteHabit = (targetId) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('**************RESPONSE WAS OK AND WE GOT DATA BVACK', data)
-        console.log("🚀 ~ file: habit.js:121 ~ ThunkDeleteHabit ~ data:", data)
-        console.log("🚀 ~ file: habit.js:122 ~ ThunkDeleteHabit ~ data.targetDeletion:", data.targetDeletion)
         await dispatch(actionDeleteHabit(data));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
         if (data.errors) {
             return data.errors;
@@ -158,8 +150,6 @@ export const ThunkDeleteHabit = (targetId) => async (dispatch) => {
     }
 };
 export const ThunkEditHabit = (updatedHabit) => async (dispatch) => {
-    console.log('at least i hit the THUNKEDITHABIT thunk')
-    console.log("🚀 ~ file: habit.js:89 ~ ThunkEditHabit ~ updatedHabit:", updatedHabit)
     const response = await fetch("/api/habits/edit-habit", {
         method: "POST",
         headers: {
@@ -174,7 +164,6 @@ export const ThunkEditHabit = (updatedHabit) => async (dispatch) => {
         await dispatch(actionEditHabit(data));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
         return data
     } else {
@@ -183,8 +172,6 @@ export const ThunkEditHabit = (updatedHabit) => async (dispatch) => {
 };
 
 export const ThunkNewHabit = (habit) => async (dispatch) => {
-    console.log('at least i hit the thunk')
-    console.log("🚀 ~ file: habit.js:72 ~ ThunkNewHabitINSIDETHUNK ~ habit:", habit)
     const response = await fetch("/api/habits/new-habit", {
         method: "POST",
         headers: {
@@ -197,11 +184,9 @@ export const ThunkNewHabit = (habit) => async (dispatch) => {
     if (response.ok) {
         const data = await response.json();
         // const newData = normalizeData(data.all_habits, data.new_habit)
-        console.log('***************data going to action in create is', data)
         await dispatch(actionCreateHabit(data));
         return data;
     } else if (response.status < 500) {
-        console.log('WE HIT OUR ELSE')
         const data = await response.json();
         return data
 
@@ -217,12 +202,9 @@ export const ThunkGetAllHabits = () => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        console.log('IHNSIDE OUR THUNK NOW')
 
-        console.log("🚀 ~ file: habit.js:197 ~ ThunkGetAllHabits ~ data:", data)
         const newData = normalizeData(data);
 
-        console.log("🚀 ~ file: habit.js:200 ~ ThunkGetAllHabits ~ newData:", newData)
         await dispatch(actionGetAllHabits(newData));
         return data;
     } else if (response.status < 500) {
@@ -239,9 +221,6 @@ export default function reducer(state = initialState, action) {
     let newState
     switch (action.type) {
         case GET_ALL_HABITS:
-            console.log('ACTION.PAYLOAD IN REDUCER FOR GET ALL HABITS IS', action.payload)
-
-            console.log("🚀 ~ file: habit.js:213 ~ reducer ~ action.payload:", action.payload)
             newState = { byId: { ...action.payload.all_things }, allIds: [...action.payload.all_ids] }
             return newState
 
