@@ -53,7 +53,7 @@ export default function Dailies({ user }) {
   const HandleGoldOrHurt = async (e, goodOrBad, difficulty,dailyId) => {
     e.preventDefault();
     const key='daily'
-    let copyArray=[...localArray]
+    let copyArray= localArray?.length? [...localArray] : []
 
     let change = {}
     switch (goodOrBad) {
@@ -80,6 +80,7 @@ export default function Dailies({ user }) {
         setShowVictory(true);
         setVictoryDeets(test.victoryDeets)
       }
+
     }
   }
 
@@ -167,7 +168,7 @@ export default function Dailies({ user }) {
                       className=' sadFace'
                       style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
                     />
-                  ) : localArray?.includes(dailyId) ? (
+                  ) : localArray?.length && localArray?.includes(dailyId) ? (
                     <img
                       src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
                       onClick={(e) => HandleGoldOrHurt(e,'ungood', userDailies[dailyId].difficulty, dailyId)}

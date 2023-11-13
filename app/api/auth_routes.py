@@ -155,11 +155,14 @@ def editUser():
 @auth_routes.route('/edit-health-or-exp', methods=['POST'])
 def editHealth():
     data2= request.json
-    data=data2.get("healthOrExp")
+    healthOrExpp=data2.get("healthOrExp")
     arrayStuff=data2.get('clickedStuff')
+
+
+
     key=data2.get('key')
-    if (data.get('health')):
-        health=Decimal(data.get('health'))
+    if (healthOrExpp.get('health')):
+        health=Decimal(healthOrExpp.get('health'))
         if current_user:
             falseHealth=current_user.current_health+health
             if falseHealth>0:
@@ -171,9 +174,9 @@ def editHealth():
                 return {"death": "this is a work in progress"}
         else:
             return jsonify({"error":"There was an error while updating your health"}),400
-    elif (data.get('gold')):
-        gold=Decimal(data.get('gold'))
-        exp=Decimal(data.get('exp'))
+    elif (healthOrExpp.get('gold')):
+        gold=Decimal(healthOrExpp.get('gold'))
+        exp=Decimal(healthOrExpp.get('exp'))
         if current_user:
             if key=='habit':
                 current_user.users_clicked_habits=arrayStuff
@@ -195,7 +198,11 @@ def editHealth():
                 victoryDeets['healthIncrease']=f"Your max-health has increased from {current_user.health} to {(current_user.health+10)} and you've been fully healed."
                 current_user.health+=10
                 current_user.current_health=current_user.health
-                current_user.users_clicked_dailies=arrayStuff
+                if key=='habit':
+                    current_user.users_clicked_habits=arrayStuff
+                elif key=='daily':
+                    current_user.users_clicked_dailies=arrayStuff
+
                 current_user.exp=realExp
                 copyExp=realExp
 
@@ -217,7 +224,10 @@ def editHealth():
 
                 if current_user.exp+exp>=0:
                     current_user.exp= (current_user.exp+exp)
-                    current_user.users_clicked_dailies=arrayStuff
+                    if key=='habit':
+                        current_user.users_clicked_habits=arrayStuff
+                    elif key=='daily':
+                        current_user.users_clicked_dailies=arrayStuff
                     db.session.commit()
                     return jsonify({"victory": False, "current_user": current_user.to_dict()})
         else:

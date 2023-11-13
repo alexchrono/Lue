@@ -57,7 +57,7 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                     <p className='welcomeCongrats'>ADD/EDIT A CARD: </p>
                     <div className='victory-welcome2'>
                         <img
-                            src={`${process.env.PUBLIC_URL}/icons/finalVersionTutorialGif.gif`}
+                            src={`https://lue-cs.s3.amazonaws.com/34b70359a396434a8b371653b97b9bac.gif`}
                             alt="Welcome"></img>
                     </div>
 
