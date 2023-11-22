@@ -1,20 +1,19 @@
 """empty message
 
-Revision ID: eb90155cfb8d
+Revision ID: 181b561d0c66
 Revises:
-Create Date: 2023-11-12 19:38:01.721120
+Create Date: 2023-11-21 23:13:55.483729
 
 """
 from alembic import op
 import sqlalchemy as sa
-
 import os
 environment = os.getenv("FLASK_ENV")
 SCHEMA = os.environ.get("SCHEMA")
 
 
 # revision identifiers, used by Alembic.
-revision = 'eb90155cfb8d'
+revision = '181b561d0c66'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -83,7 +82,6 @@ def upgrade():
     )
     if environment == "production":
         op.execute(f"ALTER TABLE habits SET SCHEMA {SCHEMA};")
-
     # ### end Alembic commands ###
 
 
