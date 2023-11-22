@@ -87,6 +87,7 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                 <p className='para2'>Complete good habits or dailies and your gold and exp will increase.  Complete enough and you gain a level!  When you gain a level your health is fully restored.</p>
 
                 <p className='welcomeCongrats'>Dying/ losing a level: </p>
+                <hr className='hrBreaks'></hr>
                 <p className='para2'>However, bad habits will decrease your hp.  Mess up too many times and you will die.  You will revert to the previous level and lose all gold and experience</p>
                 <p></p>
                 <p className='para2 white'>Once Again, welcome to Level Up Everything.  You are now free to start your journey.</p>
