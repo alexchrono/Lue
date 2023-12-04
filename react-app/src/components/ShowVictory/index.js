@@ -27,7 +27,28 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                     <p className='para'>{victoryDeets.nextLevel}</p>
                     <p className='para'>{victoryDeets.endingLine}</p>
                     <button className='letsMakePretty'onClick={() => {
-                        setVictory(false);
+                        setVictory('nothing');
+                        closeModal();
+                    }}>Ok</button>
+                </div>
+            )}
+
+{formType === 'death' && (
+                <div className="victory-popup">
+                    <h1 className='welcomeCongrats'>You died</h1>
+                    <div className='victory-celebrate'>
+                        <img
+                            src={`${process.env.PUBLIC_URL}/icons/vivi-death.gif`}
+                            alt="Level Up"></img>
+                    </div>
+
+                    <p className='para'>{`${victoryDeets.levelGrowth} & ${victoryDeets.newTitle}`}</p>
+                    <p className='para'>{victoryDeets.healthIncrease}</p>
+                    <p className='para'>{victoryDeets.lossGold}</p>
+                    <p className='para'>{victoryDeets.lossExp}</p>
+                    <p className='para'>{victoryDeets.rayOfHope}</p>
+                    <button className='letsMakePretty'onClick={() => {
+                        setVictory('nothing');
                         closeModal();
                     }}>Ok</button>
                 </div>
@@ -94,7 +115,7 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                 <div className='button'>
 <button className='letsMakePretty' onClick={async () => {
     setForm3(false)
-    setVictory(false);
+    setVictory('nothing');
     await dispatch(ThunkEditNewUser());
     closeModal();
 }}>Exit Tutorial</button>

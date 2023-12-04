@@ -28,7 +28,7 @@ export default function Habits({ user }) {
   const clickedEmoti= useSelector((state) => state.session.user.usersClickedHabits)
   const [localArray,setLocalArray]=useState([])
   const [openHabit, setOpenHabit] = useState(null)
-  const [showVictory, setShowVictory] = useState(false);
+  const [showVictory, setShowVictory] = useState('nothing');
   const [victoryDeets, setVictoryDeets] = useState({})
   const [needsLoading, setNeedsLoading] = useState(true);
 
@@ -146,10 +146,14 @@ export default function Habits({ user }) {
 
 
 
-      if (test.victory) {
-        setShowVictory(true);
+      if (test.victory==='victory') {
+        setShowVictory('victory');
         setVictoryDeets(test.victoryDeets)
 
+      }
+      else if (test.victory==='death'){
+        setShowVictory('death')
+        setVictoryDeets(test.victoryDeets)
       }
 
     }
@@ -240,7 +244,8 @@ export default function Habits({ user }) {
       {user2?.newUser && (<ShowVictory formType='newUser' setVictory={setShowVictory} victoryDeets={victoryDeets} />)}
       {/* {errors?.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)} */}
       {errors?.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
-      {showVictory && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory==='victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory==='death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Habits</div>

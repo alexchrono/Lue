@@ -166,12 +166,66 @@ def editHealth():
         if current_user:
             falseHealth=current_user.current_health+health
             if falseHealth>0:
+
                 current_user.current_health= (current_user.current_health+health)
                 current_user.users_clicked_habits=arrayStuff
                 db.session.commit()
-                return {"victory": False,"current_user": current_user.to_dict()}
+                return {"victory": 'nothing',"current_user": current_user.to_dict()}
             else:
-                return {"death": "this is a work in progress"}
+                victoryDeets={}
+                beforeLevel=current_user.level
+                if current_user.level<=1:
+                    victoryDeets['levelGrowth']=f"As you were only level 1, you will remain at level 1"
+                    victoryDeets['healthIncrease']=f' Your max health remains at 25, and upon your revival will be fully restored.'
+                    victoryDeets['newTitle']=f' you are still a novice.'
+                    victoryDeets['lossGold']=f' you lost {current_user.gold} pieces of gold and now have 0.'
+                    victoryDeets['lossExp']=f' you lost {current_user.exp} exp  and your exp has been reset to 0.  You will need 25 exp to get to the next level'
+                    victoryDeets['rayOfHope']=f"However Don't lose too much faith.  We all fall short sometimes.  Pick yourself up, and let's get back to being the best version of ourself we can be!"
+                    current_user.exp=0
+                    current_user.gold=0
+                    current_user.current_health=current_user.health
+                    db.session.commit()
+                    return jsonify({"victory": 'death', "victoryDeets":victoryDeets, "current_user": current_user.to_dict()})
+
+
+
+                    # afterLevel=1
+                    # oldTitle=level_titles[current_user.level]
+                    # newTitle= level_titles[current_user.level]
+                    # oldHealth=current_user.health
+                    # newHealth=current_user.health
+                else:
+                    afterLevel=current_user.level-1
+                    victoryDeets['levelGrowth']=f"You went from level {beforeLevel}, to level {afterLevel}."
+
+
+                    oldTitle=level_titles[beforeLevel]
+                    newTitle=level_titles[afterLevel]
+                    victoryDeets['newTitle']=f"You've been demoted from {oldTitle} to {newTitle}."
+                    oldHealth=current_user.health
+                    newHealth=current_user.health-10
+                    victoryDeets['healthIncrease']=f' Your max health dropped from {oldHealth} to {newHealth}.'
+                    victoryDeets['lossGold']=f' you lost {current_user.gold} pieces of gold and now have 0.'
+                    victoryDeets['lossExp']=f' you lost {current_user.exp} exp  and your exp has been reset to 0.  You will need {afterLevel * 25} exp to get to the next level'
+                    victoryDeets['rayOfHope']=f"However Don't lose too much faith.  We all fall short sometimes.  Pick yourself up, and let's get back to being the best version of ourself we can be!"
+
+                    # oldExp= current_user.exp
+                    # newExp= 0
+                    # newTargetExp= (current_user.level-1)*25
+                    # oldGold= current_user.gold
+                    # newGold= 0
+
+
+                    current_user.health=newHealth
+                    current_user.current_health=newHealth
+                    current_user.exp=0
+                    current_user.gold=0
+                    current_user.level=afterLevel
+                    current_user.users_clicked_habits=arrayStuff
+                    db.session.commit()
+
+                    return jsonify({"victory": 'death', "victoryDeets":victoryDeets, "current_user": current_user.to_dict()})
+
         else:
             return jsonify({"error":"There was an error while updating your health"}),400
     elif (healthOrExpp.get('gold')):
@@ -219,7 +273,7 @@ def editHealth():
 
                 victoryDeets['newTitle']=f' are now {aOrAN} {newTitle}.'
                 victoryDeets['endingLine']='Enjoy your promotion.  You did great!'
-                return jsonify({"victory": True, "victoryDeets":victoryDeets, "current_user": current_user.to_dict()})
+                return jsonify({"victory": 'victory', "victoryDeets":victoryDeets, "current_user": current_user.to_dict()})
             else:
 
                 if current_user.exp+exp>=0:
@@ -229,7 +283,7 @@ def editHealth():
                     elif key=='daily':
                         current_user.users_clicked_dailies=arrayStuff
                     db.session.commit()
-                    return jsonify({"victory": False, "current_user": current_user.to_dict()})
+                    return jsonify({"victory": 'nothing', "current_user": current_user.to_dict()})
         else:
             return jsonify({"error":"There was an error while updating your Gold and exp"}),400
 
