@@ -129,6 +129,44 @@ def makeNewHabit():
 #     return {"test": "7"}
 
 
+@habit_routes.route('/move-habit', methods=['POST'])
+def moveHabit():
+    err = {}
+    data = request.json
+    habit_title = data.get('habit')
+
+    if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
+        custError(err, 'title', 'Habit Title is required and must be between 3 and 30 characters')
+
+    if 'errors' in err:
+        return jsonify(err), 400
+
+    new_habit = Habit(
+        title=habit_title,
+        user_id=current_user.id,
+        untouched=True,
+        position=0
+    )
+    db.session.add(new_habit)
+    db.session.commit()
+
+    for habit in current_user.users_habits:
+            habit.position=habit.position+1
+
+    db.session.commit()
+
+    current_user.set_habits_and_dailies()
+
+    ourGuyDict = current_user.to_dict()
+    updatedArray = ourGuyDict.get("usersHabitsArray")
+    updatedObj= ourGuyDict.get("usersHabitsObj")
+
+
+
+    return jsonify({ "newArray": updatedArray,'habitsObj':updatedObj})
+
+
+
 @habit_routes.route('/edit-habit', methods=['POST'])
 def editHabit():
     err = {}

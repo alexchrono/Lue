@@ -102,11 +102,12 @@ function normalizeData(allHabits, newItem) {
     }
     return { 'all_things': normalized, 'all_ids': allHabits.arrayHabits }
 }
-export const ThunkMoveHabitBottom = (habit) => async (dispatch) => {
+export const ThunkMoveHabit = (habit) => async (dispatch) => {
+    console.log('inside thunkMoveHabitBottom')
 
 
 
-    const response = await fetch("/api/habits/move-bottom", {
+    const response = await fetch(`/api/habits/move-habit`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
