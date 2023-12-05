@@ -6,9 +6,11 @@ html {
 .stats-container {
     display: flex;
     flex-direction: row;
-    height: 26%;
-    max-height: 26%;
+    /* height: 26%; */
+    max-height: 29%;
     flex-grow: 1;
+    padding-top: 2%;
+    padding-bottom: 3%;
 }
 
 .avatar,
@@ -19,9 +21,10 @@ html {
 }
 
 .avatar {
-    flex-basis: 20%;
+    flex-basis: 50%;
     height: auto;
     overflow: hidden;
+
 }
 
 .avatar img {
@@ -47,7 +50,7 @@ html {
 
 .inspirational-quote {
     position: relative;
-    flex-basis: 60%;
+    flex-basis: 65%;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -625,4 +628,9 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
   .endofdays {
     text-align: center;
     font-size: 3.1em;
+  }
+  .avStats {
+width: 35%;
+display: flex;
+flex-direction: row;
   }

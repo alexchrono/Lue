@@ -44,8 +44,9 @@ export default function Main({mode}) {
     return (
 
         <div className= 'main-main-container'>
-            {mode==='main'?
+
         <div className="stats-container">
+            <div className='avStats'>
             <div className="avatar">
             <img src={`${user.selectedAvatar}`}></img> </div>
             <div className='stats'><span>level: {user.level}</span>
@@ -56,6 +57,8 @@ export default function Main({mode}) {
 
 
             </div>
+            </div>
+            {mode==='main'?
             <div className='inspirational-quote'>
 
         <img className = 'sword-Divider' src={`${process.env.PUBLIC_URL}/icons/sword-flipped-divider3.png`}></img>
@@ -63,12 +66,14 @@ export default function Main({mode}) {
         <div className='fiftyheight'><div className='bad-spot'></div><div className='sweet-spot'><div className='text-finally'>What you make of it</div></div></div>
         {/* <div className="LifeIs">Life is what you make it</div> */}
         </div>
-        </div>
+
+
+
     : mode==='profile'?
 <div className='stats-container'>lets test this</div>
 : null}
-        <div className='buffer'></div>
-
+        {/* <div className='buffer'></div> */}
+        </div>
         <div className='tables'>
             {user?.justGainedLevel && (
                 <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`}  />
@@ -81,6 +86,7 @@ export default function Main({mode}) {
 
 
         </div>
+
 
         </div>
     )
