@@ -4,23 +4,27 @@ html {
 
 }
 .stats-container {
-    display: flex;
+    display: inline-flex;
     flex-direction: row;
     height: 26%;
     max-height: 26%;
+    width: 45%;
+    /* max-width:30%; */
     flex-grow: 1;
 }
 
 .avatar,
 .stats,
 .inspirational-quote {
+    width: 40%;
     padding: 10px;
     box-sizing: border-box;
 }
 
 .avatar {
-    flex-basis: 20%;
+    /* flex-basis: 20%; */
     height: auto;
+    width: 43%;
     overflow: hidden;
 }
 
@@ -625,4 +629,12 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
   .endofdays {
     text-align: center;
     font-size: 3.1em;
+  }
+  .inline {
+    display: inline-flex;
+  }
+
+  .house {
+    display: flex;
+    flex-direction: row;
   }
