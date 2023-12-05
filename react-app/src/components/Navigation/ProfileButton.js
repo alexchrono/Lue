@@ -17,6 +17,7 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
   const history=useHistory()
   const [errors,setErrors]=useState({})
+  const [profOrMain,setProfOrMain]=useState('profile')
 
   const loginDemo = async (e) => {
     e.preventDefault();
@@ -72,7 +73,14 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
-            <li><button onClick={(e)=>{history.push('/profile')}}>Profile</button></li>
+            {profOrMain==='profile'?
+            <li><button onClick={(e)=>{
+              history.push('/profile');
+            setProfOrMain('main')}}>Profile</button></li>: profOrMain==='main'?
+
+<li><button onClick={(e)=>{history.push('/main');
+setProfOrMain('profile')}}>Main</button></li> : null
+          }
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>
