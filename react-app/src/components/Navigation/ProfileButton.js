@@ -72,6 +72,7 @@ function ProfileButton({ user }) {
           <>
             <li>{user.username}</li>
             <li>{user.email}</li>
+            <li><button onClick={(e)=>{history.push('/profile')}}>Profile</button></li>
             <li>
               <button onClick={handleLogout}>Log Out</button>
             </li>

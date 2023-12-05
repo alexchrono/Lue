@@ -10,7 +10,7 @@ import './main.css';
 
 
 
-export default function Main() {
+export default function Main({mode}) {
     const user = useSelector((state) => state.session.user)
     const history= useHistory()
     const userArray= useSelector((state) => state?.habits?.allIds);
@@ -40,8 +40,11 @@ export default function Main() {
         return null
     }
 
+
     return (
+
         <div className= 'main-main-container'>
+            {mode==='main'?
         <div className="stats-container">
             <div className="avatar">
             <img src={`${user.selectedAvatar}`}></img> </div>
@@ -61,7 +64,9 @@ export default function Main() {
         {/* <div className="LifeIs">Life is what you make it</div> */}
         </div>
         </div>
-
+    : mode==='profile'?
+<div className='stats-container'>lets test this</div>
+: null}
         <div className='buffer'></div>
 
         <div className='tables'>
@@ -79,6 +84,4 @@ export default function Main() {
 
         </div>
     )
-
-
-}
+            }
