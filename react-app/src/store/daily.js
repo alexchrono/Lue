@@ -3,6 +3,7 @@ const CREATE_DAILY = "daily/CREATE_DAILY";
 const EDIT_DAILY = "daily/EDIT_DAILY";
 const DELETE_DAILY = "daily/DELETE_DAILY";
 const GET_ALL_DAILIES = 'daily/GET_ALL_DAILIES'
+const MOVE_DAILY = 'daily/MOVE_DAILY'
 
 
 
@@ -22,6 +23,11 @@ const actionEditDaily = (data) => ({
 
 const actionDeleteDaily = (data) => ({
     type: DELETE_DAILY,
+    payload: data,
+});
+
+const actionMoveDaily = (data) => ({
+    type: MOVE_DAILY,
     payload: data,
 });
 
@@ -104,6 +110,31 @@ function normalizeData(allDailies, newItem) {
 }
 
 
+export const ThunkMoveDaily = (daily) => async (dispatch) => {
+    console.log('inside thunkMoveHabitBottom')
+
+
+
+    const response = await fetch(`/api/dailies/move-daily`, {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify(daily),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        await dispatch(actionMoveDaily(data));
+        return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        return data
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
 export const ThunkDeleteDaily = (targetId) => async (dispatch) => {
 
     targetId=parseInt(targetId)
@@ -209,6 +240,12 @@ export default function reducer(state = initialState, action) {
 
             // newState.allIds.push(action.payload.id)
             // newState.allIds=newState.allIds.map(id=>parseInt(id))
+
+            return newState;
+
+        case MOVE_DAILY:
+            let copyOfArray2 = [...action.payload.newArray]
+            newState = { byId: { ...action.payload.dailiesObj }, allIds: copyOfArray2 }
 
             return newState;
 
