@@ -11,6 +11,7 @@ import './ellipsis.css';
 export default function EllipsisMenu({ formType, id, habitOrDaily, setter, array }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch()
+    
 
     return (
         <div className='backGa'>
