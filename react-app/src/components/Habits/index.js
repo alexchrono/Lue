@@ -349,7 +349,7 @@ export default function Habits({ user }) {
               </div>
               <div className='fifteen-percent invisi2'>
                 {openHabit === habitId && (
-                  <EllipsisMenu formType='habit' id={habitId} habitOrDaily={userHabits[habitId]} setter={setOpenHabit} />)}
+                  <EllipsisMenu formType='habit' id={habitId} habitOrDaily={userHabits[habitId]} setter={setOpenHabit}  />)}
 
               </div>
             </div>))}

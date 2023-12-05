@@ -7,7 +7,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { ThunkMoveHabit } from "../../store/habit";
 import './ellipsis.css';
 
-export default function EllipsisMenu({ formType, id, habitOrDaily,setter }) {
+export default function EllipsisMenu({ formType, id, habitOrDaily,setter,array }) {
     const { closeModal } = useModal();
     const dispatch=useDispatch()
 
@@ -31,7 +31,7 @@ export default function EllipsisMenu({ formType, id, habitOrDaily,setter }) {
                 <li>
                     <button className="menu-item-button" onClick={async(e)=>{
                         formType==='habit' && (
-                         await dispatch(ThunkMoveHabit({'position':'bottom','habit': habitOrDaily})))
+                         await dispatch(ThunkMoveHabit({'position':'bottom','habit': habitOrDaily,'array': array})))
 
                         // : await dispatch(ThunkMoveDailyBottom(habitOrDaily))
                     }}>To Bottom</button>
