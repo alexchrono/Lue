@@ -155,13 +155,14 @@ def moveHabit():
     posOfFirst=firstHabit
     ic(posOfLast)
     if desired_pos == 'top':
+                newPos = posOfFirst -1
 
                 for habit in current_user.users_habits:
                     if habit.id==idToChange:
-                        habit.position=posOfFirst
+                        habit.position=newPos
 
-                    elif habit.position>posToChange:
-                        habit.position+=1
+                    elif habit.id !=idToChange and habit.position>=posToChange:
+                        habit.position +=1
 
                 db.session.commit()
 

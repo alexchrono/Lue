@@ -27,19 +27,22 @@ export default function EllipsisMenu({ formType, id, habitOrDaily,setter,array }
                 </li>
                 <li>
                     <button className="menu-item-button" onClick={async(e)=>{
-                        formType==='habit' && (
-                         await dispatch(ThunkMoveHabit({'position':'top','habit': habitOrDaily,'array': array})))
+                        if (formType==='habit') {
+                         await dispatch(ThunkMoveHabit({'position':'top','habit': habitOrDaily,'array': array}))
+                         setter(null)
+                        }
 
                         // : await dispatch(ThunkMoveDailyBottom(habitOrDaily))
                     }}>To Top</button>
                 </li>
                 <li>
                     <button className="menu-item-button" onClick={async(e)=>{
-                        formType==='habit' && (
-                         await dispatch(ThunkMoveHabit({'position':'bottom','habit': habitOrDaily,'array': array})))
-
+                        if (formType==='habit'){
+                         await dispatch(ThunkMoveHabit({'position':'bottom','habit': habitOrDaily,'array': array}))
+                         setter(null)}
+}
                         // : await dispatch(ThunkMoveDailyBottom(habitOrDaily))
-                    }}>To Bottom</button>
+                    }>To Bottom</button>
                 </li>
                 <li>
                     <OpenModalButton
