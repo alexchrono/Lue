@@ -27,7 +27,28 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                     <p className='para'>{victoryDeets.nextLevel}</p>
                     <p className='para'>{victoryDeets.endingLine}</p>
                     <button className='letsMakePretty'onClick={() => {
-                        setVictory(false);
+                        setVictory('nothing');
+                        closeModal();
+                    }}>Ok</button>
+                </div>
+            )}
+
+{formType === 'death' && (
+                <div className="victory-popup">
+                    <h1 className='welcomeCongrats'>You died</h1>
+                    <div className='victory-celebrate'>
+                        <img
+                            src={`${process.env.PUBLIC_URL}/icons/vivi-death.gif`}
+                            alt="Level Up"></img>
+                    </div>
+
+                    <p className='para'>{`${victoryDeets.levelGrowth} & ${victoryDeets.newTitle}`}</p>
+                    <p className='para'>{victoryDeets.healthIncrease}</p>
+                    <p className='para'>{victoryDeets.lossGold}</p>
+                    <p className='para'>{victoryDeets.lossExp}</p>
+                    <p className='para'>{victoryDeets.rayOfHope}</p>
+                    <button className='letsMakePretty'onClick={() => {
+                        setVictory('nothing');
                         closeModal();
                     }}>Ok</button>
                 </div>
@@ -87,13 +108,14 @@ export default function ShowVictory({ formType, setVictory, victoryDeets }) {
                 <p className='para2'>Complete good habits or dailies and your gold and exp will increase.  Complete enough and you gain a level!  When you gain a level your health is fully restored.</p>
 
                 <p className='welcomeCongrats'>Dying/ losing a level: </p>
+                <hr className='hrBreaks'></hr>
                 <p className='para2'>However, bad habits will decrease your hp.  Mess up too many times and you will die.  You will revert to the previous level and lose all gold and experience</p>
                 <p></p>
                 <p className='para2 white'>Once Again, welcome to Level Up Everything.  You are now free to start your journey.</p>
                 <div className='button'>
 <button className='letsMakePretty' onClick={async () => {
     setForm3(false)
-    setVictory(false);
+    setVictory('nothing');
     await dispatch(ThunkEditNewUser());
     closeModal();
 }}>Exit Tutorial</button>

@@ -53,7 +53,15 @@ const ourName='steve'
 
       <h1 className='welcomeCongrats4'>Are you sure you want to delete the {ourDisplay}</h1>
       <p className='endofdays'>{title} ? </p>
-      <div className="alignment-choice">
+      <div className='editButtons2'>
+        <button className='letsMakePretty' type='button' onClick={closeModal}>
+              NO - do not delete
+            </button>
+            <button className='letsMakePretty' type='button' onClick={handleDelete}>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Yes - Delete&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            </button>
+            </div>
+      {/* <div className="alignment-choice">
 
 <div className="pic-container">
     <img
@@ -74,7 +82,7 @@ const ourName='steve'
     />
     <p className="pic-caption">Yes I'm Sure- delete</p>
   </div>
-</div>
+</div> */}
 </div>
     </>
   );

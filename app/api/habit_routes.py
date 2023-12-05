@@ -129,6 +129,119 @@ def makeNewHabit():
 #     return {"test": "7"}
 
 
+@habit_routes.route('/move-habit', methods=['POST'])
+def moveHabit():
+    ic('INSIDE MOVE HABIT ROUTE BABY')
+    err = {}
+    data = request.json
+    desired_pos = data.get('position')
+    habitToChange= data.get('habit')
+    idToChange= habitToChange['id']
+    posToChange= habitToChange['position']
+    ic(idToChange)
+    ourArray=current_user.users_habits_array
+    ic(ourArray)
+    lenArray=len(ourArray)-1
+    idOfLast=ourArray[lenArray]
+    ic(idOfLast)
+    ourHabits=current_user.users_habits
+    ic(ourHabits)
+    lenHabits=len(current_user.users_habits)-1
+    ic(ourHabits)
+    firstHabit= min(habit.position for habit in ourHabits)
+    lastHabit=max(habit.position for habit in ourHabits)
+    ic(lastHabit)
+    posOfLast=lastHabit
+    posOfFirst=firstHabit
+    ic(posOfLast)
+    if desired_pos == 'top':
+                newPos = posOfFirst -1
+
+                for habit in current_user.users_habits:
+                    if habit.id==idToChange:
+                        habit.position=newPos
+
+                    elif habit.id !=idToChange and habit.position>=posToChange:
+                        habit.position +=1
+
+                db.session.commit()
+
+
+                current_user.set_habits_and_dailies()
+
+                ourGuyDict = current_user.to_dict()
+                updatedArray = ourGuyDict.get("usersHabitsArray")
+                updatedObj= ourGuyDict.get("usersHabitsObj")
+                ic(updatedArray)
+                ic(updatedObj)
+
+
+
+                return jsonify({ "newArray": updatedArray,'habitsObj':updatedObj})
+
+
+    elif desired_pos == 'bottom':
+        for habit in current_user.users_habits:
+            if habit.id==idToChange:
+                habit.position=posOfLast
+
+            elif habit.position>posToChange:
+                    habit.position-=1
+
+        db.session.commit()
+
+
+        current_user.set_habits_and_dailies()
+
+        ourGuyDict = current_user.to_dict()
+        updatedArray = ourGuyDict.get("usersHabitsArray")
+        updatedObj= ourGuyDict.get("usersHabitsObj")
+        ic(updatedArray)
+        ic(updatedObj)
+
+
+
+        return jsonify({ "newArray": updatedArray,'habitsObj':updatedObj})
+    # lenArray=len(current_user.users_habits_array)
+    # ic(current_user.users_habits_array[lenArray-1])
+    # ic(lenArray)
+    ic(desired_pos)
+    ic(habitToChange)
+
+
+
+    # if not habit_title or len(habit_title) < 3 or len(habit_title) > 30:
+    #     custError(err, 'title', 'Habit Title is required and must be between 3 and 30 characters')
+
+    # if 'errors' in err:
+    #     return jsonify(err), 400
+
+    # new_habit = Habit(
+    #     title=habit_title,
+    #     user_id=current_user.id,
+    #     untouched=True,
+    #     position=0
+    # )
+    # db.session.add(new_habit)
+    # db.session.commit()
+
+    # for habit in current_user.users_habits:
+    #         habit.position=habit.position+1
+
+    # db.session.commit()
+
+    # current_user.set_habits_and_dailies()
+
+    # ourGuyDict = current_user.to_dict()
+    # updatedArray = ourGuyDict.get("usersHabitsArray")
+    # updatedObj= ourGuyDict.get("usersHabitsObj")
+
+
+
+    # return jsonify({ "newArray": 7,'habitsObj':7})
+
+
+
 @habit_routes.route('/edit-habit', methods=['POST'])
 def editHabit():
     err = {}

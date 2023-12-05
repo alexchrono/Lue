@@ -438,6 +438,15 @@ width: 100%;
     flex-grow: 1;
     margin-left: 10%;
 }
+.editButtons2 {
+    display: flex;
+    justify-content: center;
+    gap:3%;
+    flex-grow: 1;
+    padding-bottom: 5%;
+    /* margin-left: 10%; */
+}
+
 
 .deleteButton {
     display: flex;
