@@ -4,10 +4,10 @@ import EditDailyModal from "../EditDailyModal";
 import EditHabitModal from "../EditHabitModal";
 import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 import { useDispatch, useSelector } from "react-redux";
-import { ThunkMoveHabitBottom } from "../../store/habit";
+import { ThunkMoveHabit } from "../../store/habit";
 import './ellipsis.css';
 
-export default function EllipsisMenu({ formType, id, habitOrDaily,setter }) {
+export default function EllipsisMenu({ formType, id, habitOrDaily,setter,array }) {
     const { closeModal } = useModal();
     const dispatch=useDispatch()
 
@@ -26,14 +26,23 @@ export default function EllipsisMenu({ formType, id, habitOrDaily,setter }) {
                     />
                 </li>
                 <li>
-                    <button className="menu-item-button">To Top</button>
+                    <button className="menu-item-button" onClick={async(e)=>{
+                        if (formType==='habit') {
+                         await dispatch(ThunkMoveHabit({'position':'top','habit': habitOrDaily,'array': array}))
+                         setter(null)
+                        }
+
+                        // : await dispatch(ThunkMoveDailyBottom(habitOrDaily))
+                    }}>To Top</button>
                 </li>
                 <li>
                     <button className="menu-item-button" onClick={async(e)=>{
-                        formType==='habit' && (
-                         await dispatch(ThunkMoveHabitBottom(habitOrDaily)))
+                        if (formType==='habit'){
+                         await dispatch(ThunkMoveHabit({'position':'bottom','habit': habitOrDaily,'array': array}))
+                         setter(null)}
+}
                         // : await dispatch(ThunkMoveDailyBottom(habitOrDaily))
-                    }}>To Bottom</button>
+                    }>To Bottom</button>
                 </li>
                 <li>
                     <OpenModalButton

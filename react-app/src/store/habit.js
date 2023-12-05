@@ -5,6 +5,7 @@ const CREATE_HABIT = "habit/CREATE_HABIT";
 const EDIT_HABIT = "habit/EDIT_HABIT";
 const DELETE_HABIT = "habit/DELETE_HABIT";
 const GET_ALL_HABITS = 'habit/GET_ALL_HABITS'
+const MOVE_HABIT = 'habit/MOVE_HABIT'
 
 
 
@@ -24,6 +25,10 @@ const actionEditHabit = (data) => ({
 
 const actionDeleteHabit = (data) => ({
     type: DELETE_HABIT,
+    payload: data,
+});
+const actionMoveHabit = (data) => ({
+    type: MOVE_HABIT,
     payload: data,
 });
 
@@ -102,11 +107,12 @@ function normalizeData(allHabits, newItem) {
     }
     return { 'all_things': normalized, 'all_ids': allHabits.arrayHabits }
 }
-export const ThunkMoveHabitBottom = (habit) => async (dispatch) => {
+export const ThunkMoveHabit = (habit) => async (dispatch) => {
+    console.log('inside thunkMoveHabitBottom')
 
 
 
-    const response = await fetch("/api/habits/move-bottom", {
+    const response = await fetch(`/api/habits/move-habit`, {
         method: "POST",
         headers: {
             'Content-Type': 'application/json',
@@ -117,7 +123,7 @@ export const ThunkMoveHabitBottom = (habit) => async (dispatch) => {
 
     if (response.ok) {
         const data = await response.json();
-        await dispatch(actionEditHabit(data));
+        await dispatch(actionMoveHabit(data));
         return data;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -236,6 +242,11 @@ export default function reducer(state = initialState, action) {
 
             return newState;
 
+        case MOVE_HABIT:
+            let copyOfArray2 = [...action.payload.newArray]
+            newState = { byId: { ...action.payload.habitsObj }, allIds: copyOfArray2 }
+
+            return newState;
 
         case EDIT_HABIT:
             newState = { ...state }

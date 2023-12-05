@@ -22,7 +22,7 @@ export default function Dailies({ user }) {
   const [localArray,setLocalArray]=useState([])
   const [openDaily, setOpenDaily] = useState(null);
   const [errors, setErrors] = useState([]);
-  const [showVictory, setShowVictory] = useState(false);
+  const [showVictory, setShowVictory] = useState('nothing');
   const [victoryDeets, setVictoryDeets] = useState({})
   const [needsLoading, setNeedsLoading] = useState(true);
 
@@ -76,8 +76,12 @@ export default function Dailies({ user }) {
     if (change) {
 
       const test = await dispatch(ThunkEditHealth(change,copyArray,key))
-      if (test.victory) {
-        setShowVictory(true);
+      if (test.victory==='victory') {
+        setShowVictory('victory');
+        setVictoryDeets(test.victoryDeets)
+      }
+      else if (test.victory==='death'){
+        setShowVictory('death')
         setVictoryDeets(test.victoryDeets)
       }
 
@@ -131,7 +135,8 @@ export default function Dailies({ user }) {
   return (
     <>
       {errors.title && (<ErrorComponent errorMessage={'Daily titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setDaily} />)}
-      {showVictory && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory==='victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory==='death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
