@@ -148,12 +148,38 @@ def moveHabit():
     ic(ourHabits)
     lenHabits=len(current_user.users_habits)-1
     ic(ourHabits)
+    firstHabit= min(habit.position for habit in ourHabits)
     lastHabit=max(habit.position for habit in ourHabits)
     ic(lastHabit)
     posOfLast=lastHabit
+    posOfFirst=firstHabit
     ic(posOfLast)
+    if desired_pos == 'top':
 
-    if desired_pos == 'bottom':
+                for habit in current_user.users_habits:
+                    if habit.id==idToChange:
+                        habit.position=posOfFirst
+
+                    elif habit.position>posToChange:
+                        habit.position+=1
+
+                db.session.commit()
+
+
+                current_user.set_habits_and_dailies()
+
+                ourGuyDict = current_user.to_dict()
+                updatedArray = ourGuyDict.get("usersHabitsArray")
+                updatedObj= ourGuyDict.get("usersHabitsObj")
+                ic(updatedArray)
+                ic(updatedObj)
+
+
+
+                return jsonify({ "newArray": updatedArray,'habitsObj':updatedObj})
+
+
+    elif desired_pos == 'bottom':
         for habit in current_user.users_habits:
             if habit.id==idToChange:
                 habit.position=posOfLast
@@ -211,7 +237,7 @@ def moveHabit():
 
 
 
-    return jsonify({ "newArray": 7,'habitsObj':7})
+    # return jsonify({ "newArray": 7,'habitsObj':7})
 
 
 
