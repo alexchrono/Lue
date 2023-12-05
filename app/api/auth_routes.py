@@ -251,7 +251,7 @@ def editHealth():
 
                 victoryDeets['healthIncrease']=f"Your max-health has increased from {current_user.health} to {(current_user.health+10)} and you've been fully healed."
                 current_user.health+=10
-                current_user.current_health=current_user.health
+                current_user.current_health= min(current_user.current_health, current_user.health)
                 if key=='habit':
                     current_user.users_clicked_habits=arrayStuff
                 elif key=='daily':
