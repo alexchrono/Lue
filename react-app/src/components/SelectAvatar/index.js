@@ -5,21 +5,28 @@ import { useModal } from "../../context/Modal";
 import OpenModalButton from "../OpenModalButton";
 import DeleteHabitOrDaily from "../DeleteHabitOrDaily";
 import { ThunkEditDaily } from "../../store/daily";
+import './selectAvatar.css'
 
-
-export default function SelectAvatar() {
-
-
-
-  return (
-    <>
-    <h1>Select your Avatar</h1>
-    <img src={`${process.env.PUBLIC_URL}/icons/SNES - Super Street Fighter II The New Challengers - RyuAnimated.gif`}></img>
-    <img src={`${process.env.PUBLIC_URL}/icons/SNES - Super Street Fighter II The New Challengers - GuileAnim.gif`}></img>
-    <img src={`${process.env.PUBLIC_URL}/icons/sailorJupiterSprites1.gif`}></img>
-    <img src={`${process.env.PUBLIC_URL}/icons/SNES - Sailor Moon - Sailor Mars.gif`}></img>
-
-
-    </>)
-
+export default function SelectAvatar({setGif,setter}) {
+    return (
+        <div className='selectAv'>
+            <h1>Select your Avatar</h1>
+            <div className='row1'>
+                <img src={`${process.env.PUBLIC_URL}/icons/RyuAnimated.gif`} alt='Ryu' onClick={
+                    (e)=>{setGif('Ryu');
+                    setter(false)}}></img>
+                <img src={`${process.env.PUBLIC_URL}/icons/GuileAnim.gif`} alt='Guile' onClick={
+                    (e)=>{setGif('Guile');
+                    setter(false)}}></img>
+            </div>
+            <div className='row2'>
+                <img src={`${process.env.PUBLIC_URL}/icons/sailorJupiterAnim.gif`} alt='Sailor Jupiter' onClick={
+                    (e)=>{setGif('Jupiter');
+                    setter(false)}}></img>
+                <img src={`${process.env.PUBLIC_URL}/icons/SailorMarsAnim.gif`} alt='Sailor Mars'onClick={
+                    (e)=>{setGif('Mars');
+                    setter(false)}}></img>
+            </div>
+        </div>
+    );
 }

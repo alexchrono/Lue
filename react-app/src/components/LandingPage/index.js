@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp, login } from '../../store/session';
+import SelectAvatar from '../SelectAvatar';
 
 
 import './LandingPage.css';
@@ -19,6 +20,12 @@ export default function LandingPage() {
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
     const [errorsFe, setErrorsFe] = useState([])
+    const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
+    const [gif,setGif]=useState('')
+
+    const openAvatarModal = () => {
+        setIsAvatarModalOpen(true);
+    };
 
     const handleAvatarChange = (e) => {
         setNewAvatar(e.target.files[0])
@@ -192,7 +199,7 @@ export default function LandingPage() {
     <button
         type='button'
         className="letsMakePretty"
-        onClick={() => document.getElementById('fileInput').click()}
+        onClick={openAvatarModal}
     >
         Select Avatar
     </button>
@@ -219,7 +226,10 @@ export default function LandingPage() {
 
             </div>
 
+            {isAvatarModalOpen && (
+                <SelectAvatar setGif={setGif} setter={setIsAvatarModalOpen}/>
 
+            )}
 
         </div>
     )
