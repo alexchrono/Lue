@@ -119,8 +119,8 @@ export default function LandingPage() {
 
                     <div className='createdBy'>
                         Created By:  <a
-            href="https://github.com/alexchrono"
-          >Alex Heasley</a>
+                            href="https://github.com/alexchrono"
+                        >Alex Heasley</a>
                     </div>
                 </div>
             </div>
@@ -186,13 +186,26 @@ export default function LandingPage() {
                         accept="image/*"
                     />
 
-                    <button
-                    type='button'
-                        className="letsMakePretty"
-                        onClick={() => document.getElementById('fileInput').click()}
-                    >
-                        Upload Avatar (optional)
-                    </button>
+
+
+<div className="uploadAndSelect">
+    <button
+        type='button'
+        className="letsMakePretty"
+        onClick={() => document.getElementById('fileInput').click()}
+    >
+        Select Avatar
+    </button>
+
+    <button
+        type='button'
+        className="letsMakePretty"
+        onClick={() => document.getElementById('fileInput').click()}
+    >
+        Upload Profile Pic (optional)
+    </button>
+</div>
+
 
                     <button className="letsMakePretty" type="submit">Sign Up</button>
                     <button className="letsMakePretty" onClick={loginDemo}>
