@@ -80,6 +80,7 @@ export default function Main({mode}) {
             )}
 
             <Habits user={user}/>
+            
 
         <div className='center-buffer'></div>
         <Dailies user={user}/>
