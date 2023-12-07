@@ -31,6 +31,13 @@ level_titles = {
     19: 'Ascendant',
     20: 'Master',
 }
+
+switchUrl= {
+    'Ryu': "/icons/RyuAnimated.gif",
+    'Guile': "/icons/GuileAnim.gif",
+    'Jupiter': "/icons/sailorJupiterAnim.gif",
+    'Mars': "/icons/SailorMarsAnim.gif"
+}
 def expFinder():
 
     targetExp=current_user.level*25
@@ -101,11 +108,14 @@ def sign_up():
             if "url" not in upload:
                 return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
             url=upload['url']
+
+
         user = User(
                 username=form.data['username'],
                 email=form.data['email'],
                 password=form.data['password'],
                 selected_avatar=url,
+                gif=switchUrl[form.data['gif']],
                 new_user=True
 
             )

@@ -1,16 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 html {
-    background: rgb(221,221,221);
+    background: rgb(221, 221, 221);
 
 }
+
 .stats-container {
     display: flex;
     flex-direction: row;
     /* height: 26%; */
-    max-height: 29%;
+    /* max-height: 29%; */
     flex-grow: 1;
     padding-top: 2%;
     padding-bottom: 3%;
+
 }
 
 .avatar,
@@ -114,15 +117,16 @@ html {
     width: 100%;
 
 }
+
 .allHabits {
     width: 100%;
-    height:90%;
+    height: 90%;
     box-sizing: border-box;
     overflow-y: scroll;
     border-right: 2px dotted black;
     border-left: 2px dotted black;
     border-bottom: 2px dotted black;
-    border-radius:5px;
+    border-radius: 5px;
 }
 
 .fifteen-percent {
@@ -141,6 +145,7 @@ html {
     visibility: hidden;
 
 }
+
 .invisi2 {
     border: none;
     /* background-color:#602399 */
@@ -349,7 +354,6 @@ form select {
     width: 90%;
     height: 100%;
     font-size: 1.5em
-
 }
 
 .tenpercent {
@@ -360,19 +364,22 @@ form select {
 
 
 }
+
 .tenpercent button {
     height: 100%;
 }
+
 .tenpercent img {
     width: 100%;
     height: auto;
     object-fit: contain;
 }
+
 .forgigs {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height:100%;
+    height: 100%;
 }
 
 .red {
@@ -380,6 +387,7 @@ form select {
     height: 100%;
     width: 100%;
 }
+
 .green {
     background-color: green;
     height: 100%;
@@ -392,7 +400,7 @@ form select {
     text-align: center;
 }
 
-.feErrors{
+.feErrors {
     color: red;
     font-weight: bold;
     text-decoration: underline;
@@ -401,7 +409,8 @@ form select {
 
 .changeToHand:hover {
     cursor: pointer;
-  }
+}
+
 /* @keyframes blink {
   0%, 100% {
     border-color: transparent;
@@ -420,6 +429,7 @@ form select {
     width: 100%;
     border: 2px solid blue; */
 }
+
 .invisiborder {
     border: 2px solid transparent;
 }
@@ -434,17 +444,19 @@ width: 100%;
     flex-direction: row;
     align-items: center;
     padding: 10px;
-  }
+}
+
 .editButtons {
     display: flex;
     justify-content: center;
     flex-grow: 1;
     margin-left: 10%;
 }
+
 .editButtons2 {
     display: flex;
     justify-content: center;
-    gap:3%;
+    gap: 3%;
     flex-grow: 1;
     padding-bottom: 5%;
     /* margin-left: 10%; */
@@ -453,11 +465,11 @@ width: 100%;
 
 .deleteButton {
     display: flex;
-    width:10%;
+    width: 10%;
 }
 
 
-.sword-Divider{
+.sword-Divider {
 
     position: absolute;
     bottom: 0;
@@ -487,7 +499,7 @@ width: 100%;
 
 .fiftyheight {
     width: 100%;
-    height:50%;
+    height: 50%;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -529,26 +541,28 @@ width: 100%;
 }
 
 .topOfCard {
-margin-top: 0px;
-margin: 0px;
-padding: 0px;
-padding-bottom: 0px;
-font-size: 1.5em;
+    margin-top: 0px;
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 0px;
+    font-size: 1.5em;
 
 }
+
 .bottOfCard {
-font-size: 1em;
+    font-size: 1em;
 }
 
-.overallSizeEditModal{
+.overallSizeEditModal {
     z-index: index 9000;
-    background: rgb(63,136,185);
-    background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
+    background: rgb(63, 136, 185);
+    background: linear-gradient(90deg, rgba(63, 136, 185, 1) 0%, rgba(37, 92, 62, 1) 70%, rgba(54, 65, 226, 1) 100%);
     max-width: 600px;
     margin: auto;
     /* background: rgb(63,136,185);
 background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, rgba(78,156,171,1) 100%); */
 }
+
 .deleteButton button {
     margin: 10px;
     padding: 5px;
@@ -557,27 +571,27 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     /* margin-right: 0px; */
     background-color: rgb(230, 37, 7);
     display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 4px;
-        text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
 }
 
 
-.letsMakePrettyDangerous{
+.letsMakePrettyDangerous {
 
-        background-color: rgb(230, 37, 7);
-        display: inline-block;
-        border: none;
-        color: rgb(0, 0, 0);
-        font-weight: bold;
-        padding: 2.7% 8%;
-        text-align: center;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 9px;
+    background-color: rgb(230, 37, 7);
+    display: inline-block;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 2.7% 8%;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 9px;
 
 }
 
@@ -588,11 +602,11 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     padding: 11px 0px;
     font-family: 'Press Start 2P';
     text-align: center;
-    line-height:1.5;
+    line-height: 1.5;
     text-shadow: 7px 4px 3px black;
-  }
+}
 
-  .letsMakePretty {
+.letsMakePretty {
     background-color: #35ee50;
     display: inline-block;
     border: none;
@@ -621,16 +635,28 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     padding: 11px 0px;
     font-family: 'Press Start 2P';
     text-align: center;
-    line-height:1.5;
+    line-height: 1.5;
     text-shadow: 7px 4px 3px black;
-  }
+}
 
-  .endofdays {
+.endofdays {
     text-align: center;
     font-size: 3.1em;
-  }
-  .avStats {
-width: 35%;
-display: flex;
-flex-direction: row;
-  }
+}
+
+.avStats {
+    width: 35%;
+    display: flex;
+    flex-direction: row;
+}
+
+.avatarContainer {
+    height: 100%;
+    display: flex;
+}
+
+.avatarContainer img {
+    height: 100%;
+    width: auto;
+    margin-left: 39%;
+}

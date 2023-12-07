@@ -63,6 +63,7 @@ class User(db.Model, UserMixin):
     users_dailies= db.relationship('Daily',back_populates='dailies_of_user')
     users_dailies_array = db.Column(db.PickleType, default=list)
     users_clicked_dailies=db.Column(db.PickleType, default=list)
+    gif=db.Column(db.String, default="/icons/RyuAnimated.gif")
     @property
     def password(self):
         return self.hashed_password
@@ -123,6 +124,7 @@ class User(db.Model, UserMixin):
             'usersDailiesArray': self.users_dailies_array,
             'usersDailiesObj':userDailies,
             'usersClickedDailies':self.users_clicked_dailies,
+            'gif': self.gif,
             'created_at': self.created_at,
             'updated_at': self.updated_at
 

@@ -77,9 +77,11 @@ export default function LandingPage() {
             formData.append('email', email);
             formData.append('password', password);
             formData.append('confirm_password', confirmPassword)
+
             if (newAvatar) {
                 formData.append('selected_avatar', newAvatar);
             }
+            formData.append('gif',gif)
 
             const success = await dispatch(signUp(formData))
 

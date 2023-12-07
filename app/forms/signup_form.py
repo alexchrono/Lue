@@ -59,3 +59,4 @@ class SignUpForm(FlaskForm):
     password = StringField('password', validators=[DataRequired(),password_validator])
     confirm_password= StringField('confirm_password', validators=[DataRequired(),confirm_password_validator])
     selected_avatar = FileField("Avatar Image",validators=[FileAllowed(list(ALLOWED_IMG_EXTENSIONS))])
+    gif= StringField('gif', validators=[DataRequired()])

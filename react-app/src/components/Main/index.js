@@ -70,7 +70,10 @@ export default function Main({mode}) {
 
 
     : mode==='profile'?
-<div className='stats-container'>lets test this</div>
+<div className='profileContainer'>
+<div className='avatarContainer'>
+<img src={`${process.env.PUBLIC_URL}${user.gif}`}></img></div>
+</div>
 : null}
         {/* <div className='buffer'></div> */}
         </div>
@@ -80,7 +83,7 @@ export default function Main({mode}) {
             )}
 
             <Habits user={user}/>
-            
+
 
         <div className='center-buffer'></div>
         <Dailies user={user}/>
