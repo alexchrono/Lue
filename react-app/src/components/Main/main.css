@@ -8,8 +8,8 @@ html {
 .stats-container {
     display: flex;
     flex-direction: row;
-    /* height: 26%; */
-    /* max-height: 29%; */
+     height: 26%;
+     max-height: 29%;
     flex-grow: 1;
     padding-top: 2%;
     padding-bottom: 3%;
@@ -656,7 +656,29 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 
 .avatarContainer img {
-    height: 100%;
-    width: auto;
-    margin-left: 39%;
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 100%;
+    margin-left: 12%;
+}
+
+.profileContainer {
+    flex-basis: 65%;
+    width: 65%;
+    display: flex;
+    flex-direction: row;
+}
+.profileInfo {
+    display: flex;
+    flex-direction: column;
+    margin-left: 6%;
+    font-size: 1.5em;
+    justify-content: space-between;
+
+}
+
+.profilePretty {
+    margin-top: 0px;
+    margin-bottom: 0px;
 }

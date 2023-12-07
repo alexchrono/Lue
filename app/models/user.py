@@ -64,6 +64,7 @@ class User(db.Model, UserMixin):
     users_dailies_array = db.Column(db.PickleType, default=list)
     users_clicked_dailies=db.Column(db.PickleType, default=list)
     gif=db.Column(db.String, default="/icons/RyuAnimated.gif")
+    deaths=db.Column(db.Integer, default=0)
     @property
     def password(self):
         return self.hashed_password
@@ -125,6 +126,7 @@ class User(db.Model, UserMixin):
             'usersDailiesObj':userDailies,
             'usersClickedDailies':self.users_clicked_dailies,
             'gif': self.gif,
+            'deaths': self.deaths,
             'created_at': self.created_at,
             'updated_at': self.updated_at
 

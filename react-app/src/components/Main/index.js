@@ -21,6 +21,16 @@ export default function Main({mode}) {
         return targetExp
     }
 
+    function calculateDaysOld(createdDateString) {
+        const createdDate = new Date(createdDateString);
+        const currentDate = new Date();
+        const timeDiff = currentDate - createdDate;
+        const daysOld = Math.ceil(timeDiff / (1000 * 60 * 60 * 24));
+        return daysOld;
+    }
+
+    const daysOld = calculateDaysOld(user?.created_at);
+
 
     useEffect(() => {
 
@@ -73,6 +83,14 @@ export default function Main({mode}) {
 <div className='profileContainer'>
 <div className='avatarContainer'>
 <img src={`${process.env.PUBLIC_URL}${user.gif}`}></img></div>
+<div className='profileInfo'>
+
+    <p className='profilePretty'>Username: {user.username}</p>
+    <p className='profilePretty'>Email: {user.email}</p>
+    <p className='profilePretty'>Days old: {daysOld}</p>
+    <p className='profilePretty'>Total Deaths: {user.deaths}</p>
+
+</div>
 </div>
 : null}
         {/* <div className='buffer'></div> */}
