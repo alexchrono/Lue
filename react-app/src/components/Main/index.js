@@ -4,6 +4,8 @@ import { useSelector } from 'react-redux';
 import Habits from '../Habits';
 import Dailies from '../Dailies';
 import ErrorComponent from '../errorShow';
+import EllipsisMenu from '../habitOrDailyEllipsisMenu';
+import ProfileMenu from '../profileMenu';
 import './main.css';
 
 export default function Main({ mode }) {
@@ -79,6 +81,8 @@ export default function Main({ mode }) {
                                     </tbody>
                                 </table>
                             </div>
+
+                  <ProfileMenu  />
                         </div>
                         : null}
             </div>

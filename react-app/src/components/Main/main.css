@@ -742,3 +742,54 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     margin-top: 0px;
     margin-bottom: 0px;
 }
+
+.backGa9 {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items:stretch;
+}
+
+.backGa9 li {
+    height:33.33%;
+
+}
+.menu-item-button9 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 33%;
+    flex-grow:2;
+    width: 100%;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    border: none;
+    text-align: center;
+    border:1px solid white;
+}
+
+.ellipsu li button {
+    display: flex;
+    flex-grow: 2;
+    background-color: black;
+    width: 100%;
+
+    text-align: center;
+    border:1px solid white;
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+}
+
+.ellipsu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: black;
+}
+.ellipsu li {
+    list-style-type: none;
+}
