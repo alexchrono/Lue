@@ -60,6 +60,7 @@ export default function Main({mode}) {
             <div className="avatar">
             <img src={`${user.selectedAvatar}`}></img> </div>
             <div className='stats'>
+                
     <table>
         <tbody>
             <tr><td>Level:</td><td>{user.level}</td></tr>
@@ -95,6 +96,7 @@ export default function Main({mode}) {
             <tr><td>Total Deaths:</td><td>{user.deaths}</td></tr>
         </tbody>
     </table>
+    where this go
 </div>
 </div>
 : null}
