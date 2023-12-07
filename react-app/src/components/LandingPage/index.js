@@ -60,6 +60,10 @@ export default function LandingPage() {
             custError(err, 'passwordConfirmation', 'password confirmation does not match password')
         }
 
+        if (gif==='') {
+            custError(err, 'avatar', 'You must select an avatar')
+        }
+
         if (err.errors) {
             setErrorsFe(err.errors)
             return
@@ -181,7 +185,7 @@ export default function LandingPage() {
                     />
 
                     {errors.passwordConfirmation ? <p className="errors">{errors.passwordConfirmation}</p> : errorsFe.passwordConfirmation ? <p className="feErrors">{errorsFe.passwordConfirmation}</p> : null}
-
+                    {errors.avatar ? <p className="errors">{errors.avatar}</p> : errorsFe.avatar ? <p className="feErrors">{errorsFe.avatar}</p> : null}
                     <input
                         type="file"
                         id="fileInput"
