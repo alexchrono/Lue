@@ -41,14 +41,40 @@ html {
 .stats {
     flex-basis: 20%;
     display: flex;
-    flex-direction: column;
     height: 100%;
     flex-grow: 2;
 }
 
-.stats span {
+.stats tr {
     height: 20%;
     font-size: 1.5em;
+    gap: 2%;
+}
+
+.stats tbody {
+    height: 100%;
+    width: 100%;
+}
+
+.stats td:first-child {
+    width: 150px;
+}
+
+.stats td {
+    padding: 5px;
+}
+
+.profileInfo tbody {
+    height: 100%;
+    width: 100%;
+}
+
+.profileInfo td:first-child {
+    width: 150px;
+}
+
+.profileInfo td {
+    padding: 5px;
 }
 
 .inspirational-quote {
@@ -645,7 +671,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 
 .avStats {
-    width: 35%;
+    width: 40%;
     display: flex;
     flex-direction: row;
 }
@@ -664,17 +690,23 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 
 .profileContainer {
-    flex-basis: 65%;
-    width: 65%;
+    flex-basis: 60%;
+    width: 60%;
     display: flex;
     flex-direction: row;
 }
 .profileInfo {
-    display: flex;
-    flex-direction: column;
+    /* display: flex;
+    flex-direction: column; */
     margin-left: 6%;
     font-size: 1.5em;
     justify-content: space-between;
+    flex-basis: 20%;
+    display: flex;
+    height: 100%;
+    flex-grow: 2;
+
+
 
 }
 

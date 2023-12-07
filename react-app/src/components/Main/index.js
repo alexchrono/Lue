@@ -59,14 +59,17 @@ export default function Main({mode}) {
             <div className='avStats'>
             <div className="avatar">
             <img src={`${user.selectedAvatar}`}></img> </div>
-            <div className='stats'><span>level: {user.level}</span>
-            <span>title: {user.levelTitle}</span>
-            <span>Health: {user.currentHealth} / {user.health}</span>
-            <span>Exp: {user.exp} / {expFinder()} </span>
-            <span>Gold: {user.gold}</span>
-
-
-            </div>
+            <div className='stats'>
+    <table>
+        <tbody>
+            <tr><td>Level:</td><td>{user.level}</td></tr>
+            <tr><td>Title:</td><td>{user.levelTitle}</td></tr>
+            <tr><td>Health:</td><td>{user.currentHealth} / {user.health}</td></tr>
+            <tr><td>Exp:</td><td>{user.exp} / {expFinder()}</td></tr>
+            <tr><td>Gold:</td><td>{user.gold}</td></tr>
+        </tbody>
+    </table>
+</div>
             </div>
             {mode==='main'?
             <div className='inspirational-quote'>
@@ -84,12 +87,14 @@ export default function Main({mode}) {
 <div className='avatarContainer'>
 <img src={`${process.env.PUBLIC_URL}${user.gif}`}></img></div>
 <div className='profileInfo'>
-
-    <p className='profilePretty'>Username: {user.username}</p>
-    <p className='profilePretty'>Email: {user.email}</p>
-    <p className='profilePretty'>Days old: {daysOld}</p>
-    <p className='profilePretty'>Total Deaths: {user.deaths}</p>
-
+    <table>
+        <tbody>
+            <tr><td>Username:</td><td>{user.username}</td></tr>
+            <tr><td>Email:</td><td>{user.email}</td></tr>
+            <tr><td>Days old:</td><td>{daysOld}</td></tr>
+            <tr><td>Total Deaths:</td><td>{user.deaths}</td></tr>
+        </tbody>
+    </table>
 </div>
 </div>
 : null}
