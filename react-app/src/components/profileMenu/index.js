@@ -8,7 +8,7 @@ import { ThunkMoveHabit } from "../../store/habit";
 import { ThunkMoveDaily } from "../../store/daily";
 // import './ellipsis.css';
 
-export default function ProfileMenu({ }) {
+export default function ProfileMenu({menuSelect, setMenuSelect }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch()
 
@@ -16,9 +16,14 @@ export default function ProfileMenu({ }) {
     return (
         <div className='backGa9'>
             <ul className='ellipsu'>
-                <li>
+            <li>
                     <OpenModalButton
-                        buttonText={<button className="menu-item-button9"   >Edit Profile</button>}
+                        buttonText={<button
+                            className={`menu-item-button9 ${menuSelect === 'stats' ? 'blinking-border' : ''}`}
+                            onClick={() => setMenuSelect('stats')}
+                        >
+                            Stats
+                        </button>}
                         // modalComponent={
                         //     formType === 'habit'
                         //         ? <EditHabitModal habitId={id} habit={habitOrDaily} setter={setter} />
@@ -29,7 +34,12 @@ export default function ProfileMenu({ }) {
                 </li>
                 <li>
                     <OpenModalButton
-                        buttonText={<button className="menu-item-button9"   >Shop</button>}
+                        buttonText={<button
+                            className={`menu-item-button9 ${menuSelect === 'editProfile' ? 'blinking-border' : ''}`}
+                            onClick={() => setMenuSelect('editProfile')}
+                        >
+                            Edit Profile
+                        </button>}
                         // modalComponent={
                         //     formType === 'habit'
                         //         ? <EditHabitModal habitId={id} habit={habitOrDaily} setter={setter} />
@@ -40,7 +50,28 @@ export default function ProfileMenu({ }) {
                 </li>
                 <li>
                     <OpenModalButton
-                        buttonText={<button className="menu-item-button9"   >Inventory</button>}
+                        buttonText={<button
+                            className={`menu-item-button9 ${menuSelect === 'shop' ? 'blinking-border' : ''}`}
+                            onClick={() => setMenuSelect('shop')}
+                        >
+                            Shop
+                        </button>}
+                        // modalComponent={
+                        //     formType === 'habit'
+                        //         ? <EditHabitModal habitId={id} habit={habitOrDaily} setter={setter} />
+                        //         : <EditDailyModal dailyId={id} daily={habitOrDaily} setter={setter} />
+                        // }
+
+                    />
+                </li>
+                <li>
+                    <OpenModalButton
+                        buttonText={<button
+                            className={`menu-item-button9 ${menuSelect === 'inventory' ? 'blinking-border' : ''}`}
+                            onClick={() => setMenuSelect('inventory')}
+                        >
+                            Inventory
+                        </button>}
                         // modalComponent={
                         //     formType === 'habit'
                         //         ? <EditHabitModal habitId={id} habit={habitOrDaily} setter={setter} />

@@ -11,6 +11,7 @@ import './main.css';
 export default function Main({ mode }) {
     const user = useSelector((state) => state.session.user);
     const history = useHistory();
+    const [menuSelect,setMenuSelect]=useState('stats')
 
     const expFinder = () => {
         return user.level * 25;
@@ -71,6 +72,7 @@ export default function Main({ mode }) {
                             <div className='avatarContainer'>
                                 <img src={`${process.env.PUBLIC_URL}${user.gif}`} alt="User Gif" />
                             </div>
+                            {(menuSelect === 'stats' || menuSelect ==='editProfile') && (
                             <div className='profileInfo'>
                                 <table>
                                     <tbody>
@@ -80,9 +82,44 @@ export default function Main({ mode }) {
                                         <tr><td>Total Deaths:</td><td>{user.deaths}</td></tr>
                                     </tbody>
                                 </table>
-                            </div>
+                            </div>)}
 
-                  <ProfileMenu  />
+                            {menuSelect ==='shop' && (
+                                <div className='profileInfo'>
+                                    <div className='topCenter'>
+                                    <table className='purrfect'>
+                                    <tbody>
+                                        <tr><td>Gold:</td><td>{user.gold}</td></tr>
+                                        </tbody>
+                                </table>
+                                </div>
+                                <div className='purchaseText'>
+                                    <p>Items Available:</p>
+                                </div>
+                                <div className='centerDisplay'></div>
+                                <div className='bottomSelection'>
+                                    <div className='bottomLeft'></div>
+                                    <div className='bottomRight'>
+                                        <div className='right1'>
+                                            <div className='one'></div>
+                                            <div className='two'></div>
+
+
+                                        </div>
+                                        <div className='right2'>
+                                        <div className='three'></div>
+                                            <div className='four'></div>
+
+
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                    </div>
+                            )}
+
+                  <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} />
                         </div>
                         : null}
             </div>

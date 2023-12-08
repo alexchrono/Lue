@@ -17,21 +17,16 @@
     background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
 }
 
-.row1, .row2 {
+.row {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-    height: 200px;
+    height: 400px;
 }
 
 .selectAv img {
-
-    /* max-width: 45%;
-    height: auto; */
     height: 100%;
-    width: 22%;
+    width: 45%;
     margin: 10px;
     border: 3px transparent red;
     box-sizing: border-box;
@@ -40,7 +35,6 @@
 .selectAv img:hover {
     border: 3px solid red;
     box-sizing: border-box;
-
 }
 
 @media (max-width: 768px) {

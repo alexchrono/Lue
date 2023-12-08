@@ -31,12 +31,9 @@ level_titles = {
     19: 'Ascendant',
     20: 'Master',
 }
-
 switchUrl= {
-    'Ryu': "/icons/RyuAnimated.gif",
-    'Guile': "/icons/GuileAnim.gif",
-    'Jupiter': "/icons/sailorJupiterAnim.gif",
-    'Mars': "/icons/SailorMarsAnim.gif"
+    'ryu': "/icons/avgifs/Ryu/ryu-none-none.gif",
+    'chun-li': "/icons/avgifs/chun-li/chunli-none-none.gif"
 }
 def expFinder():
 

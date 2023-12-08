@@ -710,6 +710,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 .profileInfo {
     flex-basis: 50%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     height: 100%;
 }
@@ -721,6 +722,12 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     background-color: #ddd;
     border-collapse: collapse;
 }
+.topCenter {
+    width: 100%;
+    height: 25%;
+    align-self: first baseline;
+}
+
 
 .profileInfo td:first-child {
     width: 150px;
@@ -751,7 +758,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 
 .backGa9 li {
-    height:33.33%;
+    height:25%;
 
 }
 .menu-item-button9 {
@@ -765,9 +772,19 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     border-radius: 5px;
     color: white;
     cursor: pointer;
-    border: none;
+    border: 3px solid transparent;
     text-align: center;
-    border:1px solid white;
+}
+
+.blinking-border {
+    animation: blink 1s linear infinite;
+    border: 3px solid red;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
 }
 
 .ellipsu li button {
@@ -777,7 +794,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     width: 100%;
 
     text-align: center;
-    border:1px solid white;
+    /* border:1px solid white; */
     padding: 0px;
     margin: 0px;
     height: 100%;
@@ -792,4 +809,58 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 .ellipsu li {
     list-style-type: none;
+}
+.purchaseText {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.purchaseText p {
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+
+}
+
+.bottomSelection {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 55%;
+    border: 2px solid blue;
+}
+
+.bottomLeft {
+    width: 38%;
+    border: 2px solid blue;
+}
+.bottomRight {
+    width: 62%;
+    border: 2px solid blue;
+    display: flex;
+    flex-direction: column;
+}
+
+.right1 {
+    display: flex;
+    width: 100%;
+    border: 1px solid red;
+    height: 50%;
+    flex-direction: row;
+}
+
+.right2 {
+    display: flex;
+    width: 100%;
+    border: 1px solid red;
+    height: 50%;
+    flex-direction: row;
+}
+
+.one ,.two, .three, .four {
+    width: 50%;
+    height: 100%;
+    border:1px solid black;
 }

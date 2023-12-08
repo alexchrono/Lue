@@ -63,7 +63,7 @@ class User(db.Model, UserMixin):
     users_dailies= db.relationship('Daily',back_populates='dailies_of_user')
     users_dailies_array = db.Column(db.PickleType, default=list)
     users_clicked_dailies=db.Column(db.PickleType, default=list)
-    gif=db.Column(db.String, default="/icons/RyuAnimated.gif")
+    gif=db.Column(db.String, default="/icons/avgifs/Ryu/ryu-none-none.gif")
     deaths=db.Column(db.Integer, default=0)
     @property
     def password(self):
