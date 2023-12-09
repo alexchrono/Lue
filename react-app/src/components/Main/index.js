@@ -101,14 +101,22 @@ export default function Main({ mode }) {
                                     <div className='bottomLeft'></div>
                                     <div className='bottomRight'>
                                         <div className='right1'>
-                                            <div className='one'></div>
-                                            <div className='two'></div>
+                                            <div className='one'>
+                                            <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`}></img>
+                                            </div>
+                                            <div className='two'>
+                                            <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`}></img>
+                                            </div>
 
 
                                         </div>
                                         <div className='right2'>
-                                        <div className='three'></div>
-                                            <div className='four'></div>
+                                        <div className='three'>
+                                        <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`}></img>
+                                        </div>
+                                            <div className='four'>
+                                            <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`}></img>
+                                            </div>
 
 
 
