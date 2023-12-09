@@ -834,19 +834,22 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 
 .bottomLeft {
     width: 38%;
-    border: 2px solid blue;
+    border-left: 2px solid blue;
+    border-bottom: 2px solid blue;
+    border-top: 2px solid blue;
 }
 .bottomRight {
     width: 62%;
-    border: 2px solid blue;
+    /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
+    gap: 2%;
 }
 
 .right1 {
     display: flex;
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 50%;
     flex-direction: row;
 }
@@ -854,7 +857,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 .right2 {
     display: flex;
     width: 100%;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     height: 50%;
     flex-direction: row;
 }
@@ -870,4 +873,19 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     height: 100%;
     object-fit: cover;
     object-position: center;
+}
+.solid-border {
+    border-color: red;
+}
+.blinking-border {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: red;
+    }
 }

@@ -11,7 +11,8 @@ import './main.css';
 export default function Main({ mode }) {
     const user = useSelector((state) => state.session.user);
     const history = useHistory();
-    const [menuSelect,setMenuSelect]=useState('stats')
+    const [menuSelect, setMenuSelect] = useState('stats');
+    const [selectedItem, setSelectedItem] = useState(null);
 
     const expFinder = () => {
         return user.level * 25;
@@ -87,47 +88,40 @@ export default function Main({ mode }) {
                             {menuSelect ==='shop' && (
                                 <div className='profileInfo'>
                                     <div className='topCenter'>
-                                    <table className='purrfect'>
-                                    <tbody>
-                                        <tr><td>Gold:</td><td>{user.gold}</td></tr>
-                                        </tbody>
-                                </table>
-                                </div>
-                                <div className='purchaseText'>
-                                    <p>Items Available:</p>
-                                </div>
-                                <div className='centerDisplay'></div>
-                                <div className='bottomSelection'>
-                                    <div className='bottomLeft'></div>
-                                    <div className='bottomRight'>
-                                        <div className='right1'>
-                                            <div className='one'>
-                                            <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`}></img>
+                                        <table className='purrfect'>
+                                            <tbody>
+                                                <tr><td>Gold:</td><td>{user.gold}</td></tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    <div className='purchaseText'>
+                                        <p>Items Available:</p>
+                                    </div>
+                                    <div className='centerDisplay'></div>
+                                    <div className='bottomSelection'>
+                                        <div className='bottomLeft'></div>
+                                        <div className='bottomRight'>
+                                            <div className='right1'>
+                                                <div className={`one ${selectedItem === 'buckler' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('buckler')}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img>
+                                                </div>
+                                                <div className={`two ${selectedItem === 'hylian' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('hylian')}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img>
+                                                </div>
                                             </div>
-                                            <div className='two'>
-                                            <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`}></img>
+                                            <div className='right2'>
+                                                <div className={`three ${selectedItem === 'machete' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('machete')}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img>
+                                                </div>
+                                                <div className={`four ${selectedItem === 'katana' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('katana')}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana"></img>
+                                                </div>
                                             </div>
-
-
-                                        </div>
-                                        <div className='right2'>
-                                        <div className='three'>
-                                        <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`}></img>
-                                        </div>
-                                            <div className='four'>
-                                            <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`}></img>
-                                            </div>
-
-
-
                                         </div>
                                     </div>
-
                                 </div>
-                                    </div>
                             )}
-
-                  <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} />
+                            <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} />
                         </div>
                         : null}
             </div>
