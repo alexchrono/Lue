@@ -95,11 +95,22 @@ export default function Main({ mode }) {
                                         </table>
                                     </div>
                                     <div className='purchaseText'>
-                                        <p>Items Available:</p>
+                                        <p>{selectedItem==='default'? 'Items Available' : 'nothing'}:</p>
                                     </div>
-                                    <div className='centerDisplay'></div>
+                                    <div className='centerDisplay'>
+
+
+                                    </div>
                                     <div className='bottomSelection'>
-                                        <div className='bottomLeft'></div>
+                                        <div className='bottomLeft'>
+                                        {selectedItem==='buckler'? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img> :
+                                        selectedItem==='hylian'? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img> :
+                                        selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img> :
+                                        selectedItem === 'katana' ?  <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana"></img> :
+                                        <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItem2.png`} alt="SelectItem"></img>
+
+                                        }
+                                        </div>
                                         <div className='bottomRight'>
                                             <div className='right1'>
                                                 <div className={`one ${selectedItem === 'buckler' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('buckler')}>
@@ -121,7 +132,7 @@ export default function Main({ mode }) {
                                     </div>
                                 </div>
                             )}
-                            <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} />
+                            <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} setSelectedItem={setSelectedItem}/>
                         </div>
                         : null}
             </div>

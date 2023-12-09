@@ -838,6 +838,12 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     border-bottom: 2px solid blue;
     border-top: 2px solid blue;
 }
+.bottomLeft img {
+    width: 100%;
+    height: 100%;
+    object-fit:  cover;
+    box-sizing: border-box;
+}
 .bottomRight {
     width: 62%;
     /* border: 2px solid blue; */
@@ -866,6 +872,19 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     width: 50%;
     height: 100%;
     border:1px solid black;
+}
+.centerDisplay {
+    width: 100%;
+    height:89%;
+    box-sizing: border-box;
+}
+
+.centerDisplay img {
+    width: 100%;
+    height: 89%;
+    object-fit: cover;
+    object-position: center;
+    box-sizing: border-box;
 }
 
 .one img, .two img, .three img, .four img {

@@ -8,7 +8,7 @@ import { ThunkMoveHabit } from "../../store/habit";
 import { ThunkMoveDaily } from "../../store/daily";
 // import './ellipsis.css';
 
-export default function ProfileMenu({menuSelect, setMenuSelect }) {
+export default function ProfileMenu({menuSelect, setMenuSelect,setSelectedItem }) {
     const { closeModal } = useModal();
     const dispatch = useDispatch()
 
@@ -52,7 +52,9 @@ export default function ProfileMenu({menuSelect, setMenuSelect }) {
                     <OpenModalButton
                         buttonText={<button
                             className={`menu-item-button9 ${menuSelect === 'shop' ? 'blinking-border' : ''}`}
-                            onClick={() => setMenuSelect('shop')}
+                            onClick={() => {
+                                setSelectedItem('default')
+                                setMenuSelect('shop')}}
                         >
                             Shop
                         </button>}
