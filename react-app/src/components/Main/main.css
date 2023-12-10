@@ -952,14 +952,13 @@ height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    padding: 10px;
     height: 100%;
     width: 100%;
 }
 
 .inventory-item {
     position: relative;
-    height: 85%;
+    height: 100%;
     border: 1px solid #ccc;
     overflow: hidden;
     text-align: center;
