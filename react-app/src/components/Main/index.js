@@ -225,7 +225,7 @@ export default function Main({ mode }) {
     <div key={index} className='inventory-item'>
       {user.armorInventory[index] ? (
         <>
-          <img src={getItemImage(user.armorInventory[index])} alt={user.armorInventory[index]} />
+          <img src={getItemImage(user.armorInventory[index])} alt={user.armorInventory[index]} onClick={() => setEquipItem(user.armorInventory[index])} />
           {/* <span>{getItemName(user.inventory[index])}</span> */}
         </>
       ) : (
@@ -245,7 +245,7 @@ export default function Main({ mode }) {
     <div key={index} className='inventory-item'>
       {user.weaponInventory[index] ? (
         <>
-          <img src={getItemImage(user.weaponInventory[index])} alt={user.weaponInventory[index]} />
+          <img src={getItemImage(user.weaponInventory[index])} alt={user.weaponInventory[index]} onClick={() => setEquipItem(user.weaponInventory[index])}/>
           {/* <span>{getItemName(user.inventory[index])}</span> */}
         </>
       ) : (
