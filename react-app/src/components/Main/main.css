@@ -964,6 +964,9 @@ height: 100%;
     overflow: hidden;
     text-align: center;
 }
+.redBordz {
+    border: 5px solid red;
+}
 
 .inventory-item img {
     width: 100%;

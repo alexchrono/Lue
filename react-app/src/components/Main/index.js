@@ -17,6 +17,8 @@ export default function Main({ mode }) {
     const [buyItem, setBuyItem] = useState(false)
     const [purchasePrice, setPurchasePrice] = useState('')
     const [equipItem,setEquipItem] = useState('')
+    const [selectedArmor, setSelectedArmor] = useState(null);
+    const [selectedWeapon, setSelectedWeapon] = useState(null);
 
     const expFinder = () => {
         return user.level * 25;
@@ -113,6 +115,11 @@ export default function Main({ mode }) {
                                     menuSelect === 'shop' && selectedItem === 'hylian' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" /> :
                                     menuSelect === 'shop' && selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
                                     menuSelect === 'shop' && selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> :
+                                    menuSelect==='inventory' && selectedArmor ==='buckler' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
+                                    menuSelect==='inventory' && selectedArmor ==='hylian' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
+                                    menuSelect==='inventory' && selectedArmor ==='hylian' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
+
+
                                                 <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />}
                             </div>
                             {(menuSelect === 'stats' || menuSelect === 'editProfile') && (
@@ -222,10 +229,12 @@ export default function Main({ mode }) {
 <div className='inventory-grid'>
 
   {Array.from({ length: 3 }, (_, index) => (
-    <div key={index} className='inventory-item'>
+    <div key={index} className={selectedArmor===user.armorInventory[index]? 'inventory-item redBordz' : 'inventory-item'}>
       {user.armorInventory[index] ? (
         <>
-          <img src={getItemImage(user.armorInventory[index])} alt={user.armorInventory[index]} onClick={() => setEquipItem(user.armorInventory[index])} />
+          <img src={getItemImage(user.armorInventory[index])} alt={user.armorInventory[index]} onClick={() =>
+            
+            setSelectedArmor(user.armorInventory[index])} />
           {/* <span>{getItemName(user.inventory[index])}</span> */}
         </>
       ) : (
@@ -242,10 +251,10 @@ export default function Main({ mode }) {
 <div className='inventory-grid'>
 
   {Array.from({ length: 3 }, (_, index) => (
-    <div key={index} className='inventory-item'>
+    <div key={index} className={selectedWeapon===user.weaponInventory[index]? 'inventory-item redBordz' : 'inventory-item'}>
       {user.weaponInventory[index] ? (
         <>
-          <img src={getItemImage(user.weaponInventory[index])} alt={user.weaponInventory[index]} onClick={() => setEquipItem(user.weaponInventory[index])}/>
+          <img src={getItemImage(user.weaponInventory[index])} alt={user.weaponInventory[index]} onClick={() => setSelectedWeapon(user.weaponInventory[index])}/>
           {/* <span>{getItemName(user.inventory[index])}</span> */}
         </>
       ) : (
