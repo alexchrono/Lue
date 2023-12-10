@@ -36,7 +36,8 @@ export default function Main({ mode }) {
     if (!user) {
         return null;
     }
-
+    console.log("🚀 ~ file: index.js:40 ~ Main ~ user.gif:", user.gif)
+    console.log('user gif is',user.gif)
     return (
         <div className='main-main-container'>
             <div className="stats-container">
@@ -71,7 +72,12 @@ export default function Main({ mode }) {
                     : mode === 'profile' ?
                         <div className='profileContainer'>
                             <div className='avatarContainer'>
-                                <img src={`${process.env.PUBLIC_URL}${user.gif}`} alt="User Gif" />
+                                {/* <p>{`/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`}</p> */}
+                               {selectedItem==='default'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />:
+                               selectedItem==='buckler'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
+                               selectedItem==='hylian'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
+                               selectedItem==='machete'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
+                               selectedItem==='katana'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> : null}
                             </div>
                             {(menuSelect === 'stats' || menuSelect ==='editProfile') && (
                             <div className='profileInfo'>
@@ -95,7 +101,11 @@ export default function Main({ mode }) {
                                         </table>
                                     </div>
                                     <div className='purchaseText'>
-                                        <p>{selectedItem==='default'? 'Items Available' : 'nothing'}:</p>
+                                        <p>{selectedItem==='default'? 'Items Available' :
+                                        selectedItem==='buckler'?'Buckler: 5 gold' :
+                                        selectedItem==='hylian'?'Hylian Shield: 25 gold' :
+                                        selectedItem==='machete'? 'Machete: 5 gold' :
+                                        selectedItem==='katana'? 'Katana: 25 gold' : null}</p>
                                     </div>
                                     <div className='centerDisplay'>
 

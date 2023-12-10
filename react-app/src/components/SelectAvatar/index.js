@@ -10,7 +10,7 @@ export default function SelectAvatar({setGif,setter}) {
                     (e)=>{setGif('ryu');
                     setter(false)}}></img>
                 <img src={`${process.env.PUBLIC_URL}/icons/avgifs/chun-li/chunli-none-none.gif`} alt='chun-li' onClick={
-                    (e)=>{setGif('chun-li');
+                    (e)=>{setGif('chunli');
                     setter(false)}}></img>
             </div>
         </div>

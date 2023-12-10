@@ -31,10 +31,10 @@ level_titles = {
     19: 'Ascendant',
     20: 'Master',
 }
-switchUrl= {
-    'ryu': "/icons/avgifs/Ryu/ryu-none-none.gif",
-    'chun-li': "/icons/avgifs/chun-li/chunli-none-none.gif"
-}
+# switchUrl= {
+#     'ryu': "/icons/avgifs/Ryu/ryu-none-none.gif",
+#     'chun-li': "/icons/avgifs/chun-li/chunli-none-none.gif"
+# }
 def expFinder():
 
     targetExp=current_user.level*25
@@ -112,7 +112,7 @@ def sign_up():
                 email=form.data['email'],
                 password=form.data['password'],
                 selected_avatar=url,
-                gif=switchUrl[form.data['gif']],
+                gif=form.data['gif'],
                 new_user=True
 
             )
