@@ -16,6 +16,7 @@ export default function Main({ mode }) {
     const [selectedItem, setSelectedItem] = useState(null);
     const [buyItem, setBuyItem] = useState(false)
     const [purchasePrice, setPurchasePrice] = useState('')
+    const [equipItem,setEquipItem] = useState('')
 
     const expFinder = () => {
         return user.level * 25;
