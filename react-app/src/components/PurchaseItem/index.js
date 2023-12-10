@@ -17,7 +17,7 @@ export default function PurchaseItem({ purchasePrice, setBuyItem, selectedItem }
             displayName = 'The Buckler';
             displayPic = `${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`;
             break;
-        case 'hylian':
+        case 'hyrule':
             displayName = 'The Hylian Shield';
             displayPic = `${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`;
             break;

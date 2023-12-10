@@ -37,7 +37,7 @@ export default function Main({ mode }) {
         switch (item) {
             case 'buckler':
                 return `${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`;
-            case 'hylian':
+            case 'hyrule':
                 return `${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`;
             case 'machete':
                 return `${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`;
@@ -51,7 +51,7 @@ export default function Main({ mode }) {
     function getItemName(item) {
         const itemNames = {
             buckler: 'The Buckler',
-            hylian: 'The Hylian Shield',
+            hyrule: 'The Hylian Shield',
             machete: 'The Machete',
             katana: 'Masamune Katana',
         };
@@ -112,12 +112,12 @@ export default function Main({ mode }) {
                                 {/* <p>{`/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`}</p> */}
                                 {menuSelect === 'shop' && selectedItem === 'default' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" /> :
                                     menuSelect === 'shop' && selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
-                                    menuSelect === 'shop' && selectedItem === 'hylian' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" /> :
+                                    menuSelect === 'shop' && selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" /> :
                                     menuSelect === 'shop' && selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
                                     menuSelect === 'shop' && selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> :
                                     menuSelect==='inventory' && selectedArmor ==='buckler' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
-                                    menuSelect==='inventory' && selectedArmor ==='hylian' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
-                                    menuSelect==='inventory' && selectedArmor ==='hylian' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
+                                    menuSelect==='inventory' && selectedArmor ==='hyrule' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
+                                    menuSelect==='inventory' && selectedArmor ==='hyrule' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
 
 
                                                 <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />}
@@ -146,7 +146,7 @@ export default function Main({ mode }) {
                                     <div className='purchaseText'>
                                         <p>{selectedItem === 'default' ? 'Items Available' :
                                             selectedItem === 'buckler' ? 'Buckler: 5 gold' :
-                                                selectedItem === 'hylian' ? 'Hylian Shield: 25 gold' :
+                                                selectedItem === 'hyrule' ? 'Hylian Shield: 25 gold' :
                                                     selectedItem === 'machete' ? 'Machete: 5 gold' :
                                                         selectedItem === 'katana' ? 'Katana: 25 gold' : null}</p>
                                     </div>
@@ -158,7 +158,7 @@ export default function Main({ mode }) {
                                         <div className='bottomLeft'>
                                             <div className='bottomLeftPic'>
                                                 {selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img> :
-                                                    selectedItem === 'hylian' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img> :
+                                                    selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img> :
                                                         selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img> :
                                                             selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana"></img> :
                                                                 <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItem2.png`} alt="SelectItem"></img>
@@ -179,7 +179,7 @@ export default function Main({ mode }) {
                                                                 setBuyItem(true)
 
                                                             } else if (
-                                                                (selectedItem === 'katana' || selectedItem === 'hylian') &&
+                                                                (selectedItem === 'katana' || selectedItem === 'hyrule') &&
                                                                 user.gold >= 25
                                                             ) {
                                                                 // Add code to open the modal here
@@ -191,7 +191,7 @@ export default function Main({ mode }) {
                                                             ? user.gold >= 5
                                                                 ? 'Purchase'
                                                                 : 'Not enough gold'
-                                                            : selectedItem === 'katana' || selectedItem === 'hylian'
+                                                            : selectedItem === 'katana' || selectedItem === 'hyrule'
                                                                 ? user.gold >= 25
                                                                     ? 'Purchase'
                                                                     : 'Not enough gold'
@@ -205,7 +205,7 @@ export default function Main({ mode }) {
                                                 <div className={`one ${selectedItem === 'buckler' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('buckler')}>
                                                     <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img>
                                                 </div>
-                                                <div className={`two ${selectedItem === 'hylian' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('hylian')}>
+                                                <div className={`two ${selectedItem === 'hyrule' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('hyrule')}>
                                                     <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img>
                                                 </div>
                                             </div>
@@ -233,7 +233,7 @@ export default function Main({ mode }) {
       {user.armorInventory[index] ? (
         <>
           <img src={getItemImage(user.armorInventory[index])} alt={user.armorInventory[index]} onClick={() =>
-            
+
             setSelectedArmor(user.armorInventory[index])} />
           {/* <span>{getItemName(user.inventory[index])}</span> */}
         </>

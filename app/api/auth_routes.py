@@ -172,7 +172,7 @@ def purchaseItem():
         weapon_inventory = list(user.weapon_inventory)
         weapon_inventory.append(item)
         user.weapon_inventory = weapon_inventory
-    elif item in ['buckler', 'hylian']:
+    elif item in ['buckler', 'hyrule']:
         armor_inventory = list(user.armor_inventory)
         armor_inventory.append(item)
         user.armor_inventory = armor_inventory
