@@ -166,13 +166,24 @@ def purchaseItem():
     data2= request.json
     item=data2.get("item")
     price=data2.get('price')
-    
+    ic(item)
+    ic(price)
+    current_user.gold= current_user.gold-price
+    tempInv=list(current_user.inventory)
+    tempInv.append(item)
+    current_user.inventory=tempInv
+    db.session.commit()
+    return jsonify({"current_user": current_user.to_dict()})
+
+
+
 
 @auth_routes.route('/edit-health-or-exp', methods=['POST'])
 def editHealth():
     data2= request.json
     healthOrExpp=data2.get("healthOrExp")
     arrayStuff=data2.get('clickedStuff')
+
 
 
 

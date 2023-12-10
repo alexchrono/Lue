@@ -943,3 +943,43 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     background: rgb(63,136,185);
     background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
 }
+
+.profileInfo .inventory {
+height: 100%;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+    height: 100%;
+    width: 100%;
+}
+
+.inventory-item {
+    position: relative;
+    height: 85%;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    text-align: center;
+}
+
+.inventory-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire item */
+}
+
+.inventory-item span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}

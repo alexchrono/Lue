@@ -14,8 +14,8 @@ export default function Main({ mode }) {
     const history = useHistory();
     const [menuSelect, setMenuSelect] = useState('stats');
     const [selectedItem, setSelectedItem] = useState(null);
-    const [buyItem,setBuyItem]=useState(false)
-    const [purchasePrice,setPurchasePrice]=useState('')
+    const [buyItem, setBuyItem] = useState(false)
+    const [purchasePrice, setPurchasePrice] = useState('')
 
     const expFinder = () => {
         return user.level * 25;
@@ -30,6 +30,32 @@ export default function Main({ mode }) {
 
     const daysOld = calculateDaysOld(user?.created_at);
 
+    function getItemImage(item) {
+        switch (item) {
+            case 'buckler':
+                return `${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`;
+            case 'hylian':
+                return `${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`;
+            case 'machete':
+                return `${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`;
+            case 'katana':
+                return `${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`;
+            default:
+                return '';
+        }
+    }
+
+    function getItemName(item) {
+        const itemNames = {
+            buckler: 'The Buckler',
+            hylian: 'The Hylian Shield',
+            machete: 'The Machete',
+            katana: 'Masamune Katana',
+        };
+
+        return itemNames[item] || 'Unknown Item';
+    }
+
     useEffect(() => {
         if (!user) {
             history.push('/');
@@ -41,6 +67,7 @@ export default function Main({ mode }) {
     }
     console.log("🚀 ~ file: index.js:40 ~ Main ~ user.gif:", user.gif)
     console.log('user gif is', user.gif)
+    console.log("🚀 ~ file: index.js:45 ~ Main ~ user.inventory:", user.inventory)
     return (
         <div className='main-main-container'>
             <div className="stats-container">
@@ -61,7 +88,7 @@ export default function Main({ mode }) {
                     </div>
                 </div>
                 {buyItem && (
-                    <PurchaseItem  purchasePrice={purchasePrice} setBuyItem={setBuyItem} selectedItem={selectedItem}/>
+                    <PurchaseItem purchasePrice={purchasePrice} setBuyItem={setBuyItem} selectedItem={selectedItem} />
                 )}
                 {mode === 'main' ?
                     <div className='inspirational-quote'>
@@ -128,39 +155,39 @@ export default function Main({ mode }) {
 
                                                 }
                                             </div>
-                                            {selectedItem !=='default' && (
-                                            <div className='bottomLeftButton'>
-                                                <button
-                                                    type='button'
-                                                    className='menu-item-button9'
-                                                    onClick={() => {
-                                                        if (
-                                                            (selectedItem === 'buckler' || selectedItem === 'machete') &&
-                                                            user.gold >= 5
-                                                        ) {
-                                                            setPurchasePrice(5)
-                                                            setBuyItem(true)
+                                            {selectedItem !== 'default' && (
+                                                <div className='bottomLeftButton'>
+                                                    <button
+                                                        type='button'
+                                                        className='menu-item-button9'
+                                                        onClick={() => {
+                                                            if (
+                                                                (selectedItem === 'buckler' || selectedItem === 'machete') &&
+                                                                user.gold >= 5
+                                                            ) {
+                                                                setPurchasePrice(5)
+                                                                setBuyItem(true)
 
-                                                        } else if (
-                                                            (selectedItem === 'katana' || selectedItem === 'hylian') &&
-                                                            user.gold >= 25
-                                                        ) {
-                                                            // Add code to open the modal here
-                                                            console.log('Open modal for katana or hylian purchase');
-                                                        }
-                                                    }}
-                                                >
-                                                    {selectedItem === 'buckler' || selectedItem === 'machete'
-                                                        ? user.gold >= 5
-                                                            ? 'Purchase'
-                                                            : 'Not enough gold'
-                                                        : selectedItem === 'katana' || selectedItem === 'hylian'
-                                                            ? user.gold >= 25
+                                                            } else if (
+                                                                (selectedItem === 'katana' || selectedItem === 'hylian') &&
+                                                                user.gold >= 25
+                                                            ) {
+                                                                // Add code to open the modal here
+                                                                console.log('Open modal for katana or hylian purchase');
+                                                            }
+                                                        }}
+                                                    >
+                                                        {selectedItem === 'buckler' || selectedItem === 'machete'
+                                                            ? user.gold >= 5
                                                                 ? 'Purchase'
                                                                 : 'Not enough gold'
-                                                            : ''}
-                                                </button>
-                                            </div>
+                                                            : selectedItem === 'katana' || selectedItem === 'hylian'
+                                                                ? user.gold >= 25
+                                                                    ? 'Purchase'
+                                                                    : 'Not enough gold'
+                                                                : ''}
+                                                    </button>
+                                                </div>
                                             )}
                                         </div>
                                         <div className='bottomRight'>
@@ -184,7 +211,31 @@ export default function Main({ mode }) {
                                     </div>
                                 </div>
                             )}
-                            <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} setSelectedItem={setSelectedItem} />
+
+                            {menuSelect === 'inventory' && (
+    <div className='profileInfo inventory'>
+<div className='inventory-grid'>
+  {Array.from({ length: 9 }, (_, index) => (
+    <div key={index} className='inventory-item'>
+      {user.inventory[index] ? (
+        <>
+          <img src={getItemImage(user.inventory[index])} alt={user.inventory[index]} />
+          {/* <span>{getItemName(user.inventory[index])}</span> */}
+        </>
+      ) : (
+        <>
+          <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItemEmpty.png`} alt={`Placeholder ${index}`} />
+          {/* <span>{getItemName(user.inventory[index])}</span> */}
+        </>
+      )}
+    </div>
+  ))}
+</div>
+    </div>
+)}
+
+
+                                <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} setSelectedItem={setSelectedItem} />
                         </div>
                         : null}
             </div>

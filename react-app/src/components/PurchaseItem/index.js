@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useDispatch, useSelector } from 'react-redux';
 import { ThunkPurchase } from "../../store/session";
 
 export default function PurchaseItem({ purchasePrice, setBuyItem, selectedItem }) {
-    const [display, setDisplay] = useState(true); // Set initial state to 'true'
+    const [display, setDisplay] = useState(true);
+    const dispatch = useDispatch();
     let displayName = "";
     let displayPic = "";
 
@@ -37,12 +39,13 @@ export default function PurchaseItem({ purchasePrice, setBuyItem, selectedItem }
                     <h2>for {purchasePrice} gold?</h2>
                     <div className='editButtons'>
                         <button className='letsMakePretty' type='button' onClick={() => {
-                            await ThunkPurchase(selectedItem,purchasePrice)
+
                             setBuyItem(false)
                         }}>
                             &nbsp;Cancel&nbsp;
                         </button>
-                        <button className='letsMakePretty' type='button' onClick={() => {
+                        <button className='letsMakePretty' type='button' onClick={async() => {
+                            await dispatch(ThunkPurchase(selectedItem,purchasePrice));
 
                             setDisplay(false) }}>
                             Purchase

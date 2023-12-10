@@ -3,6 +3,7 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const SET_HEALTH_OR_EXP = 'session/SET_HEALTH_OR_EXP'
 const EDIT_NEW_USER = 'session/EDIT_NEW_USER'
+const PURCHASE_ITEM = 'session/PURCHASE_ITEM'
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -11,6 +12,11 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
 	type: REMOVE_USER,
+});
+
+const actionPurchase = (data) => ({
+	type: PURCHASE_ITEM,
+	payload: data,
 });
 
 const actionEditHealthOrExp = (data) => ({
@@ -117,7 +123,7 @@ export const ThunkPurchase = (selectedItem,purchasePrice) => async (dispatch) =>
     if (response.ok) {
         const data = await response.json();
 
-        await dispatch(actionEditHealthOrExp(data.current_user));
+        await dispatch(actionPurchase(data.current_user));
         return data;
     } else if (response.status < 500) {
         const data = await response.json();
@@ -178,6 +184,8 @@ export default function reducer(state = initialState, action) {
 		case SET_HEALTH_OR_EXP:
 			return {user: action.payload}
 		case EDIT_NEW_USER:
+			return {user: action.payload}
+		case PURCHASE_ITEM:
 			return {user: action.payload}
 
 		case REMOVE_USER:
