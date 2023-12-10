@@ -163,18 +163,24 @@ def editUser():
 
 @auth_routes.route('/purchaseItem', methods=['POST'])
 def purchaseItem():
-    data2= request.json
-    item=data2.get("item")
-    price=data2.get('price')
-    ic(item)
-    ic(price)
-    current_user.gold= current_user.gold-price
-    tempInv=list(current_user.inventory)
-    tempInv.append(item)
-    current_user.inventory=tempInv
-    db.session.commit()
-    return jsonify({"current_user": current_user.to_dict()})
+    data2 = request.json
+    item = data2.get("item")
+    price = data2.get('price')
+    user = current_user
 
+    if item in ['machete', 'katana']:
+        weapon_inventory = list(user.weapon_inventory)
+        weapon_inventory.append(item)
+        user.weapon_inventory = weapon_inventory
+    elif item in ['buckler', 'hylian']:
+        armor_inventory = list(user.armor_inventory)
+        armor_inventory.append(item)
+        user.armor_inventory = armor_inventory
+
+    user.gold = user.gold - price
+    db.session.commit()
+
+    return jsonify({"current_user": user.to_dict()})
 
 
 

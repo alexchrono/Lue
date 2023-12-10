@@ -67,7 +67,8 @@ class User(db.Model, UserMixin):
     deaths=db.Column(db.Integer, default=0)
     armor=db.Column(db.String, default='none')
     weapon=db.Column(db.String, default='none')
-    inventory=db.Column(db.PickleType, default=list)
+    armor_inventory = db.Column(db.PickleType, default=list)
+    weapon_inventory = db.Column(db.PickleType, default=list)
     @property
     def password(self):
         return self.hashed_password
@@ -132,7 +133,8 @@ class User(db.Model, UserMixin):
             'deaths': self.deaths,
             'armor': self.armor,
             'weapon': self.weapon,
-            'inventory': self.inventory,
+            'armorInventory': self.armor_inventory,
+            'weaponInventory': self.weapon_inventory,
             'created_at': self.created_at,
             'updated_at': self.updated_at
 

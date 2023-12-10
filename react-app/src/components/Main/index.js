@@ -68,7 +68,8 @@ export default function Main({ mode }) {
     }
     console.log("🚀 ~ file: index.js:40 ~ Main ~ user.gif:", user.gif)
     console.log('user gif is', user.gif)
-    console.log("🚀 ~ file: index.js:45 ~ Main ~ user.inventory:", user.inventory)
+
+    console.log("🚀 ~ file: index.js:72 ~ Main ~ user:", user)
     return (
         <div className='main-main-container'>
             <div className="stats-container">
@@ -216,12 +217,35 @@ export default function Main({ mode }) {
 
                             {menuSelect === 'inventory' && (
     <div className='profileInfo inventory'>
+          <div className='topcenter'>
+    <h3>Armor</h3></div>
 <div className='inventory-grid'>
-  {Array.from({ length: 9 }, (_, index) => (
+
+  {Array.from({ length: 3 }, (_, index) => (
     <div key={index} className='inventory-item'>
-      {user.inventory[index] ? (
+      {user.armorInventory[index] ? (
         <>
-          <img src={getItemImage(user.inventory[index])} alt={user.inventory[index]} />
+          <img src={getItemImage(user.armorInventory[index])} alt={user.armorInventory[index]} />
+          {/* <span>{getItemName(user.inventory[index])}</span> */}
+        </>
+      ) : (
+        <>
+          <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItemEmpty.png`} alt={`Placeholder ${index}`} />
+          {/* <span>{getItemName(user.inventory[index])}</span> */}
+        </>
+      )}
+    </div>
+  ))}
+</div>
+<div className='topcenter'>
+    <h3>Weapons</h3></div>
+<div className='inventory-grid'>
+
+  {Array.from({ length: 3 }, (_, index) => (
+    <div key={index} className='inventory-item'>
+      {user.weaponInventory[index] ? (
+        <>
+          <img src={getItemImage(user.weaponInventory[index])} alt={user.weaponInventory[index]} />
           {/* <span>{getItemName(user.inventory[index])}</span> */}
         </>
       ) : (
