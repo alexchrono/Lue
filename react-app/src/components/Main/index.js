@@ -6,6 +6,7 @@ import Dailies from '../Dailies';
 import ErrorComponent from '../errorShow';
 import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 import ProfileMenu from '../profileMenu';
+import PurchaseItem from '../PurchaseItem'
 import './main.css';
 
 export default function Main({ mode }) {
@@ -13,6 +14,8 @@ export default function Main({ mode }) {
     const history = useHistory();
     const [menuSelect, setMenuSelect] = useState('stats');
     const [selectedItem, setSelectedItem] = useState(null);
+    const [buyItem,setBuyItem]=useState(false)
+    const [purchasePrice,setPurchasePrice]=useState('')
 
     const expFinder = () => {
         return user.level * 25;
@@ -37,7 +40,7 @@ export default function Main({ mode }) {
         return null;
     }
     console.log("🚀 ~ file: index.js:40 ~ Main ~ user.gif:", user.gif)
-    console.log('user gif is',user.gif)
+    console.log('user gif is', user.gif)
     return (
         <div className='main-main-container'>
             <div className="stats-container">
@@ -57,6 +60,9 @@ export default function Main({ mode }) {
                         </table>
                     </div>
                 </div>
+                {buyItem && (
+                    <PurchaseItem  purchasePrice={purchasePrice} setBuyItem={setBuyItem} selectedItem={selectedItem}/>
+                )}
                 {mode === 'main' ?
                     <div className='inspirational-quote'>
                         <img className='sword-Divider' src={`${process.env.PUBLIC_URL}/icons/sword-flipped-divider3.png`} alt="Sword Divider" />
@@ -73,25 +79,25 @@ export default function Main({ mode }) {
                         <div className='profileContainer'>
                             <div className='avatarContainer'>
                                 {/* <p>{`/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`}</p> */}
-                               {selectedItem==='default'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />:
-                               selectedItem==='buckler'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
-                               selectedItem==='hylian'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
-                               selectedItem==='machete'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
-                               selectedItem==='katana'? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> : null}
+                                {selectedItem === 'default' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" /> :
+                                    selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
+                                        selectedItem === 'hylian' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" /> :
+                                            selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
+                                                selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> : null}
                             </div>
-                            {(menuSelect === 'stats' || menuSelect ==='editProfile') && (
-                            <div className='profileInfo'>
-                                <table>
-                                    <tbody>
-                                        <tr><td>Username:</td><td>{user.username}</td></tr>
-                                        <tr><td>Email:</td><td>{user.email}</td></tr>
-                                        <tr><td>Days old:</td><td>{daysOld}</td></tr>
-                                        <tr><td>Total Deaths:</td><td>{user.deaths}</td></tr>
-                                    </tbody>
-                                </table>
-                            </div>)}
+                            {(menuSelect === 'stats' || menuSelect === 'editProfile') && (
+                                <div className='profileInfo'>
+                                    <table>
+                                        <tbody>
+                                            <tr><td>Username:</td><td>{user.username}</td></tr>
+                                            <tr><td>Email:</td><td>{user.email}</td></tr>
+                                            <tr><td>Days old:</td><td>{daysOld}</td></tr>
+                                            <tr><td>Total Deaths:</td><td>{user.deaths}</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>)}
 
-                            {menuSelect ==='shop' && (
+                            {menuSelect === 'shop' && (
                                 <div className='profileInfo'>
                                     <div className='topCenter'>
                                         <table className='purrfect'>
@@ -101,11 +107,11 @@ export default function Main({ mode }) {
                                         </table>
                                     </div>
                                     <div className='purchaseText'>
-                                        <p>{selectedItem==='default'? 'Items Available' :
-                                        selectedItem==='buckler'?'Buckler: 5 gold' :
-                                        selectedItem==='hylian'?'Hylian Shield: 25 gold' :
-                                        selectedItem==='machete'? 'Machete: 5 gold' :
-                                        selectedItem==='katana'? 'Katana: 25 gold' : null}</p>
+                                        <p>{selectedItem === 'default' ? 'Items Available' :
+                                            selectedItem === 'buckler' ? 'Buckler: 5 gold' :
+                                                selectedItem === 'hylian' ? 'Hylian Shield: 25 gold' :
+                                                    selectedItem === 'machete' ? 'Machete: 5 gold' :
+                                                        selectedItem === 'katana' ? 'Katana: 25 gold' : null}</p>
                                     </div>
                                     <div className='centerDisplay'>
 
@@ -113,13 +119,49 @@ export default function Main({ mode }) {
                                     </div>
                                     <div className='bottomSelection'>
                                         <div className='bottomLeft'>
-                                        {selectedItem==='buckler'? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img> :
-                                        selectedItem==='hylian'? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img> :
-                                        selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img> :
-                                        selectedItem === 'katana' ?  <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana"></img> :
-                                        <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItem2.png`} alt="SelectItem"></img>
+                                            <div className='bottomLeftPic'>
+                                                {selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img> :
+                                                    selectedItem === 'hylian' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img> :
+                                                        selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img> :
+                                                            selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana"></img> :
+                                                                <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItem2.png`} alt="SelectItem"></img>
 
-                                        }
+                                                }
+                                            </div>
+                                            {selectedItem !=='default' && (
+                                            <div className='bottomLeftButton'>
+                                                <button
+                                                    type='button'
+                                                    className='menu-item-button9'
+                                                    onClick={() => {
+                                                        if (
+                                                            (selectedItem === 'buckler' || selectedItem === 'machete') &&
+                                                            user.gold >= 5
+                                                        ) {
+                                                            setPurchasePrice(5)
+                                                            setBuyItem(true)
+
+                                                        } else if (
+                                                            (selectedItem === 'katana' || selectedItem === 'hylian') &&
+                                                            user.gold >= 25
+                                                        ) {
+                                                            // Add code to open the modal here
+                                                            console.log('Open modal for katana or hylian purchase');
+                                                        }
+                                                    }}
+                                                >
+                                                    {selectedItem === 'buckler' || selectedItem === 'machete'
+                                                        ? user.gold >= 5
+                                                            ? 'Purchase'
+                                                            : 'Not enough gold'
+                                                        : selectedItem === 'katana' || selectedItem === 'hylian'
+                                                            ? user.gold >= 25
+                                                                ? 'Purchase'
+                                                                : 'Not enough gold'
+                                                            : ''}
+                                                </button>
+                                            </div>
+                                            )}
                                         </div>
                                         <div className='bottomRight'>
                                             <div className='right1'>
@@ -142,7 +184,7 @@ export default function Main({ mode }) {
                                     </div>
                                 </div>
                             )}
-                            <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} setSelectedItem={setSelectedItem}/>
+                            <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} setSelectedItem={setSelectedItem} />
                         </div>
                         : null}
             </div>

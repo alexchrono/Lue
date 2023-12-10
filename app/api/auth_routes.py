@@ -159,6 +159,15 @@ def editUser():
 
         return jsonify({"error":"There was an error updating  your character"}),400
 
+
+
+@auth_routes.route('/purchaseItem', methods=['POST'])
+def purchaseItem():
+    data2= request.json
+    item=data2.get("item")
+    price=data2.get('price')
+    
+
 @auth_routes.route('/edit-health-or-exp', methods=['POST'])
 def editHealth():
     data2= request.json

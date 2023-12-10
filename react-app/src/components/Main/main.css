@@ -833,19 +833,28 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 
 .bottomLeft {
-    width: 38%;
+    width: 44%;
+
     border-left: 2px solid blue;
     border-bottom: 2px solid blue;
     border-top: 2px solid blue;
 }
+.bottomLeftPic {
+    width: 100%;
+    height: 73%;
+}
 .bottomLeft img {
     width: 100%;
-    height: 65%;
+    height: 100%;
     object-fit:  cover;
     box-sizing: border-box;
 }
+
+.bottomLeftButton {
+    height: 100%;
+}
 .bottomRight {
-    width: 62%;
+    width: 66%;
     /* border: 2px solid blue; */
     display: flex;
     flex-direction: column;
@@ -907,4 +916,30 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     100% {
         border-color: red;
     }
+}
+
+.centerBig {
+    border: none;
+    width: 75%;
+    height: auto;
+    margin: auto;
+}
+
+.purchase {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border: 3px dotted black;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 36%;
+    text-align: center;
+    color: #ededed;
+    z-index: 10000;
+    background: rgb(63,136,185);
+    background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
 }

@@ -104,6 +104,30 @@ export const ThunkEditNewUser = () => async (dispatch) => {
     }
 };
 
+export const ThunkPurchase = (selectedItem,purchasePrice) => async (dispatch) => {
+    const response = await fetch("/api/auth/purchaseItem", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({item:selectedItem,price:purchasePrice}),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        await dispatch(actionEditHealthOrExp(data.current_user));
+        return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        return data
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+
 export const ThunkEditHealth = (healthOrExp,clickedStuff,key) => async (dispatch) => {
     const response = await fetch("/api/auth/edit-health-or-exp", {
         method: "POST",
