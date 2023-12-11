@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { signUp, login } from '../../store/session';
+import SelectAvatar from '../SelectAvatar';
 
 
 import './LandingPage.css';
@@ -19,6 +20,12 @@ export default function LandingPage() {
     const dispatch = useDispatch()
     const [errors, setErrors] = useState({})
     const [errorsFe, setErrorsFe] = useState([])
+    const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
+    const [gif,setGif]=useState('')
+
+    const openAvatarModal = () => {
+        setIsAvatarModalOpen(true);
+    };
 
     const handleAvatarChange = (e) => {
         setNewAvatar(e.target.files[0])
@@ -53,6 +60,10 @@ export default function LandingPage() {
             custError(err, 'passwordConfirmation', 'password confirmation does not match password')
         }
 
+        if (gif==='') {
+            custError(err, 'avatar', 'You must select an avatar')
+        }
+
         if (err.errors) {
             setErrorsFe(err.errors)
             return
@@ -66,9 +77,11 @@ export default function LandingPage() {
             formData.append('email', email);
             formData.append('password', password);
             formData.append('confirm_password', confirmPassword)
+
             if (newAvatar) {
                 formData.append('selected_avatar', newAvatar);
             }
+            formData.append('gif',gif)
 
             const success = await dispatch(signUp(formData))
 
@@ -119,8 +132,8 @@ export default function LandingPage() {
 
                     <div className='createdBy'>
                         Created By:  <a
-            href="https://github.com/alexchrono"
-          >Alex Heasley</a>
+                            href="https://github.com/alexchrono"
+                        >Alex Heasley</a>
                     </div>
                 </div>
             </div>
@@ -174,7 +187,7 @@ export default function LandingPage() {
                     />
 
                     {errors.passwordConfirmation ? <p className="errors">{errors.passwordConfirmation}</p> : errorsFe.passwordConfirmation ? <p className="feErrors">{errorsFe.passwordConfirmation}</p> : null}
-
+                    {errors.avatar ? <p className="errors">{errors.avatar}</p> : errorsFe.avatar ? <p className="feErrors">{errorsFe.avatar}</p> : null}
                     <input
                         type="file"
                         id="fileInput"
@@ -186,13 +199,26 @@ export default function LandingPage() {
                         accept="image/*"
                     />
 
-                    <button
-                    type='button'
-                        className="letsMakePretty"
-                        onClick={() => document.getElementById('fileInput').click()}
-                    >
-                        Upload Avatar (optional)
-                    </button>
+
+
+<div className="uploadAndSelect">
+    <button
+        type='button'
+        className="letsMakePretty"
+        onClick={openAvatarModal}
+    >
+        Select Avatar
+    </button>
+
+    <button
+        type='button'
+        className="letsMakePretty"
+        onClick={() => document.getElementById('fileInput').click()}
+    >
+        Upload Profile Pic (optional)
+    </button>
+</div>
+
 
                     <button className="letsMakePretty" type="submit">Sign Up</button>
                     <button className="letsMakePretty" onClick={loginDemo}>
@@ -206,7 +232,10 @@ export default function LandingPage() {
 
             </div>
 
+            {isAvatarModalOpen && (
+                <SelectAvatar setGif={setGif} setter={setIsAvatarModalOpen}/>
 
+            )}
 
         </div>
     )

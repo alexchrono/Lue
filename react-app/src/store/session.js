@@ -3,6 +3,8 @@ const SET_USER = "session/SET_USER";
 const REMOVE_USER = "session/REMOVE_USER";
 const SET_HEALTH_OR_EXP = 'session/SET_HEALTH_OR_EXP'
 const EDIT_NEW_USER = 'session/EDIT_NEW_USER'
+const PURCHASE_ITEM = 'session/PURCHASE_ITEM'
+const EQUIP_ITEM = 'session/EQUIP_ITEM'
 
 const setUser = (user) => ({
 	type: SET_USER,
@@ -11,6 +13,16 @@ const setUser = (user) => ({
 
 const removeUser = () => ({
 	type: REMOVE_USER,
+});
+
+const actionEquip = (data) => ({
+	type: EQUIP_ITEM,
+	payload: data,
+});
+
+const actionPurchase = (data) => ({
+	type: PURCHASE_ITEM,
+	payload: data,
 });
 
 const actionEditHealthOrExp = (data) => ({
@@ -104,6 +116,54 @@ export const ThunkEditNewUser = () => async (dispatch) => {
     }
 };
 
+export const ThunkEquip = (selectedArmor,selectedWeapon) => async (dispatch) => {
+    const response = await fetch("/api/auth/equipItem", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({armor:selectedArmor,weapon:selectedWeapon}),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        await dispatch(actionEquip(data.current_user));
+        return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        return data
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+
+export const ThunkPurchase = (selectedItem,purchasePrice) => async (dispatch) => {
+    const response = await fetch("/api/auth/purchaseItem", {
+        method: "POST",
+        headers: {
+            'Content-Type': 'application/json',
+        },
+
+        body: JSON.stringify({item:selectedItem,price:purchasePrice}),
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+
+        await dispatch(actionPurchase(data.current_user));
+        return data;
+    } else if (response.status < 500) {
+        const data = await response.json();
+        return data
+    } else {
+        return ["An error occurred. Please try again."];
+    }
+};
+
+
 export const ThunkEditHealth = (healthOrExp,clickedStuff,key) => async (dispatch) => {
     const response = await fetch("/api/auth/edit-health-or-exp", {
         method: "POST",
@@ -155,6 +215,11 @@ export default function reducer(state = initialState, action) {
 			return {user: action.payload}
 		case EDIT_NEW_USER:
 			return {user: action.payload}
+		case PURCHASE_ITEM:
+			return {user: action.payload}
+		case EQUIP_ITEM:
+			return {user: action.payload}
+
 
 		case REMOVE_USER:
 			return { user: null };

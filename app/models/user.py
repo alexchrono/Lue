@@ -63,6 +63,12 @@ class User(db.Model, UserMixin):
     users_dailies= db.relationship('Daily',back_populates='dailies_of_user')
     users_dailies_array = db.Column(db.PickleType, default=list)
     users_clicked_dailies=db.Column(db.PickleType, default=list)
+    gif=db.Column(db.String, default="ryu")
+    deaths=db.Column(db.Integer, default=0)
+    armor=db.Column(db.String, default='none')
+    weapon=db.Column(db.String, default='none')
+    armor_inventory = db.Column(db.PickleType, default=list)
+    weapon_inventory = db.Column(db.PickleType, default=list)
     @property
     def password(self):
         return self.hashed_password
@@ -123,6 +129,12 @@ class User(db.Model, UserMixin):
             'usersDailiesArray': self.users_dailies_array,
             'usersDailiesObj':userDailies,
             'usersClickedDailies':self.users_clicked_dailies,
+            'gif': self.gif,
+            'deaths': self.deaths,
+            'armor': self.armor,
+            'weapon': self.weapon,
+            'armorInventory': self.armor_inventory,
+            'weaponInventory': self.weapon_inventory,
             'created_at': self.created_at,
             'updated_at': self.updated_at
 

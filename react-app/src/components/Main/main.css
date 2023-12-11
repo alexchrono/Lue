@@ -1,14 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 html {
-    background: rgb(221,221,221);
+    background: rgb(221, 221, 221);
 
 }
+
 .stats-container {
     display: flex;
     flex-direction: row;
-    height: 26%;
-    max-height: 26%;
+     height: 26%;
+     max-height: 29%;
+     max-width: 90%;
     flex-grow: 1;
+    padding-top: 2%;
+    padding-bottom: 3%;
+
 }
 
 .avatar,
@@ -19,9 +25,10 @@ html {
 }
 
 .avatar {
-    flex-basis: 20%;
-    height: auto;
     overflow: hidden;
+    margin-left: 3%;
+    margin-right: 3%;
+
 }
 
 .avatar img {
@@ -33,25 +40,60 @@ html {
 }
 
 .stats {
-    flex-basis: 20%;
+    flex-basis: 50%;
     display: flex;
-    flex-direction: column;
-    height: 100%;
-    flex-grow: 2;
+    align-items: center;
+    /* height: 100%;
+    flex-grow: 2; */
 }
 
-.stats span {
-    height: 20%;
+.stats table {
+    width: 100%;
+    height: 100%;
+    background-color: #ddd;
+    border-collapse: collapse;
+}
+
+.stats tr {
+
     font-size: 1.5em;
+
+}
+
+.stats tbody {
+    height: 100%;
+    width: 100%;
+}
+
+.stats td:first-child {
+    width: 150px;
+}
+
+.stats td {
+    padding: 5px;
+    border: 1px solid #bbb;
+}
+
+.profileInfo tbody {
+    height: 100%;
+    width: 100%;
+}
+
+.profileInfo td:first-child {
+    width: 150px;
+}
+
+.profileInfo td {
+    padding: 5px;
 }
 
 .inspirational-quote {
     position: relative;
-    flex-basis: 60%;
+    flex-basis: 65%;
     display: flex;
     flex-direction: column;
     height: 100%;
-    flex-grow: 2 2 auto;
+    flex-grow: 2;
     /* align-items: center;
     justify-content: center; */
 
@@ -111,15 +153,16 @@ html {
     width: 100%;
 
 }
+
 .allHabits {
     width: 100%;
-    height:90%;
+    height: 90%;
     box-sizing: border-box;
     overflow-y: scroll;
     border-right: 2px dotted black;
     border-left: 2px dotted black;
     border-bottom: 2px dotted black;
-    border-radius:5px;
+    border-radius: 5px;
 }
 
 .fifteen-percent {
@@ -138,6 +181,7 @@ html {
     visibility: hidden;
 
 }
+
 .invisi2 {
     border: none;
     /* background-color:#602399 */
@@ -346,7 +390,6 @@ form select {
     width: 90%;
     height: 100%;
     font-size: 1.5em
-
 }
 
 .tenpercent {
@@ -357,19 +400,22 @@ form select {
 
 
 }
+
 .tenpercent button {
     height: 100%;
 }
+
 .tenpercent img {
     width: 100%;
     height: auto;
     object-fit: contain;
 }
+
 .forgigs {
     display: flex;
     flex-direction: row;
     width: 100%;
-    height:100%;
+    height: 100%;
 }
 
 .red {
@@ -377,6 +423,7 @@ form select {
     height: 100%;
     width: 100%;
 }
+
 .green {
     background-color: green;
     height: 100%;
@@ -389,7 +436,7 @@ form select {
     text-align: center;
 }
 
-.feErrors{
+.feErrors {
     color: red;
     font-weight: bold;
     text-decoration: underline;
@@ -398,7 +445,8 @@ form select {
 
 .changeToHand:hover {
     cursor: pointer;
-  }
+}
+
 /* @keyframes blink {
   0%, 100% {
     border-color: transparent;
@@ -417,6 +465,7 @@ form select {
     width: 100%;
     border: 2px solid blue; */
 }
+
 .invisiborder {
     border: 2px solid transparent;
 }
@@ -431,17 +480,19 @@ width: 100%;
     flex-direction: row;
     align-items: center;
     padding: 10px;
-  }
+}
+
 .editButtons {
     display: flex;
     justify-content: center;
     flex-grow: 1;
     margin-left: 10%;
 }
+
 .editButtons2 {
     display: flex;
     justify-content: center;
-    gap:3%;
+    gap: 3%;
     flex-grow: 1;
     padding-bottom: 5%;
     /* margin-left: 10%; */
@@ -450,11 +501,11 @@ width: 100%;
 
 .deleteButton {
     display: flex;
-    width:10%;
+    width: 10%;
 }
 
 
-.sword-Divider{
+.sword-Divider {
 
     position: absolute;
     bottom: 0;
@@ -484,7 +535,7 @@ width: 100%;
 
 .fiftyheight {
     width: 100%;
-    height:50%;
+    height: 50%;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
@@ -526,26 +577,28 @@ width: 100%;
 }
 
 .topOfCard {
-margin-top: 0px;
-margin: 0px;
-padding: 0px;
-padding-bottom: 0px;
-font-size: 1.5em;
+    margin-top: 0px;
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 0px;
+    font-size: 1.5em;
 
 }
+
 .bottOfCard {
-font-size: 1em;
+    font-size: 1em;
 }
 
-.overallSizeEditModal{
+.overallSizeEditModal {
     z-index: index 9000;
-    background: rgb(63,136,185);
-    background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
+    background: rgb(63, 136, 185);
+    background: linear-gradient(90deg, rgba(63, 136, 185, 1) 0%, rgba(37, 92, 62, 1) 70%, rgba(54, 65, 226, 1) 100%);
     max-width: 600px;
     margin: auto;
     /* background: rgb(63,136,185);
 background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, rgba(78,156,171,1) 100%); */
 }
+
 .deleteButton button {
     margin: 10px;
     padding: 5px;
@@ -554,27 +607,27 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     /* margin-right: 0px; */
     background-color: rgb(230, 37, 7);
     display: inline-block;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 4px;
-        text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+    text-align: center;
 }
 
 
-.letsMakePrettyDangerous{
+.letsMakePrettyDangerous {
 
-        background-color: rgb(230, 37, 7);
-        display: inline-block;
-        border: none;
-        color: rgb(0, 0, 0);
-        font-weight: bold;
-        padding: 2.7% 8%;
-        text-align: center;
-        font-size: 16px;
-        margin: 4px 2px;
-        cursor: pointer;
-        border-radius: 9px;
+    background-color: rgb(230, 37, 7);
+    display: inline-block;
+    border: none;
+    color: rgb(0, 0, 0);
+    font-weight: bold;
+    padding: 2.7% 8%;
+    text-align: center;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 9px;
 
 }
 
@@ -585,11 +638,11 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     padding: 11px 0px;
     font-family: 'Press Start 2P';
     text-align: center;
-    line-height:1.5;
+    line-height: 1.5;
     text-shadow: 7px 4px 3px black;
-  }
+}
 
-  .letsMakePretty {
+.letsMakePretty {
     background-color: #35ee50;
     display: inline-block;
     border: none;
@@ -618,11 +671,349 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     padding: 11px 0px;
     font-family: 'Press Start 2P';
     text-align: center;
-    line-height:1.5;
+    line-height: 1.5;
     text-shadow: 7px 4px 3px black;
-  }
+}
 
-  .endofdays {
+.endofdays {
     text-align: center;
     font-size: 3.1em;
+}
+
+.avStats {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    flex-grow:2;
+}
+
+.avatarContainer {
+    height: 100%;
+    display: flex;
+    margin-left: 3%;
+    margin-right: 3%;
+}
+
+.avatarContainer img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    max-height: 100%;
+}
+
+.profileContainer {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+.profileInfo {
+    flex-basis: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+
+.profileInfo table {
+    width: 100%;
+    height: 100%;
+    max-height: 100%;
+    background-color: #ddd;
+    border-collapse: collapse;
+}
+.topCenter {
+    width: 100%;
+    height: 25%;
+    align-self: first baseline;
+}
+
+
+.profileInfo td:first-child {
+    width: 150px;
+}
+
+.profileInfo td {
+
+    padding: 5px;
+    border: 1px solid #bbb;
+}
+
+.profileInfo tr {
+    font-size: 1.5em;
+    height: 25%;
+
+}
+
+.profilePretty {
+    margin-top: 0px;
+    margin-bottom: 0px;
+}
+
+.backGa9 {
+    height: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items:stretch;
+}
+
+.backGa9 li {
+    height:25%;
+
+}
+.menu-item-button9 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 33%;
+    flex-grow:2;
+    width: 100%;
+    background-color: black;
+    border-radius: 5px;
+    color: white;
+    cursor: pointer;
+    border: 3px solid transparent;
+    text-align: center;
+}
+
+.blinking-border {
+    animation: blink 1s linear infinite;
+    border: 3px solid red;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+.ellipsu li button {
+    display: flex;
+    flex-grow: 2;
+    background-color: black;
+    width: 100%;
+
+    text-align: center;
+    /* border:1px solid white; */
+    padding: 0px;
+    margin: 0px;
+    height: 100%;
+}
+
+.ellipsu {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    background-color: black;
+}
+.ellipsu li {
+    list-style-type: none;
+}
+.purchaseText {
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.purchaseText p {
+
+    text-align: center;
+    font-weight: bold;
+    font-size: 1.2em;
+
+}
+
+.bottomSelection {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 55%;
+    border: 2px solid blue;
+}
+
+.bottomLeft {
+    width: 44%;
+    height: 100%;
+
+    border-left: 2px solid blue;
+    border-bottom: 2px solid blue;
+    border-top: 2px solid blue;
+    box-sizing: border-box;
+}
+.bottomLeftPic {
+    width: 100%;
+    height: 73%;
+}
+.bottomLeft img {
+    width: 100%;
+    height: 100%;
+    object-fit:  cover;
+    box-sizing: border-box;
+}
+
+.bottomLeftButton {
+    height: 83%;
+}
+.bottomRight {
+    width: 66%;
+    /* border: 2px solid blue; */
+    display: flex;
+    flex-direction: column;
+}
+
+.right1 {
+    display: flex;
+    width: 100%;
+    /* border: 1px solid red; */
+    height: 50%;
+    flex-direction: row;
+}
+
+.right2 {
+    display: flex;
+    width: 100%;
+    /* border: 1px solid red; */
+    height: 50%;
+    flex-direction: row;
+}
+
+.one ,.two, .three, .four {
+    width: 50%;
+    height: 100%;
+    border:2px solid black;
+    box-sizing: border-box;
+}
+.centerDisplay {
+    width: 100%;
+    height:89%;
+    box-sizing: border-box;
+}
+
+.centerDisplay img {
+    width: 100%;
+    height: 89%;
+    object-fit: cover;
+    object-position: center;
+    box-sizing: border-box;
+}
+
+.one img, .two img, .three img, .four img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+.solid-border {
+    border-color: red;
+}
+.blinking-border {
+    animation: blink 1s linear infinite;
+}
+
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+    100% {
+        border-color: red;
+    }
+}
+
+.centerBig {
+    border: none;
+    width: 75%;
+    height: auto;
+    margin: auto;
+}
+
+.purchase {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border: 3px dotted black;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 36%;
+    text-align: center;
+    color: #ededed;
+    z-index: 10000;
+    background: rgb(63,136,185);
+    background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
+}
+
+.profileInfo .inventory {
+height: 100%;
+}
+
+.inventory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    height: 33%;
+    width: 100%;
+}
+
+
+.inventory-item {
+    position: relative;
+    height: 100%;
+    border: 3px solid #ccc;
+    overflow: hidden;
+    text-align: center;
+    box-sizing: border-box;
+}
+.redBordz {
+    border: 3px solid red;
+}
+
+.inventory-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire item */
+}
+
+.inventory-item span {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+    color: white;
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.topcenter {
+    height: 10%;
+}
+.topcenter h3 {
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+
+.centerButtonz {
+    border: 2px solid black;
+    width: 100%;
+    height: 100%;
+}
+
+.newHeight {
+    height: 50%;
+    border: 1px solid white;
+}
+
+.onehundro {
+    height: 100%;
+}
+
+.blackOut {
+    filter: brightness(30%); /* Adjust the brightness percentage as needed */
+    pointer-events: none;
   }

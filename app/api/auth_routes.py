@@ -31,6 +31,10 @@ level_titles = {
     19: 'Ascendant',
     20: 'Master',
 }
+# switchUrl= {
+#     'ryu': "/icons/avgifs/Ryu/ryu-none-none.gif",
+#     'chun-li': "/icons/avgifs/chun-li/chunli-none-none.gif"
+# }
 def expFinder():
 
     targetExp=current_user.level*25
@@ -101,11 +105,14 @@ def sign_up():
             if "url" not in upload:
                 return { 'errors': validation_errors_to_error_messages(form.errors) }, 400
             url=upload['url']
+
+
         user = User(
                 username=form.data['username'],
                 email=form.data['email'],
                 password=form.data['password'],
                 selected_avatar=url,
+                gif=form.data['gif'],
                 new_user=True
 
             )
@@ -152,11 +159,50 @@ def editUser():
 
         return jsonify({"error":"There was an error updating  your character"}),400
 
+"/api/auth/equipItem"
+
+@auth_routes.route('/equipItem', methods=['POST'])
+def equipItem():
+    data2 = request.json
+    armor = data2.get("armor")
+    weapon = data2.get('weapon')
+    user = current_user
+
+    user.armor = armor
+    user.weapon = weapon
+    db.session.commit()
+
+    return jsonify({"current_user": user.to_dict()})
+
+@auth_routes.route('/purchaseItem', methods=['POST'])
+def purchaseItem():
+    data2 = request.json
+    item = data2.get("item")
+    price = data2.get('price')
+    user = current_user
+
+    if item in ['machete', 'katana']:
+        weapon_inventory = list(user.weapon_inventory)
+        weapon_inventory.append(item)
+        user.weapon_inventory = weapon_inventory
+    elif item in ['buckler', 'hyrule']:
+        armor_inventory = list(user.armor_inventory)
+        armor_inventory.append(item)
+        user.armor_inventory = armor_inventory
+
+    user.gold = user.gold - price
+    db.session.commit()
+
+    return jsonify({"current_user": user.to_dict()})
+
+
+
 @auth_routes.route('/edit-health-or-exp', methods=['POST'])
 def editHealth():
     data2= request.json
     healthOrExpp=data2.get("healthOrExp")
     arrayStuff=data2.get('clickedStuff')
+
 
 
 

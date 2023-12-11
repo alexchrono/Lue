@@ -1,0 +1,44 @@
+.selectAv {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    border: 3px dotted black;
+    border-radius: 8px;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    width: 36%;
+    text-align: center;
+    color: #ededed;
+    z-index: 10000;
+    background: rgb(63,136,185);
+    background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 400px;
+}
+
+.selectAv img {
+    height: 100%;
+    width: 45%;
+    margin: 10px;
+    border: 3px transparent red;
+    box-sizing: border-box;
+}
+
+.selectAv img:hover {
+    border: 3px solid red;
+    box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+    .selectAv img {
+        max-width: 90%;
+    }
+}

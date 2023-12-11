@@ -25,8 +25,13 @@ function App() {
             </Route>
 
             <Route exact path="/main">
-            <Main />
+            <Main mode='main'/>
           </Route>
+
+          <Route exact path="/profile">
+            <Main mode='profile'/>
+          </Route>
+
           <Route exact path="/login" >
             <LoginFormPage />
           </Route>

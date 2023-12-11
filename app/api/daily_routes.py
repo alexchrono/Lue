@@ -90,6 +90,81 @@ def makeNewDaily():
 
 #     return {"test": "7"}
 
+# dailiesObj
+
+@daily_routes.route('/move-daily', methods=['POST'])
+def moveDaily():
+    ic('INSIDE MOVE HABIT ROUTE BABY')
+    err = {}
+    data = request.json
+    desired_pos = data.get('position')
+    habitToChange= data.get('daily')
+    idToChange= habitToChange['id']
+    posToChange= habitToChange['position']
+    ic(idToChange)
+    ourArray=current_user.users_dailies_array
+    ic(ourArray)
+    lenArray=len(ourArray)-1
+    idOfLast=ourArray[lenArray]
+    ic(idOfLast)
+    ourDailies=current_user.users_dailies
+    ic(ourDailies)
+    lenDailies=len(current_user.users_dailies)-1
+    ic(ourDailies)
+    firstDaily= min(daily.position for daily in ourDailies)
+    lastDaily=max(daily.position for daily in ourDailies)
+    ic(lastDaily)
+    posOfLast=lastDaily
+    posOfFirst=firstDaily
+    ic(posOfLast)
+    if desired_pos == 'top':
+                newPos = posOfFirst -1
+
+                for daily in current_user.users_dailies:
+                    if daily.id==idToChange:
+                        daily.position=newPos
+
+                    elif daily.id !=idToChange and daily.position>=posToChange:
+                        daily.position +=1
+
+                db.session.commit()
+
+
+                current_user.set_habits_and_dailies()
+
+                ourGuyDict = current_user.to_dict()
+                updatedArray = ourGuyDict.get("usersDailiesArray")
+                updatedObj= ourGuyDict.get("usersDailiesObj")
+                ic(updatedArray)
+                ic(updatedObj)
+
+
+
+                return jsonify({ "newArray": updatedArray,'dailiesObj':updatedObj})
+
+
+    elif desired_pos == 'bottom':
+        for daily in current_user.users_dailies:
+            if daily.id==idToChange:
+                daily.position=posOfLast
+
+            elif daily.position>posToChange:
+                    daily.position-=1
+
+        db.session.commit()
+
+
+        current_user.set_habits_and_dailies()
+
+        ourGuyDict = current_user.to_dict()
+        updatedArray = ourGuyDict.get("usersDailiesArray")
+        updatedObj= ourGuyDict.get("usersDailiesObj")
+        ic(updatedArray)
+        ic(updatedObj)
+
+
+
+        return jsonify({ "newArray": updatedArray,'dailiesObj':updatedObj})
 
 @daily_routes.route('/edit-daily', methods=['POST'])
 def editDaily():
