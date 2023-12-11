@@ -952,7 +952,7 @@ height: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 10px;
-    height: 38%;
+    height: 33%;
     width: 100%;
 }
 
@@ -993,4 +993,19 @@ height: 100%;
 .topcenter h3 {
     margin-top: 0%;
     margin-bottom: 0%;
+}
+
+.centerButtonz {
+    border: 2px solid black;
+    width: 100%;
+    height: 100%;
+}
+
+.newHeight {
+    height: 50%;
+    border: 1px solid white;
+}
+
+.onehundro {
+    height: 100%;
 }

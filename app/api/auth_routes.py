@@ -159,7 +159,20 @@ def editUser():
 
         return jsonify({"error":"There was an error updating  your character"}),400
 
+"/api/auth/equipItem"
 
+@auth_routes.route('/equipItem', methods=['POST'])
+def equipItem():
+    data2 = request.json
+    armor = data2.get("armor")
+    weapon = data2.get('weapon')
+    user = current_user
+
+    user.armor = armor
+    user.weapon = weapon
+    db.session.commit()
+
+    return jsonify({"current_user": user.to_dict()})
 
 @auth_routes.route('/purchaseItem', methods=['POST'])
 def purchaseItem():

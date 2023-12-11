@@ -1,15 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import Habits from '../Habits';
 import Dailies from '../Dailies';
 import ErrorComponent from '../errorShow';
 import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 import ProfileMenu from '../profileMenu';
 import PurchaseItem from '../PurchaseItem'
+import { ThunkEquip } from '../../store/session';
 import './main.css';
 
 export default function Main({ mode }) {
+    const dispatch= useDispatch()
     const user = useSelector((state) => state.session.user);
     const history = useHistory();
     const [menuSelect, setMenuSelect] = useState('stats');
@@ -115,9 +117,16 @@ export default function Main({ mode }) {
                                     menuSelect === 'shop' && selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" /> :
                                     menuSelect === 'shop' && selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
                                     menuSelect === 'shop' && selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> :
-                                    menuSelect==='inventory' && selectedArmor ==='buckler' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
-                                    menuSelect==='inventory' && selectedArmor ==='hyrule' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
-                                    menuSelect==='inventory' && selectedArmor ==='hyrule' ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" />:
+
+                                    menuSelect==='inventory' && !selectedArmor && !selectedWeapon  ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />:
+
+
+
+                                    menuSelect==='inventory' && selectedArmor && !selectedWeapon  ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${user.weapon}.gif`} alt="User Gif" /> :
+                                    menuSelect==='inventory' && !selectedArmor && selectedWeapon  ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${selectedWeapon}.gif`} alt="User Gif" />:
+                                    menuSelect==='inventory' && selectedArmor && selectedWeapon  ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${selectedWeapon}.gif`} alt="User Gif" />:
+
+
 
 
                                                 <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />}
@@ -156,12 +165,12 @@ export default function Main({ mode }) {
                                     </div>
                                     <div className='bottomSelection'>
                                         <div className='bottomLeft'>
-                                            <div className='bottomLeftPic'>
+                                            <div className={selectedItem==='default'? 'onehundro': 'bottomLeftPic'}>
                                                 {selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img> :
                                                     selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img> :
                                                         selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img> :
                                                             selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana"></img> :
-                                                                <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItem2.png`} alt="SelectItem"></img>
+                                                                <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItem2.png`} alt="SelectItem" className='bottomLeftPic3'></img>
 
                                                 }
                                             </div>
@@ -266,6 +275,20 @@ export default function Main({ mode }) {
     </div>
   ))}
 </div>
+<div className='centerButtonz'>
+    <button className='menu-item-button9 newHeight' onClick={async()=>{
+        await dispatch(ThunkEquip('none','none'))
+        setSelectedArmor(null)
+        setSelectedWeapon(null)
+    }}>Unequip all</button>
+    <button className='menu-item-button9 newHeight' onClick={async()=>{
+
+        await dispatch(ThunkEquip(selectedArmor===null?'none':selectedArmor,selectedWeapon===null?'none':selectedWeapon))
+        setSelectedArmor(null)
+        setSelectedWeapon(null)
+    }}>Equip Selected</button>
+
+     </div>
     </div>
 )}
 
