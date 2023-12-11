@@ -1,10 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
 .main-container {
     display: flex;
     width: 100%;
     height: 90%;
     margin: 0px;
-    padding:0px;
+    padding: 0px;
     box-sizing: border-box;
 }
 
@@ -57,15 +58,16 @@
 .signup-form {
     display: flex;
     flex-direction: column;
-    align-items: stretch;
     width: 100%;
-    height: 100%;
+    height: 72%;
 }
 
-.signup-form input{
+.signup-form input {
     width: 100%;
+    height: 11%;
     padding: 20px;
     box-sizing: border-box;
+    margin-bottom: 1%;
 }
 
 
@@ -88,6 +90,7 @@ ul li {
     gap: 1%;
     margin-top: 1%;
     margin-bottom: 1%;
+    height: 15%;
 }
 
 .uploadAndSelect button {
@@ -95,4 +98,37 @@ ul li {
     height: 100%;
     width: 45%;
 
+}
+
+.smaller-input {
+    padding: 30px;
+}
+
+.displayPictures {
+    display: flex;
+    width: 100%;
+    height: 24%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+
+}
+
+.avatarPreview {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.profilePreview {
+    display: flex;
+    justify-content: center;
+    width: 50%;
+    height: 100%;
+    box-sizing: border-box;
+}
+
+.topOfRight {
+    height: 18%;
 }
