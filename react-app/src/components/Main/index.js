@@ -175,7 +175,7 @@ export default function Main({ mode }) {
                                     <div className='bottomSelection'>
                                         <div className='bottomLeft'>
                                             <div className={selectedItem==='default'? 'onehundro': 'bottomLeftPic'}>
-                                                {selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img> :
+                                                {selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler" ></img> :
                                                     selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img> :
                                                         selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img> :
                                                             selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana"></img> :
@@ -220,19 +220,26 @@ export default function Main({ mode }) {
                                         </div>
                                         <div className='bottomRight'>
                                             <div className='right1'>
-                                                <div className={`one ${selectedItem === 'buckler' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('buckler')}>
-                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler"></img>
+                                                <div className={`one ${selectedItem === 'buckler' ? 'solid-border' : ''}`} onClick={() =>{
+                                                    if (!user.armorInventory.includes('buckler')) {setSelectedItem('buckler')}}}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler" className={user.armorInventory.includes('buckler')?'blackOut':''}></img>
                                                 </div>
-                                                <div className={`two ${selectedItem === 'hyrule' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('hyrule')}>
-                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img>
+                                                <div className={`two ${selectedItem === 'hyrule' ? 'solid-border' : ''}`} onClick={() => {
+                                                    if (!user.armorInventory.includes('hyrule')) {
+                                                    setSelectedItem('hyrule')}}}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield" className={user.armorInventory.includes('hyrule')?'blackOut':''}></img>
                                                 </div>
                                             </div>
                                             <div className='right2'>
-                                                <div className={`three ${selectedItem === 'machete' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('machete')}>
-                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img>
+                                                <div className={`three ${selectedItem === 'machete' ? 'solid-border' : ''}`} onClick={() => {
+                                                    if (!user.weaponInventory.includes('machete')) {
+
+                                                    setSelectedItem('machete')}}}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete" className={user.weaponInventory.includes('machete')?'blackOut':''}></img>
                                                 </div>
-                                                <div className={`four ${selectedItem === 'katana' ? 'solid-border' : ''}`} onClick={() => setSelectedItem('katana')}>
-                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana"></img>
+                                                <div className={`four ${selectedItem === 'katana' ? 'solid-border' : ''}`} onClick={() => {
+                                                    if (!user.weaponInventory.includes('katana')) {setSelectedItem('katana')}}}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana" className={user.weaponInventory.includes('katana')?'blackOut':''}></img>
                                                 </div>
                                             </div>
                                         </div>

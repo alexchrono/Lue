@@ -1009,3 +1009,8 @@ height: 100%;
 .onehundro {
     height: 100%;
 }
+
+.blackOut {
+    filter: brightness(30%); /* Adjust the brightness percentage as needed */
+    pointer-events: none;
+  }
