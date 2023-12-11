@@ -252,6 +252,7 @@ export default function Main({ mode }) {
           <div className='topcenter'>
     <h3>Armor</h3></div>
 <div className='inventory-grid'>
+    
 
   {Array.from({ length: 3 }, (_, index) => (
     <div key={index} className={selectedArmor===user.armorInventory[index]? 'inventory-item redBordz' : 'inventory-item'}>
