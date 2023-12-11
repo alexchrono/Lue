@@ -66,7 +66,7 @@ function ProfileButton({ user }) {
   return (
     <>
       <button onClick={openMenu}>
-        <img src='https://lue-cs.s3.amazonaws.com/3b92de1d2dd3453bbb012a4345b4c0ca.png'></img>
+      <img src={`${process.env.PUBLIC_URL}/icons/forWebsiteYay2.png`} />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
