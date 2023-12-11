@@ -61,9 +61,18 @@ export default function Main({ mode }) {
         return itemNames[item] || 'Unknown Item';
     }
 
+    // useEffect(() => {
+    //     if (!user) {
+    //         history.push('/');
+    //     }
+    // }, [user, history]);
     useEffect(() => {
         if (!user) {
             history.push('/');
+        } else {
+
+            setSelectedArmor(user.armor !== 'none' ? user.armor : null);
+            setSelectedWeapon(user.weapon !== 'none' ? user.weapon : null);
         }
     }, [user, history]);
 
@@ -281,12 +290,12 @@ export default function Main({ mode }) {
         setSelectedArmor(null)
         setSelectedWeapon(null)
     }}>Unequip all</button>
-    <button className='menu-item-button9 newHeight' onClick={async()=>{
+ <button className='menu-item-button9 newHeight' onClick={async() => {
+    setSelectedArmor(user.armor);
+    setSelectedWeapon(user.weapon);
+    await dispatch(ThunkEquip(selectedArmor === null ? 'none' : selectedArmor, selectedWeapon === null ? 'none' : selectedWeapon));
 
-        await dispatch(ThunkEquip(selectedArmor===null?'none':selectedArmor,selectedWeapon===null?'none':selectedWeapon))
-        setSelectedArmor(null)
-        setSelectedWeapon(null)
-    }}>Equip Selected</button>
+}}>Equip Selected</button>
 
      </div>
     </div>
