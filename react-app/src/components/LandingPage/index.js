@@ -21,14 +21,22 @@ export default function LandingPage() {
     const [errors, setErrors] = useState({})
     const [errorsFe, setErrorsFe] = useState([])
     const [isAvatarModalOpen, setIsAvatarModalOpen] = useState(false);
-    const [gif,setGif]=useState('')
+    const [gif, setGif] = useState('')
+    const [profilePicPreview, setProfilePicPreview] = useState(null)
 
     const openAvatarModal = () => {
         setIsAvatarModalOpen(true);
     };
 
     const handleAvatarChange = (e) => {
-        setNewAvatar(e.target.files[0])
+        setNewAvatar(e.target.files[0]);
+        const file = e.target.files[0];
+        if (file) {
+            const previewURL = URL.createObjectURL(file);
+            setProfilePicPreview(previewURL);
+        } else {
+            setProfilePicPreview(null);
+        }
     }
     function custError(err, field, message) {
         if (!err.errors) {
@@ -60,7 +68,7 @@ export default function LandingPage() {
             custError(err, 'passwordConfirmation', 'password confirmation does not match password')
         }
 
-        if (gif==='') {
+        if (gif === '') {
             custError(err, 'avatar', 'You must select an avatar')
         }
 
@@ -81,7 +89,7 @@ export default function LandingPage() {
             if (newAvatar) {
                 formData.append('selected_avatar', newAvatar);
             }
-            formData.append('gif',gif)
+            formData.append('gif', gif)
 
             const success = await dispatch(signUp(formData))
 
@@ -138,8 +146,10 @@ export default function LandingPage() {
                 </div>
             </div>
             <div className='right-box'>
+                <div className='topOfRight'>
                 <h1>New to Level up Everything?</h1>
                 <h2>Sign up for free</h2>
+                </div>
                 <form
                     onSubmit={handleSubmit}
                     encType="multipart/form-data"
@@ -200,24 +210,29 @@ export default function LandingPage() {
                     />
 
 
+                    <div className='displayPictures'>
+                        <div className='avatarPreview'>{gif === '' ? <img src={`${process.env.PUBLIC_URL}/icons/noImageSelected.png`} /> : gif === 'ryu' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/ryu/ryu-none-none.gif`} /> : gif === 'chunli' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/chunli/chunli-none-none.gif`} /> : null}</div>
+                        <div className='profilePreview'>
+              {profilePicPreview ? <img src={profilePicPreview} alt='Profile Preview' /> : <img src={`${process.env.PUBLIC_URL}/icons/noImageSelected.png`} /> }
+            </div>
+                    </div>
+                    <div className="uploadAndSelect">
+                        <button
+                            type='button'
+                            className="letsMakePretty"
+                            onClick={openAvatarModal}
+                        >
+                            Select Avatar
+                        </button>
 
-<div className="uploadAndSelect">
-    <button
-        type='button'
-        className="letsMakePretty"
-        onClick={openAvatarModal}
-    >
-        Select Avatar
-    </button>
-
-    <button
-        type='button'
-        className="letsMakePretty"
-        onClick={() => document.getElementById('fileInput').click()}
-    >
-        Upload Profile Pic (optional)
-    </button>
-</div>
+                        <button
+                            type='button'
+                            className="letsMakePretty"
+                            onClick={() => document.getElementById('fileInput').click()}
+                        >
+                            Upload Profile Pic (optional)
+                        </button>
+                    </div>
 
 
                     <button className="letsMakePretty" type="submit">Sign Up</button>
@@ -233,7 +248,7 @@ export default function LandingPage() {
             </div>
 
             {isAvatarModalOpen && (
-                <SelectAvatar setGif={setGif} setter={setIsAvatarModalOpen}/>
+                <SelectAvatar setGif={setGif} setter={setIsAvatarModalOpen} />
 
             )}
 
