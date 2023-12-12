@@ -210,6 +210,7 @@ export default function LandingPage() {
                     />
 
 
+
                     <div className='displayPictures'>
                         <div className='avatarPreview'>{gif === '' ? <img src={`${process.env.PUBLIC_URL}/icons/noImageSelected.png`} /> : gif === 'ryu' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/ryu/ryu-none-none.gif`} /> : gif === 'chunli' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/chunli/chunli-none-none.gif`} /> : null}</div>
                         <div className='profilePreview'>
