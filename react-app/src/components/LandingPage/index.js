@@ -135,15 +135,7 @@ export default function LandingPage() {
                     {/* <img src='https://i.imgur.com/DafdjXQ.png' className='pic' alt=''></img> */}
                 </div>
 
-                <div className='left-bottom-quote'>
-                    Change your life
 
-                    <div className='createdBy'>
-                        Created By:  <a
-                            href="https://github.com/alexchrono"
-                        >Alex Heasley</a>
-                    </div>
-                </div>
             </div>
             <div className='right-box'>
                 <div className='topOfRight'>
@@ -247,6 +239,15 @@ export default function LandingPage() {
 
 
             </div>
+            <div className='left-bottom-quote'>
+                    Change your life
+
+                    <div className='createdBy'>
+                        Created By:  <a
+                            href="https://github.com/alexchrono"
+                        >Alex Heasley</a>
+                    </div>
+                </div>
 
             {isAvatarModalOpen && (
                 <SelectAvatar setGif={setGif} setter={setIsAvatarModalOpen} />
