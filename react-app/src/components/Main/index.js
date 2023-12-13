@@ -99,6 +99,7 @@ export default function Main({ mode }) {
                                 <tr><td>Exp:</td><td>{user.exp} / {expFinder()}</td></tr>
                                 <tr><td>Gold:</td><td>{user.gold}</td></tr>
                             </tbody>
+                            
                         </table>
                     </div>
                 </div>
@@ -252,7 +253,7 @@ export default function Main({ mode }) {
           <div className='topcenter'>
     <h3>Armor</h3></div>
 <div className='inventory-grid'>
-    
+
 
   {Array.from({ length: 3 }, (_, index) => (
     <div key={index} className={selectedArmor===user.armorInventory[index]? 'inventory-item redBordz' : 'inventory-item'}>
