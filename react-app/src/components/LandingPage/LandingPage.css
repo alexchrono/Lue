@@ -19,7 +19,7 @@
     box-sizing: border-box;
     padding-left: 5%;
     padding-right: 5%;
-    padding-top: 5%;
+    padding-top: 0%;
 }
 
 .pic-box-container {
@@ -80,15 +80,14 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    height: 82%;
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .signup-form input {
     width: 100%;
-    height: 11%;
-    padding: 20px;
     box-sizing: border-box;
-    margin-bottom: 1%;
+    text-align: center;
 }
 
 
@@ -160,8 +159,9 @@ ul li {
 }
 
 .top90 {
+    box-sizing: border-box;
     width: 100%;
-    height: 90%;
+    height: 72%;
     display: flex;
     flex-direction: row;
     /* align-items: stretch; */
@@ -169,9 +169,31 @@ ul li {
 
 .left-container, .right-box {
     box-sizing: border-box; /* Include padding and borders in height calculation */
-    height: 100%; /* Set height to 100% of the parent */
     margin-top: 0; /* Remove margin-top if not needed */
-    padding-top: 5%; /* Adjust padding-top if it affects the height */
-    padding-bottom: 5%;
     /* Other styles */
+}
+
+.eighteenOf90 {
+    height: 18%;
+    /* border:2px solid red; */
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    box-sizing: border-box;
+}
+
+.left18 {
+    box-sizing: border-box;
+    width: 55%;
+    /* border: 2px solid black; */
+    height: 100%;
+
+}
+
+.right18 {
+    box-sizing: border-box;
+    width: 45%;
+    /* border: 2px solid black; */
+    height: 100%;
+    text-align: center;
 }
