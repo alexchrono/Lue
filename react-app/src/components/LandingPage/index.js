@@ -129,6 +129,7 @@ export default function LandingPage() {
 
     return (
         <div className='main-container'>
+            <div className='top90'>
             <div className='left-container'>
                 <div className='pic-box-container'>
                     <img src={`${process.env.PUBLIC_URL}/icons/cloud-spinning.gif`}></img>
@@ -240,6 +241,7 @@ export default function LandingPage() {
                 </form>
 
 
+            </div>
             </div>
             <div className='left-bottom-quote'>
                     Change your life
