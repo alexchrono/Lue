@@ -118,7 +118,7 @@ html {
     display: flex-box;
     flex-direction: column;
 
-    width: 48%;
+    width: 39%;
     height: 90%;
     /* padding: 2% 5%; */
 
@@ -295,7 +295,7 @@ form textarea {
 
 
 .center-buffer {
-    width: 1%;
+    width: 2%;
 }
 
 .bad-habit-emoti {

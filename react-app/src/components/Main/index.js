@@ -325,7 +325,7 @@ export default function Main({ mode }) {
 
             <div className='tables'>
                 <div className='tableBuffer'></div>
-                <div className='eightyPerc'>
+
                     <img className='absBG'
                         src={`${process.env.PUBLIC_URL}/icons/tryThisOne.gif`}
                     />
@@ -336,8 +336,8 @@ export default function Main({ mode }) {
                     <Habits user={user} />
                     <div className='center-buffer'></div>
                     <Dailies user={user} />
-                </div>
 
+                    <div className='tableBuffer'></div>
             </div>
 
         </div>
