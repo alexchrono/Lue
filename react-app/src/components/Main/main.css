@@ -2,15 +2,16 @@
 
 html {
     background: rgb(221, 221, 221);
+    z-index: 2;
 
 }
 
 .stats-container {
     display: flex;
     flex-direction: row;
-     height: 26%;
-     max-height: 29%;
-     max-width: 90%;
+    height: 26%;
+    max-height: 29%;
+    max-width: 90%;
     flex-grow: 1;
     padding-top: 2%;
     padding-bottom: 3%;
@@ -53,6 +54,7 @@ html {
     width: 100%;
     height: 100%;
     background-color: #ddd;
+    z-index: 1;
     border-collapse: collapse;
 }
 
@@ -116,8 +118,9 @@ html {
     display: flex-box;
     flex-direction: column;
 
-    width: 50%;
+    width: 48%;
     height: 90%;
+    /* padding: 2% 5%; */
 
 
 }
@@ -127,13 +130,14 @@ html {
     border: 2px solid black;
     box-sizing: border-box;
 
-    width: 50%;
-    height: 100%;
+    width: 48%;
+    height: 90%;
 
 
 }
 
 .tables {
+    position: relative;
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -165,6 +169,9 @@ html {
     border-left: 2px dotted black;
     border-bottom: 2px dotted black;
     border-radius: 5px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 .fifteen-percent {
@@ -178,6 +185,12 @@ html {
 
 }
 
+.fifteen-percent img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
 .invisi {
     border: none;
     visibility: hidden;
@@ -187,7 +200,7 @@ html {
 .invisi2 {
     border: none;
     /* background-color:#602399 */
-    background-color: #074d47;
+    /* background-color: #074d47; */
 
 }
 
@@ -275,6 +288,7 @@ form textarea {
     height: 100%;
     display: flex;
     flex-direction: row;
+    background-color: gray;
 
 }
 
@@ -713,7 +727,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     width: 50%;
     display: flex;
     flex-direction: row;
-    flex-grow:2;
+    flex-grow: 2;
 }
 
 .avatarContainer {
@@ -736,6 +750,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     flex-direction: row;
     align-items: center;
 }
+
 .profileInfo {
     flex-basis: 50%;
     display: flex;
@@ -751,6 +766,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     background-color: #ddd;
     border-collapse: collapse;
 }
+
 .topCenter {
     width: 100%;
     height: 25%;
@@ -783,19 +799,20 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     height: 100%;
     display: flex;
     justify-content: space-between;
-    align-items:stretch;
+    align-items: stretch;
 }
 
 .backGa9 li {
-    height:25%;
+    height: 25%;
 
 }
+
 .menu-item-button9 {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 33%;
-    flex-grow:2;
+    flex-grow: 2;
     width: 100%;
     background-color: black;
     border-radius: 5px;
@@ -836,15 +853,18 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     width: 100%;
     background-color: black;
 }
+
 .ellipsu li {
     list-style-type: none;
 }
+
 .purchaseText {
     height: 20%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .purchaseText p {
 
     text-align: center;
@@ -870,20 +890,23 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     border-top: 2px solid blue;
     box-sizing: border-box;
 }
+
 .bottomLeftPic {
     width: 100%;
     height: 73%;
 }
+
 .bottomLeft img {
     width: 100%;
     height: 100%;
-    object-fit:  cover;
+    object-fit: cover;
     box-sizing: border-box;
 }
 
 .bottomLeftButton {
     height: 83%;
 }
+
 .bottomRight {
     width: 66%;
     /* border: 2px solid blue; */
@@ -907,15 +930,19 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     flex-direction: row;
 }
 
-.one ,.two, .three, .four {
+.one,
+.two,
+.three,
+.four {
     width: 50%;
     height: 100%;
-    border:2px solid black;
+    border: 2px solid black;
     box-sizing: border-box;
 }
+
 .centerDisplay {
     width: 100%;
-    height:89%;
+    height: 89%;
     box-sizing: border-box;
 }
 
@@ -927,15 +954,20 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     box-sizing: border-box;
 }
 
-.one img, .two img, .three img, .four img {
+.one img,
+.two img,
+.three img,
+.four img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: center;
 }
+
 .solid-border {
     border-color: red;
 }
+
 .blinking-border {
     animation: blink 1s linear infinite;
 }
@@ -944,6 +976,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     50% {
         border-color: transparent;
     }
+
     100% {
         border-color: red;
     }
@@ -971,12 +1004,12 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     text-align: center;
     color: #ededed;
     z-index: 10000;
-    background: rgb(63,136,185);
-    background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%);
+    background: rgb(63, 136, 185);
+    background: linear-gradient(90deg, rgba(63, 136, 185, 1) 0%, rgba(37, 92, 62, 1) 70%, rgba(54, 65, 226, 1) 100%);
 }
 
 .profileInfo .inventory {
-height: 100%;
+    height: 100%;
 }
 
 .inventory-grid {
@@ -996,6 +1029,7 @@ height: 100%;
     text-align: center;
     box-sizing: border-box;
 }
+
 .redBordz {
     border: 3px solid red;
 }
@@ -1003,7 +1037,8 @@ height: 100%;
 .inventory-item img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Ensure the image covers the entire item */
+    object-fit: cover;
+    /* Ensure the image covers the entire item */
 }
 
 .inventory-item span {
@@ -1011,7 +1046,8 @@ height: 100%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: rgba(0, 0, 0, 0.5); /* Add a semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.5);
+    /* Add a semi-transparent background */
     color: white;
     padding: 5px;
     border-radius: 5px;
@@ -1022,6 +1058,7 @@ height: 100%;
 .topcenter {
     height: 10%;
 }
+
 .topcenter h3 {
     margin-top: 0%;
     margin-bottom: 0%;
@@ -1043,6 +1080,31 @@ height: 100%;
 }
 
 .blackOut {
-    filter: brightness(30%); /* Adjust the brightness percentage as needed */
+    filter: brightness(30%);
+    /* Adjust the brightness percentage as needed */
     pointer-events: none;
-  }
+}
+
+.absBG {
+    position: absolute;
+    top: 13%;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+
+
+}
+
+.eightyPerc {
+    width: 79%;
+    border: 5px solid green;
+    box-sizing: border-box;
+}
+
+.tableBuffer {
+    width: 10%;
+    height: 100%;
+    border: 2px solid red;
+    box-sizing: border-box;
+}

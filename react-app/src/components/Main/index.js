@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { NavLink, useHistory } from 'react-router-dom';
-import { useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import Habits from '../Habits';
 import Dailies from '../Dailies';
 import ErrorComponent from '../errorShow';
@@ -11,14 +11,14 @@ import { ThunkEquip } from '../../store/session';
 import './main.css';
 
 export default function Main({ mode }) {
-    const dispatch= useDispatch()
+    const dispatch = useDispatch()
     const user = useSelector((state) => state.session.user);
     const history = useHistory();
     const [menuSelect, setMenuSelect] = useState('stats');
     const [selectedItem, setSelectedItem] = useState(null);
     const [buyItem, setBuyItem] = useState(false)
     const [purchasePrice, setPurchasePrice] = useState('')
-    const [equipItem,setEquipItem] = useState('')
+    const [equipItem, setEquipItem] = useState('')
     const [selectedArmor, setSelectedArmor] = useState(null);
     const [selectedWeapon, setSelectedWeapon] = useState(null);
 
@@ -100,7 +100,7 @@ export default function Main({ mode }) {
                                 <tr><td>Exp:</td><td>{user.exp} / {expFinder()}</td></tr>
                                 <tr><td>Gold:</td><td>{user.gold}</td></tr>
                             </tbody>
-                            
+
                         </table>
                     </div>
                 </div>
@@ -125,22 +125,22 @@ export default function Main({ mode }) {
                                 {/* <p>{`/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`}</p> */}
                                 {menuSelect === 'shop' && selectedItem === 'default' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" /> :
                                     menuSelect === 'shop' && selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
-                                    menuSelect === 'shop' && selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" /> :
-                                    menuSelect === 'shop' && selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
-                                    menuSelect === 'shop' && selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> :
+                                        menuSelect === 'shop' && selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" /> :
+                                            menuSelect === 'shop' && selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
+                                                menuSelect === 'shop' && selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> :
 
-                                    menuSelect==='inventory' && !selectedArmor && !selectedWeapon  ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />:
-
-
-
-                                    menuSelect==='inventory' && selectedArmor && !selectedWeapon  ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${user.weapon}.gif`} alt="User Gif" /> :
-                                    menuSelect==='inventory' && !selectedArmor && selectedWeapon  ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${selectedWeapon}.gif`} alt="User Gif" />:
-                                    menuSelect==='inventory' && selectedArmor && selectedWeapon  ?  <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${selectedWeapon}.gif`} alt="User Gif" />:
+                                                    menuSelect === 'inventory' && !selectedArmor && !selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" /> :
 
 
 
+                                                        menuSelect === 'inventory' && selectedArmor && !selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${user.weapon}.gif`} alt="User Gif" /> :
+                                                            menuSelect === 'inventory' && !selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${selectedWeapon}.gif`} alt="User Gif" /> :
+                                                                menuSelect === 'inventory' && selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${selectedWeapon}.gif`} alt="User Gif" /> :
 
-                                                <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />}
+
+
+
+                                                                    <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />}
                             </div>
                             {(menuSelect === 'stats' || menuSelect === 'editProfile') && (
                                 <div className='profileInfo'>
@@ -176,7 +176,7 @@ export default function Main({ mode }) {
                                     </div>
                                     <div className='bottomSelection'>
                                         <div className='bottomLeft'>
-                                            <div className={selectedItem==='default'? 'onehundro': 'bottomLeftPic'}>
+                                            <div className={selectedItem === 'default' ? 'onehundro' : 'bottomLeftPic'}>
                                                 {selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler" ></img> :
                                                     selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield"></img> :
                                                         selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete"></img> :
@@ -222,26 +222,32 @@ export default function Main({ mode }) {
                                         </div>
                                         <div className='bottomRight'>
                                             <div className='right1'>
-                                                <div className={`one ${selectedItem === 'buckler' ? 'solid-border' : ''}`} onClick={() =>{
-                                                    if (!user.armorInventory.includes('buckler')) {setSelectedItem('buckler')}}}>
-                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler" className={user.armorInventory.includes('buckler')?'blackOut':''}></img>
+                                                <div className={`one ${selectedItem === 'buckler' ? 'solid-border' : ''}`} onClick={() => {
+                                                    if (!user.armorInventory.includes('buckler')) { setSelectedItem('buckler') }
+                                                }}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsBucklerDone.png`} alt="Buckler" className={user.armorInventory.includes('buckler') ? 'blackOut' : ''}></img>
                                                 </div>
                                                 <div className={`two ${selectedItem === 'hyrule' ? 'solid-border' : ''}`} onClick={() => {
                                                     if (!user.armorInventory.includes('hyrule')) {
-                                                    setSelectedItem('hyrule')}}}>
-                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield" className={user.armorInventory.includes('hyrule')?'blackOut':''}></img>
+                                                        setSelectedItem('hyrule')
+                                                    }
+                                                }}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsHylianShield.png`} alt="Hylian Shield" className={user.armorInventory.includes('hyrule') ? 'blackOut' : ''}></img>
                                                 </div>
                                             </div>
                                             <div className='right2'>
                                                 <div className={`three ${selectedItem === 'machete' ? 'solid-border' : ''}`} onClick={() => {
                                                     if (!user.weaponInventory.includes('machete')) {
 
-                                                    setSelectedItem('machete')}}}>
-                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete" className={user.weaponInventory.includes('machete')?'blackOut':''}></img>
+                                                        setSelectedItem('machete')
+                                                    }
+                                                }}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsMachete.png`} alt="Machete" className={user.weaponInventory.includes('machete') ? 'blackOut' : ''}></img>
                                                 </div>
                                                 <div className={`four ${selectedItem === 'katana' ? 'solid-border' : ''}`} onClick={() => {
-                                                    if (!user.weaponInventory.includes('katana')) {setSelectedItem('katana')}}}>
-                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana" className={user.weaponInventory.includes('katana')?'blackOut':''}></img>
+                                                    if (!user.weaponInventory.includes('katana')) { setSelectedItem('katana') }
+                                                }}>
+                                                    <img src={`${process.env.PUBLIC_URL}/icons/backgroundItemsKATANADONE.png`} alt="Katana" className={user.weaponInventory.includes('katana') ? 'blackOut' : ''}></img>
                                                 </div>
                                             </div>
                                         </div>
@@ -250,80 +256,90 @@ export default function Main({ mode }) {
                             )}
 
                             {menuSelect === 'inventory' && (
-    <div className='profileInfo inventory'>
-          <div className='topcenter'>
-    <h3>Armor</h3></div>
-<div className='inventory-grid'>
+                                <div className='profileInfo inventory'>
+                                    <div className='topcenter'>
+                                        <h3>Armor</h3></div>
+                                    <div className='inventory-grid'>
 
 
-  {Array.from({ length: 3 }, (_, index) => (
-    <div key={index} className={selectedArmor===user.armorInventory[index]? 'inventory-item redBordz' : 'inventory-item'}>
-      {user.armorInventory[index] ? (
-        <>
-          <img src={getItemImage(user.armorInventory[index])} alt={user.armorInventory[index]} onClick={() =>
+                                        {Array.from({ length: 3 }, (_, index) => (
+                                            <div key={index} className={selectedArmor === user.armorInventory[index] ? 'inventory-item redBordz' : 'inventory-item'}>
+                                                {user.armorInventory[index] ? (
+                                                    <>
+                                                        <img src={getItemImage(user.armorInventory[index])} alt={user.armorInventory[index]} onClick={() =>
 
-            setSelectedArmor(user.armorInventory[index])} />
-          {/* <span>{getItemName(user.inventory[index])}</span> */}
-        </>
-      ) : (
-        <>
-          <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItemEmpty.png`} alt={`Placeholder ${index}`} />
-          {/* <span>{getItemName(user.inventory[index])}</span> */}
-        </>
-      )}
-    </div>
-  ))}
-</div>
-<div className='topcenter'>
-    <h3>Weapons</h3></div>
-<div className='inventory-grid'>
+                                                            setSelectedArmor(user.armorInventory[index])} />
+                                                        {/* <span>{getItemName(user.inventory[index])}</span> */}
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItemEmpty.png`} alt={`Placeholder ${index}`} />
+                                                        {/* <span>{getItemName(user.inventory[index])}</span> */}
+                                                    </>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className='topcenter'>
+                                        <h3>Weapons</h3></div>
+                                    <div className='inventory-grid'>
 
-  {Array.from({ length: 3 }, (_, index) => (
-    <div key={index} className={selectedWeapon===user.weaponInventory[index]? 'inventory-item redBordz' : 'inventory-item'}>
-      {user.weaponInventory[index] ? (
-        <>
-          <img src={getItemImage(user.weaponInventory[index])} alt={user.weaponInventory[index]} onClick={() => setSelectedWeapon(user.weaponInventory[index])}/>
-          {/* <span>{getItemName(user.inventory[index])}</span> */}
-        </>
-      ) : (
-        <>
-          <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItemEmpty.png`} alt={`Placeholder ${index}`} />
-          {/* <span>{getItemName(user.inventory[index])}</span> */}
-        </>
-      )}
-    </div>
-  ))}
-</div>
-<div className='centerButtonz'>
-    <button className='menu-item-button9 newHeight' onClick={async()=>{
-        await dispatch(ThunkEquip('none','none'))
-        setSelectedArmor(null)
-        setSelectedWeapon(null)
-    }}>Unequip all</button>
- <button className='menu-item-button9 newHeight' onClick={async() => {
-    setSelectedArmor(user.armor);
-    setSelectedWeapon(user.weapon);
-    await dispatch(ThunkEquip(selectedArmor === null ? 'none' : selectedArmor, selectedWeapon === null ? 'none' : selectedWeapon));
+                                        {Array.from({ length: 3 }, (_, index) => (
+                                            <div key={index} className={selectedWeapon === user.weaponInventory[index] ? 'inventory-item redBordz' : 'inventory-item'}>
+                                                {user.weaponInventory[index] ? (
+                                                    <>
+                                                        <img src={getItemImage(user.weaponInventory[index])} alt={user.weaponInventory[index]} onClick={() => setSelectedWeapon(user.weaponInventory[index])} />
+                                                        {/* <span>{getItemName(user.inventory[index])}</span> */}
+                                                    </>
+                                                ) : (
+                                                    <>
+                                                        <img src={`${process.env.PUBLIC_URL}/icons/SelectAnItemEmpty.png`} alt={`Placeholder ${index}`} />
+                                                        {/* <span>{getItemName(user.inventory[index])}</span> */}
+                                                    </>
+                                                )}
+                                            </div>
+                                        ))}
+                                    </div>
+                                    <div className='centerButtonz'>
+                                        <button className='menu-item-button9 newHeight' onClick={async () => {
+                                            await dispatch(ThunkEquip('none', 'none'))
+                                            setSelectedArmor(null)
+                                            setSelectedWeapon(null)
+                                        }}>Unequip all</button>
+                                        <button className='menu-item-button9 newHeight' onClick={async () => {
+                                            setSelectedArmor(user.armor);
+                                            setSelectedWeapon(user.weapon);
+                                            await dispatch(ThunkEquip(selectedArmor === null ? 'none' : selectedArmor, selectedWeapon === null ? 'none' : selectedWeapon));
 
-}}>Equip Selected</button>
+                                        }}>Equip Selected</button>
 
-     </div>
-    </div>
-)}
+                                    </div>
+                                </div>
+                            )}
 
 
-                                <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} setSelectedItem={setSelectedItem} />
+                            <ProfileMenu menuSelect={menuSelect} setMenuSelect={setMenuSelect} setSelectedItem={setSelectedItem} />
                         </div>
                         : null}
             </div>
+
             <div className='tables'>
-                {user?.justGainedLevel && (
-                    <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`} />
-                )}
-                <Habits user={user} />
-                <div className='center-buffer'></div>
-                <Dailies user={user} />
+                <div className='tableBuffer'></div>
+                <div className='eightyPerc'>
+                    <img className='absBG'
+                        src={`${process.env.PUBLIC_URL}/icons/tryThisOne.gif`}
+                    />
+
+                    {user?.justGainedLevel && (
+                        <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`} />
+                    )}
+                    <Habits user={user} />
+                    <div className='center-buffer'></div>
+                    <Dailies user={user} />
+                </div>
+
             </div>
+
         </div>
     );
 }
