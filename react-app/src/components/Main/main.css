@@ -30,6 +30,7 @@ html {
     margin-left: 3%;
     margin-right: 3%;
 
+
 }
 
 .avatar img {
@@ -665,6 +666,28 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 
 .letsMakePretty:hover {
+    color: white;
+}
+
+.letsMakePretty3 {
+    background-color: #35ee50;
+    display: inline-block;
+    border: none;
+    color: black;
+    font-weight: bold;
+    padding: 2.7% 8%;
+
+    text-align: center;
+
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 9px;
+    box-shadow: 4px 4px 4px black;
+
+}
+
+.letsMakePretty3:hover {
     color: white;
 }
 

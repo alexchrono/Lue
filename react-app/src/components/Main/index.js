@@ -88,6 +88,7 @@ export default function Main({ mode }) {
             <div className="stats-container">
                 <div className='avStats'>
                     <div className="avatar">
+                        
                         <img src={`${user.selectedAvatar}`} alt="Avatar" />
                     </div>
                     <div className='stats'>
@@ -99,7 +100,6 @@ export default function Main({ mode }) {
                                 <tr><td>Exp:</td><td>{user.exp} / {expFinder()}</td></tr>
                                 <tr><td>Gold:</td><td>{user.gold}</td></tr>
                             </tbody>
-                            
                         </table>
                     </div>
                 </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useDispatch } from "react-redux";
-import { NavLink,useHistory } from 'react-router-dom';
+import { NavLink,useHistory, useLocation } from 'react-router-dom';
 import { logout } from "../../store/session";
 import OpenModalButton from "../OpenModalButton";
 import LoginFormModal from "../LoginFormModal";
@@ -17,6 +17,8 @@ function ProfileButton({ user }) {
   const ulRef = useRef();
   const history=useHistory()
   const [errors,setErrors]=useState({})
+  const location = useLocation();
+  const currentPath = location.pathname;
   const [profOrMain,setProfOrMain]=useState('profile')
 
   const loginDemo = async (e) => {
@@ -65,8 +67,11 @@ function ProfileButton({ user }) {
 
   return (
     <>
+
       <button onClick={openMenu}>
-      <img src={`${process.env.PUBLIC_URL}/icons/forWebsiteYay2.png`} />
+
+
+       <img src={`${process.env.PUBLIC_URL}/icons/forWebsiteYay2.png`} />
       </button>
       <ul className={ulClassName} ref={ulRef}>
         {user ? (

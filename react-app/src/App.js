@@ -25,7 +25,7 @@ function App() {
             </Route>
 
             <Route exact path="/main">
-            <Main mode='main'/>
+            <Main mode='profile'/>
           </Route>
 
           <Route exact path="/profile">
