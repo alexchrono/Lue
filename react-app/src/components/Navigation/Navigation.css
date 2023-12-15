@@ -13,9 +13,9 @@
 }
 
 .profile-dropdown li {
-  padding: 3px;
   white-space: normal;
   border: 2px solid transparent;
+  padding: 4%;
 
 }
 
@@ -23,6 +23,15 @@
 
 border: 2px dotted black;
 
+}
+
+.profile-dropdown li button {
+  width: 100%; /* Fills the width of the li */
+  height: 100%; /* Fills the height of the li */
+  padding: 3% 3%; /* Removes any internal padding */
+  border: none; /* Adjust as needed */
+  text-align: start;
+  /* Other styles */
 }
 
 .hidden {
