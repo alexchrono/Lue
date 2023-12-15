@@ -68,11 +68,14 @@ function ProfileButton({ user }) {
   return (
     <>
 
+{currentPath === '/' ?  <button className='onOwn' onClick={openMenu}>Log in
+            </button>:
+
       <button onClick={openMenu}>
 
 
        <img src={`${process.env.PUBLIC_URL}/icons/forWebsiteYay2.png`} />
-      </button>
+      </button>}
       <ul className={ulClassName} ref={ulRef}>
         {user ? (
           <>

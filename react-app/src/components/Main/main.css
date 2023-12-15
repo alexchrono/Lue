@@ -669,25 +669,27 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     color: white;
 }
 
-.letsMakePretty3 {
+.onOwn {
     background-color: #35ee50;
     display: inline-block;
     border: none;
     color: black;
     font-weight: bold;
-    padding: 2.7% 8%;
+    width: 7vw;
+    height: 8vh;
+
 
     text-align: center;
 
     font-size: 16px;
-    margin: 4px 2px;
+    margin-right: 1%;
     cursor: pointer;
     border-radius: 9px;
     box-shadow: 4px 4px 4px black;
 
 }
 
-.letsMakePretty3:hover {
+.onOwn:hover {
     color: white;
 }
 
