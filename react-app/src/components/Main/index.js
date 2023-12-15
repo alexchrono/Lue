@@ -324,7 +324,9 @@ export default function Main({ mode }) {
             </div>
 
             <div className='tables'>
-                <div className='tableBuffer'></div>
+                <div className='tableBuffer'>
+                    <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />
+                </div>
 
                     <img className='absBG'
                         src={`${process.env.PUBLIC_URL}/icons/tryThisOne.gif`}
@@ -334,10 +336,14 @@ export default function Main({ mode }) {
                         <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`} />
                     )}
                     <Habits user={user} />
-                    <div className='center-buffer'></div>
+                    <div className='center-buffer'>
+                    <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />
+                    </div>
                     <Dailies user={user} />
 
-                    <div className='tableBuffer'></div>
+                    <div className='tableBuffer'>
+                    <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />
+                    </div>
             </div>
 
         </div>

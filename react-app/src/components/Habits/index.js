@@ -271,12 +271,12 @@ export default function Habits({ user }) {
           <div className='fifteen-percent menu-text' style={{ borderRight: 'none' }}>strong</div>
         </div>
         <div className='allHabits'>
-
+        
           {userArray?.map((habitId, index) => (
             <div className='habits-card'>
               <div className='fifteen-percent invisi2'>
               <img
-                        src={`${process.env.PUBLIC_URL}/icons/curvyLine4.png`}
+                        src={`${process.env.PUBLIC_URL}/icons/curvyLine42.png`}
               />
               </div>
               <div className='habits-card-center'>
@@ -353,7 +353,7 @@ export default function Habits({ user }) {
               </div>
               <div className='fifteen-percent invisi2'>
               <img
-                        src={`${process.env.PUBLIC_URL}/icons/curvyLine5.png`}
+                        src={`${process.env.PUBLIC_URL}/icons/curvyLine52.png`}
               />
                 {openHabit === habitId && (
                   <EllipsisMenu formType='habit' id={habitId} habitOrDaily={userHabits[habitId]} setter={setOpenHabit}  />)}

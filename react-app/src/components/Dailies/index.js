@@ -166,7 +166,7 @@ export default function Dailies({ user }) {
             <div className='habits-card'>
               <div className='fifteen-percent invisi2'>
                 <img
-                  src={`${process.env.PUBLIC_URL}/icons/curvyLine4.png`}
+                  src={`${process.env.PUBLIC_URL}/icons/curvyLine42.png`}
                 />
               </div>
               <div className='habits-card-center'>
@@ -213,7 +213,7 @@ export default function Dailies({ user }) {
               </div>
               <div className='fifteen-percent invisi2'>
                 <img
-                  src={`${process.env.PUBLIC_URL}/icons/curvyLine5.png`}
+                  src={`${process.env.PUBLIC_URL}/icons/curvyLine52.png`}
                 />
                 {openDaily === dailyId && (
                   <EllipsisMenu formType='daily' id={dailyId} habitOrDaily={userDailies[dailyId]} setter={setOpenDaily} />)}
