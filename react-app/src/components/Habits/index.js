@@ -271,12 +271,12 @@ export default function Habits({ user }) {
           <div className='fifteen-percent menu-text' style={{ borderRight: 'none' }}>strong</div>
         </div>
         <div className='allHabits'>
-        
+
           {userArray?.map((habitId, index) => (
             <div className='habits-card'>
               <div className='fifteen-percent invisi2'>
               <img
-                        src={`${process.env.PUBLIC_URL}/icons/curvyLine42.png`}
+                        src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDER3.png`}
               />
               </div>
               <div className='habits-card-center'>
@@ -360,6 +360,11 @@ export default function Habits({ user }) {
 
               </div>
             </div>))}
+        </div>
+        <div className='bottomPic'>
+        <img
+                        src={`${process.env.PUBLIC_URL}/icons/curvyLineBottom.png`}
+              />
         </div>
       </div>
     </>

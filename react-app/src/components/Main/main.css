@@ -162,7 +162,7 @@ html {
 
 .allHabits {
     width: 100%;
-    height: 90%;
+    height: 78%;
     box-sizing: border-box;
     overflow-y: scroll;
     /* border-right: 2px dotted black;
@@ -197,6 +197,7 @@ html {
     width: 100%;
     height: 100%;
     object-fit: contain;
+    margin-right: 14%;
 }
 
 .invisi {
@@ -1137,4 +1138,22 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     height: 100%;
     object-fit: cover;
     z-index: 1;
+}
+
+.bottomPic {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 11%;
+    width: 82%;
+}
+
+.bottomPic img {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    object-fit: contain;
+    z-index: 1;
+    left: 5%;
 }
