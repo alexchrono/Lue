@@ -1157,3 +1157,32 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     z-index: 1;
     left: 5%;
 }
+
+::-webkit-scrollbar {
+    width: 3em;
+}
+::-webkit-scrollbar-track {
+    background-image: url('https://lue-cs.s3.amazonaws.com/0cd4392c1c1d41049b24f579df9d122b.png');
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    background-position: center;
+}
+
+::-webkit-scrollbar-thumb {
+
+
+    background-image: url('https://lue-cs.s3.amazonaws.com/8d63713e0f3646b19595d32ea4870e78.png');
+    background-size: 100% auto;
+    background-repeat: no-repeat;
+    background-position: center;
+
+
+
+}
+
+::-webkit-scrollbar-button:vertical:end {
+    background-image: url('https://lue-cs.s3.amazonaws.com/8c3a09a6be5441bd955ffcc9f0e92fc0.png');
+    background-size: cover;
+    display: block;
+    height: 20px;
+}
