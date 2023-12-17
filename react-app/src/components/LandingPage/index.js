@@ -129,95 +129,94 @@ export default function LandingPage() {
 
     return (
         <div className='main-container'>
-            <div className='left-container'>
-                <div className='pic-box-container'>
-                    <img src={`${process.env.PUBLIC_URL}/icons/cloud-spinning.gif`}></img>
-                    {/* <img src='https://i.imgur.com/DafdjXQ.png' className='pic' alt=''></img> */}
-                </div>
+            <div className='eighteenOf90'>
+                <div className='left18'></div><div className='right18'><h1>New to Level up Everything?</h1>
+                        <h2>Sign up for free</h2></div>
 
-                <div className='left-bottom-quote'>
-                    Change your life
 
-                    <div className='createdBy'>
-                        Created By:  <a
-                            href="https://github.com/alexchrono"
-                        >Alex Heasley</a>
-                    </div>
-                </div>
+
             </div>
-            <div className='right-box'>
-                <div className='topOfRight'>
-                <h1>New to Level up Everything?</h1>
-                <h2>Sign up for free</h2>
-                </div>
-                <form
-                    onSubmit={handleSubmit}
-                    encType="multipart/form-data"
-                    className='signup-form'
-                >
+            <div className='top90'>
 
-                    <input
-                        type="text"
-                        value={userName}
-                        onChange={e => setUserName(e.target.value)}
-                        placeHolder='Username'
-                        autoComplete="off"
-
-                    />
-                    {errors.userName ? (<p className="errors">{errors.userName}</p>) : errorsFe.userName ? <p className="feErrors">{errorsFe.userName}</p> : null}
-
-                    <input
-                        type="text"
-                        autoComplete="off"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Email"
-
-
-                    />
-                    {errors.email ? <p className="errors">{errors.email}</p> : errorsFe.email ? <p className="feErrors">{errorsFe.email}</p> : null}
-
-                    <input
-                        type="password"
-                        autoComplete="off"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        placeholder="Password"
-
-                    />
-                    {errors.password ? <p className="errors">{errors.password}</p> : errorsFe.password ? <p className="feErrors">{errorsFe.password}</p> : null}
-
-
-                    <input
-                        type="password"
-                        value={confirmPassword}
-                        onChange={(e) => setConfirmPassword(e.target.value)}
-                        placeholder="Confirm Password"
-                        autoComplete="off"
-                    />
-
-                    {errors.passwordConfirmation ? <p className="errors">{errors.passwordConfirmation}</p> : errorsFe.passwordConfirmation ? <p className="feErrors">{errorsFe.passwordConfirmation}</p> : null}
-                    {errors.avatar ? <p className="errors">{errors.avatar}</p> : errorsFe.avatar ? <p className="feErrors">{errorsFe.avatar}</p> : null}
-                    <input
-                        type="file"
-                        id="fileInput"
-                        onChange={(e) => {
-                            setDidPicChange(true);
-                            handleAvatarChange(e);
-                        }}
-                        style={{ display: 'none' }}
-                        accept="image/*"
-                    />
-
-
-
-                    <div className='displayPictures'>
-                        <div className='avatarPreview'>{gif === '' ? <img src={`${process.env.PUBLIC_URL}/icons/noImageSelected.png`} /> : gif === 'ryu' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/ryu/ryu-none-none.gif`} /> : gif === 'chunli' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/chunli/chunli-none-none.gif`} /> : null}</div>
-                        <div className='profilePreview'>
-              {profilePicPreview ? <img src={profilePicPreview} alt='Profile Preview' /> : <img src={`${process.env.PUBLIC_URL}/icons/noImageSelected.png`} /> }
-            </div>
+                <div className='left-container'>
+                    <div className='pic-box-container'>
+                        <img src={`${process.env.PUBLIC_URL}/icons/cloud-spinning.gif`}></img>
+                        {/* <img src='https://i.imgur.com/DafdjXQ.png' className='pic' alt=''></img> */}
+                        <p>Spinning in circles?</p>
                     </div>
-                    <div className="uploadAndSelect">
+
+
+
+                </div>
+                <div className='right-box'>
+                    <form
+                        onSubmit={handleSubmit}
+                        encType="multipart/form-data"
+                        className='signup-form'
+                    >
+
+                        <input
+                            type="text"
+                            value={userName}
+                            onChange={e => setUserName(e.target.value)}
+                            placeHolder='Username'
+                            autoComplete="off"
+
+                        />
+                        {errors.userName ? (<p className="errors">{errors.userName}</p>) : errorsFe.userName ? <p className="feErrors">{errorsFe.userName}</p> : null}
+
+                        <input
+                            type="text"
+                            autoComplete="off"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            placeholder="Email"
+
+
+                        />
+                        {errors.email ? <p className="errors">{errors.email}</p> : errorsFe.email ? <p className="feErrors">{errorsFe.email}</p> : null}
+
+                        <input
+                            type="password"
+                            autoComplete="off"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            placeholder="Password"
+
+                        />
+                        {errors.password ? <p className="errors">{errors.password}</p> : errorsFe.password ? <p className="feErrors">{errorsFe.password}</p> : null}
+
+
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
+                            placeholder="Confirm Password"
+                            autoComplete="off"
+                        />
+
+                        {errors.passwordConfirmation ? <p className="errors">{errors.passwordConfirmation}</p> : errorsFe.passwordConfirmation ? <p className="feErrors">{errorsFe.passwordConfirmation}</p> : null}
+                        {errors.avatar ? <p className="errors">{errors.avatar}</p> : errorsFe.avatar ? <p className="feErrors">{errorsFe.avatar}</p> : null}
+                        <input
+                            type="file"
+                            id="fileInput"
+                            onChange={(e) => {
+                                setDidPicChange(true);
+                                handleAvatarChange(e);
+                            }}
+                            style={{ display: 'none' }}
+                            accept="image/*"
+                        />
+
+
+
+                        <div className='displayPictures'>
+                            <div className='avatarPreview'>{gif === '' ? <img src={`${process.env.PUBLIC_URL}/icons/selectAvatarReal.png`} onClick={openAvatarModal} /> : gif === 'ryu' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/ryu/ryu-none-none.gif`} onClick={openAvatarModal} /> : gif === 'chunli' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/chunli/chunli-none-none.gif`} onClick={openAvatarModal} /> : null}</div>
+                            <div className='profilePreview'>
+                                {profilePicPreview ? <img src={profilePicPreview} alt='Profile Preview' onClick={() => document.getElementById('fileInput').click()} /> : <img src={`${process.env.PUBLIC_URL}/icons/selectProfilePicReal.png`} onClick={() => document.getElementById('fileInput').click()} />}
+                            </div>
+                        </div>
+                        {/* <div className="uploadAndSelect">
                         <button
                             type='button'
                             className="letsMakePretty"
@@ -233,19 +232,29 @@ export default function LandingPage() {
                         >
                             Upload Profile Pic (optional)
                         </button>
-                    </div>
+                    </div> */}
 
 
-                    <button className="letsMakePretty" type="submit">Sign Up</button>
-                    <button className="letsMakePretty" onClick={loginDemo}>
-                        Log in as Demo
-                    </button>
+                        <button className="letsMakePretty" type="submit">Sign Up</button>
+                        <button className="letsMakePretty" onClick={loginDemo}>
+                            Log in as Demo
+                        </button>
 
 
 
-                </form>
+                    </form>
 
 
+                </div>
+            </div>
+            <div className='left-bottom-quote'>
+                Change your life
+
+                <div className='createdBy'>
+                    Created By:  <a
+                        href="https://github.com/alexchrono"
+                    >Alex Heasley</a>
+                </div>
             </div>
 
             {isAvatarModalOpen && (

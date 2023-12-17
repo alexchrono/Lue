@@ -18,8 +18,8 @@ export default function Dailies({ user }) {
   const user2 = useSelector((state) => state.session.user);
   const userDailies = useSelector((state) => state.dailies.byId);
   const userArray = useSelector((state) => state.dailies.allIds);
-  const clickedEmoti= useSelector((state) => state.session.user.usersClickedDailies)
-  const [localArray,setLocalArray]=useState([])
+  const clickedEmoti = useSelector((state) => state.session.user.usersClickedDailies)
+  const [localArray, setLocalArray] = useState([])
   const [openDaily, setOpenDaily] = useState(null);
   const [errors, setErrors] = useState([]);
   const [showVictory, setShowVictory] = useState('nothing');
@@ -50,10 +50,10 @@ export default function Dailies({ user }) {
     4: { gold: 2.4, exp: 14 }
   }
 
-  const HandleGoldOrHurt = async (e, goodOrBad, difficulty,dailyId) => {
+  const HandleGoldOrHurt = async (e, goodOrBad, difficulty, dailyId) => {
     e.preventDefault();
-    const key='daily'
-    let copyArray= localArray?.length? [...localArray] : []
+    const key = 'daily'
+    let copyArray = localArray?.length ? [...localArray] : []
 
     let change = {}
     switch (goodOrBad) {
@@ -67,7 +67,7 @@ export default function Dailies({ user }) {
         change = goodTranslator[difficulty];
         change.gold = -(change.gold);
         change.exp = -(change.exp);
-        copyArray=copyArray.filter((ele) => ele !== dailyId)
+        copyArray = copyArray.filter((ele) => ele !== dailyId)
         setLocalArray(copyArray)
         break;
       default:
@@ -75,12 +75,12 @@ export default function Dailies({ user }) {
     }
     if (change) {
 
-      const test = await dispatch(ThunkEditHealth(change,copyArray,key))
-      if (test.victory==='victory') {
+      const test = await dispatch(ThunkEditHealth(change, copyArray, key))
+      if (test.victory === 'victory') {
         setShowVictory('victory');
         setVictoryDeets(test.victoryDeets)
       }
-      else if (test.victory==='death'){
+      else if (test.victory === 'death') {
         setShowVictory('death')
         setVictoryDeets(test.victoryDeets)
       }
@@ -135,9 +135,11 @@ export default function Dailies({ user }) {
   return (
     <>
       {errors.title && (<ErrorComponent errorMessage={'Daily titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setDaily} />)}
-      {showVictory==='victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
-      {showVictory==='death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory === 'victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory === 'death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
+      <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised2.png`} className='borderFrame left2'
+          />
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
           <div className='forty-percent'>
@@ -164,7 +166,11 @@ export default function Dailies({ user }) {
         <div className='allHabits'>
           {userArray?.map((dailyId, index) => (
             <div className='habits-card'>
-              <div className='fifteen-percent invisi2'></div>
+              <div className='fifteen-percent invisi2'>
+                {/* <img
+                  src={`${process.env.PUBLIC_URL}/icons/curvyLine42.png`}
+                /> */}
+              </div>
               <div className='habits-card-center'>
                 <div className='bad-habit-emoti'>
                   {userDailies[dailyId]?.untouched ? (
@@ -176,14 +182,14 @@ export default function Dailies({ user }) {
                   ) : localArray?.length && localArray?.includes(dailyId) ? (
                     <img
                       src={`${process.env.PUBLIC_URL}/icons/checkmark-outline-ion.svg`}
-                      onClick={(e) => HandleGoldOrHurt(e,'ungood', userDailies[dailyId].difficulty, dailyId)}
+                      onClick={(e) => HandleGoldOrHurt(e, 'ungood', userDailies[dailyId].difficulty, dailyId)}
                       className='changeToHand sadFace'
                       style={{ width: '100%', backgroundColor: 'green', height: '100%', margin: '0' }}
                     />
                   ) : (
                     <img
                       src={`${process.env.PUBLIC_URL}/icons/hourglass-split-bs.svg`}
-                      onClick={(e) => HandleGoldOrHurt(e,'good', userDailies[dailyId].difficulty, dailyId)}
+                      onClick={(e) => HandleGoldOrHurt(e, 'good', userDailies[dailyId].difficulty, dailyId)}
                       className='changeToHand sadFace'
                       style={{ width: '100%', backgroundColor: 'gray', height: '100%', margin: '0' }}
                     />
@@ -208,6 +214,9 @@ export default function Dailies({ user }) {
                 </div>
               </div>
               <div className='fifteen-percent invisi2'>
+                {/* <img
+                  src={`${process.env.PUBLIC_URL}/icons/curvyLine52.png`}
+                /> */}
                 {openDaily === dailyId && (
                   <EllipsisMenu formType='daily' id={dailyId} habitOrDaily={userDailies[dailyId]} setter={setOpenDaily} />)}
 
