@@ -334,6 +334,16 @@ form textarea {
     height: 100%;
 
 }
+.main-body-habit-card h3 {
+    padding-top: 1%;
+    padding-left: 8%;
+}
+
+.main-body-habit-card .bottOfCard {
+    padding-left: 8%;
+    padding-top: 6%;
+    margin: 0%;
+}
 
 .ellipsis {
     width: 5%;

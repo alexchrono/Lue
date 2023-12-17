@@ -197,8 +197,8 @@ export default function Dailies({ user }) {
                 </div>
                 <div className='main-body-habit-card'>
                   <h3 className='topOfCard'>{userDailies[dailyId]?.title}</h3>
-                  <p className='bottOfCard'>{userDailies[dailyId]?.notes && userDailies[dailyId]?.notes.length > 46
-                    ? userDailies[dailyId].notes.substring(0, userDailies[dailyId].notes.lastIndexOf(' ', 46)) + '...'
+                  <p className='bottOfCard'>{userDailies[dailyId]?.notes && userDailies[dailyId]?.notes.length > 39
+                    ? userDailies[dailyId].notes.substring(0, userDailies[dailyId].notes.lastIndexOf(' ', 39)) + '...'
                     : userDailies[dailyId].notes}</p>
                 </div>
                 <div className='ellipsis'>

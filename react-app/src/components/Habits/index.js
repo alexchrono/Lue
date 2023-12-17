@@ -340,8 +340,8 @@ export default function Habits({ user }) {
                 <div className='main-body-habit-card'>
                   <h3 className='topOfCard'>{userHabits[habitId]?.title}</h3>
                   <p className='bottOfCard'>{
-                    userHabits[habitId]?.notes && userHabits[habitId]?.notes.length > 46
-                      ? userHabits[habitId]?.notes.substring(0, userHabits[habitId]?.notes.lastIndexOf(' ', 46)) + '...'
+                    userHabits[habitId]?.notes && userHabits[habitId]?.notes.length > 39
+                      ? userHabits[habitId]?.notes.substring(0, userHabits[habitId]?.notes.lastIndexOf(' ', 39)) + '...'
                       : userHabits[habitId]?.notes
                   }</p>
                 </div>
