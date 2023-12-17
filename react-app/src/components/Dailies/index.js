@@ -138,6 +138,8 @@ export default function Dailies({ user }) {
       {showVictory === 'victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       {showVictory === 'death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
+      <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised.png`} className='borderFrame'
+          />
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
           <div className='forty-percent'>
@@ -165,9 +167,9 @@ export default function Dailies({ user }) {
           {userArray?.map((dailyId, index) => (
             <div className='habits-card'>
               <div className='fifteen-percent invisi2'>
-                <img
+                {/* <img
                   src={`${process.env.PUBLIC_URL}/icons/curvyLine42.png`}
-                />
+                /> */}
               </div>
               <div className='habits-card-center'>
                 <div className='bad-habit-emoti'>
@@ -212,9 +214,9 @@ export default function Dailies({ user }) {
                 </div>
               </div>
               <div className='fifteen-percent invisi2'>
-                <img
+                {/* <img
                   src={`${process.env.PUBLIC_URL}/icons/curvyLine52.png`}
-                />
+                /> */}
                 {openDaily === dailyId && (
                   <EllipsisMenu formType='daily' id={dailyId} habitOrDaily={userDailies[dailyId]} setter={setOpenDaily} />)}
 

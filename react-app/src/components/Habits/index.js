@@ -25,8 +25,8 @@ export default function Habits({ user }) {
   const user2 = useSelector((state) => state.session.user);
   const userHabits = useSelector((state) => state.habits.byId);
   const userArray = useSelector((state) => state.habits.allIds);
-  const clickedEmoti= useSelector((state) => state.session.user.usersClickedHabits)
-  const [localArray,setLocalArray]=useState([])
+  const clickedEmoti = useSelector((state) => state.session.user.usersClickedHabits)
+  const [localArray, setLocalArray] = useState([])
   const [openHabit, setOpenHabit] = useState(null)
   const [showVictory, setShowVictory] = useState('nothing');
   const [victoryDeets, setVictoryDeets] = useState({})
@@ -99,13 +99,13 @@ export default function Habits({ user }) {
     }
   };
 
-  const HandleDislikeOrLike = async (e, goodOrBad, difficulty,habitId) => {
+  const HandleDislikeOrLike = async (e, goodOrBad, difficulty, habitId) => {
     e.preventDefault();
-    const key='habit'
+    const key = 'habit'
 
 
     let change = {}
-    let copyArray= localArray?.length? [...localArray] : []
+    let copyArray = localArray?.length ? [...localArray] : []
 
     switch (goodOrBad) {
       case 'bad':
@@ -116,7 +116,7 @@ export default function Habits({ user }) {
         break
       case 'unbad':
         change.health = -(badTranslator[difficulty])
-        copyArray=copyArray.filter((ele) => ele !== habitId)
+        copyArray = copyArray.filter((ele) => ele !== habitId)
         setLocalArray(copyArray)
         //     setClickedEmoti(newArray)
 
@@ -131,7 +131,7 @@ export default function Habits({ user }) {
         change = goodTranslator[difficulty]
         change.gold = -(change.gold)
         change.exp = -(change.exp)
-        copyArray=copyArray.filter((ele) => ele !== habitId)
+        copyArray = copyArray.filter((ele) => ele !== habitId)
         setLocalArray(copyArray)
 
         break
@@ -142,16 +142,16 @@ export default function Habits({ user }) {
 
 
     if (change) {
-      const test = await dispatch(ThunkEditHealth(change,copyArray,key))
+      const test = await dispatch(ThunkEditHealth(change, copyArray, key))
 
 
 
-      if (test.victory==='victory') {
+      if (test.victory === 'victory') {
         setShowVictory('victory');
         setVictoryDeets(test.victoryDeets)
 
       }
-      else if (test.victory==='death'){
+      else if (test.victory === 'death') {
         setShowVictory('death')
         setVictoryDeets(test.victoryDeets)
       }
@@ -217,7 +217,7 @@ export default function Habits({ user }) {
 
   useEffect(() => {
 
-  },[userArray])
+  }, [userArray])
 
   // useEffect(() => {
   //   if (!showMenu) return;
@@ -244,9 +244,11 @@ export default function Habits({ user }) {
       {user2?.newUser && (<ShowVictory formType='newUser' setVictory={setShowVictory} victoryDeets={victoryDeets} />)}
       {/* {errors?.misclick && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)} */}
       {errors?.title && (<ErrorComponent errorMessage={'Habit titles are required and must be between 3-30 characters'} setErrors={setErrors} setHabit={setHabit} />)}
-      {showVictory==='victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
-      {showVictory==='death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory === 'victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
+      {showVictory === 'death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
+      <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised.png`} className='borderFrame'
+          />
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Habits</div>
           <div className='forty-percent'>
@@ -272,12 +274,16 @@ export default function Habits({ user }) {
         </div>
         <div className='allHabits'>
 
+
+
+
+
           {userArray?.map((habitId, index) => (
             <div className='habits-card'>
               <div className='fifteen-percent invisi2'>
-              <img
+                {/* <img
                         src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDER3.png`}
-              />
+              /> */}
               </div>
               <div className='habits-card-center'>
                 <div className='bad-habit-emoti'>
@@ -295,13 +301,13 @@ export default function Habits({ user }) {
                         style={{ width: '100%', height: '100%', margin: '0' }}
                         onClick={(e) => {
                           if (localArray?.length && localArray.includes(habitId)) {
-                            HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty,habitId)
+                            HandleDislikeOrLike(e, 'unbad', userHabits[habitId].difficulty, habitId)
 
 
 
                           }
                           else {
-                            HandleDislikeOrLike(e, 'bad', userHabits[habitId].difficulty,habitId)
+                            HandleDislikeOrLike(e, 'bad', userHabits[habitId].difficulty, habitId)
 
                           }
                         }}
@@ -314,13 +320,13 @@ export default function Habits({ user }) {
 
                         onClick={(e) => {
                           if (localArray?.length && localArray.includes(habitId)) {
-                            HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty,habitId)
+                            HandleDislikeOrLike(e, 'ungood', userHabits[habitId].difficulty, habitId)
 
 
 
                           }
                           else {
-                            HandleDislikeOrLike(e, 'good', userHabits[habitId].difficulty,habitId)
+                            HandleDislikeOrLike(e, 'good', userHabits[habitId].difficulty, habitId)
 
                           }
                         }}
@@ -352,20 +358,20 @@ export default function Habits({ user }) {
                 </div>
               </div>
               <div className='fifteen-percent invisi2'>
-              <img
+                {/* <img
                         src={`${process.env.PUBLIC_URL}/icons/curvyLine52.png`}
-              />
+              /> */}
                 {openHabit === habitId && (
-                  <EllipsisMenu formType='habit' id={habitId} habitOrDaily={userHabits[habitId]} setter={setOpenHabit}  />)}
+                  <EllipsisMenu formType='habit' id={habitId} habitOrDaily={userHabits[habitId]} setter={setOpenHabit} />)}
 
               </div>
             </div>))}
         </div>
-        <div className='bottomPic'>
+        {/* <div className='bottomPic'>
         <img
                         src={`${process.env.PUBLIC_URL}/icons/curvyLineBottom.png`}
               />
-        </div>
+        </div> */}
       </div>
     </>
   );

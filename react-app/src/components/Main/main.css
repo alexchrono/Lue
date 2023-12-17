@@ -1186,3 +1186,12 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     display: block;
     height: 20px;
 }
+
+.borderFrame {
+    position: absolute;
+    width: 36%;
+    height: 82.1%;
+    /* left: 5%; */
+    bottom: 9%;
+
+}
