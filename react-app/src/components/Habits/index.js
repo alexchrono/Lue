@@ -247,7 +247,7 @@ export default function Habits({ user }) {
       {showVictory === 'victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       {showVictory === 'death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
-      <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised.png`} className='borderFrame'
+      <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised2.png`} className='borderFrame'
           />
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Habits</div>

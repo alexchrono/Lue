@@ -1166,6 +1166,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     background-size: 100% auto;
     background-repeat: repeat-y;
     background-position: center;
+    z-index:5;
 }
 
 ::-webkit-scrollbar-thumb {
@@ -1175,6 +1176,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     background-size: 100% auto;
     background-repeat: no-repeat;
     background-position: center;
+    z-index: 5;
 
 
 
@@ -1185,13 +1187,19 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     background-size: cover;
     display: block;
     height: 20px;
+    z-index: 5;
 }
 
 .borderFrame {
     position: absolute;
-    width: 36%;
+    width: 42%;
     height: 82.1%;
-    /* left: 5%; */
+    left: 7%;
     bottom: 9%;
+    z-index: -1;
 
+}
+
+.left2 {
+    left: 48%;
 }

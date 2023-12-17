@@ -138,7 +138,7 @@ export default function Dailies({ user }) {
       {showVictory === 'victory' && <ShowVictory formType={'levelUp'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       {showVictory === 'death' && <ShowVictory formType={'death'} setVictory={setShowVictory} victoryDeets={victoryDeets} />}
       <div className='habits'>
-      <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised.png`} className='borderFrame'
+      <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised2.png`} className='borderFrame left2'
           />
         <div className='habits-topMenu'>
           <div className='fifteen-percent bigtextcenter'>Dailies</div>
