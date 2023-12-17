@@ -319,35 +319,33 @@ form textarea {
     z-index: 1;
 }
 
-.bad-habit-emoti {
-    width: 20%;
-    border: 5px solid black;
-    box-sizing: border-box;
-    height: 100%;
-}
+
+
+
 
 .main-body-habit-card {
     width: 75%;
-    border-top: 5px solid black;
     border-bottom: 5px solid black;
     box-sizing: border-box;
     height: 100%;
 
 }
+
+.habits-card:first-child .habits-card-center {
+    border-top: 5px solid black;
+}
 .main-body-habit-card h3 {
     padding-top: 1%;
     padding-left: 8%;
+    margin: 0%;
 }
 
 .main-body-habit-card .bottOfCard {
     padding-left: 8%;
-    padding-top: 6%;
-    margin: 0%;
 }
 
 .ellipsis {
     width: 5%;
-    border-top: 5px solid black;
     border-bottom: 5px solid black;
     border-right: 5px solid black;
     box-sizing: border-box;
@@ -364,7 +362,7 @@ form textarea {
     height: 100%;
 }
 
-.sadFace {}
+
 
 .ellipsis-pic {
     /* display: flex; */
@@ -1212,4 +1210,13 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 
 .left2 {
     left: 48%;
+}
+
+.bad-habit-emoti {
+    width: 20%;
+    border-bottom: 5px solid black;
+    border-left: 5px solid black;
+    border-right: 2px solid black;
+    box-sizing: border-box;
+    height: 100%;
 }
