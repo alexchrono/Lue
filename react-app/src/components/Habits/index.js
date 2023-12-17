@@ -114,6 +114,7 @@ export default function Habits({ user }) {
         setLocalArray(copyArray)
 
         break
+        
       case 'unbad':
         change.health = -(badTranslator[difficulty])
         copyArray = copyArray.filter((ele) => ele !== habitId)
