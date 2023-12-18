@@ -11,25 +11,27 @@ html {
     flex-direction: row;
     height: 26%;
     max-height: 29%;
-    max-width: 90%;
+    max-width: 80%;
     flex-grow: 1;
     padding-top: 2%;
     padding-bottom: 3%;
+    padding-left: 10%;
 
 }
 
 .avatar,
 .stats,
 .inspirational-quote {
-    padding: 10px;
+
     box-sizing: border-box;
 
 }
 
 .avatar {
+    display: flex;
     overflow: hidden;
-    margin-left: 3%;
-    margin-right: 3%;
+    width: 35%;
+    padding: 1%;
 
 
 }
@@ -43,7 +45,7 @@ html {
 }
 
 .stats {
-    flex-basis: 50%;
+    width: 65%;
     display: flex;
     align-items: center;
     /* height: 100%;
