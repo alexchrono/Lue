@@ -753,7 +753,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 
 .avStats {
-    width: 50%;
+    width: 45%;
     display: flex;
     flex-direction: row;
     flex-grow: 2;
@@ -774,7 +774,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 }
 
 .profileContainer {
-    flex-basis: 50%;
+    flex-basis: 45%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -1219,4 +1219,11 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     border-right: 2px solid black;
     box-sizing: border-box;
     height: 100%;
+}
+
+.holdMuter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 10%;
 }

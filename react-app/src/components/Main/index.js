@@ -23,12 +23,44 @@ export default function Main({ mode }) {
     const [equipItem, setEquipItem] = useState('')
     const [selectedArmor, setSelectedArmor] = useState(null);
     const [selectedWeapon, setSelectedWeapon] = useState(null);
+    const [isMuted, setIsMuted] = useState(true);
+    const [sounds, setSounds] = useState({});
+
+    // const sounds = {
+    //     victorySound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/victory.mp3`),
+    //     hurtSound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/hurt.mp3`)
+    // };
+
+    useEffect(() => {
+        Object.values(sounds).forEach(sound => {
+            sound.volume = isMuted ? 0 : 1;
+        });
+    }, [isMuted, sounds]);
+
+    useEffect(() => {
+        if (user) {
+            setSounds({
+                victorySound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/victory.mp3`),
+                hurtSound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/hurt.mp3`)
+            });
+        }
+    }, [user]);
+
+    const toggleMute = () => {
+        setIsMuted(!isMuted);
+    };
+
+    const playSound = (soundName) => {
+        if (!isMuted && sounds[soundName]) {
+            sounds[soundName].play();
+        }
+    };
 
     const expFinder = () => {
         return user.level * 25;
     };
 
-    
+
     function calculateDaysOld(createdDateString) {
         const createdDate = new Date(createdDateString);
         const currentDate = new Date();
@@ -81,7 +113,7 @@ export default function Main({ mode }) {
 
     useEffect(() => {
         if (tempState) {
-            togglePic(user,tempState).then(() => {
+            togglePic(user, tempState, playSound).then(() => {
                 setTempState(null);
             });
         }
@@ -114,7 +146,13 @@ export default function Main({ mode }) {
 
                         </table>
                     </div>
+
                 </div>
+                <div className='holdMuter'>
+                    <button className='muter' onClick={toggleMute}>
+                        {isMuted ? <img src={`${process.env.PUBLIC_URL}/icons/muted.svg`} /> : <img src={`${process.env.PUBLIC_URL}/icons/unmuted.svg`} />}
+                    </button>
+                    </div>
                 {buyItem && (
                     <PurchaseItem purchasePrice={purchasePrice} setBuyItem={setBuyItem} selectedItem={selectedItem} />
                 )}
@@ -148,8 +186,8 @@ export default function Main({ mode }) {
                                                             menuSelect === 'inventory' && !selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${selectedWeapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
                                                                 menuSelect === 'inventory' && selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${selectedWeapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
                                                                     !tempState ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
-                                                                    tempState==='hurt' || tempState==='victory' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
-                                                                         null}
+                                                                        tempState === 'hurt' || tempState === 'victory' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                                                            null}
 
                             </div>
                             {(menuSelect === 'stats' || menuSelect === 'editProfile') && (
