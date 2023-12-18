@@ -11,7 +11,7 @@ import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 import ShowVictory from '../ShowVictory';
 
 
-export default function Habits({ user,setter }) {
+export default function Habits({ user,setter, playSound }) {
   const [habit, setHabit] = useState('');
   // const [showMenu, setShowMenu] = useState(false);
   // const [clickedEmoti, setClickedEmoti] = useState([])
@@ -154,9 +154,10 @@ export default function Habits({ user,setter }) {
       if (test.victory === 'victory') {
         setShowVictory('victory');
         setVictoryDeets(test.victoryDeets)
+        playSound('levelUp')
 
       }
-      
+
       else if (test.victory === 'death') {
         setShowVictory('death')
         setVictoryDeets(test.victoryDeets)

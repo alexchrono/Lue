@@ -25,6 +25,7 @@ export default function Main({ mode }) {
     const [selectedWeapon, setSelectedWeapon] = useState(null);
     const [isMuted, setIsMuted] = useState(true);
     const [sounds, setSounds] = useState({});
+    const [hasUnMutePlayed, setHasUnMutePlayed] = useState(false);
 
     // const sounds = {
     //     victorySound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/victory.mp3`),
@@ -41,14 +42,26 @@ export default function Main({ mode }) {
         if (user) {
             setSounds({
                 victorySound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/victory.mp3`),
-                hurtSound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/hurt.mp3`)
+                hurtSound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/hurt.mp3`),
+                levelUp: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/levelUp.mp3`),
+                unMute: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/unMute.mp3`)
             });
         }
     }, [user]);
 
     const toggleMute = () => {
+        if (isMuted) {
+            setHasUnMutePlayed(false);
+        }
         setIsMuted(!isMuted);
     };
+
+    useEffect(() => {
+        if (!isMuted && sounds.unMute && !hasUnMutePlayed) {
+            sounds.unMute.play();
+            setHasUnMutePlayed(true);
+        }
+    }, [isMuted, sounds.unMute, hasUnMutePlayed]);
 
     const playSound = (soundName) => {
         if (!isMuted && sounds[soundName]) {
@@ -383,7 +396,7 @@ export default function Main({ mode }) {
                 {user?.justGainedLevel && (
                     <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`} />
                 )}
-                <Habits user={user} setter={setTempState} />
+                <Habits user={user} setter={setTempState} playSound={playSound}/>
                 <div className='center-buffer'>
                     <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />
                 </div>
