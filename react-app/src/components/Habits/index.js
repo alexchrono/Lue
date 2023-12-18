@@ -118,6 +118,7 @@ export default function Habits({ user,setter }) {
 
       case 'unbad':
         change.health = -(badTranslator[difficulty])
+        setter('victory')
         copyArray = copyArray.filter((ele) => ele !== habitId)
         setLocalArray(copyArray)
         //     setClickedEmoti(newArray)
@@ -125,12 +126,14 @@ export default function Habits({ user,setter }) {
         break
       case 'good':
         change = goodTranslator[difficulty]
+        setter('victory')
         copyArray.push(habitId)
         setLocalArray(copyArray)
 
         break
       case 'ungood':
         change = goodTranslator[difficulty]
+        setter('hurt')
         change.gold = -(change.gold)
         change.exp = -(change.exp)
         copyArray = copyArray.filter((ele) => ele !== habitId)
