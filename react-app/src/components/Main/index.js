@@ -147,7 +147,7 @@ export default function Main({ mode }) {
                                                             menuSelect === 'inventory' && !selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${selectedWeapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
                                                                 menuSelect === 'inventory' && selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${selectedWeapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
                                                                     !tempState ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
-                                                                    tempState ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                                                    tempState=== ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
                                                                          null}
 
                             </div>
