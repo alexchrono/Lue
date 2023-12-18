@@ -28,6 +28,7 @@ export default function Main({ mode }) {
         return user.level * 25;
     };
 
+    
     function calculateDaysOld(createdDateString) {
         const createdDate = new Date(createdDateString);
         const currentDate = new Date();
