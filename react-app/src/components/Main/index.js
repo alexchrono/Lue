@@ -400,7 +400,7 @@ export default function Main({ mode }) {
                 <div className='center-buffer'>
                     <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />
                 </div>
-                <Dailies user={user} />
+                <Dailies user={user} setter={setTempState} playSound={playSound} />
 
                 <div className='tableBuffer'>
                     <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />

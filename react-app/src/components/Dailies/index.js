@@ -9,7 +9,7 @@ import ErrorComponent from '../errorShow';
 import ShowVictory from '../ShowVictory';
 import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 
-export default function Dailies({ user }) {
+export default function Dailies({ user,setter, playSound }) {
   const [daily, setDaily] = useState('');
   // const [showMenu, setShowMenu] = useState(false);
   const [clickedDailyCheck, setClickedDailyCheck] = useState([]);
@@ -59,12 +59,15 @@ export default function Dailies({ user }) {
     switch (goodOrBad) {
       case 'good':
         change = goodTranslator[difficulty];
+        setter('victory')
+
 
         copyArray.push(dailyId)
         setLocalArray(copyArray)
         break;
       case 'ungood':
         change = goodTranslator[difficulty];
+        setter('hurt')
         change.gold = -(change.gold);
         change.exp = -(change.exp);
         copyArray = copyArray.filter((ele) => ele !== dailyId)
@@ -79,6 +82,7 @@ export default function Dailies({ user }) {
       if (test.victory === 'victory') {
         setShowVictory('victory');
         setVictoryDeets(test.victoryDeets)
+        playSound('levelUp')
       }
       else if (test.victory === 'death') {
         setShowVictory('death')
