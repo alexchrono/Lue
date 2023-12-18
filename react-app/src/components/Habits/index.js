@@ -156,6 +156,7 @@ export default function Habits({ user,setter }) {
         setVictoryDeets(test.victoryDeets)
 
       }
+      
       else if (test.victory === 'death') {
         setShowVictory('death')
         setVictoryDeets(test.victoryDeets)
