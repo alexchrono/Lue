@@ -11,7 +11,7 @@ import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 import ShowVictory from '../ShowVictory';
 
 
-export default function Habits({ user }) {
+export default function Habits({ user,setter }) {
   const [habit, setHabit] = useState('');
   // const [showMenu, setShowMenu] = useState(false);
   // const [clickedEmoti, setClickedEmoti] = useState([])
@@ -110,11 +110,12 @@ export default function Habits({ user }) {
     switch (goodOrBad) {
       case 'bad':
         change.health = badTranslator[difficulty]
+        setter('hurt')
         copyArray.push(habitId)
         setLocalArray(copyArray)
 
         break
-        
+
       case 'unbad':
         change.health = -(badTranslator[difficulty])
         copyArray = copyArray.filter((ele) => ele !== habitId)
