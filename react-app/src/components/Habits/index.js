@@ -11,7 +11,7 @@ import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 import ShowVictory from '../ShowVictory';
 
 
-export default function Habits({ user }) {
+export default function Habits({ user,setter, playSound }) {
   const [habit, setHabit] = useState('');
   // const [showMenu, setShowMenu] = useState(false);
   // const [clickedEmoti, setClickedEmoti] = useState([])
@@ -19,6 +19,7 @@ export default function Habits({ user }) {
   const [hideModal, setHideModal] = useState(false)
 
 
+  
 
   const ulRef = useRef();
   const dispatch = useDispatch();
@@ -110,12 +111,15 @@ export default function Habits({ user }) {
     switch (goodOrBad) {
       case 'bad':
         change.health = badTranslator[difficulty]
+        setter('hurt')
         copyArray.push(habitId)
         setLocalArray(copyArray)
 
         break
+
       case 'unbad':
         change.health = -(badTranslator[difficulty])
+        setter('victory')
         copyArray = copyArray.filter((ele) => ele !== habitId)
         setLocalArray(copyArray)
         //     setClickedEmoti(newArray)
@@ -123,12 +127,14 @@ export default function Habits({ user }) {
         break
       case 'good':
         change = goodTranslator[difficulty]
+        setter('victory')
         copyArray.push(habitId)
         setLocalArray(copyArray)
 
         break
       case 'ungood':
         change = goodTranslator[difficulty]
+        setter('hurt')
         change.gold = -(change.gold)
         change.exp = -(change.exp)
         copyArray = copyArray.filter((ele) => ele !== habitId)
@@ -149,8 +155,10 @@ export default function Habits({ user }) {
       if (test.victory === 'victory') {
         setShowVictory('victory');
         setVictoryDeets(test.victoryDeets)
+        playSound('levelUp')
 
       }
+
       else if (test.victory === 'death') {
         setShowVictory('death')
         setVictoryDeets(test.victoryDeets)
@@ -340,8 +348,8 @@ export default function Habits({ user }) {
                 <div className='main-body-habit-card'>
                   <h3 className='topOfCard'>{userHabits[habitId]?.title}</h3>
                   <p className='bottOfCard'>{
-                    userHabits[habitId]?.notes && userHabits[habitId]?.notes.length > 46
-                      ? userHabits[habitId]?.notes.substring(0, userHabits[habitId]?.notes.lastIndexOf(' ', 46)) + '...'
+                    userHabits[habitId]?.notes && userHabits[habitId]?.notes.length > 39
+                      ? userHabits[habitId]?.notes.substring(0, userHabits[habitId]?.notes.lastIndexOf(' ', 39)) + '...'
                       : userHabits[habitId]?.notes
                   }</p>
                 </div>

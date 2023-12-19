@@ -8,6 +8,7 @@ import EllipsisMenu from '../habitOrDailyEllipsisMenu';
 import ProfileMenu from '../profileMenu';
 import PurchaseItem from '../PurchaseItem'
 import { ThunkEquip } from '../../store/session';
+import togglePic from './togglePic';
 import './main.css';
 
 export default function Main({ mode }) {
@@ -18,13 +19,60 @@ export default function Main({ mode }) {
     const [selectedItem, setSelectedItem] = useState(null);
     const [buyItem, setBuyItem] = useState(false)
     const [purchasePrice, setPurchasePrice] = useState('')
+    const [tempState, setTempState] = useState(null)
     const [equipItem, setEquipItem] = useState('')
     const [selectedArmor, setSelectedArmor] = useState(null);
     const [selectedWeapon, setSelectedWeapon] = useState(null);
+    const [isMuted, setIsMuted] = useState(true);
+    const [sounds, setSounds] = useState({});
+    const [hasUnMutePlayed, setHasUnMutePlayed] = useState(false);
+
+    // const sounds = {
+    //     victorySound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/victory.mp3`),
+    //     hurtSound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/hurt.mp3`)
+    // };
+
+    useEffect(() => {
+        Object.values(sounds).forEach(sound => {
+            sound.volume = isMuted ? 0 : 1;
+        });
+    }, [isMuted, sounds]);
+
+    useEffect(() => {
+        if (user) {
+            setSounds({
+                victorySound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/victory.mp3`),
+                hurtSound: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/hurt.mp3`),
+                levelUp: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/levelUp.mp3`),
+                unMute: new Audio(`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/sounds/unMute.mp3`)
+            });
+        }
+    }, [user]);
+
+    const toggleMute = () => {
+        if (isMuted) {
+            setHasUnMutePlayed(false);
+        }
+        setIsMuted(!isMuted);
+    };
+
+    useEffect(() => {
+        if (!isMuted && sounds.unMute && !hasUnMutePlayed) {
+            sounds.unMute.play();
+            setHasUnMutePlayed(true);
+        }
+    }, [isMuted, sounds.unMute, hasUnMutePlayed]);
+
+    const playSound = (soundName) => {
+        if (!isMuted && sounds[soundName]) {
+            sounds[soundName].play();
+        }
+    };
 
     const expFinder = () => {
         return user.level * 25;
     };
+
 
     function calculateDaysOld(createdDateString) {
         const createdDate = new Date(createdDateString);
@@ -76,6 +124,14 @@ export default function Main({ mode }) {
         }
     }, [user, history]);
 
+    useEffect(() => {
+        if (tempState) {
+            togglePic(user, tempState, playSound).then(() => {
+                setTempState(null);
+            });
+        }
+    }, [tempState, user]);
+
     if (!user) {
         return null;
     }
@@ -103,7 +159,13 @@ export default function Main({ mode }) {
 
                         </table>
                     </div>
+
                 </div>
+                <div className='holdMuter'>
+                    <button className='muter' onClick={toggleMute}>
+                        {isMuted ? <img src={`${process.env.PUBLIC_URL}/icons/muted.svg`} /> : <img src={`${process.env.PUBLIC_URL}/icons/unmuted.svg`} />}
+                    </button>
+                    </div>
                 {buyItem && (
                     <PurchaseItem purchasePrice={purchasePrice} setBuyItem={setBuyItem} selectedItem={selectedItem} />
                 )}
@@ -123,24 +185,23 @@ export default function Main({ mode }) {
                         <div className='profileContainer'>
                             <div className='avatarContainer'>
                                 {/* <p>{`/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`}</p> */}
-                                {menuSelect === 'shop' && selectedItem === 'default' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" /> :
-                                    menuSelect === 'shop' && selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" /> :
-                                        menuSelect === 'shop' && selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" /> :
-                                            menuSelect === 'shop' && selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" /> :
-                                                menuSelect === 'shop' && selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" /> :
+                                {menuSelect === 'shop' && selectedItem === 'default' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                    menuSelect === 'shop' && selectedItem === 'buckler' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-buckler-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                        menuSelect === 'shop' && selectedItem === 'hyrule' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-hyrule-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                            menuSelect === 'shop' && selectedItem === 'machete' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-machete.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                                menuSelect === 'shop' && selectedItem === 'katana' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-katana.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
 
-                                                    menuSelect === 'inventory' && !selectedArmor && !selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" /> :
-
-
-
-                                                        menuSelect === 'inventory' && selectedArmor && !selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${user.weapon}.gif`} alt="User Gif" /> :
-                                                            menuSelect === 'inventory' && !selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${selectedWeapon}.gif`} alt="User Gif" /> :
-                                                                menuSelect === 'inventory' && selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${selectedWeapon}.gif`} alt="User Gif" /> :
+                                                    menuSelect === 'inventory' && !selectedArmor && !selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
 
 
 
+                                                        menuSelect === 'inventory' && selectedArmor && !selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                                            menuSelect === 'inventory' && !selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${selectedWeapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                                                menuSelect === 'inventory' && selectedArmor && selectedWeapon ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${selectedArmor}-${selectedWeapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                                                    !tempState ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                                                        tempState === 'hurt' || tempState === 'victory' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" className='userGif' id='userGifz' /> :
+                                                                            null}
 
-                                                                    <img src={`${process.env.PUBLIC_URL}/icons/avgifs/${user.gif}/${user.gif}-${user.armor}-${user.weapon}.gif`} alt="User Gif" />}
                             </div>
                             {(menuSelect === 'stats' || menuSelect === 'editProfile') && (
                                 <div className='profileInfo'>
@@ -202,6 +263,8 @@ export default function Main({ mode }) {
                                                                 (selectedItem === 'katana' || selectedItem === 'hyrule') &&
                                                                 user.gold >= 25
                                                             ) {
+                                                                setPurchasePrice(25)
+                                                                setBuyItem(true)
                                                                 // Add code to open the modal here
                                                                 console.log('Open modal for katana or hylian purchase');
                                                             }
@@ -328,22 +391,22 @@ export default function Main({ mode }) {
                     <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />
                 </div>
 
-                    <img className='absBG'
-                        src={`${process.env.PUBLIC_URL}/icons/tryThisOne.gif`}
-                    />
+                <img className='absBG'
+                    src={`${process.env.PUBLIC_URL}/icons/tryThisOne.gif`}
+                />
 
-                    {user?.justGainedLevel && (
-                        <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`} />
-                    )}
-                    <Habits user={user} />
-                    <div className='center-buffer'>
+                {user?.justGainedLevel && (
+                    <ErrorComponent errorMessage={`Congrats!  You just gained a level.  You are now level ${user.level}.   Your health has been fully restored, and your stats have increased.`} />
+                )}
+                <Habits user={user} setter={setTempState} playSound={playSound}/>
+                <div className='center-buffer'>
                     <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />
-                    </div>
-                    <Dailies user={user} />
+                </div>
+                <Dailies user={user} setter={setTempState} playSound={playSound} />
 
-                    <div className='tableBuffer'>
+                <div className='tableBuffer'>
                     <img src={`${process.env.PUBLIC_URL}/icons/justGray.png`} />
-                    </div>
+                </div>
             </div>
 
         </div>
