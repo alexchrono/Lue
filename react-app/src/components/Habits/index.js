@@ -19,7 +19,7 @@ export default function Habits({ user,setter, playSound }) {
   const [hideModal, setHideModal] = useState(false)
 
 
-  
+
 
   const ulRef = useRef();
   const dispatch = useDispatch();
@@ -258,7 +258,7 @@ export default function Habits({ user,setter, playSound }) {
       <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised2.png`} className='borderFrame'
           />
         <div className='habits-topMenu'>
-          <div className='fifteen-percent bigtextcenter'>Habits</div>
+          <div className='fifteen-percent bigtextcenter headerTable'>Habits</div>
           <div className='forty-percent'>
             <form onSubmit={MakeNewHabit}>
               <div className='forgigs'>
@@ -288,7 +288,7 @@ export default function Habits({ user,setter, playSound }) {
 
           {userArray?.map((habitId, index) => (
             <div className='habits-card'>
-              <div className='fifteen-percent invisi2'>
+              <div className='fifteen-percent invisi2 mobileGone'>
                 {/* <img
                         src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDER3.png`}
               /> */}
@@ -365,7 +365,7 @@ export default function Habits({ user,setter, playSound }) {
                   />
                 </div>
               </div>
-              <div className='fifteen-percent invisi2'>
+              <div className='fifteen-percent invisi2 ' >
                 {/* <img
                         src={`${process.env.PUBLIC_URL}/icons/curvyLine52.png`}
               /> */}

@@ -17,7 +17,8 @@ function Navigation({ isLoaded }) {
 			</div>
 			{!sessionUser && (
 				<div className='fancy-text'>
-					Level Up Everything
+
+					<div className='holdText'>Level Up Everything</div>
 				</div>
 			)}
 			{sessionUser && (

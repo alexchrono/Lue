@@ -128,10 +128,11 @@ export default function LandingPage() {
 
 
     return (
+
         <div className='main-container'>
             <div className='eighteenOf90'>
                 <div className='left18'></div><div className='right18'><h1>New to Level up Everything?</h1>
-                        <h2>Sign up for free</h2></div>
+                        <h2 className='h2mobile'>Sign up for free</h2></div>
 
 
 
@@ -213,7 +214,7 @@ export default function LandingPage() {
                         <div className='displayPictures'>
                             <div className='avatarPreview'>{gif === '' ? <img src={`${process.env.PUBLIC_URL}/icons/selectAvatarReal.png`} onClick={openAvatarModal} /> : gif === 'ryu' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/ryu/ryu-none-none.gif`} onClick={openAvatarModal} /> : gif === 'chunli' ? <img src={`${process.env.PUBLIC_URL}/icons/avgifs/chunli/chunli-none-none.gif`} onClick={openAvatarModal} /> : null}</div>
                             <div className='profilePreview'>
-                                {profilePicPreview ? <img src={profilePicPreview} alt='Profile Preview' onClick={() => document.getElementById('fileInput').click()} /> : <img src={`${process.env.PUBLIC_URL}/icons/selectProfilePicReal.png`} onClick={() => document.getElementById('fileInput').click()} />}
+                                {profilePicPreview ? <img src={profilePicPreview} alt='Profile Preview' onClick={() => document.getElementById('fileInput').click()} /> : <img src={`${process.env.PUBLIC_URL}/icons/selectProfilePicReal2.png`} onClick={() => document.getElementById('fileInput').click()} />}
                             </div>
                         </div>
                         {/* <div className="uploadAndSelect">

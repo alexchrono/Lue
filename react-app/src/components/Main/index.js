@@ -159,6 +159,11 @@ export default function Main({ mode }) {
 
                         </table>
                     </div>
+                    <div className='holdMuter3'>
+                    <button className='muter' onClick={toggleMute}>
+                        {isMuted ? <img src={`${process.env.PUBLIC_URL}/icons/muted.svg`} /> : <img src={`${process.env.PUBLIC_URL}/icons/unmuted.svg`} />}
+                    </button>
+                    </div>
 
                 </div>
                 <div className='holdMuter'>
