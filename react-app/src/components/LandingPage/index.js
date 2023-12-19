@@ -128,6 +128,7 @@ export default function LandingPage() {
 
 
     return (
+
         <div className='main-container'>
             <div className='eighteenOf90'>
                 <div className='left18'></div><div className='right18'><h1>New to Level up Everything?</h1>
