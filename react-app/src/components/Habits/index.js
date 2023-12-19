@@ -19,6 +19,7 @@ export default function Habits({ user,setter, playSound }) {
   const [hideModal, setHideModal] = useState(false)
 
 
+  
 
   const ulRef = useRef();
   const dispatch = useDispatch();
