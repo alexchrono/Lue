@@ -2,7 +2,7 @@
     width: 100%;
     height: 100%;
     display: flex;
-    position: relativel;
+    position: relative;
     align-items: center;
     justify-content: center;
 }
@@ -53,4 +53,11 @@
     border:1px solid white;
     padding: 0px;
     margin: 0px;
+}
+
+
+@media only screen and (max-width: 600px) {
+.ellipsa li button {
+    height: 100%;
+}
 }

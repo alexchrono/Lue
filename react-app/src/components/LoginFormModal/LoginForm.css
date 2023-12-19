@@ -73,3 +73,17 @@
     padding: 0px 0px;
     text-decoration: underline;
 }
+
+@media only screen and (max-width: 600px) {
+.overallSizeEditModal2 {
+    /* z-index: 9000;
+    background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 70%, rgba(54,65,226,1) 100%); */
+    width: 300px;
+    /* height: 100%;
+    min-height: 400px;
+    margin: auto;
+    text-align: center;
+    display: flex;
+    flex-direction: column; */
+}
+}

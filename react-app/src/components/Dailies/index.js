@@ -145,7 +145,7 @@ export default function Dailies({ user,setter, playSound }) {
       <img src={`${process.env.PUBLIC_URL}/icons/curvyLineWIDERFrame-revised2.png`} className='borderFrame left2'
           />
         <div className='habits-topMenu'>
-          <div className='fifteen-percent bigtextcenter'>Dailies</div>
+          <div className='fifteen-percent bigtextcenter headerTable'>Dailies</div>
           <div className='forty-percent'>
             <form onSubmit={MakeNewDaily}>
               <div className='forgigs'>
@@ -170,7 +170,7 @@ export default function Dailies({ user,setter, playSound }) {
         <div className='allHabits'>
           {userArray?.map((dailyId, index) => (
             <div className='habits-card'>
-              <div className='fifteen-percent invisi2'>
+              <div className='fifteen-percent invisi2 '>
                 {/* <img
                   src={`${process.env.PUBLIC_URL}/icons/curvyLine42.png`}
                 /> */}
@@ -217,7 +217,7 @@ export default function Dailies({ user,setter, playSound }) {
                   />
                 </div>
               </div>
-              <div className='fifteen-percent invisi2'>
+              <div className='fifteen-percent invisi2 mobileGone2'>
                 {/* <img
                   src={`${process.env.PUBLIC_URL}/icons/curvyLine52.png`}
                 /> */}

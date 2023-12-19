@@ -1,0 +1,16 @@
+
+
+#root {
+    height: 98dvh;
+    overflow: hidden;
+}
+
+
+@media only screen and (max-width: 600px) {
+    #root {
+        height: 98dvh;
+        width: 98vw;
+        overflow: hidden;
+    }
+
+}
