@@ -6,6 +6,10 @@ html {
 
 }
 
+.holdMuter3 {
+    display: none;
+}
+
 .stats-container {
     display: flex;
     flex-direction: row;
@@ -1240,13 +1244,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     height: 100%;
 }
 
-.holdMuter {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 4%;
-    height: 100%;
-}
+
 
 .muter {
     width: 100%;
@@ -1325,15 +1323,25 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
         height: 50%;
     }
 
+
+
     .holdMuter {
         display: none;
+
+    }
+    .holdMuter3 {
+        display: flex;
+        width: 20%;
+        height: 100%;
+        justify-content: center;
+        align-items: center;
+
+
     }
 
+    .holdMuter3 .muter {
+        width: 71%;
 
-
-
-    .holdMuter {
-        display: none;
     }
 
     .avatar img {
@@ -1342,7 +1350,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 
     .stats table {
         /* width: 100%; */
-        width: 80%;
+        width: 100%;
         height: auto;
         background-color: #ddd;
         z-index: 1;
@@ -1353,6 +1361,14 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
         font-size: .7em;
         height: 20%;
     }
+
+
+
+.stats {
+    width: 55%;
+    display: flex;
+    align-items: center;
+}
 
     .avatar {
         display: flex;
