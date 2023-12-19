@@ -263,6 +263,8 @@ export default function Main({ mode }) {
                                                                 (selectedItem === 'katana' || selectedItem === 'hyrule') &&
                                                                 user.gold >= 25
                                                             ) {
+                                                                setPurchasePrice(25)
+                                                                setBuyItem(true)
                                                                 // Add code to open the modal here
                                                                 console.log('Open modal for katana or hylian purchase');
                                                             }
