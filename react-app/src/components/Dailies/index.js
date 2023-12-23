@@ -170,11 +170,7 @@ export default function Dailies({ user,setter, playSound }) {
         <div className='allHabits'>
           {userArray?.map((dailyId, index) => (
             <div className='habits-card'>
-              <div className='fifteen-percent invisi2 '>
-                {/* <img
-                  src={`${process.env.PUBLIC_URL}/icons/curvyLine42.png`}
-                /> */}
-              </div>
+              
               <div className='habits-card-center'>
                 <div className='bad-habit-emoti'>
                   {userDailies[dailyId]?.untouched ? (

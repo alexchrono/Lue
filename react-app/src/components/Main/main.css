@@ -1278,6 +1278,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 
     .profileInfo td {
         width: 63%;
+        text-align: center;
     }
 
     .profileInfo tr {
@@ -1543,7 +1544,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
         }
 
         .habits {
-            width: 46%;
+            width: 50%;
 
             /* padding: 2% 5%; */
         }
