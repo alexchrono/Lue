@@ -141,7 +141,8 @@ export default function LandingPage() {
 
                 <div className='left-container'>
                     <div className='pic-box-container'>
-                        <img src={`${process.env.PUBLIC_URL}/icons/cloud-spinning.gif`}></img>
+                        <img src={`${process.env.PUBLIC_URL}/icons/cloud-spinning.gif`} id='big'></img>
+                        <img src={`${process.env.PUBLIC_URL}/icons/chronoTrig.png`} id='small'></img>
                         {/* <img src='https://i.imgur.com/DafdjXQ.png' className='pic' alt=''></img> */}
                         <p>Spinning in circles?</p>
                     </div>

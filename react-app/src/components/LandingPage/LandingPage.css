@@ -205,12 +205,28 @@ h2 {
 }
 
 .displayPictures img {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: contain;
 }
 
+#small {
+    display: none;
+}
+
 @media only screen and (max-width: 600px) {
+    #big {
+        display: none;
+    }
+
+    #small {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }
+
     .eighteenOf90 {
         height: 14%;
         /* border: 2px solid red; */
@@ -233,14 +249,15 @@ h2 {
 
     .left-container {
         width: 44%;
-        height: 44%;
+        height: 90%;
         display: flex;
         flex-direction: column;
         margin-top: 2%;
         box-sizing: border-box;
-        padding-left: 5%;
-        padding-right: 5%;
+        /* padding-left: 5%; */
+        /* padding-right: 5%; */
         padding-top: 0%;
+        margin-top: 0%;
     }
 
     .top90 {
@@ -261,6 +278,14 @@ h2 {
         box-sizing: border-box;
         padding-left: 4%;
         padding-right: 4%;
+
+    }
+
+    .right-box .signup-form input {
+        height: 12%;
+        margin-top: 9%;
+
+
     }
 
     .left18 {
@@ -276,43 +301,43 @@ h2 {
     }
 
     .right18 {
-            width: 55%;
-            height: 90%;
-            display: flex;
-            flex-direction: column;
-            box-sizing: border-box;
-            padding-left: 4%;
-            padding-right: 4%;
-        }
+        width: 55%;
+        height: 90%;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        padding-left: 4%;
+        padding-right: 4%;
+    }
 
-        .pic-box-container p {
-            height: 10%;
-            text-align: center;
-            font-size: .9em;
-            margin-bottom: 0px;
-        }
+    .pic-box-container p {
+        height: 10%;
+        text-align: center;
+        font-size: .9em;
+        margin-bottom: 0px;
+    }
 
-        /* .displayPictures img {
+    /* .displayPictures img {
             width: 100%;
             height: 100%;
             object-fit: contain;
         } */
 
-        .left-bottom-quote {
-            width: 100%;
-            height: 10%;
-            display: flex;
-            flex-direction: column;
-            grid-gap: 24%;
-            gap: 24%;
-            font-family: 'Press Start 2P';
-            justify-content: center;
-            /* align-items: center; */
-            font-size: 1.4em;
-            text-align: center;
-            margin-bottom: 0px;
-            padding: 0px;
-        }
+    .left-bottom-quote {
+        width: 100%;
+        height: 10%;
+        display: flex;
+        flex-direction: column;
+        grid-gap: 24%;
+        gap: 24%;
+        font-family: 'Press Start 2P';
+        justify-content: center;
+        /* align-items: center; */
+        font-size: 1.4em;
+        text-align: center;
+        margin-bottom: 0px;
+        padding: 0px;
+    }
 
 
 
