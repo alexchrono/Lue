@@ -1271,6 +1271,20 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
         width: 0%;
     }
 
+    .profileInfo td:first-child {
+        width: 37%;
+        padding: 5px;
+    }
+
+    .profileInfo td {
+        width: 63%;
+    }
+
+    .profileInfo tr {
+        font-size: .7em;
+        height: 20%;
+    }
+
     .onOwn {
         background-color: #35ee50;
         display: inline-block;
@@ -1331,7 +1345,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     }
     .holdMuter3 {
         display: flex;
-        width: 20%;
+        width: 10%;
         height: 100%;
         justify-content: center;
         align-items: center;
@@ -1365,7 +1379,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
 
 
 .stats {
-    width: 55%;
+    width: 65%;
     display: flex;
     align-items: center;
 }
@@ -1380,7 +1394,10 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     }
 
     .stats td:first-child {
-        width: 5%;
+        width: 37%;
+    }
+    .stats td {
+        width: 63%;
     }
 
     .stats td {
@@ -1450,7 +1467,7 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
         }
 
         .profileInfo {
-            width: 59%;
+            width: 65%;
             display: flex;
             flex-direction: column;
             align-items: center;
