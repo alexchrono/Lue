@@ -1373,8 +1373,10 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     .avatar {
         display: flex;
         overflow: hidden;
+        box-sizing: border-box;
         width: 26%;
         padding: 1%;
+        min-width: 26%;
     }
 
     .stats td:first-child {
@@ -1390,8 +1392,10 @@ background: linear-gradient(90deg, rgba(63,136,185,1) 0%, rgba(37,92,62,1) 85%, 
     .avatarContainer {
             display: flex;
             overflow: hidden;
+            box-sizing: border-box;
             width: 26%;
             padding: 1%;
+            max-width: 26%;
         }
 
         .profileContainer {
